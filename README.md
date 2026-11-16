@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="https://divine-gw2.github.io/"><img src="https://img.shields.io/badge/Abrir%20o%20site-0a7487?style=for-the-badge" alt="Abrir o site"></a>
+  <a href="https://divinegw.github.io/"><img src="https://img.shields.io/badge/Abrir%20o%20site-0a7487?style=for-the-badge" alt="Abrir o site"></a>
   <img src="https://img.shields.io/badge/atualizado-nov.%202026-8a5f0e?style=for-the-badge" alt="Atualizado em novembro de 2026">
   <img src="https://img.shields.io/badge/idioma-PT--BR-44546a?style=for-the-badge" alt="Português do Brasil">
 </p>
@@ -28,11 +28,11 @@
 
 | | Guia | O que você encontra | |
 |:-:|---|---|---|
-| <img src="assets/img/4b61cGW2-EX6QR2-Wallpaper-1920x1080-7b99c4-760.jpg" width="180" alt=""> | **[Endgame](https://divine-gw2.github.io/guias/endgame.html)**<br><sub>comece por aqui</sub> | Tipos de dano, boons e conditions, atributos, roles, builds, golem de treino, ArcDPS e como entrar em um squad. | [PDF](https://divine-gw2.github.io/pdfs/endgame.pdf) |
-| <img src="assets/img/9a3b3gw2-ex6-voe-launch-wallpaper-1920x1080-7e4a01-760.jpg" width="180" alt=""> | **[Raids](https://divine-gw2.github.io/guias/raids.html)** | As 8 wings e os 16 Raid Encounters, recompensas, CM e Legendary Mode, Quickplay e vídeo de cada boss. | [PDF](https://divine-gw2.github.io/pdfs/raids.pdf) |
-| <img src="assets/img/mlNOp2u-0211f6-760.jpg" width="180" alt=""> | **[Fractals](https://divine-gw2.github.io/guias/fractals.html)** | Tiers e Agony Resistance, instabilidades, dailies, Account Augmentations, títulos e Challenge Mode. | [PDF](https://divine-gw2.github.io/pdfs/fractals.pdf) |
-| <img src="assets/img/Ascalonian-Catacombs-story-loading-screen-076a2d-760.jpg" width="180" alt=""> | **[Dungeons](https://divine-gw2.github.io/guias/dungeons.html)** | As 8 dungeons clássicas de Tyria: acesso, recompensas, achievements e vídeo de cada path. | [PDF](https://divine-gw2.github.io/pdfs/dungeons.pdf) |
-| <img src="assets/img/800px-The-Battle-for-Lion-s-Arch-loading-screen-7254a0-760.jpg" width="180" alt=""> | **[Recursos Úteis](https://divine-gw2.github.io/guias/recursos-uteis.html)** | 56 sites e ferramentas da comunidade: builds, conta, logs, gold, crafting, mapas, WvW e homestead. | [PDF](https://divine-gw2.github.io/pdfs/recursos-uteis.pdf) |
+| <img src="assets/img/4b61cGW2-EX6QR2-Wallpaper-1920x1080-7b99c4-760.jpg" width="180" alt=""> | **[Endgame](https://divinegw.github.io/guias/endgame.html)**<br><sub>comece por aqui</sub> | Tipos de dano, boons e conditions, atributos, roles, builds, golem de treino, ArcDPS e como entrar em um squad. | [PDF](https://divinegw.github.io/pdfs/endgame.pdf) |
+| <img src="assets/img/9a3b3gw2-ex6-voe-launch-wallpaper-1920x1080-7e4a01-760.jpg" width="180" alt=""> | **[Raids](https://divinegw.github.io/guias/raids.html)** | As 8 wings e os 16 Raid Encounters, recompensas, CM e Legendary Mode, Quickplay e vídeo de cada boss. | [PDF](https://divinegw.github.io/pdfs/raids.pdf) |
+| <img src="assets/img/mlNOp2u-0211f6-760.jpg" width="180" alt=""> | **[Fractals](https://divinegw.github.io/guias/fractals.html)** | Tiers e Agony Resistance, instabilidades, dailies, Account Augmentations, títulos e Challenge Mode. | [PDF](https://divinegw.github.io/pdfs/fractals.pdf) |
+| <img src="assets/img/Ascalonian-Catacombs-story-loading-screen-076a2d-760.jpg" width="180" alt=""> | **[Dungeons](https://divinegw.github.io/guias/dungeons.html)** | As 8 dungeons clássicas de Tyria: acesso, recompensas, achievements e vídeo de cada path. | [PDF](https://divinegw.github.io/pdfs/dungeons.pdf) |
+| <img src="assets/img/800px-The-Battle-for-Lion-s-Arch-loading-screen-7254a0-760.jpg" width="180" alt=""> | **[Recursos Úteis](https://divinegw.github.io/guias/recursos-uteis.html)** | 56 sites e ferramentas da comunidade: builds, conta, logs, gold, crafting, mapas, WvW e homestead. | [PDF](https://divinegw.github.io/pdfs/recursos-uteis.pdf) |
 
 ## No site
 
