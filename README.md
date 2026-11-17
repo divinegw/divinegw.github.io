@@ -46,6 +46,6 @@
 
 - Conteúdo: guilda **DIVINE**, a partir dos guias publicados no Discord da guilda.
 - Guild Wars 2 e suas artes são marcas da **ArenaNet**. Imagens: Guild Wars 2 Wiki, wallpapers oficiais do guildwars2.com e artes da guilda.
-- Ícones: [Lucide](https://lucide.dev) (ISC). Fontes: Barlow Condensed, Source Sans 3 e IBM Plex Mono (SIL Open Font License).
+- Ícones: [Lucide](https://lucide.dev) (ISC). Fontes: Mona Sans e Geist Mono (SIL Open Font License; licenças em assets/fonts/).
 
 <sub>Este repositório contém o site já pronto, gerado com Astro e publicado pelo GitHub Pages. Os arquivos-fonte e o guia de edição ficam com quem mantém o site.</sub>
