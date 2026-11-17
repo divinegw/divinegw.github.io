@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="assets/readme/banner.jpg" alt="Arte oficial de Guild Wars 2: Visions of Eternity" width="100%">
+  <img src="readme/banner.jpg" alt="Arte de Guild Wars 2: personagens descansando diante da lareira" width="100%">
 </p>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/logo-escuro.png">
-    <img src="assets/readme/logo-claro.png" alt="Brasão da guilda DIVINE" width="110">
+    <source media="(prefers-color-scheme: dark)" srcset="readme/logo-escuro.png">
+    <img src="readme/logo-claro.png" alt="Brasão da guilda DIVINE" width="110">
   </picture>
 </p>
 
@@ -28,11 +28,11 @@
 
 | | Guia | O que você encontra | |
 |:-:|---|---|---|
-| <img src="assets/img/4b61cGW2-EX6QR2-Wallpaper-1920x1080-7b99c4-760.jpg" width="180" alt=""> | **[Endgame](https://divinegw.github.io/guias/endgame.html)**<br><sub>comece por aqui</sub> | Tipos de dano, boons e conditions, atributos, roles, builds, golem de treino, ArcDPS e como entrar em um squad. | [PDF](https://divinegw.github.io/pdfs/endgame.pdf) |
-| <img src="assets/img/9a3b3gw2-ex6-voe-launch-wallpaper-1920x1080-7e4a01-760.jpg" width="180" alt=""> | **[Raids](https://divinegw.github.io/guias/raids.html)** | As 8 wings e os 16 Raid Encounters, recompensas, CM e Legendary Mode, Quickplay e vídeo de cada boss. | [PDF](https://divinegw.github.io/pdfs/raids.pdf) |
-| <img src="assets/img/mlNOp2u-0211f6-760.jpg" width="180" alt=""> | **[Fractals](https://divinegw.github.io/guias/fractals.html)** | Tiers e Agony Resistance, instabilidades, dailies, Account Augmentations, títulos e Challenge Mode. | [PDF](https://divinegw.github.io/pdfs/fractals.pdf) |
-| <img src="assets/img/Ascalonian-Catacombs-story-loading-screen-076a2d-760.jpg" width="180" alt=""> | **[Dungeons](https://divinegw.github.io/guias/dungeons.html)** | As 8 dungeons clássicas de Tyria: acesso, recompensas, achievements e vídeo de cada path. | [PDF](https://divinegw.github.io/pdfs/dungeons.pdf) |
-| <img src="assets/img/800px-The-Battle-for-Lion-s-Arch-loading-screen-7254a0-760.jpg" width="180" alt=""> | **[Recursos Úteis](https://divinegw.github.io/guias/recursos-uteis.html)** | 56 sites e ferramentas da comunidade: builds, conta, logs, gold, crafting, mapas, WvW e homestead. | [PDF](https://divinegw.github.io/pdfs/recursos-uteis.pdf) |
+| <img src="readme/endgame.jpg" width="180" alt=""> | **[Endgame](https://divinegw.github.io/guias/endgame.html)**<br><sub>comece por aqui</sub> | Tipos de dano, boons e conditions, atributos, roles, builds, golem de treino, ArcDPS e como entrar em um squad. | [PDF](https://divinegw.github.io/pdfs/endgame.pdf) |
+| <img src="readme/raids.jpg" width="180" alt=""> | **[Raids](https://divinegw.github.io/guias/raids.html)** | As 8 wings e os 16 Raid Encounters, recompensas, CM e Legendary Mode, Quickplay e vídeo de cada boss. | [PDF](https://divinegw.github.io/pdfs/raids.pdf) |
+| <img src="readme/fractals.jpg" width="180" alt=""> | **[Fractals](https://divinegw.github.io/guias/fractals.html)** | Tiers e Agony Resistance, instabilidades, dailies, Account Augmentations, títulos e Challenge Mode. | [PDF](https://divinegw.github.io/pdfs/fractals.pdf) |
+| <img src="readme/dungeons.jpg" width="180" alt=""> | **[Dungeons](https://divinegw.github.io/guias/dungeons.html)** | As 8 dungeons clássicas de Tyria: acesso, recompensas, achievements e vídeo de cada path. | [PDF](https://divinegw.github.io/pdfs/dungeons.pdf) |
+| <img src="readme/recursos-uteis.jpg" width="180" alt=""> | **[Recursos Úteis](https://divinegw.github.io/guias/recursos-uteis.html)** | 56 sites e ferramentas da comunidade: builds, conta, logs, gold, crafting, mapas, WvW e homestead. | [PDF](https://divinegw.github.io/pdfs/recursos-uteis.pdf) |
 
 ## No site
 
@@ -48,4 +48,4 @@
 - Guild Wars 2 e suas artes são marcas da **ArenaNet**. Imagens: Guild Wars 2 Wiki, wallpapers oficiais do guildwars2.com e artes da guilda.
 - Ícones: [Lucide](https://lucide.dev) (ISC). Fontes: Barlow Condensed, Source Sans 3 e IBM Plex Mono (SIL Open Font License).
 
-<sub>Este repositório contém o site já pronto, publicado pelo GitHub Pages. Os arquivos-fonte e o guia de edição ficam com quem mantém o site.</sub>
+<sub>Este repositório contém o site já pronto, gerado com Astro e publicado pelo GitHub Pages. Os arquivos-fonte e o guia de edição ficam com quem mantém o site.</sub>
