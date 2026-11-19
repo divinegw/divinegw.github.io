@@ -48,7 +48,7 @@ Nunca fez conteúdo em grupo? Leia o **Endgame** primeiro. Ele ensina o que os o
 ## Para baixar
 
 - **PDF de cada guia**, em A4, para ler offline ou numa segunda tela durante a luta. O link fica na tabela acima e no botão "Baixar PDF" de cada guia.
-- **[Configuração Zyanore do ArcDPS](https://divinegw.github.io/downloads/arcdps-zyanore.zip)**: o perfil de janelas de DPS que a guilda usa, com a fonte e um passo a passo. O guia de [Endgame](https://divinegw.github.io/guias/endgame.html#arcdps) explica como instalar.
+- **[Configuração do Zyanore para o ArcDPS](https://divinegw.github.io/downloads/arcdps-zyanore.zip)**: o perfil de janelas de DPS do Zyanore, com a fonte e um passo a passo. O guia de [Endgame](https://divinegw.github.io/guias/endgame.html#arcdps) explica como instalar.
 - **[Divine Prisma](https://github.com/divinegw/divine-prisma)**: os cursores, com instalador para o Nexus e versão `.cur` para o YoloMouse.
 
 ## O que tem no site
