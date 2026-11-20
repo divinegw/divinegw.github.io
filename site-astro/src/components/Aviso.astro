@@ -1,0 +1,22 @@
+---
+// Caixa de destaque: Dica, Atenção ou Importante. Tinta da cor do tipo + borda de 1px (nunca borda lateral grossa).
+//   tipo:   dica (marinho; atalho, recomendação) · atencao (ouro; algo que costuma dar errado) ·
+//           importante (vermelho; perde progresso, recompensa ou acesso)
+//   titulo: texto do título; sem ele, o título é o nome do tipo. Com ele, o leitor de tela ouve "Dica: <titulo>".
+// O ícone é decorativo; o tipo sempre aparece escrito (a cor nunca trabalha sozinha).
+import { lucide } from '../lib/lucide';
+
+interface Props { tipo: 'dica' | 'atencao' | 'importante'; titulo?: string; id?: string; class?: string }
+const TIPOS = {
+  dica: { nome: 'Dica', icone: 'lightbulb' },
+  atencao: { nome: 'Atenção', icone: 'triangle-alert' },
+  importante: { nome: 'Importante', icone: 'octagon-alert' },
+};
+const { tipo, titulo, id, class: extra } = Astro.props;
+const t = TIPOS[tipo];
+if (!t) throw new Error(`Aviso: tipo "${tipo}" não existe (use dica, atencao ou importante).`);
+---
+<div class:list={['aviso', `aviso-${tipo}`, extra]} role="note" id={id}>
+  <p class="aviso-titulo"><Fragment set:html={lucide(t.icone)} />{titulo ? <><span class="sr-only">{t.nome}: </span>{titulo}</> : t.nome}</p>
+  <div class="aviso-corpo"><slot /></div>
+</div>

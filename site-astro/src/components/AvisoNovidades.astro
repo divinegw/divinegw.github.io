@@ -1,0 +1,118 @@
+---
+// Aviso de novidade em BALÃO (Fase 6; desde a Fase 7 sai do link "Novidades" do header único): a ponta aponta para
+// o link visível (no celular, para o ☰), nas cores do balão do Termo (marinho no claro, grafite com fio de ouro no
+// escuro). No celular, ocupa a largura toda logo abaixo da barra. Entra pelo Cabecalho.astro (`aviso`), depois da barra.
+// Aparece 1,2 s depois de a pessoa ENTRAR no site (em qualquer página, inclusive a inicial), quando há uma novidade
+// (src/novidades.ts) que ela ainda não viu. Uma vez por visita, no navegador todo: depois de aparecer, não volta em
+// outra página nem em outra aba por VISITA_HORAS (localStorage, não sessionStorage, que é por aba).
+// Não é modal: não tranca o foco nem cobre a leitura. "Ver o que mudou", X e Esc marcam como vista (localStorage)
+// e ela só volta quando sair uma novidade nova. "Depois" e ignorar (a pessoa só viu, não clicou): volta na próxima visita.
+// Só nos AVISO_DIAS dias seguintes à data. O mesmo script acende o ponto de "Novidades" e do ☰ (`data-sino`, `data-sino-menu`).
+//   pagina: está na própria página de Novidades (não mostra o aviso; só marca a novidade como vista)
+//   balao:  false acende só o ponto, sem balão
+import { Image } from 'astro:assets';
+import { lucide } from '../lib/lucide';
+import { icone } from '../lib/arquivos';
+import { ultimaNovidade as n, dataCurta, AVISO_DIAS } from '../novidades';
+
+interface Props { pagina?: boolean; balao?: boolean }
+const { pagina, balao = true } = Astro.props;
+const img = n.icone ? icone(n.icone) : undefined;
+const qtd = n.mudancas.length;
+---
+<span hidden data-novidades data-id={n.id} data-data={n.data} data-dias={AVISO_DIAS} data-pagina={pagina ? '1' : undefined}></span>
+{!pagina && balao && (
+  <>
+    <span class="sr-only" aria-live="polite" data-aviso-anuncio></span>
+    <div class="aviso-novidade" id="aviso-novidade" role="region" aria-labelledby="aviso-novidade-titulo" hidden>
+      <div class="aviso-novidade-cab">
+        <span class="aviso-novidade-ico" aria-hidden="true">{img ? <Image src={img} width={22} height={22} alt="" layout="fixed" /> : <Fragment set:html={lucide('bell')} />}</span>
+        <div class="aviso-novidade-texto">
+          <p class="aviso-novidade-titulo" id="aviso-novidade-titulo">{n.titulo}</p>
+          <p class="aviso-novidade-meta"><time datetime={n.data}>{dataCurta(n.data)}</time> · {qtd} {qtd === 1 ? 'mudança' : 'mudanças'}</p>
+        </div>
+        <button type="button" class="aviso-novidade-fechar" aria-label="Fechar aviso de novidade" data-vista><Fragment set:html={lucide('x')} /></button>
+      </div>
+      <div class="aviso-novidade-acoes tema-escuro">
+        <a class="btn btn-primario btn-sm" href={`/novidades.html#${n.id}`} data-vista>Ver o que mudou</a>
+        <button type="button" class="aviso-novidade-depois" data-depois>Depois</button>
+      </div>
+    </div>
+  </>
+)}
+
+<script>
+  const cfg = document.querySelector<HTMLElement>('[data-novidades]');
+  if (cfg) {
+    const { id = '', data = '', dias = '30', pagina } = cfg.dataset;
+    const CHAVE = 'divine-novidade-vista';
+    const MOSTRADA = 'divine-novidade-mostrada'; // "<id>|<quando apareceu, ms>"
+    const VISITA_HORAS = 12; // depois de aparecer, não volta por 12 h (em nenhuma aba); passado isso é outra visita
+    const ler = (s: Storage, k: string) => { try { return s.getItem(k); } catch { return null; } };
+    const gravar = (s: Storage, k: string, v = id) => { try { s.setItem(k, v); } catch { /* sem armazenamento: o aviso só não lembra */ } };
+    const mostradaNestaVisita = () => {
+      const [mid, quando] = (ler(localStorage, MOSTRADA) ?? '').split('|');
+      return mid === id && Date.now() - Number(quando) < VISITA_HORAS * 36e5;
+    };
+    const raiz = document.documentElement;
+    const sinos = document.querySelectorAll<HTMLElement>('[data-sino]');
+    const menu = document.querySelector<HTMLElement>('[data-sino-menu]');
+    const sino = (aceso: boolean) => {
+      raiz.classList.toggle('tem-novidade', aceso);
+      sinos.forEach((b) => b.setAttribute('aria-label', aceso ? 'Novidades (há uma atualização que você ainda não viu)' : 'Novidades'));
+      menu?.setAttribute('aria-label', aceso ? 'Abrir menu (há uma novidade que você ainda não viu)' : 'Abrir menu');
+    };
+    // para onde o balão aponta: o link "Novidades" que está na tela; no celular (links na gaveta), o ☰
+    const alvo = () => [...sinos].find((b) => b.offsetParent !== null && !b.closest('dialog')) ?? menu;
+    const marcaVista = () => { gravar(localStorage, CHAVE); sino(false); };
+
+    if (pagina) marcaVista();
+    else if (ler(localStorage, CHAVE) !== id) {
+      sino(true);
+      const aviso = document.getElementById('aviso-novidade');
+      const idade = (Date.now() - Date.parse(`${data}T00:00:00Z`)) / 864e5;
+      if (aviso && idade <= Number(dias) && !mostradaNestaVisita()) {
+        // o balão começa logo à esquerda do alvo e não passa da borda direita da tela; a ponta fica no meio do alvo
+        // (no celular o balão ocupa a largura toda, pelo CSS, e só a ponta acompanha o ☰)
+        const ponta = () => {
+          const a = alvo(); if (!a) return;
+          const base = (aviso.offsetParent ?? document.body).getBoundingClientRect();
+          const ar = a.getBoundingClientRect(), centro = ar.left + ar.width / 2;
+          const gutter = parseFloat(getComputedStyle(aviso).getPropertyValue('--gutter') || '20');
+          aviso.style.removeProperty('--aviso-desloca');
+          if (!matchMedia('(max-width: 640px)').matches) {
+            const largura = aviso.offsetWidth;
+            const esquerda = Math.max(gutter, Math.min(ar.left - 12, innerWidth - gutter - largura));
+            aviso.style.setProperty('--aviso-desloca', `${esquerda - base.left}px`);
+          }
+          aviso.style.setProperty('--aviso-cauda', `${centro - aviso.getBoundingClientRect().left}px`);
+        };
+        const fecha = () => {
+          const tinhaFoco = aviso.contains(document.activeElement);
+          aviso.classList.remove('is-aberto'); aviso.hidden = true;
+          removeEventListener('resize', ponta); document.removeEventListener('keydown', esc);
+          if (tinhaFoco) alvo()?.focus(); // o foco do teclado volta a "Novidades" (ou ao ☰), não ao início da página
+        };
+        // Esc fecha de qualquer lugar; só marca como vista se a pessoa estava no balão ou no sino
+        const esc = (e: KeyboardEvent) => {
+          if (e.key !== 'Escape') return;
+          const foco = document.activeElement;
+          if (aviso.contains(foco) || foco === alvo()) marcaVista();
+          fecha();
+        };
+        aviso.querySelectorAll('[data-vista]').forEach((el) => el.addEventListener('click', () => { marcaVista(); fecha(); }));
+        aviso.querySelector('[data-depois]')?.addEventListener('click', fecha);
+        setTimeout(() => {
+          aviso.hidden = false;
+          ponta();
+          addEventListener('resize', ponta);
+          document.addEventListener('keydown', esc);
+          gravar(localStorage, MOSTRADA, `${id}|${Date.now()}`);
+          const anuncio = document.querySelector('[data-aviso-anuncio]');
+          if (anuncio) anuncio.textContent = `Novidade: ${aviso.querySelector('.aviso-novidade-titulo')?.textContent ?? ''}`;
+          requestAnimationFrame(() => aviso.classList.add('is-aberto'));
+        }, 1200);
+      }
+    }
+  }
+</script>

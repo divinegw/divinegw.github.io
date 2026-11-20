@@ -1,0 +1,28 @@
+# Gerado
+node_modules/
+site-astro/dist/
+site-astro/.astro/
+
+# Material de trabalho grande (capturas, protótipos): fica só no computador de quem mantém
+design-system/
+site-astro/comparacao/
+
+# Claude: só os agentes, a skill voz-divine e as configurações do projeto vão para o repositório.
+# As skills de terceiros estão listadas em .claude/SKILLS.md, com o link de cada uma.
+.claude/*
+!.claude/agents/
+!.claude/settings.json
+!.claude/launch.json
+!.claude/SKILLS.md
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/voz-divine/
+.claude/settings.local.json
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Notas locais do Claude
+CLAUDE.local.md

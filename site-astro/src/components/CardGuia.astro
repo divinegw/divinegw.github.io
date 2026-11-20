@@ -1,0 +1,35 @@
+---
+// Card de um guia (página inicial): arte 2:1 com o nome, selo opcional, texto e "Abrir guia" (as tags saíram na Fase 4;
+// o botão de PDF saiu na Fase 7: os PDFs só são gerados sob demanda, com publicar.ps1 -ComPdf).
+// Os dados vêm de GUIAS em src/site.ts. A arte tem o mesmo view-transition-name do herói do guia
+// (arte-<slug>): ao abrir o guia, ela cresce até virar o topo da página (View Transitions, só CSS).
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { icone } from '../lib/arquivos';
+import { lucide } from '../lib/lucide';
+import type { GuiaInfo } from '../site';
+import Botao from './Botao.astro';
+import Selo from './Selo.astro';
+
+interface Props extends GuiaInfo { titulo?: 'h3' | 'h2' }
+const { guia, nome, marca, texto, selo } = Astro.props;
+const entry = await getEntry('guias', guia);
+if (!entry) throw new Error(`Guia não encontrado: src/content/guias/${guia}.mdx`);
+const marcaImg = icone(marca);
+// "mono-…": ícone branco de uma cor (PNG que o usuário mandou, pintado de branco): mesmo tamanho dos ícones de linha
+const mono = marca.startsWith('mono-');
+---
+<article class="guide" aria-labelledby={`card-${guia}`}>
+  <div class="art" style={`view-transition-name:arte-${guia}`}>
+    <Image class="banner-img" src={entry.data.arte} alt="" widths={[380, 760, 1140].filter((w) => w <= entry.data.arte.width)} sizes="(min-width: 1180px) 380px, (min-width: 820px) 33vw, 100vw" style={`object-position:${entry.data.foco}`} />
+    <span class="mark">{marcaImg ? <Image class:list={['badge-img', { 'mark-mono': mono }]} src={marcaImg} width={Math.min(64, marcaImg.width)} height={Math.min(64, marcaImg.width)} alt="" layout="fixed" /> : <Fragment set:html={lucide(marca)} />}</span>
+    <h3 id={`card-${guia}`}>{nome}</h3>
+  </div>
+  <div class="body">
+    {selo && <p class="guide-selo"><Selo tipo={selo.tipo} data={selo.data} rotuloData={selo.rotulo} /></p>}
+    <p>{texto}</p>
+    <div class="actions">
+      <Botao variante="primario" tamanho="lg" href={`/guias/${guia}.html`} class="guide-abrir">Abrir guia<span class="sr-only"> de {nome}</span></Botao>
+    </div>
+  </div>
+</article>

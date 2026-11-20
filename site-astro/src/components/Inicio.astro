@@ -1,0 +1,55 @@
+---
+// Corpo da página inicial (portal): barra do topo (Cabecalho.astro, a mesma de todas as páginas), o slide dos 5 guias,
+// a faixa da última novidade (src/novidades.ts; leva a /novidades.html; na home ela faz o papel do aviso dos guias), a trilha "Comece por aqui" (Endgame → Fractals → Raids, cards numerados ligados por um fio de ouro)
+// e "Mais guias". Ordem e textos: SITE, INICIO, GUIAS e TRILHA em src/site.ts.
+import Cabeca from './Cabeca.astro';
+import Cabecalho from './Cabecalho.astro';
+import CarrosselGuias from './CarrosselGuias.astro';
+import CardGuia from './CardGuia.astro';
+import Rodape from './Rodape.astro';
+import { SITE, INICIO, GUIAS, TRILHA } from '../site';
+import FaixaNovidade from './FaixaNovidade.astro';
+import { lucide } from '../lib/lucide';
+import '../styles/inicio.css';
+
+const trilha = TRILHA.map((s) => GUIAS.find((g) => g.guia === s)!);
+const outros = GUIAS.filter((g) => !TRILHA.includes(g.guia));
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca ogTitulo={`${SITE.nome}: guias de Guild Wars 2`} descricao={INICIO.descricao} caminho="/" />
+</head>
+<body>
+<div class="pagina">
+<Cabecalho atual="inicio" aviso />
+<main id="conteudo">
+  <h1 class="sr-only">{SITE.nome}: guias de Guild Wars 2</h1>
+  <CarrosselGuias />
+  <div class="hub">
+    <FaixaNovidade />
+    <section aria-labelledby="comece">
+      <h2 class="block-title" id="comece">Comece por aqui</h2>
+      <p class="block-sub">Chegou agora? Siga {trilha.map((g) => g.nome).join(', ').replace(/, ([^,]*)$/, ' e $1')}, nesta ordem, e você estará pronto para o primeiro squad.</p>
+      <ol class="trilha">
+        {trilha.map((g, i) => (
+          <li class="trilha-passo">
+            <span class="trilha-no" aria-hidden="true">{i + 1}</span>
+            <CardGuia {...g} />
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section aria-labelledby="mais-guias">
+      <h2 class="block-title" id="mais-guias">Mais guias</h2>
+      <div class="grid">
+        {outros.map((g) => <CardGuia {...g} />)}
+      </div>
+    </section>
+  </div>
+</main>
+</div>
+<Rodape />
+</body>
+</html>

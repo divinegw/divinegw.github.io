@@ -1,0 +1,434 @@
+---
+// Sorteador da guilda: /sorteio.html. Tudo roda no navegador (src/scripts/sorteio.ts), menos a inscrição online,
+// que usa o Firebase (src/scripts/sorteio-online.ts, só baixado quando alguém usa) e só aparece com FIREBASE
+// preenchido em src/sorteio.ts.
+// Abas: Ao vivo · Lista de contas (vencedores ou prêmios) · Números · Squads · Extras (o que jogar, dados, moeda).
+// Ganhadores e Conferir pelo código ficam na página filha /sorteio/ganhadores.html (src/pages/sorteio/ganhadores.astro).
+// Todo resultado traz um código (semente): com ele e a mesma entrada, qualquer um refaz o sorteio e confere.
+// Os últimos 20 resultados ficam salvos só neste navegador (localStorage).
+// Página de um sorteio ao vivo: /sorteio.html?s=<id>. Mesmo topo da página de Novidades.
+import { Image } from 'astro:assets';
+import Cabeca from '../components/Cabeca.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Rodape from '../components/Rodape.astro';
+import Abas from '../components/Abas.astro';
+import Aba from '../components/Aba.astro';
+import Codigo from '../components/sorteio/Codigo.astro';
+import { imagem } from '../lib/arquivos';
+import { lucide } from '../lib/lucide';
+import { conteudoSorteio } from '../lib/sorteio/conteudo';
+import { FIREBASE } from '../sorteio';
+import { EXPANSOES, ICONE_GEMA, ICONE_OURO } from '../lib/sorteio/premio';
+import '../styles/sorteio.css';
+
+const arte = imagem('dungeons/arte.jpg');
+const grupos = await conteudoSorteio();
+const online = Boolean(FIREBASE) || import.meta.env.DEV; // no dev, a aba aparece (com aviso) para dar para ver o visual
+const ico = (n: string) => lucide(n);
+
+// ícones que um prêmio "Outro" pode usar: os mesmos das outras abas (gemas, ouro, expansões) ou o de um item do jogo
+const ICONES_OUTRO = [
+  { v: 'presente', rotulo: 'Presente', rar: 'texto', svg: 'gift' },
+  { v: 'gemas', rotulo: 'Gemas', rar: 'gema', img: ICONE_GEMA },
+  { v: 'ouro', rotulo: 'Ouro', rar: 'ouro', img: ICONE_OURO },
+  ...[...EXPANSOES].reverse().map((e) => ({ v: e.sigla, rotulo: e.sigla, longo: e.nome, rar: 'expansao', img: e.icone })),
+  { v: 'item', rotulo: 'Item do jogo', rar: 'texto', svg: 'search' },
+];
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca titulo="Sorteio" descricao="Sorteie números, contas do jogo e squads da guilda DIVINE, com um código para todo mundo conferir o resultado." caminho="/sorteio.html" />
+</head>
+<body>
+<div class="pagina">
+<Cabecalho atual="sorteio" aviso />
+<header class="novidades-topo sorteio-topo">
+  <Image class="novidades-arte" src={arte} alt="" widths={[640, 1024, 1600].filter((w) => w <= arte.width)} sizes="100vw" loading="eager" fetchpriority="high" layout="full-width" style="object-position:50% 18%" />
+  <div class="novidades-topo-texto">
+    <h1>Sorteio</h1>
+    <p>Sorteie número, conta, prêmio ou squad, aqui ou ao vivo com a galera. Todo resultado tem um código para conferir.</p>
+  </div>
+</header>
+
+<main id="conteudo" class="sorteio" data-sorteio data-firebase={FIREBASE ? JSON.stringify(FIREBASE) : ''}>
+
+
+  {/* Página de um sorteio ao vivo (?s=...): o script mostra este bloco e preenche com o sorteio */}
+  <section class="inscricao" data-inscricao hidden aria-labelledby="inscricao-titulo">
+    <div class="sala-dono" data-i-dono hidden></div>
+    <nav class="sala-nav" aria-label="Sorteio">
+      <a href="/sorteio.html"><Fragment set:html={ico('arrow-left')} />Todos os sorteios</a>
+      <a href="/sorteio/ganhadores.html"><Fragment set:html={ico('trophy')} />Ganhadores</a>
+    </nav>
+    <div class="sala-grade">
+      <div class="sala-esq">
+        <h2 id="inscricao-titulo" data-i-titulo>Carregando o sorteio…</h2>
+        <div class="sala-premio" data-i-premio hidden></div>
+        <p class="inscricao-desc" data-i-desc hidden></p>
+      </div>
+      <div class="sala-dir">
+        <p class="inscricao-estado" data-i-estado></p>
+        <form class="inscricao-form" data-i-form hidden>
+          <div class="campo">
+            <label class="campo-rotulo" for="i-conta">Sua conta do Guild Wars 2</label>
+            <span class="inscricao-linha">
+              <input class="campo-entrada" id="i-conta" name="conta" autocomplete="off" spellcheck="false" placeholder="Nome.1234" required maxlength="40" aria-describedby="i-conta-ajuda" />
+              <button type="submit" class="btn btn-primario">Participar</button>
+            </span>
+          </div>
+          <span class="campo-ajuda" id="i-conta-ajuda">Nome, ponto e 4 números, como Joana.1234.</span>
+          <p class="campo-ajuda" data-i-google hidden>Este sorteio pede a sua conta Google: vale uma inscrição por conta.</p>
+        </form>
+        <p class="sorteio-msg" id="i-msg" data-i-msg role="status"></p>
+        <details class="inscricao-lista" data-i-lista hidden>
+          <summary>Quem já se inscreveu (<span data-i-total>0</span>)</summary>
+          <ol data-i-nomes></ol>
+        </details>
+      </div>
+    </div>
+    <div class="roleta" data-i-roleta hidden aria-hidden="true"><canvas width="400" height="400"></canvas><span class="roleta-ponteiro"></span></div>
+    <div data-i-resultado></div>
+    <div class="sala-transparencia" data-i-transparencia hidden></div>
+  </section>
+
+  <div class="sorteio-grade">
+  {/* Sorteios ao vivo abertos agora (lidos pela API REST do Firestore em sorteio.ts). Some quando a página abre um sorteio (?s=). */}
+    {FIREBASE && (
+      <section class="ao-vivo" data-ao-vivo aria-labelledby="ao-vivo-titulo">
+        <div class="ao-vivo-topo">
+          <h2 id="ao-vivo-titulo">Sorteios ao vivo</h2>
+        </div>
+        <div class="ao-vivo-vazio" data-ao-vivo-vazio hidden>
+          <Fragment set:html={ico('radio')} />
+          <p class="ao-vivo-vazio-titulo">Nenhum sorteio aberto agora</p>
+          <p>Abra um em <a href="#faca-titulo">Faça um sorteio</a> e ele aparece aqui para todo mundo.</p>
+        </div>
+        <ul class="ao-vivo-lista" data-ao-vivo-lista aria-busy="true"></ul>
+        <button type="button" class="btn btn-secundario btn-sm ao-vivo-mais" data-ao-vivo-mais hidden aria-expanded="false"></button>
+      </section>
+    )}
+
+
+  <section class="sorteio-faca" aria-labelledby="faca-titulo">
+  <div class="sorteio-faca-topo">
+    <h2 class="sorteio-area-titulo" id="faca-titulo">Faça um sorteio</h2>
+    <a class="btn btn-secundario btn-sm" href="/sorteio/ganhadores.html"><Fragment set:html={ico('trophy')} />Ganhadores</a>
+  </div>
+  <Abas rotulo="Tipos de sorteio" class="sorteio-abas">
+
+    {online && (
+      <Aba rotulo="Ao vivo">
+        <div class="online" data-online>
+          {!FIREBASE && <p class="sorteio-msg is-erro">O sorteio ao vivo ainda não está ligado: falta preencher o Firebase em <code>src/sorteio.ts</code> (passo a passo em <code>site-astro/firebase/LEIA-ME.md</code>). Esta aba só aparece no site depois disso.</p>}
+          <form class="sorteio-form" data-novo novalidate>
+            <label class="campo"><span class="campo-rotulo">Nome do sorteio</span><input class="campo-entrada" name="titulo" required maxlength="80" autocomplete="off" placeholder="Sorteio da live de sexta…" /></label>
+            <fieldset class="campo-grupo" data-premio>
+              <legend class="campo-rotulo">Prêmio</legend>
+              <div class="segmentado" role="radiogroup" aria-label="Tipo de prêmio">
+                <label class="segmentado-op"><input type="radio" name="premioTipo" value="item" checked /><span>Item do jogo</span></label>
+                <label class="segmentado-op"><input type="radio" name="premioTipo" value="gemas" /><span>Gemas</span></label>
+                <label class="segmentado-op"><input type="radio" name="premioTipo" value="ouro" /><span>Ouro</span></label>
+                <label class="segmentado-op"><input type="radio" name="premioTipo" value="expansao" /><span>Expansão</span></label>
+                <label class="segmentado-op"><input type="radio" name="premioTipo" value="texto" /><span>Outro</span></label>
+              </div>
+              <div class="premio-linha" data-p="item">
+                <div class="campo premio-nome">
+                  <label class="campo-rotulo" for="item-campo">Nome do item, em inglês</label>
+                  <span class="combo" data-combo="item">
+                    <input class="campo-entrada" id="item-campo" name="item" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="itens-lista" aria-describedby="itens-status"
+                      autocomplete="off" spellcheck="false" placeholder="Aurene's Bite…" maxlength="80" />
+                    <span class="busca-resultados combo-painel">
+                      <span class="busca-status" id="itens-status"></span>
+                      <ul class="busca-lista" id="itens-lista" role="listbox" aria-label="Itens encontrados na wiki do jogo" hidden></ul>
+                    </span>
+                  </span>
+                  <span class="sr-only" aria-live="polite" data-itens-anuncio></span>
+                </div>
+                <label class="campo campo-num"><span class="campo-rotulo">Quantidade</span><input class="campo-entrada campo-mono" name="qtdItem" type="number" inputmode="numeric" min="1" max="250" value="1" /></label>
+              </div>
+              <div class="premio-linha" data-p="gemas" hidden>
+                <label class="campo campo-num"><span class="campo-rotulo">Quantas gemas</span><input class="campo-entrada campo-mono" name="qtdGemas" type="number" inputmode="numeric" min="1" max="100000" step="1" placeholder="400" /></label>
+              </div>
+              <div class="premio-linha" data-p="ouro" hidden>
+                <label class="campo campo-num"><span class="campo-rotulo">Quanto ouro</span><input class="campo-entrada campo-mono" name="qtdOuro" type="number" inputmode="numeric" min="1" max="1000000" step="1" placeholder="100" /></label>
+              </div>
+              <div class="premio-linha" data-p="expansao" hidden>
+                <label class="campo premio-nome">
+                  <span class="campo-rotulo">Qual expansão</span>
+                  <select class="campo-entrada" name="expansao">
+                    <option value="Visions of Eternity">Visions of Eternity (VoE)</option>
+                    <option value="Janthir Wilds">Janthir Wilds (JW)</option>
+                    <option value="Secrets of the Obscure">Secrets of the Obscure (SotO)</option>
+                    <option value="End of Dragons">End of Dragons (EoD)</option>
+                    <option value="Path of Fire">Path of Fire (PoF)</option>
+                    <option value="Heart of Thorns">Heart of Thorns (HoT)</option>
+                  </select>
+                </label>
+              </div>
+              <div class="premio-linha premio-outro" data-p="texto" hidden>
+                <label class="campo premio-nome"><span class="campo-rotulo">Qual é o prêmio</span><input class="campo-entrada" name="premioTexto" maxlength="80" autocomplete="off" placeholder="Lendária Gen 1 à escolha de quem ganhar…" /></label>
+                <fieldset class="campo-grupo premio-icones">
+                  <legend class="campo-rotulo">Ícone do prêmio</legend>
+                  <div class="icone-grade">
+                    {ICONES_OUTRO.map((o) => (
+                      <label class="icone-op">
+                        <input type="radio" name="iconeOutro" value={o.v} checked={o.v === 'presente'} />
+                        <span class={`premio-ico is-p is-${o.rar}`}>{o.img ? <img src={o.img} alt="" width="40" height="40" loading="lazy" decoding="async" /> : <Fragment set:html={ico(o.svg!)} />}</span>
+                        <span class="icone-op-nome">{o.longo ? <><span aria-hidden="true">{o.rotulo}</span><span class="sr-only">{o.longo}</span></> : o.rotulo}</span>
+                      </label>
+                    ))}
+                  </div>
+                  <div class="campo premio-nome" data-icone-item hidden>
+                    <label class="campo-rotulo" for="icone-campo">Item do jogo para o ícone, em inglês</label>
+                    <span class="combo" data-combo="icone">
+                      <input class="campo-entrada" id="icone-campo" name="iconeItem" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="icones-lista" aria-describedby="icones-status icone-ajuda"
+                        autocomplete="off" spellcheck="false" placeholder="Twilight…" maxlength="80" />
+                      <span class="busca-resultados combo-painel">
+                        <span class="busca-status" id="icones-status"></span>
+                        <ul class="busca-lista" id="icones-lista" role="listbox" aria-label="Itens encontrados na wiki do jogo" hidden></ul>
+                      </span>
+                    </span>
+                    <span class="sr-only" aria-live="polite" data-icones-anuncio></span>
+                    <span class="campo-ajuda" id="icone-ajuda">Do item vêm só o ícone e a cor da raridade. O nome do prêmio continua o que você escreveu.</span>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="premio-previa" data-premio-previa aria-live="polite"></div>
+            </fieldset>
+            <label class="campo"><span class="campo-rotulo">Sobre o prêmio (opcional)</span><textarea class="campo-entrada" name="descricao" rows="2" maxlength="300" placeholder="Em poucas palavras: o que é o prêmio e por que vale a pena." aria-describedby="sobre-ajuda"></textarea><span class="campo-ajuda" id="sobre-ajuda">Até 300 caracteres. O card do sorteio mostra as 3 primeiras linhas, e a página mostra tudo.</span></label>
+            <div class="sorteio-campos">
+              <label class="campo campo-num"><span class="campo-rotulo">Vencedores</span><input class="campo-entrada campo-mono" name="vencedores" type="number" inputmode="numeric" min="1" max="50" value="1" /></label>
+              <label class="campo">
+                <span class="campo-rotulo">Inscrições abertas por</span>
+                <select class="campo-entrada" name="duracao">
+                  <option value="5">5 minutos</option>
+                  <option value="10">10 minutos</option>
+                  <option value="15" selected>15 minutos</option>
+                  <option value="30">30 minutos</option>
+                  <option value="60">1 hora</option>
+                  <option value="180">3 horas</option>
+                  <option value="1440">1 dia</option>
+                  <option value="4320">3 dias</option>
+                  <option value="10080">7 dias</option>
+                  <option value="0">Sem prazo (você encerra)</option>
+                </select>
+              </label>
+            </div>
+            <label class="opcao">
+              <input type="checkbox" name="aceite" checked />
+              <span class="opcao-texto">Quem ganhar tem 1 minuto para aceitar
+                <span class="opcao-ajuda">Se não aceitar, você sorteia outra pessoa.</span>
+              </span>
+            </label>
+            <label class="opcao">
+              <input type="checkbox" name="google" />
+              <span class="opcao-texto">Uma inscrição por conta Google
+                <span class="opcao-ajuda">Cada pessoa entra com o Google, e vale uma inscrição por conta.</span>
+              </span>
+            </label>
+            <p class="sorteio-msg" data-msg role="alert"></p>
+            <button type="submit" class="btn btn-primario btn-lg"><Fragment set:html={ico('radio')} />Abrir sorteio e copiar o link</button>
+          </form>
+          <div class="online-bloco" data-meus-bloco hidden>
+            <h3>Seus sorteios abertos</h3>
+            <ul class="online-lista" data-meus></ul>
+          </div>
+        </div>
+      </Aba>
+    )}
+
+    <Aba rotulo="Lista de contas">
+      <form class="sorteio-form" data-modo="lista" novalidate>
+        <fieldset class="campo-grupo">
+          <legend class="campo-rotulo">O que fazer com a lista</legend>
+          <div class="segmentado" role="radiogroup" aria-label="O que fazer com a lista">
+            <label class="segmentado-op"><input type="radio" name="usoLista" value="lista" checked /><span>Sortear vencedores</span></label>
+            <label class="segmentado-op"><input type="radio" name="usoLista" value="premios" /><span>Distribuir prêmios</span></label>
+          </div>
+        </fieldset>
+        <label class="campo">
+          <span class="campo-rotulo">Participantes</span>
+          <textarea class="campo-entrada campo-lista" name="lista" rows="9" spellcheck="false" placeholder={'Joana.1234\nCarlos.5678\nMika.4321'}></textarea>
+          <span class="campo-ajuda" data-contagem>Nenhum participante ainda.</span>
+        </label>
+        <div class="sorteio-acoes-lista">
+          <label class="btn btn-secundario btn-sm sorteio-arquivo"><Fragment set:html={ico('upload')} />Abrir arquivo .txt ou .csv<input type="file" name="arquivo" accept=".txt,.csv,text/plain,text/csv" class="sr-only" /></label>
+          <button type="button" class="btn btn-fantasma btn-sm" data-limpar><Fragment set:html={ico('trash-2')} />Limpar lista</button>
+        </div>
+
+        <details class="sorteio-api" data-api>
+          <summary>Puxar os membros da guilda pela API do jogo</summary>
+          <div class="sorteio-api-corpo">
+            <p>Só líder de guilda consegue puxar os membros. Crie uma chave em <a href="https://account.arena.net/applications" target="_blank" rel="noopener">account.arena.net/applications<span class="sr-only"> (abre em nova aba)</span></a>, marque as permissões <b>account</b> e <b>guilds</b> e cole aqui. A chave fica só nesta aba: o site não salva e não manda para ninguém além da API do jogo.</p>
+            <label class="campo"><span class="campo-rotulo">Chave de API</span><input class="campo-entrada campo-mono" type="password" name="chave" autocomplete="off" spellcheck="false" /></label>
+            <button type="button" class="btn btn-secundario" data-api-buscar><Fragment set:html={ico('shield-check')} />Buscar minhas guildas</button>
+            <div class="sorteio-api-filtros" data-api-filtros hidden>
+              <label class="campo"><span class="campo-rotulo">Guilda</span><select class="campo-entrada" name="guilda"></select></label>
+              <fieldset class="campo-grupo"><legend class="campo-rotulo">Ranks que entram</legend><div class="sorteio-opcoes" data-api-ranks></div></fieldset>
+              <label class="campo"><span class="campo-rotulo">Só quem entrou na guilda até</span><input class="campo-entrada" type="date" name="ate" /><span class="campo-ajuda">Deixe vazio para incluir todo mundo.</span></label>
+              <button type="button" class="btn btn-secundario" data-api-colocar><Fragment set:html={ico('users-round')} />Colocar os membros na lista</button>
+            </div>
+            <p class="sorteio-msg" data-api-msg role="status"></p>
+          </div>
+        </details>
+
+        <div class="sorteio-grupo" data-uso="lista">
+          <div class="sorteio-campos">
+            <label class="campo campo-num"><span class="campo-rotulo">Vencedores</span><input class="campo-entrada campo-mono" name="vencedores" type="number" inputmode="numeric" min="1" value="1" /></label>
+          </div>
+          <details class="sorteio-api sorteio-mais">
+            <summary>Mais opções: reservas, bilhetes e ordem</summary>
+            <div class="sorteio-api-corpo">
+              <label class="campo campo-num"><span class="campo-rotulo">Reservas</span><input class="campo-entrada campo-mono" name="reservas" type="number" inputmode="numeric" min="0" value="0" /><span class="campo-ajuda">Assumem se um vencedor não aparecer.</span></label>
+              <div class="sorteio-opcoes">
+                <label class="opcao"><input type="checkbox" name="peso" /><span class="opcao-texto">Usar bilhetes <span class="opcao-ajuda">Mais bilhetes, mais chance: <code>Joana.1234 x3</code></span></span></label>
+                <label class="opcao"><input type="checkbox" name="ordem" /><span>Sortear a ordem de todo mundo, do 1º ao último</span></label>
+              </div>
+            </div>
+          </details>
+          <fieldset class="campo-grupo">
+            <legend class="campo-rotulo">Como mostrar o resultado</legend>
+            <div class="sorteio-opcoes sorteio-opcoes-linha">
+              <label class="opcao"><input type="radio" name="revelar" value="hora" checked /><span>Tudo de uma vez</span></label>
+              <label class="opcao"><input type="radio" name="revelar" value="um" /><span>Um por um</span></label>
+              <label class="opcao"><input type="radio" name="revelar" value="roleta" /><span>Na roleta</span></label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="sorteio-grupo" data-uso="premios" hidden>
+          <label class="campo">
+            <span class="campo-rotulo">Prêmios</span>
+            <textarea class="campo-entrada campo-lista" name="premios" rows="6" placeholder={'Legendary Insight x2\n100 gold\nMini Llama'}></textarea>
+            <span class="campo-ajuda">Mais de uma unidade: <code>Gift of Battle x3</code></span>
+          </label>
+          <label class="opcao"><input type="checkbox" name="repetir" /><span>Uma pessoa pode levar mais de um prêmio</span></label>
+        </div>
+        <label class="opcao"><input type="checkbox" name="soGw2" checked /><span>Aceitar só contas do jogo (Nome.1234)</span></label>
+        <Codigo />
+        <p class="sorteio-msg" data-msg role="alert"></p>
+        <button type="submit" class="btn btn-primario btn-lg" data-sortear-lista><Fragment set:html={ico('trophy')} /><span>Sortear da lista</span></button>
+      </form>
+      <div class="roleta" data-roleta hidden aria-hidden="true"><canvas width="400" height="400"></canvas><span class="roleta-ponteiro"></span></div>
+      <div class="sorteio-resultado" data-resultado></div>
+    </Aba>
+
+    <Aba rotulo="Números">
+      <form class="sorteio-form" data-modo="numeros" novalidate>
+        <div class="sorteio-campos">
+          <label class="campo"><span class="campo-rotulo">De</span><input class="campo-entrada campo-mono" name="min" inputmode="numeric" value="1" autocomplete="off" /></label>
+          <label class="campo"><span class="campo-rotulo">Até</span><input class="campo-entrada campo-mono" name="max" inputmode="numeric" value="100" autocomplete="off" /></label>
+          <label class="campo"><span class="campo-rotulo">Quantos números</span><input class="campo-entrada campo-mono" name="qtd" type="number" inputmode="numeric" min="1" max="10000" value="1" /></label>
+        </div>
+        <div class="sorteio-opcoes">
+          <label class="opcao"><input type="checkbox" name="repetir" /><span>Um número pode sair mais de uma vez</span></label>
+          <label class="opcao"><input type="checkbox" name="ordenar" /><span>Mostrar do menor para o maior</span></label>
+        </div>
+        <Codigo />
+        <p class="sorteio-msg" data-msg role="alert"></p>
+        <button type="submit" class="btn btn-primario btn-lg"><Fragment set:html={ico('dices')} />Sortear números</button>
+      </form>
+      <div class="sorteio-resultado" data-resultado></div>
+    </Aba>
+
+    <Aba rotulo="Squads">
+      <form class="sorteio-form" data-modo="squads" novalidate>
+        <label class="campo">
+          <span class="campo-rotulo">Participantes</span>
+          <textarea class="campo-entrada campo-lista" name="lista" rows="9" spellcheck="false" placeholder={'Joana.1234 - Heal\nCarlos.5678 - DPS\nMika.4321 - Quickness'}></textarea>
+          <span class="campo-ajuda">Função depois do traço: <code>Joana.1234 - Heal</code></span>
+        </label>
+        <div class="sorteio-acoes-lista"><button type="button" class="btn btn-fantasma btn-sm" data-copiar-lista><Fragment set:html={ico('copy')} />Usar a lista da aba Lista de contas</button></div>
+        <div class="sorteio-campos">
+          <label class="campo"><span class="campo-rotulo">Dividir por</span>
+            <select class="campo-entrada" name="por"><option value="tamanho">Pessoas por grupo</option><option value="grupos">Número de grupos</option></select>
+          </label>
+          <label class="campo campo-num"><span class="campo-rotulo">Quantidade</span><input class="campo-entrada campo-mono" name="n" type="number" inputmode="numeric" min="1" value="5" /><span class="campo-ajuda">5 para fractal, 10 para raid.</span></label>
+        </div>
+        <div class="sorteio-opcoes">
+          <label class="opcao"><input type="checkbox" name="soGw2" checked /><span>Aceitar só contas do jogo (Nome.1234)</span></label>
+          <label class="opcao"><input type="checkbox" name="equilibrar" checked /><span>Espalhar cada função entre os grupos</span></label>
+        </div>
+        <Codigo />
+        <p class="sorteio-msg" data-msg role="alert"></p>
+        <button type="submit" class="btn btn-primario btn-lg"><Fragment set:html={ico('users-round')} />Montar os grupos</button>
+      </form>
+      <div class="sorteio-resultado" data-resultado></div>
+    </Aba>
+
+    <Aba rotulo="Extras">
+      <section class="sorteio-bloco" data-bloco aria-labelledby="extra-jogar">
+        <h3 class="sorteio-sub" id="extra-jogar">O que jogar</h3>
+        <form class="sorteio-form" data-modo="conteudo" novalidate>
+          <fieldset class="campo-grupo">
+            <legend class="campo-rotulo">Sortear entre</legend>
+            <div class="sorteio-opcoes">
+              {grupos.map((g, i) => <label class="opcao"><input type="checkbox" name="grupo" value={g.id} checked={i === 0} /><span>{g.nome} <span class="opcao-n">({g.itens.length})</span></span></label>)}
+            </div>
+          </fieldset>
+          <label class="campo campo-num"><span class="campo-rotulo">Quantos</span><input class="campo-entrada campo-mono" name="qtd" type="number" inputmode="numeric" min="1" value="1" /></label>
+          <Codigo />
+          <p class="sorteio-msg" data-msg role="alert"></p>
+          <button type="submit" class="btn btn-primario btn-lg"><Fragment set:html={ico('swords')} />Sortear o que jogar</button>
+        </form>
+        <div class="sorteio-resultado" data-resultado></div>
+        <script type="application/json" data-conteudo set:html={JSON.stringify(grupos)} />
+      </section>
+
+      <div class="sorteio-duas sorteio-duas-forms">
+        <section class="sorteio-bloco" data-bloco aria-labelledby="extra-dados">
+          <h3 class="sorteio-sub" id="extra-dados">Dados</h3>
+          <form class="sorteio-form" data-modo="dados" novalidate>
+            <div class="sorteio-campos">
+              <label class="campo campo-num"><span class="campo-rotulo">Quantos dados</span><input class="campo-entrada campo-mono" name="qtd" type="number" inputmode="numeric" min="1" max="100" value="1" /></label>
+              <label class="campo campo-num"><span class="campo-rotulo">Lados</span>
+                <select class="campo-entrada" name="lados">{[4, 6, 8, 10, 12, 20, 100].map((l) => <option value={l} selected={l === 20}>d{l}</option>)}</select>
+              </label>
+              <label class="campo campo-num"><span class="campo-rotulo">Somar ao total</span><input class="campo-entrada campo-mono" name="mod" type="number" value="0" /></label>
+            </div>
+            <Codigo />
+            <p class="sorteio-msg" data-msg role="alert"></p>
+            <button type="submit" class="btn btn-primario btn-lg"><Fragment set:html={ico('dices')} />Rolar os dados</button>
+          </form>
+          <div class="sorteio-resultado" data-resultado></div>
+        </section>
+        <section class="sorteio-bloco" data-bloco aria-labelledby="extra-moeda">
+          <h3 class="sorteio-sub" id="extra-moeda">Cara ou coroa</h3>
+          <form class="sorteio-form" data-modo="moeda" novalidate>
+            <label class="campo campo-num"><span class="campo-rotulo">Quantas vezes</span><input class="campo-entrada campo-mono" name="qtd" type="number" inputmode="numeric" min="1" max="1000" value="1" /></label>
+            <Codigo />
+            <p class="sorteio-msg" data-msg role="alert"></p>
+            <button type="submit" class="btn btn-primario btn-lg"><Fragment set:html={ico('coins')} />Jogar a moeda</button>
+          </form>
+          <div class="sorteio-resultado" data-resultado></div>
+        </section>
+      </div>
+    </Aba>
+
+  </Abas>
+
+  <p class="sr-only" role="status" data-anuncio></p>
+  <template data-ico="gift"><Fragment set:html={ico('gift')} /></template>
+  <template data-ico="expansao"><Fragment set:html={ico('map')} /></template>
+  <template data-ico="trofeu"><Fragment set:html={ico('trophy')} /></template>
+
+  <section class="historico" aria-labelledby="historico-titulo">
+    <div class="historico-topo">
+      <h2 id="historico-titulo">Histórico neste navegador</h2>
+      <button type="button" class="btn btn-fantasma btn-sm" data-historico-limpar hidden><Fragment set:html={ico('trash-2')} />Apagar histórico</button>
+    </div>
+    <p class="historico-vazio" data-historico-vazio>Os sorteios que você fizer aparecem aqui. Eles ficam salvos só neste navegador.</p>
+    <ol class="historico-lista" data-historico></ol>
+  </section>
+  </section>
+
+  </div>
+</main>
+</div>
+<Rodape atual="sorteio" atalhos />
+
+<script>
+  import '../scripts/sorteio';
+</script>
+</body>
+</html>

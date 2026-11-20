@@ -1,0 +1,114 @@
+---
+// Busca leve nos 5 guias (página inicial e 404). Sem dependência: o índice (/busca.json, ~20 KB,
+// montado em src/lib/busca.ts) só é baixado quando a pessoa foca ou digita no campo.
+// Acha capítulos, títulos de card, Wings, Dungeons, bosses e sites; ignora acento e maiúscula.
+// Teclado: "/" ou Ctrl+K focam o campo · ↓ ↑ andam pelos resultados · Esc limpa e volta ao campo.
+// Sem JavaScript, o bloco não aparece (a página continua com os cards).
+import { lucide } from '../lib/lucide';
+interface Props { id?: string }
+const { id = 'busca' } = Astro.props;
+---
+<search class="busca" data-busca>
+  <form class="busca-form" action="/">
+    <label class="sr-only" for={id}>Buscar nos guias</label>
+    <span class="busca-ico" aria-hidden="true"><Fragment set:html={lucide('search')} /></span>
+    <input class="busca-campo" id={id} type="search" autocomplete="off" spellcheck="false" enterkeyhint="search"
+      placeholder="Buscar boss, wing, dungeon…" aria-describedby={`${id}-status`} aria-controls={`${id}-lista`} />
+    <kbd class="busca-atalho" aria-hidden="true">/</kbd>
+  </form>
+  <div class="busca-resultados">
+    <p class="busca-status" id={`${id}-status`} aria-live="polite"></p>
+    <ol class="busca-lista" id={`${id}-lista`} aria-label="Resultados da busca" hidden></ol>
+  </div>
+</search>
+
+<script>
+  type R = { t: string; g: string; c: string; h: string };
+  const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  // marca o trecho que bateu, sem perder os acentos do original
+  const marca = (texto: string, q: string) => {
+    const i = norm(texto).indexOf(q);
+    return i < 0 ? esc(texto) : `${esc(texto.slice(0, i))}<mark>${esc(texto.slice(i, i + q.length))}</mark>${esc(texto.slice(i + q.length))}`;
+  };
+  const MAX = 8;
+  let indice: Promise<(R & { n: string; nc: string; ng: string })[]> | null = null;
+  const carrega = () => (indice ??= fetch('/busca.json')
+    .then((r) => r.json() as Promise<R[]>)
+    .then((rs) => rs.map((r) => ({ ...r, n: norm(r.t), nc: norm(r.c), ng: norm(r.g) }))));
+
+  document.querySelectorAll<HTMLElement>('[data-busca]').forEach((caixa) => {
+    const campo = caixa.querySelector<HTMLInputElement>('.busca-campo')!;
+    const lista = caixa.querySelector<HTMLOListElement>('.busca-lista')!;
+    const status = caixa.querySelector<HTMLElement>('.busca-status')!;
+    caixa.classList.add('is-pronta');
+
+    const abre = (sim: boolean) => caixa.classList.toggle('is-aberta', sim);
+    const mostra = async () => {
+      const bruto = campo.value.trim();
+      const q = norm(bruto);
+      if (!q) { lista.hidden = true; lista.innerHTML = ''; status.textContent = ''; abre(false); return; }
+      abre(true);
+      let rs;
+      try { rs = await carrega(); }
+      catch { status.textContent = 'A busca não carregou. Use os cards abaixo.'; return; }
+      if (campo.value.trim() !== bruto) return; // a pessoa já digitou outra coisa
+      const termos = q.split(/\s+/);
+      const inicioPalavra = new RegExp(`(^|[^a-z0-9])${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`);
+      const achados = rs
+        .map((r) => {
+          // cada palavra tem que estar no nome, no capítulo/bloco ou no guia; e ao menos uma no nome ou no capítulo
+          // (sem isso, "raid" trazia tudo o que está dentro do guia de Raids)
+          if (!termos.every((t) => r.n.includes(t) || r.nc.includes(t) || r.ng.includes(t))) return null;
+          if (!termos.some((t) => r.n.includes(t) || r.nc.includes(t))) return null;
+          const p = r.n === q ? 0 : r.n.startsWith(q) ? 1 : inicioPalavra.test(r.n) ? 2 : r.n.includes(q) ? 3 : 4;
+          const tipo = !r.h.includes('#') ? 0 : r.c === '' ? 1 : 2; // guia, capítulo, item
+          return { r, p: (tipo === 0 && p <= 3 ? -1 : p) * 10000 + tipo * 1000 + r.t.length };
+        })
+        .filter((x): x is { r: R & { n: string; nc: string; ng: string }; p: number } => x !== null)
+        .sort((a, b) => a.p - b.p);
+      const top = achados.slice(0, MAX);
+      lista.innerHTML = top.map(({ r }) => {
+        const onde = !r.h.includes('#') ? 'Guia completo' : `${esc(r.g)}${r.c ? ` · ${esc(r.c)}` : ''}`;
+        return `<li><a class="busca-item" href="${esc(r.h)}"><span class="busca-titulo">${marca(r.t, q)}</span><span class="busca-onde">${onde}</span></a></li>`;
+      }).join('');
+      lista.hidden = top.length === 0;
+      status.textContent = achados.length === 0
+        ? `Nada encontrado para "${bruto}". Tente o nome do boss, da wing, da dungeon ou do site.`
+        : achados.length > MAX ? `${achados.length} resultados · os ${MAX} mais próximos`
+        : achados.length === 1 ? '1 resultado' : `${achados.length} resultados`;
+    };
+    // clique fora fecha o painel (o texto fica; focar o campo de novo reabre)
+    document.addEventListener('pointerdown', (e) => { if (!caixa.contains(e.target as Node)) abre(false); });
+    campo.addEventListener('focus', () => { if (campo.value.trim()) abre(true); });
+    let espera = 0;
+    campo.addEventListener('focus', () => { carrega().catch(() => {}); }, { once: true });
+    campo.addEventListener('input', () => { clearTimeout(espera); espera = window.setTimeout(mostra, 80); });
+    campo.closest('form')!.addEventListener('submit', (e) => {
+      e.preventDefault();
+      lista.querySelector<HTMLAnchorElement>('a')?.click();
+    });
+    const itens = () => [...lista.querySelectorAll<HTMLAnchorElement>('a')];
+    caixa.addEventListener('keydown', (e) => {
+      const todos = itens();
+      const i = todos.indexOf(document.activeElement as HTMLAnchorElement);
+      if (e.key === 'ArrowDown' && todos.length) { e.preventDefault(); todos[Math.min(i + 1, todos.length - 1)].focus(); }
+      else if (e.key === 'ArrowUp' && i >= 0) { e.preventDefault(); (i === 0 ? campo : todos[i - 1]).focus(); }
+      else if (e.key === 'Escape' && (campo.value || i >= 0)) { e.preventDefault(); campo.value = ''; mostra(); campo.focus(); }
+    });
+  });
+
+  // "/" e Ctrl+K (ou ⌘K) focam a primeira busca da página, fora de campos de texto
+  document.addEventListener('keydown', (e) => {
+    const alvo = e.target as HTMLElement;
+    if (alvo.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+      // o primeiro campo visível (na 404 há dois; abaixo de 1100px o da barra fica escondido atrás da lupa)
+      const campo = [...document.querySelectorAll<HTMLInputElement>('.busca-campo')].find((c) => c.offsetParent !== null);
+      if (!campo) return;
+      e.preventDefault();
+      campo.focus();
+      campo.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    }
+  });
+</script>

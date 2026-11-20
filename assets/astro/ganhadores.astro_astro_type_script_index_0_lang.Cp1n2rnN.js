@@ -1,1 +1,0 @@
-import{r as e}from"./sorteio-vivo.CjW2tAd6.js";var t=document.querySelector(`[data-sorteio-ganhadores]`);t?.dataset.firebase&&e(t,JSON.parse(t.dataset.firebase));

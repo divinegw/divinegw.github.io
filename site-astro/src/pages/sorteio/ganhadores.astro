@@ -1,0 +1,68 @@
+---
+// Ganhadores dos sorteios ao vivo: /sorteio/ganhadores.html (página filha de /sorteio.html).
+// Lista os registros permanentes (Firestore registros/{id}, gravados junto com o resultado) e confere pelo código.
+// Tudo pela API REST do Firestore em src/scripts/sorteio-vivo.ts: sem o SDK do Firebase.
+import { Image } from 'astro:assets';
+import Cabeca from '../../components/Cabeca.astro';
+import Cabecalho from '../../components/Cabecalho.astro';
+import Rodape from '../../components/Rodape.astro';
+import { imagem } from '../../lib/arquivos';
+import { lucide } from '../../lib/lucide';
+import { FIREBASE } from '../../sorteio';
+import '../../styles/sorteio.css';
+
+const arte = imagem('dungeons/arte.jpg');
+const ico = (n: string) => lucide(n);
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca titulo="Ganhadores" descricao="Quem ganhou os sorteios ao vivo da guilda DIVINE, com o código de cada sorteio para conferir." caminho="/sorteio/ganhadores.html" />
+</head>
+<body>
+<div class="pagina">
+<Cabecalho atual="sorteio" />
+<header class="novidades-topo sorteio-topo">
+  <Image class="novidades-arte" src={arte} alt="" widths={[640, 1024, 1600].filter((w) => w <= arte.width)} sizes="100vw" loading="eager" fetchpriority="high" layout="full-width" style="object-position:50% 18%" />
+  <div class="novidades-topo-texto">
+    <h1>Ganhadores</h1>
+    <p>Quem levou cada sorteio ao vivo. Todo resultado tem um código, e qualquer pessoa confere que ninguém mexeu.</p>
+  </div>
+</header>
+
+<main id="conteudo" class="sorteio" data-sorteio-ganhadores data-firebase={FIREBASE ? JSON.stringify(FIREBASE) : ''}>
+  <nav class="sala-nav" aria-label="Sorteio">
+    <a href="/sorteio.html"><Fragment set:html={ico('arrow-left')} />Voltar para o sorteio</a>
+  </nav>
+
+  {!FIREBASE && <p class="sorteio-msg is-erro">Os ganhadores não estão disponíveis agora.</p>}
+  <div class="ganhadores" data-ganhadores hidden={!FIREBASE}>
+    <form class="conferir-codigo" data-conferir novalidate>
+      <label class="campo">
+        <span class="campo-rotulo">Conferir pelo código</span>
+        <input class="campo-entrada campo-mono" name="codigo" autocomplete="off" spellcheck="false" placeholder="RFMJ-M2RD-QWNK…" maxlength="20" aria-describedby="codigo-ajuda codigo-msg" />
+      </label>
+      <button type="submit" class="btn btn-secundario btn-lg"><Fragment set:html={ico('search-check')} />Conferir</button>
+    </form>
+    <p class="campo-ajuda" id="codigo-ajuda">12 letras e números, como aparece no resultado.</p>
+    <p class="sorteio-msg" id="codigo-msg" data-conferir-msg role="status"></p>
+    <div data-conferir-res></div>
+
+    <h2 class="sorteio-area-titulo">Últimos ganhadores</h2>
+    <p class="ganhadores-vazio" data-ganhadores-vazio hidden>Ainda ninguém ganhou um sorteio ao vivo.</p>
+    <ul class="registro-lista" data-registros aria-busy="true"></ul>
+  </div>
+
+  <template data-ico="gift"><Fragment set:html={ico('gift')} /></template>
+  <template data-ico="expansao"><Fragment set:html={ico('map')} /></template>
+</main>
+</div>
+<Rodape atual="sorteio" />
+
+<script>
+  import { ganhadores } from '../../scripts/sorteio-vivo';
+  const raiz = document.querySelector<HTMLElement>('[data-sorteio-ganhadores]');
+  if (raiz?.dataset.firebase) ganhadores(raiz, JSON.parse(raiz.dataset.firebase));
+</script>
+</body>
+</html>

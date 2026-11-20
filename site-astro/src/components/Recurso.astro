@@ -1,0 +1,15 @@
+---
+// Card de recurso (Sites úteis): nome, uma frase e a URL. O texto entre as tags é a frase.
+//   <Recurso nome="GW2 Wiki" url="https://wiki.guildwars2.com/" novo>Referência principal…</Recurso>
+// O nome é um título (h3, com o id que o rehype-divine.mjs dá: o site entra no sumário), para navegar pelos sites com o leitor de tela. O card inteiro é clicável:
+// o link é a URL, esticada sobre o card; o leitor de tela ouve "GW2 Wiki: https://… (abre em nova aba)".
+import Selo from './Selo.astro';
+import { lucide } from '../lib/lucide';
+interface Props { nome: string; url: string; novo?: boolean; id?: string; class?: string }
+const { nome, url, novo, id, class: extra } = Astro.props;
+---
+<div class:list={['resource', extra]}>
+  <div class="res-head"><h3 class="res-name" id={id}>{nome}</h3>{novo && <Selo tipo="novo" />}</div>
+  <div class="res-desc"><slot /></div>
+  <a class="res-url" href={url} target="_blank" rel="noopener"><span class="sr-only">{nome}: </span>{url}<Fragment set:html={lucide('arrow-up-right')} /><span class="sr-only"> (abre em nova aba)</span></a>
+</div>

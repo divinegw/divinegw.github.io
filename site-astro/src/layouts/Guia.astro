@@ -1,0 +1,66 @@
+---
+// Página de um guia: barra do topo, herói de ponta a ponta, sumário "Neste guia", conteúdo,
+// "Próximo guia" e rodapé (que se revela por baixo da página).
+// A arte do herói tem view-transition-name arte-<slug>, o mesmo do card na página inicial e do
+// "Próximo guia": ao navegar entre eles, a arte cresce até virar o topo (View Transitions, só CSS).
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Cabeca from '../components/Cabeca.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Emblema from '../components/Emblema.astro';
+import Sumario, { type ItemSumario } from '../components/Sumario.astro';
+import ProximoGuia from '../components/ProximoGuia.astro';
+import Rodape from '../components/Rodape.astro';
+import CopiarLink from '../components/CopiarLink.astro';
+import { AVISO, SITE } from '../site';
+
+export type { ItemSumario };
+interface Props { entry: CollectionEntry<'guias'>; toc: ItemSumario[] }
+const { entry, toc } = Astro.props;
+const { title, description, arte, foco, autor } = entry.data;
+const autores = autor === undefined ? [] : Array.isArray(autor) ? autor : [autor];
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca titulo={title} ogTitulo={`${title} · ${SITE.nome}`} descricao={description} caminho={`/guias/${entry.id}.html`} imagem={arte} imagemAlt={`Arte do ${title}`} />
+</head>
+<body>
+<div class="pagina">
+<Cabecalho atual={entry.id} aviso />
+
+<header class="hero hero-guide">
+  <div class="hero-bg" style={`view-transition-name:arte-${entry.id}`}>
+    <Image class="hero-banner-img" src={arte} alt="" widths={[...new Set([640, 768, 1024, 1600, 2560, Math.min(arte.width, 3840)])].filter((w) => w <= arte.width)} sizes="100vw" loading="eager" fetchpriority="high" layout="full-width" style={`object-position:${foco}`} />
+  </div>
+  <div class="hero-inner">
+    <Emblema tamanho="lg" />
+    <h1>{title}</h1>
+    <p class="hero-sub">DIVINE · Guild Wars 2</p>
+    <p class="hero-desc">{description}</p>
+    <p class="hero-meta">
+      {autores.length > 0 && <><span>{autores.length > 1 ? 'Autores' : 'Autor'}: {autores.map((a, i) => <>{i > 0 && (i === autores.length - 1 ? ' e ' : ', ')}<b>{a}</b></>)}</span><span class="sep" aria-hidden="true">·</span></>}
+      <span>Atualizado em <a class="hero-novidades" href="/novidades.html"><time datetime={SITE.atualizadoISO}>{SITE.atualizado}</time></a></span>
+    </p>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <Sumario itens={toc} />
+  </aside>
+  <main id="conteudo" class="content conteudo-guia">
+    <slot />
+    <ProximoGuia atual={entry.id} />
+    {/* só no PDF (o rodapé não sai na impressão): o aviso obrigatório da ArenaNet tem que ir junto do conteúdo */}
+    <aside class="aviso-impresso" aria-label="Aviso legal">
+      <p>{AVISO.fa} Créditos e licenças: <a href="https://divinegw.github.io/creditos.html">divinegw.github.io/creditos.html</a></p>
+      <p lang="en">{AVISO.arenanet}</p>
+    </aside>
+  </main>
+</div>
+</div>
+<Rodape atual={entry.id} atalhos />
+<CopiarLink />
+</body>
+</html>

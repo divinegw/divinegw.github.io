@@ -1,0 +1,147 @@
+/* Página inicial (portal) e 404 (Codex DIVINE). Valores: tokens.css. Botões, chips e selos vêm de divine.css.
+   Herói com a busca → "Comece por aqui" (trilha numerada: 3 cards ligados por um fio de ouro) → "Mais guias" (2). */
+.hub{ max-width:var(--w-page); margin:0 auto; padding:var(--space-14) max(var(--gutter), env(safe-area-inset-right, 0px)) 0 max(var(--gutter), env(safe-area-inset-left, 0px)); }
+.hub > section + section{ margin-top:var(--space-16); }
+.hub h2.block-title{
+  font-family:var(--font-display);font-stretch:var(--display-stretch);font-weight:var(--fw-display);text-transform:uppercase;letter-spacing:var(--tracking-art);
+  font-size:var(--fs-fluid-h2);line-height:var(--lh-heading);margin:0;color:var(--text);text-wrap:balance;
+}
+.hub .block-sub{ margin:var(--space-2) 0 var(--space-6); color:var(--text-soft); font-size:var(--fs-lg); max-width:var(--measure-sub); }
+.hub h2.block-title + .grid{ margin-top:var(--space-6); }
+
+/* ---------- CARD DE GUIA (CardGuia.astro) ---------- */
+.guide{
+  display:flex;flex-direction:column;flex:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:var(--shadow);transition:border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.guide:hover{ border-color:var(--line-strong); transform:translateY(var(--lift)); }
+.guide .art{ position:relative; aspect-ratio:2/1; background:var(--surface-2); overflow:hidden; }
+.guide .art img.banner-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.guide .art h3{
+  position:absolute; left:0; right:0; bottom:0; z-index:var(--z-art); margin:0; color:var(--on-art); padding:var(--space-12) var(--space-5) var(--space-4);
+  background:var(--art-scrim);
+  font-family:var(--font-display);font-stretch:var(--display-stretch);font-weight:var(--fw-display);text-transform:uppercase;letter-spacing:var(--tracking-art);font-size:var(--fs-3xl);line-height:var(--lh-display);
+  text-shadow:var(--text-shadow-art);
+}
+.guide .art .mark{
+  position:absolute; right:var(--space-4); top:var(--space-4); z-index:var(--z-art); width:var(--icon-box-md); height:var(--icon-box-md); border-radius:var(--radius-md);
+  display:flex; align-items:center; justify-content:center; color:var(--on-art);
+  background:var(--art-mark-bg); border:1px solid var(--art-chip-line); backdrop-filter:blur(6px);
+}
+.guide .art .mark img{ width:var(--icon-box-sm); height:var(--icon-box-sm); object-fit:contain; }
+.guide .art .mark svg, .guide .art .mark img.mark-mono{ width:var(--icon-md); height:var(--icon-md); }
+.guide .body{ padding:var(--space-5); display:flex; flex-direction:column; gap:var(--space-3); flex:1; min-width:0; }
+.guide p{ margin:0; color:var(--text-soft); font-size:var(--fs-base); max-width:var(--measure-card); }
+.guide .guide-selo{ line-height:1; }
+.guide .tags{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:var(--space-1-5); }
+.guide .actions{ display:flex; gap:var(--space-2-5); margin-top:auto; padding-top:var(--space-1-5); }
+.guide .actions .guide-abrir{ flex:1 1 auto; }
+
+/* ---------- TRILHA "Comece por aqui" ----------
+   <ol> de 3 passos. Cada passo: nó numerado (ouro, vazado) + card. Um fio de ouro liga um nó ao próximo:
+   na horizontal a partir de --bp-home, na vertical (trilho à esquerda) no celular. A ordem é real: o número fica. */
+.trilha{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-5); }
+.trilha-passo{ position:relative; display:flex; flex-direction:column; gap:var(--space-4); min-width:0; }
+.trilha-no{
+  position:relative; z-index:var(--z-art); display:grid; place-items:center; flex-shrink:0;
+  width:var(--control-sm); height:var(--control-sm); border-radius:var(--radius-round);
+  border:2px solid var(--gold); background:var(--bg); color:var(--gold);
+  font-family:var(--font-mono); font-size:var(--fs-sm); font-weight:var(--fw-medium); font-variant-numeric:tabular-nums;
+}
+/* fio: do nó deste passo até o nó do próximo (atravessa o espaço entre os cards) */
+.trilha-passo:not(:last-child)::before{
+  content:""; position:absolute; top:calc(var(--control-sm) / 2); left:var(--control-sm); right:calc(-1 * var(--space-5));
+  border-top:1px solid var(--gold-line);
+}
+
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%, 300px),1fr)); gap:var(--space-5); } /* "Mais guias": 2 ou 3 lado a lado, conforme quantos são */
+
+@media (max-width:820px){ /* --bp-home */
+  .trilha{ grid-template-columns:minmax(0,1fr); gap:var(--space-6); }
+  .trilha-passo{ padding-left:calc(var(--control-sm) + var(--space-3)); }
+  .trilha-no{ position:absolute; left:0; top:0; }
+  .trilha-passo:not(:last-child)::before{
+    top:var(--control-sm); bottom:calc(-1 * var(--space-6)); left:calc(var(--control-sm) / 2); right:auto;
+    border-top:0; border-left:1px solid var(--gold-line);
+  }
+  .grid{ grid-template-columns:minmax(0,1fr); }
+}
+@media (prefers-reduced-motion: reduce){ .guide, .guide:hover{ transition:none; transform:none; } }
+
+/* ---------- 404 ---------- */
+.hero-404 .hero-bg{ height:clamp(200px, 26vw, 360px); }
+.hero-404-inner{ padding-bottom:var(--space-6); }
+.hero-404-inner .hero-acao{ margin:var(--space-6) 0 0; }
+
+/* ---------- SLIDE DOS GUIAS (CarrosselGuias.astro) ----------
+   Faixa de rolagem lateral com encaixe; cada slide = um guia, com a arte do próprio guia (object-fit: cover),
+   véu escuro à esquerda e embaixo (igual nos dois temas) e o texto em --on-art. Controles embaixo: pontos
+   (o ativo em ouro, com a barrinha do tempo enchendo) à esquerda; pausar, anterior e próximo à direita. */
+.carrossel{position:relative;background:var(--ink-1000);}
+.carrossel-trilho{display:flex;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;}
+.carrossel-trilho::-webkit-scrollbar{display:none;}
+.slide{position:relative;flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;height:clamp(460px, 44vw, 640px);overflow:hidden;background:var(--ink-900);}
+/* slides fora da tela: o navegador não monta nem baixa a arte até chegar a vez (a 1ª arte é o maior elemento da página no celular) */
+.slide + .slide{content-visibility:auto;}
+.slide-arte{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;}
+.slide::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to right, color-mix(in srgb, var(--ink-1000) 82%, transparent) 0%, color-mix(in srgb, var(--ink-1000) 55%, transparent) 45%, transparent 75%),
+    linear-gradient(to top, color-mix(in srgb, var(--ink-1000) 75%, transparent) 0%, transparent 45%);
+}
+.slide-conteudo{
+  position:relative;z-index:var(--z-art);height:100%;max-width:var(--w-page);margin:0 auto;
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+  padding:var(--space-10) max(var(--gutter), env(safe-area-inset-right, 0px)) calc(var(--control-lg) + var(--space-12)) max(var(--gutter), env(safe-area-inset-left, 0px));
+}
+.slide-nome{
+  margin:0;color:var(--on-art);text-shadow:var(--text-shadow-art);
+  font-family:var(--font-display);font-stretch:var(--display-stretch);font-weight:var(--fw-display);text-transform:uppercase;letter-spacing:var(--tracking-tight);
+  font-size:var(--fs-fluid-slide);line-height:var(--lh-display-tight);text-wrap:balance;
+}
+.slide-texto{margin:var(--space-4) 0 var(--space-6);max-width:46ch;color:var(--on-art);font-size:var(--fs-fluid-lead);line-height:var(--lh-lead);text-shadow:var(--text-shadow-art);}
+.slide-acoes{display:flex;gap:var(--space-2-5);flex-wrap:wrap;}
+/* botão secundário sobre a arte: vidro escuro */
+.btn-sobre-arte{background:var(--art-chip-bg);border-color:var(--art-chip-line);color:var(--on-art);}
+.btn-sobre-arte svg{color:var(--on-art);}
+.btn-sobre-arte:hover{background:color-mix(in srgb, var(--ink-1000) 72%, transparent);border-color:var(--on-art);}
+
+.carrossel-controles{
+  position:absolute;left:0;right:0;bottom:var(--space-6);z-index:var(--z-art-bar);display:none;align-items:center;justify-content:space-between;gap:var(--space-4);
+  max-width:var(--w-page);margin:0 auto;padding:0 max(var(--gutter), env(safe-area-inset-right, 0px)) 0 max(var(--gutter), env(safe-area-inset-left, 0px));
+}
+.carrossel.is-pronto .carrossel-controles{display:flex;}
+.carrossel-pontos{display:flex;gap:var(--space-1);}
+.carrossel-ponto{display:grid;place-items:center;width:var(--space-10);height:var(--control-md);padding:0;border:0;background:none;cursor:pointer;border-radius:var(--radius-sm);}
+.carrossel-ponto span{position:relative;display:block;width:100%;height:3px;border-radius:var(--radius-round);background:color-mix(in srgb, var(--on-art) 40%, transparent);overflow:hidden;transition:background-color var(--dur-fast) var(--ease-out);}
+.carrossel-ponto:hover span{background:color-mix(in srgb, var(--on-art) 75%, transparent);}
+.carrossel-ponto[aria-current="true"] span{background:color-mix(in srgb, var(--gold-300) 45%, transparent);}
+/* a barrinha do ponto ativo enche no tempo da troca; parado, fica cheia */
+.carrossel-ponto[aria-current="true"] span::after{content:"";position:absolute;inset:0;background:var(--gold-300);transform-origin:left;}
+.carrossel.is-rodando .carrossel-ponto[aria-current="true"] span::after{animation:carrossel-tempo 7s linear both;}
+@keyframes carrossel-tempo{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+@media (max-width:640px){ /* --bp-md: no celular, arrastar troca de slide */
+  .slide{height:clamp(480px, 128vw, 560px);}
+  .slide::after{background:linear-gradient(to top, color-mix(in srgb, var(--ink-1000) 88%, transparent) 0%, color-mix(in srgb, var(--ink-1000) 60%, transparent) 50%, color-mix(in srgb, var(--ink-1000) 15%, transparent) 100%);}
+  .carrossel-ponto{width:var(--space-8);}
+}
+
+/* ---------- IMPRESSÃO (raro: a página inicial e a 404 não têm PDF, mas imprimem limpas) ---------- */
+@media print{
+  .hero-home{ break-after:auto; page-break-after:auto; }
+  .hero-home .hero-bg{ height:60mm; }
+  .carrossel{ display:none !important; }
+  .busca, .guide .actions, .hero-404-inner .hero-acao{ display:none !important; }
+  .hub{ padding:8mm 0 0; }
+  .hub > section + section{ margin-top:8mm; }
+  .hub .block-sub{ margin-bottom:4mm; }
+  .trilha, .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:4mm; }
+  .trilha-passo{ padding-left:0; gap:2mm; }
+  .trilha-no{ position:static; }
+  .trilha-passo::before{ display:none; }
+  .guide{ box-shadow:none; break-inside:avoid; page-break-inside:avoid; }
+  .guide .art h3{ font-size:20pt; padding:10mm 4mm 3mm; }
+  .guide .body{ padding:4mm; gap:2mm; }
+  .guide p{ font-size:9.5pt; }
+}

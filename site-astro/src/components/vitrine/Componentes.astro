@@ -1,0 +1,292 @@
+---
+// Vitrine, Fase 2: componentes base. Cada seção tem: exemplo ao vivo (segue o tema do botão do topo),
+// os estados nos dois temas (painéis inert, estado forçado por classe) e o jeito de usar.
+import Estados from './Estados.astro';
+import Botao from '../Botao.astro';
+import Link from '../Link.astro';
+import Chip from '../Chip.astro';
+import Selo from '../Selo.astro';
+import Card from '../Card.astro';
+import CardImagem from '../CardImagem.astro';
+import Item from '../Item.astro';
+import Aviso from '../Aviso.astro';
+import Tabela from '../Tabela.astro';
+import Sumario from '../Sumario.astro';
+import Cabecalho from '../Cabecalho.astro';
+import Rodape from '../Rodape.astro';
+import Termo from '../Termo.astro';
+import { lucide } from '../../lib/lucide';
+
+const st = (e: string) => (e === 'hover' ? 'is-hover' : e === 'foco' ? 'is-foco' : undefined);
+const UNICO = { normal: 'Único estado: não é clicável' };
+
+const DEF = {
+  downed: 'Estado em que o personagem cai ao chegar a 0 de vida: ainda usa algumas skills e pode ser revivido pelos aliados.',
+  ascended: 'Raridade de equipamento acima de Exotic e abaixo de Legendary, com atributos maiores e Infusion Slots.',
+};
+
+const sumarioEx = [
+  { id: 'ex-fund', text: 'Fundamentos', subs: [{ id: 'ex-intro', text: 'Introdução às Fractals', subs: [] }, { id: 'ex-tiers', text: 'Tiers e escalas', subs: [] }, { id: 'ex-agony', text: 'Agony', subs: [] }] },
+  { id: 'ex-prog', text: 'Progressão e recompensas', subs: [{ id: 'ex-ad', text: 'Ad Infinitum', subs: [] }] },
+];
+
+const tabelaTiers = `<table><thead><tr><th scope="col">Tier</th><th scope="col">Níveis</th><th scope="col" align="right">Instabilidades</th><th scope="col" align="right">AR no último nível</th></tr></thead>
+<tbody><tr><th scope="row">1 · Initiate</th><td>1 a 25</td><td align="right">0</td><td align="right">17</td></tr>
+<tr><th scope="row">2 · Adept</th><td>26 a 50</td><td align="right">1</td><td align="right">61</td></tr>
+<tr><th scope="row">3 · Expert</th><td>51 a 75</td><td align="right">2</td><td align="right">106</td></tr>
+<tr><th scope="row">4 · Master</th><td>76 a 100</td><td align="right">3</td><td align="right">150</td></tr></tbody></table>`;
+
+const iconesCopiar = lucide('link', 'i-link') + lucide('check', 'i-ok');
+
+const uso = {
+  botoes: `<Botao variante="primario" href="/guias/fractals.html">Abrir guia</Botao>
+<Botao href="/galeria.html" icone="images">Ver a galeria</Botao>
+<Botao variante="icone" icone="moon" rotulo="Tema escuro" />
+<Botao tamanho="sm" icone="play" href="https://youtu.be/..." externo rotulo="Vídeo de Nightmare">Vídeo</Botao>
+<Botao desativado>Indisponível</Botao>`,
+  links: `[Wiki oficial](https://wiki.guildwars2.com/)      no Markdown: estilo e nova aba sozinhos
+<Link href="https://wiki.guildwars2.com/">Wiki oficial</Link>   fora do Markdown`,
+  chips: `<Chip>4 Tiers</Chip>   <Chip tom="suave">Builds</Chip>   <Chip tom="data">Atualizado em nov. 2026</Chip>
+<Chip tom="arte">CM 96</Chip>   (sobre arte escura)
+<Selo tipo="novo" />   <Selo tipo="atualizado" data="2026-11" rotuloData="nov. 2026" />   <Selo tipo="corrigido" />
+<Selo tipo="novo" icone />   <Selo tipo="novo" quantidade={8} />   (8 novos)   <Selo tipo="corrigido" variante="discreto" />`,
+  cards: `<Card icone="agony">
+
+### Agony
+
+Texto em **Markdown**.
+
+</Card>
+
+<CardImagem imagem="fractals/ad-infinitum.jpg" alt="Ad Infinitum">
+
+### Ad Infinitum (backpack lendária)
+
+Texto.
+
+</CardImagem>`,
+  avisos: `<Aviso tipo="dica">Texto da dica.</Aviso>
+<Aviso tipo="atencao" titulo="Reset diário">Texto.</Aviso>
+<Aviso tipo="importante">Texto.</Aviso>`,
+  tabela: `<Tabela legenda="Tiers das Fractals">
+
+| Tier | Níveis | Instabilidades | AR no último nível |
+|---|---|--:|--:|
+| 1 · Initiate | 1 a 25 | 0 | 17 |
+
+</Tabela>`,
+  sumario: `<Sumario itens={toc} />     (o layout Guia.astro já põe; o rehype-divine.mjs monta a lista)`,
+  cabecalho: `<Cabecalho atual="fractals" aviso />   (o layout Guia.astro já põe; nas outras páginas: atual="galeria", "novidades", "creditos" ou "inicio")`,
+  rodape: `<Rodape atual="fractals" atalhos />   (o layout Guia.astro já põe)`,
+  copiar: `<CopiarLink />   uma vez por página (o layout Guia.astro já põe).
+O rehype-divine.mjs prepara cada "##" e cada "###" de card; o botão aparece sozinho.`,
+  termo: `Quem entra em <Termo def="Estado em que o personagem cai ao chegar a 0 de vida...">downed</Termo> no Tier 3...`,
+};
+---
+<!-- 09 BOTÕES -->
+<section class="page" aria-labelledby="botoes">
+  <div class="titulo-secao"><h2 class="section" id="botoes" data-num="09">Botões</h2></div>
+  <p class="section-sub">Primário para a ação principal (um por bloco), secundário para o resto, ícone quando o símbolo basta. Com <code>href</code> vira link; sem, botão.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <div class="ds-vivo">
+    <Botao variante="primario" href="/guias/fractals.html">Abrir guia</Botao>
+    <Botao href="/galeria.html" icone="images">Ver a galeria</Botao>
+    <Botao variante="icone" icone="arrow-up" href="#botoes" rotulo="Voltar ao título de Botões" />
+    <Botao tamanho="sm" icone="play" href="https://www.youtube.com/watch?v=HCujcXMJ430" externo rotulo="Vídeo do CM de Nightmare">Vídeo</Botao>
+    <Botao desativado>Indisponível</Botao>
+  </div>
+  <h3 class="ds-h3">Estados</h3>
+  <Estados linhas={[{ id: 'pri', nome: 'Primário' }, { id: 'sec', nome: 'Secundário, com ícone' }, { id: 'ico', nome: 'Ícone' }, { id: 'sm', nome: 'Pequeno (linhas de vídeo)' }, { id: 'lg', nome: 'Grande (cards da home)' }]}>
+    {(e: string, l: string) => {
+      const d = e === 'desativado';
+      if (l === 'pri') return <Botao variante="primario" class={st(e)} desativado={d}>Abrir guia</Botao>;
+      if (l === 'sec') return <Botao icone="download" class={st(e)} desativado={d}>Baixar PDF</Botao>;
+      if (l === 'ico') return <Botao variante="icone" icone="moon" rotulo="Tema escuro" class={st(e)} desativado={d} />;
+      if (l === 'sm') return <Botao tamanho="sm" icone="play" class={st(e)} desativado={d}>Vídeo</Botao>;
+      return <Botao variante="primario" tamanho="lg" class={st(e)} desativado={d}>Abrir guia</Botao>;
+    }}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.botoes}</code></pre>
+  <ul class="ds-regras">
+    <li>Desativado não usa opacidade: fundo <code>--surface-2</code> e texto <code>--text-mute</code>, que ainda passa 4.5:1.</li>
+    <li>Variante ícone exige <code>rotulo</code> (o nome que o leitor de tela lê); a build falha sem ele.</li>
+    <li>Alvos: 32px (pequeno), 36px (padrão), 44px (grande). O botão de tema usa <code>aria-pressed</code>.</li>
+  </ul>
+</section>
+
+<!-- 10 LINKS -->
+<section class="page" aria-labelledby="links">
+  <div class="titulo-secao"><h2 class="section" id="links" data-num="10">Links</h2></div>
+  <p class="section-sub">Sublinhado fino na cor do link, que fica cheio no hover. Externo abre em nova aba, com uma seta e o aviso "(abre em nova aba)" para o leitor de tela.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <p>Os efeitos de cada instabilidade estão na <Link href="https://wiki.guildwars2.com/wiki/Fractals_of_the_Mists#Mistlock_Instability">Wiki oficial</Link>; a lista de guias fica na <Link href="/">página inicial</Link>.</p>
+  <h3 class="ds-h3">Estados</h3>
+  <Estados estados={['normal', 'hover', 'foco']} linhas={[{ id: 'int', nome: 'Interno' }, { id: 'ext', nome: 'Externo' }]}>
+    {(e: string, l: string) => l === 'int'
+      ? <p class="ds-frase">Volte para a <Link href="/" class={st(e)}>página inicial</Link>.</p>
+      : <p class="ds-frase">Veja a <Link href="https://wiki.guildwars2.com/" class={st(e)}>Wiki oficial</Link>.</p>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.links}</code></pre>
+  <ul class="ds-regras"><li>Não existe link desativado: sem destino, é texto comum.</li></ul>
+</section>
+
+<!-- 11 CHIPS E SELOS -->
+<section class="page" aria-labelledby="chips">
+  <div class="titulo-secao"><h2 class="section" id="chips" data-num="11">Chips e selos</h2></div>
+  <p class="section-sub">Chip é um dado curto em mono (nível, contagem, data). Selo é um estado em caixa alta: "Novo" em ouro, "Atualizado" em marinho, "Corrigido" em verde; com ícone, com número ("8 novos") ou discreto (ponto + palavra, para listas longas). Nenhum dos dois é clicável.</p>
+  <Estados estados={['normal']} nomes={UNICO} linhas={[{ id: 'chips', nome: 'Chips: neutro, suave, data' }, { id: 'arte', nome: 'Chip sobre arte escura' }, { id: 'selos', nome: 'Selos' }, { id: 'selos-icone', nome: 'Selos com ícone e com número' }, { id: 'selos-discreto', nome: 'Selos discretos (listas)' }]}>
+    {(_e: string, l: string) => l === 'chips'
+      ? <div class="ds-fila"><Chip>4 Tiers</Chip><Chip tom="suave">Builds</Chip><Chip tom="data">Atualizado em nov. 2026</Chip></div>
+      : l === 'arte'
+        ? <div class="ds-fila ds-sobre-arte"><Chip tom="arte">CM 96</Chip><Chip tom="arte">WING 1</Chip></div>
+        : l === 'selos'
+          ? <div class="ds-fila"><Selo tipo="novo" /><Selo tipo="atualizado" data="2026-11" rotuloData="nov. 2026" /><Selo tipo="corrigido" /></div>
+          : l === 'selos-icone'
+            ? <div class="ds-fila"><Selo tipo="novo" icone /><Selo tipo="atualizado" icone /><Selo tipo="corrigido" icone /><Selo tipo="novo" quantidade={8} /><Selo tipo="corrigido" quantidade={1} /></div>
+            : <div class="ds-fila"><Selo tipo="novo" variante="discreto" /><Selo tipo="atualizado" variante="discreto" /><Selo tipo="corrigido" variante="discreto" /></div>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.chips}</code></pre>
+</section>
+
+<!-- 12 CARDS -->
+<section class="page" aria-labelledby="cards">
+  <div class="titulo-secao"><h2 class="section" id="cards" data-num="12">Cards</h2></div>
+  <p class="section-sub">O card agrupa um assunto. Com imagem, a arte 2:1 vai de ponta a ponta no topo: use quando a imagem é o assunto (item lendário, mapa, boss). Card nunca vai dentro de card.</p>
+  <Estados estados={['normal']} nomes={UNICO} class="ds-largo" linhas={[{ id: 'card', nome: 'Card com ícone' }, { id: 'img', nome: 'Card com imagem' }]}>
+    {(_e: string, l: string) => l === 'card'
+      ? <Card icone="agony"><div class="titulo-card"><h3>Agony</h3></div><p>Debuff que causa dano por segundo e diminui curas e barreiras recebidas.</p><Item icone="shield"><b>Tier 4</b>: 150 de Agony Resistance no nível 100.</Item></Card>
+      : <CardImagem imagem="fractals/ad-infinitum.jpg" alt="Ad Infinitum, a backpack lendária das Fractals"><div class="titulo-card"><h3>Ad Infinitum</h3></div><p>A backpack lendária das Fractals, feita com Achievements e materiais do conteúdo.</p></CardImagem>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.cards}</code></pre>
+  <ul class="ds-regras"><li>Raio 14px (<code>--radius-lg</code>); o que vai dentro (imagem, tabela, aviso) usa 10px (<code>--radius-md</code>).</li><li>Sombra só no claro. Card não é clicável: sem hover.</li></ul>
+</section>
+
+<!-- 13 AVISOS -->
+<section class="page" aria-labelledby="avisos">
+  <div class="titulo-secao"><h2 class="section" id="avisos" data-num="13">Avisos</h2></div>
+  <p class="section-sub">Dica (marinho) é atalho ou recomendação. Atenção (ouro) é o que costuma dar errado. Importante (vermelho) é o que custa progresso, recompensa ou acesso. O tipo aparece sempre escrito.</p>
+  <Estados estados={['normal']} nomes={UNICO} class="ds-largo" linhas={[{ id: 'dica', nome: 'Dica' }, { id: 'atencao', nome: 'Atenção, com título próprio' }, { id: 'importante', nome: 'Importante' }]}>
+    {(_e: string, l: string) => l === 'dica'
+      ? <Aviso tipo="dica">Faça as Recommended junto com as dailies: elas dão Fractal Research Pages, que viram Fractal Journals.</Aviso>
+      : l === 'atencao'
+        ? <Aviso tipo="atencao" titulo="Reset diário">Dailies e instabilidades mudam às 00:00 UTC (21:00 no horário de Brasília).</Aviso>
+        : <Aviso tipo="importante">Quem não estiver presente quando o CM é ativado não recebe crédito de achievement pelo boss.</Aviso>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.avisos}</code></pre>
+  <ul class="ds-regras"><li><code>role="note"</code>; com <code>titulo</code>, o leitor de tela ouve "Atenção: Reset diário".</li><li>Substitui Nota e Destaque, que saíram na Fase 5.</li></ul>
+</section>
+
+<!-- 14 TABELA -->
+<section class="page" aria-labelledby="tabela">
+  <div class="titulo-secao"><h2 class="section" id="tabela" data-num="14">Tabela</h2></div>
+  <p class="section-sub">Cabeçalho em mono caixa alta, números alinhados à direita e em largura fixa. Em tela estreita a tabela rola na horizontal; a sombra na borda mostra que há mais, e a área ganha foco pelo teclado para rolar com as setas.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <Tabela legenda="Tiers das Fractals"><Fragment set:html={tabelaTiers} /></Tabela>
+  <h3 class="ds-h3">Estados</h3>
+  <Estados estados={['normal', 'foco']} nomes={{ normal: 'Normal', foco: 'Foco (quando rola)' }} class="ds-largo" linhas={[{ id: 'larga', nome: 'Cabe na coluna' }, { id: 'estreita', nome: 'Estreita: rola, com sombra na borda direita' }]}>
+    {(e: string, l: string) => <div class={l === 'estreita' ? 'ds-estreita' : undefined}><Tabela legenda="Tiers das Fractals" class={st(e)}><Fragment set:html={tabelaTiers} /></Tabela></div>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.tabela}</code></pre>
+</section>
+
+<!-- 15 SUMÁRIO -->
+<section class="page" aria-labelledby="sumario">
+  <div class="titulo-secao"><h2 class="section" id="sumario" data-num="15">Sumário</h2></div>
+  <p class="section-sub">"Neste guia": capítulos numerados em ouro, cada um com seus itens. No desktop fica fixo à esquerda e marca a seção que está na tela (barra de ouro); abaixo de 1100px vira um card no topo.</p>
+  <Estados estados={['normal', 'ativo', 'hover', 'foco']} nomes={{ ativo: 'Item ativo (seção na tela)' }} linhas={[{ id: 's' }]}>
+    {(e: string) => <Sumario itens={sumarioEx} marcar={false} rotulo="Exemplo de sumário" realce="ex-tiers" realceClasse={e === 'ativo' ? 'is-active' : st(e)} />}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.sumario}</code></pre>
+  <ul class="ds-regras"><li>Item ativo: <code>aria-current="location"</code>. O teste <code>qa_toc</code> clica em cada item de cada guia.</li></ul>
+</section>
+
+<!-- 16 CABEÇALHO -->
+<section class="page" aria-labelledby="cabecalho">
+  <div class="titulo-secao"><h2 class="section" id="cabecalho" data-num="16">Cabeçalho</h2></div>
+  <p class="section-sub">A mesma barra em todas as páginas, presa ao rolar: "Pular para o conteúdo" (só no Tab), a logo leva ao início, "Guias" abre o painel com os guias, Galeria, Novidades (ponto de ouro quando há novidade não vista), a busca, o Discord e o tema. O traço de ouro embaixo do link mostra onde você está. Abaixo de 1100 px a busca vira uma lupa; abaixo de 820 px os links vão para a gaveta do botão de menu.</p>
+  <Estados estados={['normal']} nomes={{ normal: 'Os botões seguem os estados de Botões' }} class="ds-largo" linhas={[{ id: 'c' }]}>
+    {() => <Cabecalho exemplo atual="fractals" />}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.cabecalho}</code></pre>
+</section>
+
+<!-- 17 RODAPÉ -->
+<section class="page" aria-labelledby="rodape">
+  <div class="titulo-secao"><h2 class="section" id="rodape" data-num="17">Rodapé</h2></div>
+  <p class="section-sub">Faixa escura nos dois temas: a logo (volta ao início) e os 5 guias em ordem de leitura, com o guia aberto em ouro. Nos guias, que são longos, ganha "Voltar ao topo". Na página, ela se revela por baixo do conteúdo no fim da rolagem.</p>
+  <Estados estados={['normal']} nomes={{ normal: 'Os atalhos seguem os estados de Links' }} class="ds-largo" linhas={[{ id: 'r' }]}>
+    {() => <Rodape exemplo atual="fractals" atalhos />}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.rodape}</code></pre>
+</section>
+
+<!-- 18 COPIAR LINK -->
+<section class="page" aria-labelledby="copiar">
+  <div class="titulo-secao"><h2 class="section" id="copiar" data-num="18">Copiar link da seção</h2></div>
+  <p class="section-sub">Ao lado de cada capítulo e de cada título de card, para mandar a seção no Discord. Com mouse, aparece ao passar sobre o título ou no foco; no toque, fica sempre visível. Experimente nos títulos desta página.</p>
+  <Estados estados={['normal', 'hover', 'foco', 'copiado']} nomes={{ normal: 'Normal (com mouse, escondido)', copiado: 'Depois do clique' }} class="ds-alto-pouco" linhas={[{ id: 'c' }]}>
+    {(e: string) => <div class="titulo-card"><h3 class="ds-h3-ex">Agony</h3><button type="button" class:list={['btn', 'btn-icone', 'btn-sm', 'btn-fantasma', 'copiar-link', st(e), { 'is-copiado': e === 'copiado' }]} aria-label="Copiar link da seção Agony"><Fragment set:html={iconesCopiar} /><span class="copiar-balao" aria-hidden="true">Link copiado</span></button></div>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.copiar}</code></pre>
+  <ul class="ds-regras"><li>O botão fica ao lado do título, não dentro: o leitor de tela lê "Agony", e não "Agony, copiar link".</li><li>Nome: "Copiar link da seção Agony". Ao copiar, uma região <code>aria-live</code> anuncia "Link copiado".</li><li>Sem JavaScript o botão não aparece (não teria como copiar); no PDF também não.</li></ul>
+</section>
+
+<!-- 19 TERMO -->
+<section class="page" aria-labelledby="termo">
+  <div class="titulo-secao"><h2 class="section" id="termo" data-num="19">Termo com definição</h2></div>
+  <p class="section-sub">Termo de GW2 com sublinhado pontilhado; a definição abre num balão de fala (referência: Teka Teki). Marinho da logo no claro, grafite com borda de ouro no escuro.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <p>A partir do nível 71, um Fractal Avenger aparece para finalizar quem entra em <Termo def={DEF.downed}>downed</Termo>. As Infusions só cabem em equipamento <Termo def={DEF.ascended}>Ascended</Termo> ou Legendary.</p>
+  <h3 class="ds-h3">Estados</h3>
+  <Estados estados={['normal', 'hover', 'foco', 'aberto']} nomes={{ aberto: 'Tocado (fica aberto)' }} class="ds-alto" linhas={[{ id: 't' }]}>
+    {(e: string) => <p class="ds-frase">Quem entra em <Termo def={DEF.downed} estado={e === 'normal' ? undefined : (e as 'hover' | 'foco' | 'aberto')}>downed</Termo> no Tier 3...</p>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.termo}</code></pre>
+  <ul class="ds-regras">
+    <li>Mouse: abre ao passar; dá para levar o ponteiro até o balão sem ele fechar. Esc fecha (WCAG 1.4.13).</li>
+    <li>Teclado: abre no foco. Toque: um toque abre e fixa, outro toque (ou fora) fecha.</li>
+    <li>Leitor de tela: o botão diz o termo e lê a definição como descrição (<code>aria-describedby</code>).</li>
+    <li>O balão não sai da tela: desloca para o lado e vira para baixo perto do topo. No PDF sai só o texto.</li>
+  </ul>
+</section>
+
+<style is:global>
+  .ds-vivo{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);}
+  .ds-temas{display:grid;gap:var(--space-4);margin:0 0 var(--space-2);}
+  .ds-tema{border:1px solid var(--line);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-4-5) var(--space-2);}
+  .ds-tema-nome{font-family:var(--font-mono);font-size:var(--fs-xs);font-weight:var(--fw-medium);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-mute);margin:0 0 var(--space-3);}
+  .ds-linha + .ds-linha{border-top:1px solid var(--line);padding-top:var(--space-3);}
+  .ds-linha-nome{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--text-soft);margin:0 0 var(--space-2);}
+  .ds-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-3) var(--space-4);}
+  .ds-celula{margin:0 0 var(--space-3);min-width:0;}
+  .ds-palco{display:flex;align-items:center;min-height:var(--control-lg);}
+  .ds-palco > *{margin:0;}
+  .ds-celula figcaption{font-size:var(--fs-xs);color:var(--text-mute);margin-top:var(--space-1-5);}
+  .ds-largo .ds-grade{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+  .ds-largo .ds-palco{display:block;}
+  .ds-largo .ds-palco > .card, .ds-largo .ds-palco > .aviso, .ds-largo .ds-palco .tabela{margin:0;}
+  .ds-alto .ds-grade{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+  .ds-alto .ds-palco{padding-top:calc(var(--space-18) + var(--space-12));align-items:flex-end;}
+  .ds-alto-pouco .ds-palco{padding-top:var(--space-10);}
+  .ds-alto-pouco .titulo-card{margin:0;width:100%;}
+  .ds-h3-ex{font-size:var(--fs-fluid-title);font-weight:var(--fw-bold);line-height:var(--lh-title);margin:0;flex:1;}
+  .ds-frase{margin:0;}
+  .ds-fila{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;}
+  .ds-sobre-arte{background:var(--art-scrim), var(--navy-900); /* imita a base escura de uma arte */border-radius:var(--radius-md);padding:var(--space-3);}
+  .ds-estreita{max-width:var(--tip-max);}
+  .ds-codigo{font-family:var(--font-mono);font-size:var(--fs-sm-minus);line-height:var(--lh-lead);background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--space-3-5) var(--space-4);overflow-x:auto;margin:0 0 var(--space-4);}
+  .ds-codigo code{background:none;border:0;padding:0;font-size:inherit;white-space:pre;}
+  .ds-regras{margin:0;padding-left:var(--space-5);color:var(--text-soft);font-size:var(--fs-md);max-width:var(--measure-sub);}
+  .ds-regras li + li{margin-top:var(--space-1);}
+</style>

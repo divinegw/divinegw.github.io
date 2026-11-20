@@ -1,0 +1,29 @@
+---
+// Tabela de mapa: cada linha diz que A vira (ou corresponde a) B. Ex.: Boon Corrupt no Endgame.
+// Substitui o <table class="map"> antigo: é uma <Tabela> com a coluna da seta, que o leitor de tela lê como "vira".
+//   legenda: nome da tabela (caption) · legendaOculta: só para leitor de tela
+//   de / para: cabeçalhos das duas colunas (ex.: "Boon" e "Condition") · seta: o que a seta quer dizer ("vira")
+//   pares: [[a, b], …]. Um id de boon/condition (src/lib/efeitos.ts) vira ícone + nome; outro texto sai como está.
+//   <Mapa legenda="Boon Corrupt" de="Boon" para="Condition" pares={[['aegis', 'burning'], ['alacrity', 'chilled']]} />
+import Tabela from './Tabela.astro';
+import Efeito from './Efeito.astro';
+import { lucide } from '../lib/lucide';
+import { EFEITOS } from '../lib/efeitos';
+interface Props { legenda: string; legendaOculta?: boolean; de: string; para: string; seta?: string; pares: [string, string][] }
+const { legenda, legendaOculta, de, para, seta = 'vira', pares } = Astro.props;
+const svg = lucide('arrow-right');
+---
+<Tabela legenda={legenda} legendaOculta={legendaOculta} class="mapa">
+  <table>
+    <thead><tr><th scope="col">{de}</th><th scope="col"><span class="sr-only">Relação</span></th><th scope="col">{para}</th></tr></thead>
+    <tbody>
+      {pares.map(([a, b]) => (
+        <tr>
+          <th scope="row">{EFEITOS[a] ? <Efeito nome={a} semBalao /> : a}</th>
+          <td class="mapa-seta"><Fragment set:html={svg} /><span class="sr-only">{seta}</span></td>
+          <td>{EFEITOS[b] ? <Efeito nome={b} semBalao /> : b}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</Tabela>

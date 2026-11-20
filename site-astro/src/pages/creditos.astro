@@ -1,0 +1,114 @@
+---
+// Créditos e licenças: /creditos.html (link no rodapé, coluna Comunidade, e no fim de cada PDF).
+// Diz de onde vem cada coisa que o site usa e sob qual licença: ArenaNet (artes, ícones e o aviso obrigatório),
+// capturas da Guild Wars 2 Wiki, ícones do Flaticon (crédito obrigatório), Lucide (aviso ISC), Discord,
+// fontes (OFL), canais do YouTube e sites consultados. Mesmo topo da página de Novidades.
+// Os dados ficam em src/creditos.ts; o porquê de cada item, em design-system/auditoria-direitos.md.
+import { Image } from 'astro:assets';
+import Cabeca from '../components/Cabeca.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Rodape from '../components/Rodape.astro';
+import { AVISO } from '../site';
+import { CAPTURAS_WIKI, OUTRAS_WIKI, ICONES_TERCEIROS, CANAIS, CONSULTA, arquivoWiki } from '../creditos';
+import { imagem } from '../lib/arquivos';
+import { lucide } from '../lib/lucide';
+
+const arte = imagem('recursos-uteis/arte.jpg');
+const ext = { target: '_blank', rel: 'noopener' };
+const seta = lucide('arrow-up-right', 'creditos-seta'); // link externo, como no rodapé
+const secoes = [
+  ['jogo', 'Guild Wars 2'], ['imagens', 'Imagens'], ['icones', 'Ícones'], ['fontes', 'Fontes'],
+  ['videos', 'Vídeos'], ['consulta', 'Sites consultados'], ['guilda', 'Feito pela guilda'],
+];
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca titulo="Créditos" descricao="De onde vêm as artes, ícones, fontes e vídeos do site da guilda DIVINE, e sob qual licença cada um é usado." caminho="/creditos.html" />
+</head>
+<body>
+<div class="pagina">
+<Cabecalho atual="creditos" aviso />
+<header class="novidades-topo">
+  <Image class="novidades-arte" src={arte} alt="" widths={[640, 1024, 1600].filter((w) => w <= arte.width)} sizes="100vw" loading="eager" fetchpriority="high" layout="full-width" style="object-position:50% 40%" />
+  <div class="novidades-topo-texto">
+    <h1>Créditos e licenças</h1>
+    <p>De onde vem cada arte, ícone, fonte e vídeo deste site, e sob qual licença cada um é usado.</p>
+  </div>
+</header>
+<main id="conteudo" class="creditos">
+  <nav class="creditos-indice" aria-label="Nesta página">
+    <ul>{secoes.map(([id, nome]) => <li><a href={`#${id}`}>{nome}</a></li>)}</ul>
+  </nav>
+
+  <section id="jogo">
+    <h2>Guild Wars 2</h2>
+    <p>Este é um site de fã, feito pela guilda DIVINE sem fins comerciais e sem vínculo com a ArenaNet nem com a NCSOFT.</p>
+    <p>As artes, ícones, capturas de tela, nomes e textos do jogo pertencem à ArenaNet e são usados conforme a política de conteúdo para fãs dela, os <a href="https://www.arena.net/en/legal/content-terms-of-use" {...ext}>Content Terms of Use<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>.</p>
+    <p class="creditos-aviso" lang="en">{AVISO.arenanet}</p>
+  </section>
+
+  <section id="imagens">
+    <h2>Imagens</h2>
+    <p>As ilustrações em estilo pôster (topo dos guias, cards e banners de Raids, Fractals e Dungeons, arte da Introdução do Endgame e o Challenge Mote) foram geradas pela guilda no Canva. Cada uma parte de uma arte, tela de carregamento ou captura da ArenaNet, ou de um print tirado no jogo pela guilda ou por outros jogadores da comunidade, e só muda o estilo, dentro dos Content Terms of Use. A base da arte de Sabetha the Saboteur (Wing 1) é uma cena do vídeo <a href="https://www.youtube.com/watch?v=UFghWFLj3IY" {...ext}>Sabetha the Saboteur, do canal itsBuildTV<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>. Algumas imagens foram ampliadas com o <a href="https://upscayl.org/" {...ext}>Upscayl<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a> (modelo 4xNomos8kSC).</p>
+    <p>As artes dos cards de Fractals partem das capturas que editores da <a href="https://wiki.guildwars2.com/" {...ext}>Guild Wars 2 Wiki<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a> tiraram no jogo e publicaram lá como imagens da ArenaNet:</p>
+    <ul class="creditos-colunas">
+      {CAPTURAS_WIKI.map((c) => <li><a href={arquivoWiki(c.arquivo)} {...ext}>{c.fractal}<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a></li>)}
+    </ul>
+    <p>Outros arquivos da Wiki usados como base ou como captura:</p>
+    <ul class="creditos-lista">
+      {OUTRAS_WIKI.map((c) => <li><b>{c.uso}</b>: <a href={arquivoWiki(c.arquivo)} {...ext}>{c.nome}<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>.</li>)}
+    </ul>
+    <p>Os prints da interface do jogo e do ArcDPS no guia de Endgame (Golem, Defiance Bar, janelas do ArcDPS, LFG) e o de Achievements de Dungeons foram tirados pela guilda.</p>
+  </section>
+
+  <section id="icones">
+    <h2>Ícones</h2>
+    <p>Os ícones de boons, conditions, atributos, Mastery, modos de dificuldade e itens são do jogo (ArenaNet), copiados da Guild Wars 2 Wiki.</p>
+    <p>Três ícones da página inicial são do <a href="https://www.flaticon.com/" {...ext}>Flaticon<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>, pintados de branco:</p>
+    <ul class="creditos-lista">
+      {ICONES_TERCEIROS.map((i) => <li><b>{i.onde}</b>: ícone <a href={i.url} {...ext}>{i.nome}<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>, de <a href={i.autorUrl} {...ext}>{i.autor}<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>, no Flaticon.</li>)}
+    </ul>
+    <p>Os demais ícones de linha são do <a href="https://lucide.dev/" {...ext}>Lucide<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>, sob a <a href="https://lucide.dev/license" {...ext}>licença ISC<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>:</p>
+    <p class="creditos-aviso" lang="en">Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022. Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.</p>
+    <p>O ícone do Discord vem do <a href="https://simpleicons.org/" {...ext}>Simple Icons<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a> (CC0). Discord é marca da Discord Inc., e o ícone aparece só para levar ao servidor da guilda, como pedem as <a href="https://discord.com/branding" {...ext}>regras de marca do Discord<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>. GitHub é marca da GitHub, Inc.</p>
+  </section>
+
+  <section id="fontes">
+    <h2>Fontes</h2>
+    <ul class="creditos-lista">
+      <li><b>Mona Sans</b>, do GitHub (<a href="https://github.com/github/mona-sans" {...ext}>github/mona-sans<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>), sob a SIL Open Font License 1.1. <a href="/assets/fonts/LICENSE-mona-sans.txt">Texto da licença</a>.</li>
+      <li><b>Geist Mono</b>, da Vercel (<a href="https://github.com/vercel/geist-font" {...ext}>vercel/geist-font<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>), sob a SIL Open Font License 1.1. <a href="/assets/fonts/LICENSE-geist-mono.txt">Texto da licença</a>.</li>
+    </ul>
+  </section>
+
+  <section id="videos">
+    <h2>Vídeos</h2>
+    <p>Os botões "Vídeo" dos guias abrem vídeos no YouTube (o site não copia nem embute nenhum). Obrigado aos canais:</p>
+    <ul class="creditos-colunas">
+      {CANAIS.map((c) => <li><a href={c.url} {...ext}>{c.nome}<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a></li>)}
+    </ul>
+  </section>
+
+  <section id="consulta">
+    <h2>Sites consultados</h2>
+    <p>Os guias foram escritos pela guilda, em português, com base no jogo e nestes sites. Os botões "Guia" e "Wiki" levam até eles:</p>
+    <ul class="creditos-lista creditos-linha">
+      {CONSULTA.map((s) => <li><a href={s.url} {...ext}>{s.nome}<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a></li>)}
+    </ul>
+  </section>
+
+  <section id="guilda">
+    <h2>Feito pela guilda</h2>
+    <ul class="creditos-lista">
+      <li><b>Logo e emblema DIVINE</b>: Zyanore.</li>
+      <li><b>Divine Prisma</b>: Zyanore. Os desenhos estão sob a <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.pt-br" {...ext}>CC BY-NC 4.0<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>, e os scripts sob a licença MIT (<a href="https://github.com/divinegw/divine-prisma" {...ext}>repositório<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>).</li>
+      <li><b>Configuração do Zyanore para o ArcDPS</b> (download no guia de Endgame): mistura os perfis Areki e Delta do <a href="https://github.com/DeltaRaidcore/ArcDPS-Styles" {...ext}>ArcDPS-Styles<Fragment set:html={seta} /><span class="sr-only"> (abre em nova aba)</span></a>. O zip traz a fonte Exo, de The Exo Project Authors, sob a SIL Open Font License 1.1, com o texto da licença.</li>
+      <li><b>Textos dos guias</b>: membros da guilda DIVINE (o autor de cada guia aparece no topo dele).</li>
+    </ul>
+  </section>
+</main>
+</div>
+<Rodape atual="creditos" atalhos />
+</body>
+</html>

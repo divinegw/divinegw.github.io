@@ -1,0 +1,29 @@
+---
+// Boon ou condition no meio do texto: ícone da Wiki + nome, com a definição num balão (o mesmo do Termo).
+//   <Efeito nome="quickness" />          ícone + "Quickness", balão com a definição
+//   <Efeito nome="might" texto="Might" /> troca o texto mostrado (ex.: plural ou "25 stacks de Might")
+//   <Efeito nome="fury" soIcone />        só o ícone (listas densas); o nome vira o texto alternativo
+//   <Efeito nome="aegis" semBalao />      ícone + nome sem balão (tabelas, onde o balão repetiria 12 vezes)
+//   <Efeito nome="fury" soIcone semBalao />  só o ícone, sem botão nem balão: sequências de ícones no texto
+//       (Fase 5: 11 balões numa linha davam 11 paradas de Tab e pesavam no Endgame). O nome fica no alt e,
+//       para quem usa mouse, no title. A definição de cada um está no card de Boons/Conditions do Endgame.
+// O ícone é decorativo quando o nome está escrito ao lado (alt vazio); sozinho, o alt é o nome.
+// Definições: src/lib/efeitos.ts (resumo do guia de Endgame).
+import { Image } from 'astro:assets';
+import Termo from './Termo.astro';
+import { icone } from '../lib/arquivos';
+import { efeito } from '../lib/efeitos';
+
+interface Props { nome: string; texto?: string; soIcone?: boolean; semBalao?: boolean; estado?: 'hover' | 'foco' | 'aberto' }
+const { nome, texto, soIcone, semBalao, estado } = Astro.props; // estado: só na vitrine, como no Termo
+const e = efeito(nome);
+const img = icone(nome);
+if (!img) throw new Error(`Ícone não encontrado: src/assets/icones/${nome}`);
+const px = Math.min(32, img.width); // 2x do tamanho exibido (1.15em)
+const rotulo = texto ?? e.nome;
+---
+{semBalao && soIcone
+  ? <Image src={img} width={px} height={px} alt={e.nome} title={e.nome} class="emoji" layout="fixed" />
+  : semBalao
+  ? <span class="efeito"><Image src={img} width={px} height={px} alt="" class="emoji" layout="fixed" />{rotulo}</span>
+  : <Termo def={e.def} nome={`${e.nome} · ${e.tipo}`} estado={estado}><span class:list={['efeito', { 'efeito-so-icone': soIcone }]}><Image src={img} width={px} height={px} alt={soIcone ? e.nome : ''} class="emoji" layout="fixed" />{!soIcone && rotulo}</span></Termo>}

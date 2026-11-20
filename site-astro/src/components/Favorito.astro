@@ -1,0 +1,18 @@
+---
+// Um site recomendado, dentro de <Favoritos>: nome, para que serve (curto) e o endereço. O card inteiro é o link.
+//   nome · url · para: 2 a 5 palavras ("Tudo do jogo", "KP, LI e UFE")
+// url começando com "/" é uma página do próprio site: abre na mesma aba e mostra "Guia no site" no lugar do domínio.
+import { lucide } from '../lib/lucide';
+interface Props { nome: string; url: string; para?: string }
+const { nome, url, para } = Astro.props;
+const interno = url.startsWith('/');
+const dominio = interno ? 'Guia no site' : new URL(url).hostname.replace(/^www\./, '');
+---
+<li class="featured">
+  <a class="f-link" href={url} target={interno ? undefined : '_blank'} rel={interno ? undefined : 'noopener'}>
+    <span class="f-name">{nome}<Fragment set:html={lucide(interno ? 'arrow-right' : 'arrow-up-right')} /></span>
+    {para && <span class="f-para">{para}</span>}
+    <span class="f-url">{dominio}</span>
+    {!interno && <span class="sr-only"> (abre em nova aba)</span>}
+  </a>
+</li>

@@ -1,0 +1,13 @@
+---
+// Card de um guia. O título vem dentro, como "### Título", para entrar no sumário
+// (o rehype-divine.mjs põe o título e o botão "copiar link" juntos num .titulo-card).
+//   icone: arquivo em src/assets/icones/ (sem extensão) ou ícone Lucide, à esquerda do título
+//   id / sumario / semSumario: lidos pelo rehype-divine.mjs (âncora e texto no "Neste guia")
+import Icone from './Icone.astro';
+interface Props { icone?: string; id?: string; sumario?: string; semSumario?: boolean; class?: string }
+const { icone, class: extra } = Astro.props;
+---
+<div class:list={['card', { 'has-ico': icone }, extra]}>
+  <Icone icone={icone} tipo="card" />
+  <slot />
+</div>

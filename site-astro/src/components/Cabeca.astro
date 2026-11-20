@@ -1,0 +1,57 @@
+---
+// <head> comum a todas as páginas: título, descrição, ícone (logo oficial), fontes e tema salvo.
+import { getImage } from 'astro:assets';
+import logo from '../assets/emblema-oficial.png';
+import arteEndgame from '../assets/guias/endgame/arte.webp';
+import '../styles/divine.css';
+import { SITE } from '../site';
+
+// sem titulo (a home): a aba mostra só "Guild DIVINE"
+// imagem: a da prévia do link (Discord, WhatsApp, redes). Padrão: a arte do Endgame (pedido do usuário);
+// cada guia passa a própria arte. Sai em 1200x630 JPEG, o tamanho do cartão grande dessas redes.
+interface Props { titulo?: string; ogTitulo?: string; descricao: string; caminho: string; imagem?: ImageMetadata; imagemAlt?: string }
+const { titulo, ogTitulo = titulo ?? SITE.aba, descricao, caminho, imagem = arteEndgame, imagemAlt = 'Arte de Guild Wars 2' } = Astro.props;
+const [fav, toque, og] = await Promise.all([
+  getImage({ src: logo, width: 64, height: 64, format: 'png' }),
+  getImage({ src: logo, width: 180, height: 180, format: 'png' }),
+  getImage({ src: imagem, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 82 }),
+]);
+const url = new URL(caminho, Astro.site).href;
+const ogImagem = new URL(og.src, Astro.site).href;
+// Mona Sans variável cobre títulos e texto; a Geist Mono (10 KB) está nos chips do topo:
+// pré-carregar as duas evita que o topo mude de altura quando elas chegam (CLS no celular)
+const fonts = ['mona-sans-latin-wdth-normal', 'geist-mono-latin-500-normal'];
+---
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{titulo ? `${titulo} - ${SITE.aba}, ${SITE.comunidade}` : `${SITE.aba} - ${SITE.comunidade}`}</title>{/* "<página> - Guild DIVINE, Comunidade Brasileira de Guild Wars": a designação de site de comunidade que a ArenaNet pede no título (Content Terms of Use, II.4) */}
+<meta name="description" content={descricao}>
+<link rel="canonical" href={url}>
+{/* prévia do link: cartão grande com a arte, o título e a descrição */}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content={SITE.nome}>
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content={url}>
+<meta property="og:title" content={ogTitulo}>
+<meta property="og:description" content={descricao}>
+<meta property="og:image" content={ogImagem}>
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content={imagemAlt}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={ogTitulo}>
+<meta name="twitter:description" content={descricao}>
+<meta name="twitter:image" content={ogImagem}>
+<meta name="theme-color" content="#f3f4f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0c11" media="(prefers-color-scheme: dark)">
+<link rel="icon" href={fav.src} type="image/png">
+<link rel="apple-touch-icon" href={toque.src}>
+{fonts.map((f) => <link rel="preload" href={`/assets/fonts/${f}.woff2`} as="font" type="font/woff2" crossorigin>)}
+<script is:inline>/* .js: componentes que só funcionam com script (Abas, Busca) mostram a versão interativa; tema salvo: aplica antes de pintar a página */document.documentElement.classList.add('js');/* .fontes: as fontes chegaram (o rodapé, preso por baixo da página, só aparece depois: sem refluxo contado como CLS) */document.fonts.ready.then(()=>document.documentElement.classList.add('fontes'));
+function temaSalvo(){try{var t=localStorage.getItem('divine-tema');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}}temaSalvo();
+/* voltar (Voltar do navegador restaura a página antiga do cache) ou outra aba trocou o tema: reaplica e avisa o botão */
+function temaAtualiza(){temaSalvo();dispatchEvent(new Event('divine-tema'));}
+addEventListener('pageshow',function(e){if(e.persisted)temaAtualiza();});addEventListener('storage',function(e){if(e.key==='divine-tema')temaAtualiza();});
+/* troca de página (View Transitions): a arte fora da tela perde o nome, para não voar de longe (na página que sai e na que entra) */
+function vtFora(e){if(!e.viewTransition)return;document.querySelectorAll('[style*="view-transition-name"]').forEach(function(el){var r=el.getBoundingClientRect();if(r.bottom<=0||r.top>=innerHeight)el.style.viewTransitionName='none';});}addEventListener('pageswap',vtFora);addEventListener('pagereveal',vtFora);</script>

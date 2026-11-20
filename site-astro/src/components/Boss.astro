@@ -1,0 +1,52 @@
+---
+// Linha de boss: nome + botões (Video.astro).
+// Com texto dentro (<Boss ...>texto</Boss>), o botão "CM" da linha vira um botão dividido ("▶ CM | O que muda ⌄")
+// que abre, logo embaixo, a FICHA DE CM (pedido do usuário: o resumo fica no próprio boss, recolhido; Fase 6:
+// botão da direção A, ficha da direção B). A ficha tem duas colunas: à esquerda o ícone oficial, "Challenge Mode"
+// e os números; à direita o texto. No celular, a coluna da esquerda vira uma faixa no topo.
+//   cmVida / cmLimite: números opcionais da coluna da esquerda (ex.: "30 → 40 milhões", "10 min"); com "→", o rótulo
+//   diz "Vida (normal → CM)"; sem, "Vida no CM"
+//   texto dentro: lista de tópicos em Markdown; "> **Dica:** …" vira a dica (fio tracejado em cima); um parágrafo
+//   solto no fim vira nota (guia em texto, vídeo do Legendary Mode)
+// Sem script e no PDF, a ficha aparece aberta e o "O que muda" some.
+import Video from './Video.astro';
+import FichaCmLado from './FichaCmLado.astro';
+import { slug } from '../rehype-divine.mjs';
+
+interface Props { nome: string; texto?: string; video?: string; cm?: string; guia?: string; wiki?: string; cmVida?: string; cmLimite?: string }
+const { cmVida, cmLimite, ...linha } = Astro.props;
+const temResumo = Astro.slots.has('default');
+const painel = temResumo ? `cm-${slug(linha.nome)}` : undefined;
+---
+<Video classe="boss" {...linha} painel={painel} />
+{temResumo && (
+  <div class="boss-cm" id={painel}>
+    <FichaCmLado vida={cmVida} limite={cmLimite} />
+    <div class="boss-cm-texto"><slot /></div>
+  </div>
+)}
+
+<script>
+  // "O que muda" abre e fecha a ficha de CM do boss; Esc dentro da ficha (ou no botão) fecha e devolve o foco.
+  // Um ouvinte só para a página toda.
+  const alterna = (botao: HTMLButtonElement, abre: boolean) => {
+    const ficha = document.getElementById(botao.getAttribute('aria-controls') ?? '');
+    if (!ficha) return;
+    botao.setAttribute('aria-expanded', String(abre));
+    ficha.classList.toggle('is-aberto', abre);
+  };
+  document.addEventListener('click', (e) => {
+    const botao = (e.target as Element).closest<HTMLButtonElement>('.boss-cm-botao');
+    if (botao) alterna(botao, botao.getAttribute('aria-expanded') !== 'true');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const alvo = e.target as Element;
+    const ficha = alvo.closest?.('.boss-cm.is-aberto');
+    const botao = alvo.closest?.<HTMLButtonElement>('.boss-cm-botao[aria-expanded="true"]')
+      ?? (ficha && document.querySelector<HTMLButtonElement>(`[aria-controls="${ficha.id}"]`));
+    if (!botao) return;
+    alterna(botao, false);
+    botao.focus();
+  });
+</script>

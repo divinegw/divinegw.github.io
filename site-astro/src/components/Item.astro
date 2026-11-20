@@ -1,0 +1,10 @@
+---
+// Linha com ícone dentro de um card (o antigo <div class="tier">). Escreva o texto numa linha só.
+import Icone from './Icone.astro';
+interface Props { icone?: string }
+const { icone } = Astro.props;
+---
+<div class="tier">
+  <Icone icone={icone} tipo="tier" />
+  <p><slot /></p>
+</div>

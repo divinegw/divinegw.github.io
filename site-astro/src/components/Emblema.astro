@@ -1,0 +1,18 @@
+---
+// Emblema da guilda: a logo oficial (anel marinho, nó em ouro e prata, fundo transparente).
+// A mesma imagem nos dois temas: ela já traz o próprio anel, então não leva disco por trás.
+// Original em design-system/logo/logo-oficial.png (1254×1254).
+//   tamanho: sm 30px (barra do topo) · md 96px (rodapé) · lg 124px (herói, o único com texto alternativo)
+import { Image } from 'astro:assets';
+import logo from '../assets/emblema-oficial.png';
+
+interface Props { tamanho: 'sm' | 'md' | 'lg' }
+const { tamanho } = Astro.props;
+// largura exibida: o layout "fixed" gera 1x e 2x sozinho (antes pedia 2x do 2x: 512px para mostrar 124)
+const px = { sm: 30, md: 56, lg: 124 }[tamanho];
+const alt = tamanho === 'lg' ? 'Emblema da guilda DIVINE' : '';
+---
+<span class={`emblem emblem-${tamanho}`}>
+  <Image class="emblem-img" src={logo} width={px} height={px} alt={alt} layout="fixed" format="webp" quality={85}
+    loading={tamanho === 'lg' ? 'eager' : 'lazy'} />
+</span>

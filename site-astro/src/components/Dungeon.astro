@@ -1,0 +1,31 @@
+---
+// Dungeon: arte 2:1 com o nome (h3) e os níveis por cima, depois as linhas <Info> e os <Path>.
+//   nome · niveis ("Story 30, Explo 35") · arte + alt (src/assets/guias/) · id / sumario (rehype-divine.mjs)
+//   <Dungeon nome="ASCALONIAN CATACOMBS" niveis="Story 30, Explo 35" arte="dungeons/ascalonian-catacombs.jpg" alt="…">
+//     <Info>**Inimigos:** Ghosts</Info>
+//     <Path nome="Story" video="https://…"/>
+//   </Dungeon>
+// Fase 3: o nome virou título (h3, com o id da âncora) e os níveis viraram uma lista de chips sobre a arte.
+import { Image } from 'astro:assets';
+import Chip from './Chip.astro';
+import { imagem } from '../lib/arquivos';
+
+interface Props { nome: string; niveis: string; arte: string; alt: string; id?: string; sumario?: string }
+const { nome, niveis, arte, alt, id } = Astro.props;
+// as <Info> vêm antes dos <Path>: separa as duas partes do conteúdo
+const html = await Astro.slots.render('default');
+const corte = html.indexOf('<div class="path"');
+const meta = corte < 0 ? html : html.slice(0, corte);
+const paths = corte < 0 ? '' : html.slice(corte);
+---
+<div class="dungeon">
+  <div class="dungeon-head">
+    <h3 id={id}>{nome}</h3>
+    <ul class="lvls" aria-label="Níveis">{niveis.split(',').map((n) => <Chip como="li" tom="arte" class="lvl">{n.trim()}</Chip>)}</ul>
+  </div>
+  <Image class="dungeon-img" src={imagem(arte)} alt={alt} sizes="(min-width: 800px) 760px, 100vw" />
+  <div class="dungeon-body">
+    <div class="dungeon-meta" set:html={meta} />
+    <div class="paths" set:html={paths} />
+  </div>
+</div>

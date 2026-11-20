@@ -1,0 +1,17 @@
+---
+// Um ponto da <LinhaDoTempo>.
+//   rotulo: posição na sequência, curto (Wing 1, Tier 2) · nome: o que é (Spirit Vale, Adept)
+//   href: âncora da seção no guia (opcional; o nome vira link) · detalhes: chips de dado (opcional)
+//   Texto entre as tags (opcional): uma frase sobre o marco.
+import Chip from './Chip.astro';
+interface Props { rotulo: string; nome: string; href?: string; detalhes?: string[] }
+const { rotulo, nome, href, detalhes = [] } = Astro.props;
+---
+<li class="marco">
+  <span class="marco-rotulo">{rotulo}</span>
+  <div class="marco-corpo">
+    <p class="marco-nome">{href ? <a href={href}>{nome}</a> : nome}</p>
+    {Astro.slots.has('default') && <div class="marco-texto"><slot /></div>}
+    {detalhes.length > 0 && <ul class="marco-detalhes">{detalhes.map((d) => <Chip como="li" tom="suave" nome>{d}</Chip>)}</ul>}
+  </div>
+</li>

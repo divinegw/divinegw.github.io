@@ -1,0 +1,16 @@
+---
+// Chip: um dado curto (nível, contagem, data), em mono. Não é clicável.
+//   tom: neutro (padrão) · suave (fundo surface-2, dentro de card) · data (ouro: datas) · arte (sobre arte escura)
+//   como: span (padrão) ou li (dentro de uma lista de chips)
+//   nome: o conteúdo é um nome (expansão, mecânica), não um dado: usa a fonte do texto em vez da mono
+//   icone: arquivo em src/assets/icones/ (sem extensão), à esquerda do texto, decorativo.
+//     ex.: <Chip nome icone="mastery-heart-of-thorns">Heart of Thorns</Chip> (ícone de Mastery Point da região, da Guild Wars 2 Wiki)
+import { Image } from 'astro:assets';
+import { icone as achar } from '../lib/arquivos';
+
+interface Props { tom?: 'neutro' | 'suave' | 'data' | 'arte'; como?: 'span' | 'li'; nome?: boolean; icone?: string; class?: string }
+const { tom = 'neutro', como: Tag = 'span', nome, icone, class: extra } = Astro.props;
+const img = icone ? achar(icone) : undefined;
+if (icone && !img) throw new Error(`Ícone não encontrado: src/assets/icones/${icone}`);
+---
+<Tag class:list={['chip', tom !== 'neutro' && `chip-${tom}`, nome && 'chip-nome', img && 'chip-com-icone', extra]}>{img && <Image src={img} width={40} height={40} alt="" class="chip-ico" layout="fixed" />}<slot /></Tag>

@@ -1,0 +1,63 @@
+---
+// Abas (padrão WAI-ARIA "tabs", ativação automática). Uso:
+//   <Abas rotulo="Modos de dificuldade">
+//     <Aba rotulo="Normal Mode" icone="normal-mode">Texto…</Aba>
+//     <Aba rotulo="Challenge Mode" icone="challenge-mode">Texto…</Aba>
+//   </Abas>
+//   rotulo: nome do grupo de abas para o leitor de tela · inicial: índice da aba aberta (0 = primeira)
+// Teclado: Tab entra na aba ativa; ← → trocam (dão a volta); Home e End vão à primeira e à última;
+// Tab de novo vai para o painel. Sem JavaScript (sem a classe .js no <html>) e no PDF, todos os painéis
+// aparecem, cada um com o seu título, e a fileira de abas some.
+interface Props { rotulo: string; inicial?: number; class?: string }
+const { rotulo, inicial = 0, class: extra } = Astro.props;
+const g = globalThis as { __abas?: number };
+g.__abas = (g.__abas ?? 0) + 1;
+const base = `abas-${g.__abas}`;
+
+const html = await Astro.slots.render('default');
+const titulos = [...html.matchAll(/<p class="aba-titulo">([\s\S]*?)<\/p>/g)].map((m) => m[1]);
+if (!titulos.length) throw new Error('<Abas> precisa de pelo menos um <Aba>.');
+let n = 0;
+const paineis = html.replace(/<div class="aba-painel" data-aba>/g, () => {
+  const i = n++;
+  return `<div class="aba-painel${i === inicial ? ' is-ativo' : ''}" role="tabpanel" id="${base}-p${i}" aria-labelledby="${base}-t${i}" tabindex="0" data-aba>`;
+});
+---
+<div class:list={['abas', extra]} data-abas>
+  <div class="abas-lista" role="tablist" aria-label={rotulo}>
+    {titulos.map((t, i) => (
+      <button type="button" role="tab" class="aba" id={`${base}-t${i}`} aria-controls={`${base}-p${i}`}
+        aria-selected={i === inicial ? 'true' : 'false'} tabindex={i === inicial ? 0 : -1} set:html={t} />
+    ))}
+  </div>
+  <Fragment set:html={paineis} />
+</div>
+
+<script>
+  // Uma vez por página. Os painéis já nascem certos pelo CSS (.js + .is-ativo): o script só troca.
+  document.querySelectorAll<HTMLElement>('[data-abas]').forEach((grupo) => {
+    const abas = [...grupo.querySelectorAll<HTMLButtonElement>(':scope > [role="tablist"] > [role="tab"]')];
+    const paineis = [...grupo.querySelectorAll<HTMLElement>(':scope > [role="tabpanel"]')];
+    const ativa = (i: number, foco = false) => {
+      abas.forEach((a, k) => {
+        const sim = k === i;
+        a.setAttribute('aria-selected', String(sim));
+        a.tabIndex = sim ? 0 : -1;
+        paineis[k]?.classList.toggle('is-ativo', sim);
+      });
+      if (foco) abas[i].focus();
+    };
+    abas.forEach((a, i) => {
+      a.addEventListener('click', () => ativa(i));
+      a.addEventListener('keydown', (e) => {
+        const ult = abas.length - 1;
+        const alvo = e.key === 'ArrowRight' ? (i === ult ? 0 : i + 1)
+          : e.key === 'ArrowLeft' ? (i === 0 ? ult : i - 1)
+          : e.key === 'Home' ? 0 : e.key === 'End' ? ult : -1;
+        if (alvo < 0) return;
+        e.preventDefault();
+        ativa(alvo, true);
+      });
+    });
+  });
+</script>

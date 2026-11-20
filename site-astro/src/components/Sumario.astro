@@ -1,0 +1,65 @@
+---
+// Sumário "Neste guia": capítulos numerados (01, 02...) em ouro, com os itens de cada um.
+// No desktop (≥1100px) fica fixo à esquerda e marca o item da seção que está na tela;
+// abaixo disso, vira um card no topo (em 2 colunas quando não há subitens).
+//   itens:  [{ id, text, subs: [{ id, text }] }] (o rehype-divine.mjs monta isto a partir do .mdx)
+//   titulo: rótulo acima da lista (padrão "Neste guia")
+//   marcar: liga o item ativo ao rolar (padrão: sim; desligue em exemplos estáticos)
+//   plano:  lista simples sem números (padrão: quando nenhum item tem subitens)
+//   realce / realceClasse: só na vitrine; põe uma classe de estado (is-active, is-hover, is-foco) num item
+export interface ItemSumario { id: string; text: string; subs: ItemSumario[] }
+interface Props { itens: ItemSumario[]; titulo?: string; marcar?: boolean; rotulo?: string; plano?: boolean; realce?: string; realceClasse?: string; class?: string }
+const { itens, titulo = 'Neste guia', marcar = true, rotulo = 'Sumário', realce, realceClasse, class: extra } = Astro.props;
+// sem subitens (Recursos Úteis): lista simples em duas colunas
+const plano = Astro.props.plano ?? itens.every((c) => c.subs.length === 0);
+const cls = (id: string) => (id === realce ? realceClasse : undefined);
+---
+<nav class:list={['toc', { cols: plano }, extra]} aria-label={rotulo} data-sumario={marcar ? '' : undefined}>
+  <h2>{titulo}</h2>
+  <ol>
+    {itens.map(({ id, text, subs }) => (
+      <li>
+        {plano ? <a href={`#${id}`} class={cls(id)}>{text}</a> : <b><a href={`#${id}`} class={cls(id)}>{text}</a></b>}
+        {subs.length > 0 && <ul>{subs.map((s) => <li><a href={`#${s.id}`} class={cls(s.id)}>{s.text}</a></li>)}</ul>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script>
+  // Marca o item da seção que está na tela (só o sumário fixo do desktop tem como mostrar isso).
+  const nav = document.querySelector<HTMLElement>('[data-sumario]');
+  const items = nav ? [...nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')]
+    .map((a) => ({ a, t: document.getElementById(decodeURIComponent(a.getAttribute('href')!.slice(1))) }))
+    .filter((x): x is { a: HTMLAnchorElement; t: HTMLElement } => !!x.t) : [];
+  if (items.length) {
+    let cur: HTMLAnchorElement | null = null, pinned: HTMLAnchorElement | null = null, ticking = false;
+    const set = (a: HTMLAnchorElement) => {
+      if (a === cur) return;
+      if (cur) { cur.classList.remove('is-active'); cur.removeAttribute('aria-current'); }
+      cur = a;
+      a.classList.add('is-active'); a.setAttribute('aria-current', 'location');
+      const sb = a.closest<HTMLElement>('.sidebar');
+      if (sb && sb.scrollHeight > sb.clientHeight) {
+        const r = a.getBoundingClientRect(), s = sb.getBoundingClientRect();
+        if (r.top < s.top + 8 || r.bottom > s.bottom - 8) sb.scrollTop += r.top - s.top - s.height / 3;
+      }
+    };
+    const update = () => {
+      ticking = false;
+      if (pinned) { set(pinned); return; }
+      let best = items[0];
+      for (const x of items) if (x.t.getBoundingClientRect().top <= 110) best = x;
+      const atEnd = innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
+      if (atEnd) for (let i = items.length - 1; i >= 0; i--) if (items[i].t.getBoundingClientRect().top < innerHeight - 60) { best = items[i]; break; }
+      set(best.a);
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    items.forEach((x) => x.a.addEventListener('click', () => { pinned = x.a; set(x.a); }));
+    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach((ev) => addEventListener(ev, () => { pinned = null; }, { passive: true }));
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+    if (location.hash) items.forEach((x) => { if (x.a.getAttribute('href') === location.hash) pinned = x.a; });
+    update();
+  }
+</script>

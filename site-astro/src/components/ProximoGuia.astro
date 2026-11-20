@@ -1,0 +1,26 @@
+---
+// "Próximo guia" no fim de cada guia, na ordem de GUIAS (src/site.ts). O último guia não tem.
+// O card inteiro é clicável (o link é o nome, esticado sobre o card). A arte tem o view-transition-name
+// do herói do próximo guia: ao clicar, ela cresce até virar o topo da página nova.
+// No PDF não aparece.
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { lucide } from '../lib/lucide';
+import { proximoGuia } from '../site';
+
+interface Props { atual: string }
+const prox = proximoGuia(Astro.props.atual);
+const entry = prox ? await getEntry('guias', prox.guia) : undefined;
+---
+{prox && entry && (
+  <nav class="proximo" aria-labelledby="proximo-rotulo">
+    <div class="proximo-arte" style={`view-transition-name:arte-${prox.guia}`}>
+      <Image src={entry.data.arte} alt="" widths={[380, 760].filter((w) => w <= entry.data.arte.width)} sizes="(min-width: 640px) 300px, 100vw" style={`object-position:${entry.data.foco}`} />
+    </div>
+    <div class="proximo-corpo">
+      <p class="proximo-rotulo" id="proximo-rotulo">Próximo guia</p>
+      <a class="proximo-nome" href={`/guias/${prox.guia}.html`}>{prox.nome}<Fragment set:html={lucide('arrow-right')} /></a>
+      <p class="proximo-texto">{prox.texto}</p>
+    </div>
+  </nav>
+)}

@@ -1,0 +1,56 @@
+---
+// Card de boss ou encontro: arte 2:1 com o nome por cima (mesma família da Wing), etiquetas de
+// dificuldade (os modos que existem, com o ícone oficial) e de mecânica, o texto e os botões.
+//   nome: nome do boss (vira h3 e entra no sumário, como a Wing) · id / sumario: como na Wing
+//   arte + alt: arquivo em src/assets/guias/ (opcional; sem arte, o nome fica no topo do card)
+//   onde: chips sobre a arte (ex.: ['Wing 1', 'Boss 1'])
+//   modos: os modos que o encontro tem: 'normal' · 'cm' · 'lm'
+//   mecanicas: etiquetas curtas do que o squad precisa saber (ex.: ['Tank', 'Split em 3'])
+//   video (botão principal) · cm (vídeo do CM) · guia · wiki: links, cada um opcional
+//   Texto entre as tags: o resumo do encontro, em Markdown.
+import { Image } from 'astro:assets';
+import Botao from './Botao.astro';
+import Chip from './Chip.astro';
+import { imagem, icone } from '../lib/arquivos';
+
+type Modo = 'normal' | 'cm' | 'lm';
+interface Props {
+  nome: string; id?: string; sumario?: string; arte?: string; alt?: string; onde?: string[];
+  modos?: Modo[]; mecanicas?: string[]; video?: string; cm?: string; guia?: string; wiki?: string;
+}
+const { nome, id, arte, alt = '', onde = [], modos = [], mecanicas = [], video, cm, guia, wiki } = Astro.props;
+const MODOS: Record<Modo, { nome: string; icone: string }> = {
+  normal: { nome: 'Normal Mode', icone: 'normal-mode' },
+  cm: { nome: 'Challenge Mode', icone: 'challenge-mode' },
+  lm: { nome: 'Legendary Mode', icone: 'legendary-mode' },
+};
+const img = arte ? imagem(arte) : undefined;
+const temCorpo = Astro.slots.has('default');
+---
+<div class:list={['encontro', { 'encontro-sem-arte': !img }]} id={id}>
+  {img && <Image class="encontro-arte" src={img} alt={alt} widths={[380, 760, 1140, 1520].filter((w) => w <= img.width)} sizes="(min-width: 800px) 760px, 100vw" />}
+  <div class="encontro-head">
+    <h3>{nome}</h3>
+    {onde.length > 0 && <ul class="encontro-onde">{onde.map((o) => <Chip como="li" tom={img ? 'arte' : 'suave'}>{o}</Chip>)}</ul>}
+  </div>
+  <div class="encontro-corpo">
+    {(modos.length > 0 || mecanicas.length > 0) && (
+      <dl class="encontro-tags">
+        {modos.length > 0 && <div><dt>Modos</dt><dd><ul>{modos.map((m) => {
+          const i = icone(MODOS[m].icone);
+          return <li class="modo">{i && <Image src={i} width={32} height={32} alt="" layout="fixed" />}{MODOS[m].nome}</li>;
+        })}</ul></dd></div>}
+        {mecanicas.length > 0 && <div><dt>Mecânicas</dt><dd><ul>{mecanicas.map((m) => <Chip como="li" tom="suave" nome>{m}</Chip>)}</ul></dd></div>}
+      </dl>
+    )}
+    {temCorpo && <div class="encontro-texto"><slot /></div>}
+    {(video || cm || guia || wiki) && (
+      <div class="encontro-acoes">
+        {video && <Botao variante="primario" tamanho="sm" icone="play" href={video} externo rotulo={`Vídeo de ${nome}`}>Vídeo</Botao>}
+        {cm && <Botao tamanho="sm" icone="play" href={cm} externo rotulo={`Vídeo do Challenge Mode de ${nome}`}>Vídeo do CM</Botao>}
+        {guia && <Botao tamanho="sm" icone="file-text" href={guia} externo rotulo={`Guia em texto de ${nome}`}>Guia</Botao>}
+        {wiki && <Botao tamanho="sm" icone="book-open" href={wiki} externo rotulo={`${nome} na Wiki`}>Wiki</Botao>}
+      </div>
+    )}
+  </div>
+</div>

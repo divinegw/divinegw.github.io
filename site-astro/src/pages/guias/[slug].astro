@@ -1,0 +1,44 @@
+---
+import { getCollection, render } from 'astro:content';
+import Guia, { type ItemSumario } from '../../layouts/Guia.astro';
+import Card from '../../components/Card.astro';
+import CardImagem from '../../components/CardImagem.astro';
+import Item from '../../components/Item.astro';
+import Obs from '../../components/Obs.astro';
+import Aviso from '../../components/Aviso.astro';
+import Tabela from '../../components/Tabela.astro';
+import Termo from '../../components/Termo.astro';
+import Chip from '../../components/Chip.astro';
+import Selo from '../../components/Selo.astro';
+import Botao from '../../components/Botao.astro';
+import Link from '../../components/Link.astro';
+import Wing from '../../components/Wing.astro';
+import Boss from '../../components/Boss.astro';
+import Dungeon from '../../components/Dungeon.astro';
+import Info from '../../components/Info.astro';
+import Path from '../../components/Path.astro';
+import Recurso from '../../components/Recurso.astro';
+import Favoritos from '../../components/Favoritos.astro';
+import Favorito from '../../components/Favorito.astro';
+import Lista from '../../components/Lista.astro';
+import Encontro from '../../components/Encontro.astro';
+import Abas from '../../components/Abas.astro';
+import Aba from '../../components/Aba.astro';
+import Funcao from '../../components/Funcao.astro';
+import Efeito from '../../components/Efeito.astro';
+import LinhaDoTempo from '../../components/LinhaDoTempo.astro';
+import Marco from '../../components/Marco.astro';
+import Banner from '../../components/Banner.astro';
+import Mapa from '../../components/Mapa.astro';
+
+export async function getStaticPaths() {
+  return (await getCollection('guias')).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(entry);
+const toc = (remarkPluginFrontmatter.toc ?? []) as ItemSumario[]; // montado em src/rehype-divine.mjs
+---
+<Guia entry={entry} toc={toc}>
+  <Content components={{ Card, CardImagem, Item, Obs, Aviso, Tabela, Termo, Chip, Selo, Botao, Link, Wing, Boss, Dungeon, Info, Path, Recurso, Favoritos, Favorito, Lista,
+    Encontro, Abas, Aba, Funcao, Efeito, LinhaDoTempo, Marco, Banner, Mapa }} />
+</Guia>

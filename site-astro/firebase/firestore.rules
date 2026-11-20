@@ -1,0 +1,196 @@
+rules_version = '2';
+// Regras do Firestore do sorteio ao vivo (/sorteio.html). Projeto: divine-sorteio.
+// Cole este arquivo inteiro em: console do Firebase > Firestore Database > Regras > Publicar.
+//
+// Todo mundo entra com login anônimo (invisível, feito pelo site). Quem faz o quê:
+//   qualquer pessoa     vê os sorteios, quem se inscreveu, os resultados anteriores e quem foi tirado;
+//                       abre um sorteio (no máximo 1 por minuto por aparelho);
+//                       se inscreve uma vez por sorteio com uma conta do jogo (Nome.1234), enquanto a inscrição estiver aberta
+//                       (no modo rigoroso, precisa estar com a conta Google ligada: uma inscrição por conta Google)
+//                       quem ganhou aceita o prêmio na própria página do sorteio, dentro do prazo (1 minuto)
+//   organizador         quem abriu o sorteio, ou quem abriu o link de organizador dele: encerra, reabre, sorteia,
+//                       sorteia de novo, tira inscrito e apaga
+//   ninguém pelo site   muda o dono, o modo, o horário de criação ou uma inscrição já feita; apaga um resultado;
+//                       some com um resultado anterior ou com o nome de quem foi tirado
+// O dono do projeto no Firebase apaga qualquer coisa pelo console.
+//
+// Limpeza: o campo expiraEm diz quando o documento pode sumir (24 h depois do resultado, ou 7 dias depois de fechar
+// sem sorteio). Com a política de TTL do Firestore ligada nos grupos de coleção, o Google apaga sozinho.
+// Os registros (registros/{id}) não têm expiraEm: ficam para sempre.
+// Sem ela, o site só esconde os vencidos.
+service cloud.firestore {
+  match /databases/{db}/documents {
+
+    function logado() { return request.auth != null; }
+    function eu() { return request.auth.uid; }
+    function texto(v, min, max) { return v is string && v.size() >= min && v.size() <= max; }
+    function dias(n) { return duration.value(n, 'd'); }
+    // prazo de limpeza dos documentos de apoio: uns 16 dias (o site não sabe a hora exata do servidor)
+    function janela16(t) { return t is timestamp && t > request.time + dias(15) && t < request.time + dias(17); }
+    function temGoogle() { return logado() && 'google.com' in request.auth.token.firebase.identities; }
+    // prêmio com ícone (item do jogo, gemas, ouro, expansão ou texto). O ícone só pode vir do servidor de imagens do jogo.
+    function premioOk(p) {
+      return p == null || (p is map
+        && p.keys().hasOnly(['tipo', 'nome', 'quantidade', 'icone', 'raridade', 'descricao', 'itemId'])
+        && p.tipo in ['item', 'gemas', 'ouro', 'expansao', 'texto']
+        && texto(p.nome, 1, 80) && p.quantidade is int && p.quantidade >= 1 && p.quantidade <= 1000000
+        && texto(p.icone, 0, 200) && (p.icone == '' || p.icone.matches('^https://render[.]guildwars2[.]com/file/[A-Za-z0-9/._-]+$'))
+        && texto(p.raridade, 0, 20) && texto(p.descricao, 0, 120) && p.itemId is int);
+    }
+
+    // último sorteio aberto por este aparelho: freio contra quem abre sorteio sem parar
+    match /donos/{uid} {
+      allow get: if logado() && eu() == uid;
+      allow create, update: if logado() && eu() == uid
+        && request.resource.data.keys().hasOnly(['ultimo'])
+        && request.resource.data.ultimo == request.time
+        && (resource == null || request.time > resource.data.ultimo + duration.value(60, 's'));
+    }
+
+    // registro permanente de cada sorteio ao vivo (aba Ganhadores): quem organiza grava junto com o resultado,
+    // e ele precisa bater com o resultado do sorteio. Ninguém apaga. Fica depois que o sorteio sai do ar.
+    match /registros/{sid} {
+      allow get: if true;
+      allow list: if request.query.limit <= 50;
+      allow create, update: if logado()
+        && (get(/databases/$(db)/documents/sorteios/$(sid)).data.dono == eu()
+          || exists(/databases/$(db)/documents/sorteios/$(sid)/organizadores/$(eu())))
+        && request.resource.data.keys().hasOnly(['titulo', 'premio', 'premioInfo', 'ganhadores', 'codigo', 'impressao', 'total',
+                                                 'excluidos', 'participantes', 'refeito', 'data', 'mantidos', 'ausentes'])
+        && texto(request.resource.data.titulo, 1, 80) && texto(request.resource.data.premio, 0, 120)
+        && premioOk(request.resource.data.premioInfo)
+        && request.resource.data.codigo == getAfter(/databases/$(db)/documents/sorteios/$(sid)).data.resultado.codigo
+        && request.resource.data.ganhadores == getAfter(/databases/$(db)/documents/sorteios/$(sid)).data.resultado.ganhadores
+        && request.resource.data.impressao == getAfter(/databases/$(db)/documents/sorteios/$(sid)).data.resultado.impressao
+        && request.resource.data.participantes is list && request.resource.data.participantes.size() <= 2000
+        && request.resource.data.excluidos is list && request.resource.data.total is int && request.resource.data.refeito is int
+        && request.resource.data.data == request.time;
+    }
+
+    match /sorteios/{sid} {
+      allow get: if true;
+      allow list: if request.query.limit <= 50;
+
+      function caminho() { return /databases/$(db)/documents/sorteios/$(sid); }
+      function sorteio() { return get(caminho()).data; }
+      function organizador() {
+        return logado() && (get(caminho()).data.dono == eu()
+          || exists(/databases/$(db)/documents/sorteios/$(sid)/organizadores/$(eu())));
+      }
+
+      function campos(d) {
+        return d.keys().hasOnly(['titulo', 'premio', 'descricao', 'vencedores', 'dono', 'criadoEm', 'fechaEm', 'aberto',
+                                 'resultado', 'expiraEm', 'google', 'historico', 'tirados', 'premioInfo', 'aceite', 'ausentes'])
+          && texto(d.titulo, 1, 80) && texto(d.premio, 0, 120) && texto(d.descricao, 0, 300)
+          && premioOk(d.get('premioInfo', null))
+          && d.vencedores is int && d.vencedores >= 1 && d.vencedores <= 50
+          && d.aberto is bool && d.google is bool
+          && (d.fechaEm == null || (d.fechaEm is timestamp && d.fechaEm <= request.time + dias(7) + duration.value(5, 'm')))
+          && d.expiraEm is timestamp && d.expiraEm > request.time && d.expiraEm <= request.time + dias(15)
+          && (d.resultado == null || (d.resultado is map && d.resultado.ganhadores is list && d.resultado.ganhadores.size() <= 50))
+          && d.historico is list && d.historico.size() <= 20
+          && d.tirados is list && d.tirados.size() <= 200
+          && d.get('aceite', false) is bool
+          && d.get('ausentes', []) is list && d.get('ausentes', []).size() <= 200;
+      }
+      // sortear de novo guarda o resultado anterior no histórico, que só cresce
+      function sorteouDeNovo(n, a) { return a.resultado != null && n.resultado != null && n.resultado.codigo != a.resultado.codigo; }
+      function historicoOk(n, a) {
+        return (sorteouDeNovo(n, a) && n.historico == a.historico.concat([a.resultado]))
+          || (!sorteouDeNovo(n, a) && n.historico == a.historico);
+      }
+      // quem não aceitou o prêmio a tempo: lista pública que só cresce
+      function ausentesOk(n, a) { return n.get('ausentes', []).hasAll(a.get('ausentes', [])); }
+      // a lista de quem foi tirado só cresce, de um em um
+      function tiradosOk(n, a) {
+        return n.tirados == a.tirados || (n.tirados.hasAll(a.tirados) && n.tirados.size() == a.tirados.size() + 1);
+      }
+
+      allow create: if logado()
+        && campos(request.resource.data)
+        && request.resource.data.dono == eu()
+        && request.resource.data.criadoEm == request.time
+        && request.resource.data.aberto == true
+        && request.resource.data.resultado == null
+        && request.resource.data.historico.size() == 0
+        && request.resource.data.tirados.size() == 0
+        && getAfter(/databases/$(db)/documents/donos/$(eu())).data.ultimo == request.time
+        && existsAfter(/databases/$(db)/documents/sorteios/$(sid)/privado/chave);
+      allow update: if organizador()
+        && campos(request.resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['aberto', 'fechaEm', 'resultado', 'expiraEm', 'historico', 'tirados', 'ausentes'])
+        && ausentesOk(request.resource.data, resource.data)
+        && (resource.data.resultado == null || request.resource.data.resultado != null)
+        && historicoOk(request.resource.data, resource.data)
+        && tiradosOk(request.resource.data, resource.data);
+      allow delete: if organizador();
+
+      // chave do link de organizador: só organizador lê
+      match /privado/{x} {
+        allow get: if organizador();
+        allow create: if x == 'chave' && logado()
+          && getAfter(/databases/$(db)/documents/sorteios/$(sid)).data.dono == eu()
+          && request.resource.data.keys().hasOnly(['token', 'expiraEm'])
+          && texto(request.resource.data.token, 20, 64)
+          && janela16(request.resource.data.expiraEm);
+      }
+
+      // quem abriu o link de organizador (outro navegador, o celular, um moderador)
+      match /organizadores/{uid} {
+        allow get: if logado() && eu() == uid;
+        allow create: if logado() && eu() == uid
+          && request.resource.data.keys().hasOnly(['token', 'expiraEm'])
+          && request.resource.data.token == get(/databases/$(db)/documents/sorteios/$(sid)/privado/chave).data.token
+          && janela16(request.resource.data.expiraEm);
+      }
+
+      function inscricaoAberta() {
+        let s = sorteio();
+        return s.aberto == true && s.resultado == null && (s.fechaEm == null || request.time < s.fechaEm)
+          && (s.get('google', false) == false || temGoogle());
+      }
+
+      // id do documento = conta em minúsculas: uma inscrição por conta
+      match /inscritos/{chave} {
+        allow get, list: if true;
+        allow create: if logado() && inscricaoAberta()
+          && request.resource.data.keys().hasOnly(['conta', 'em', 'uid', 'expiraEm'])
+          && texto(request.resource.data.conta, 7, 40)
+          && request.resource.data.conta.matches('^[^\\s.][^.]{1,29}[.][0-9]{4}$')
+          && request.resource.data.conta.lower() == chave
+          && request.resource.data.em == request.time
+          && request.resource.data.uid == eu()
+          && janela16(request.resource.data.expiraEm)
+          // uma inscrição por aparelho (ou por conta Google, no modo rigoroso): a marca entra junto, na mesma gravação
+          && !exists(/databases/$(db)/documents/sorteios/$(sid)/aparelhos/$(eu()))
+          && getAfter(/databases/$(db)/documents/sorteios/$(sid)/aparelhos/$(eu())).data.chave == chave;
+        // tirar alguém deixa o nome na lista pública de tirados, na mesma gravação
+        // (ou o sorteio inteiro está sendo apagado junto)
+        allow delete: if organizador()
+          && (!existsAfter(caminho())
+            || (getAfter(caminho()).data.tirados.hasAll([resource.data.conta])
+              && !sorteio().tirados.hasAll([resource.data.conta])));
+      }
+
+      // aceite do prêmio: só quem ganhou (pelo aparelho/conta que fez a inscrição) e dentro do prazo (+5 s de folga)
+      match /aceites/{chave} {
+        allow get, list: if true;
+        allow create: if logado()
+          && request.resource.data.keys().hasOnly(['em', 'expiraEm'])
+          && request.resource.data.em == request.time
+          && janela16(request.resource.data.expiraEm)
+          && get(/databases/$(db)/documents/sorteios/$(sid)/inscritos/$(chave)).data.uid == eu()
+          && get(/databases/$(db)/documents/sorteios/$(sid)/inscritos/$(chave)).data.conta in sorteio().resultado.ganhadores
+          && request.time < sorteio().resultado.prazo + duration.value(5, 's');
+      }
+
+      match /aparelhos/{uid} {
+        allow get: if logado() && eu() == uid;
+        allow create: if logado() && eu() == uid
+          && request.resource.data.keys().hasOnly(['chave', 'expiraEm'])
+          && janela16(request.resource.data.expiraEm)
+          && getAfter(/databases/$(db)/documents/sorteios/$(sid)/inscritos/$(request.resource.data.chave)).data.uid == eu();
+      }
+    }
+  }
+}

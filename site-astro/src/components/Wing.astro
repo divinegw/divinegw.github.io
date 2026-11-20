@@ -1,0 +1,23 @@
+---
+// Wing, Raid Encounter ou Fractal: faixa com nome, arte 2:1 e lista de <Boss>.
+// `arte` é um arquivo em src/assets/guias/. Sempre local: link externo (hotlink) não é aceito, para não mandar
+// o IP do leitor a outro site nem depender dele (auditoria de direitos, 18/11/2026). As capturas da Wiki
+// ficam em src/assets/guias/fractals/wings/, com a origem de cada uma na página de créditos.
+import { Image } from 'astro:assets';
+import { imagem } from '../lib/arquivos';
+
+interface Props { nome: string; num?: string; arte: string; alt: string; id?: string; sumario?: string }
+const { nome, num, arte, alt, id } = Astro.props;
+const img = imagem(arte);
+const sizes = '(min-width: 800px) 760px, 100vw';
+const widths = [800, 1280].filter((w) => w < img.width).concat(img.width); // 800 e 1280px, como as miniaturas que vinham da Wiki
+---
+<!-- id no bloco, não no nome: o link do sumário cai no topo da arte -->
+<div class="wing" id={id}>
+  <div class="wing-head">
+    <span>{nome}</span>
+    {num && <span class="wing-num">{num}</span>}
+  </div>
+  <Image class="wing-img" src={img} alt={alt} sizes={sizes} widths={widths} />
+  <div class="bosses"><slot /></div>
+</div>

@@ -1,0 +1,31 @@
+---
+// Etiqueta de função (role) de squad: ícone + nome escrito. A cor não carrega significado:
+// na Fase 1 o usuário dispensou cores por função (a comunidade não tem padrão). O que diferencia
+// é o ícone: o boon oficial da Wiki para quem dá Quickness/Alacrity, Lucide para o resto.
+//   papel: dps · healer · tank · kiter     boon: quickness · alacrity (opcional; soma o ícone do boon)
+//   classe: profissão (opcional): ponto na cor da classe + o nome da classe escrito (a cor nunca vem sozinha)
+//   <Funcao papel="dps" boon="quickness" />                       → "Quickness DPS"
+//   <Funcao papel="healer" boon="alacrity" classe="ranger" />     → "Alacrity Healer · Ranger"
+import { Image } from 'astro:assets';
+import { lucide } from '../lib/lucide';
+import { icone } from '../lib/arquivos';
+
+type Papel = 'dps' | 'healer' | 'tank' | 'kiter';
+type Classe = 'guardian' | 'revenant' | 'warrior' | 'engineer' | 'ranger' | 'thief' | 'elementalist' | 'mesmer' | 'necromancer';
+interface Props { papel: Papel; boon?: 'quickness' | 'alacrity'; classe?: Classe; como?: 'span' | 'li' }
+const { papel, boon, classe, como: Tag = 'span' } = Astro.props;
+const NOMES: Record<Papel, string> = { dps: 'DPS', healer: 'Healer', tank: 'Tank', kiter: 'Kiter' };
+const ICONES: Record<Papel, string> = { dps: 'swords', healer: 'heart', tank: 'shield', kiter: 'wind' }; // os mesmos do guia de Endgame
+const BOONS = { quickness: 'Quickness', alacrity: 'Alacrity' };
+const padrao = boon ? `${BOONS[boon]} ${NOMES[papel]}` : NOMES[papel];
+const texto = Astro.slots.has('default') ? (await Astro.slots.render('default')).trim() : padrao;
+const img = boon ? icone(boon) : undefined;
+const nomeClasse = classe ? classe[0].toUpperCase() + classe.slice(1) : '';
+---
+<Tag class="funcao">
+  {img
+    ? <Image src={img} width={32} height={32} alt="" layout="fixed" class="funcao-ico" />
+    : <span class="funcao-ico" set:html={lucide(ICONES[papel])} />}
+  <span set:html={texto} />
+  {classe && <span class="funcao-classe" style={`--fc:var(--prof-${classe});--fc-text:var(--prof-${classe}-text)`}>{nomeClasse}</span>}
+</Tag>

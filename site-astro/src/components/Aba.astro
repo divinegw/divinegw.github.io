@@ -1,0 +1,14 @@
+---
+// Um painel de <Abas>. O <Abas> lê o título daqui e monta o botão da aba.
+//   rotulo: nome da aba (ex.: "Challenge Mode") · icone: arquivo em src/assets/icones/ (opcional)
+// Sem JavaScript e no PDF, os painéis aparecem um embaixo do outro, cada um com o seu título.
+import { Image } from 'astro:assets';
+import { icone as achar } from '../lib/arquivos';
+interface Props { rotulo: string; icone?: string }
+const { rotulo, icone } = Astro.props;
+const img = icone ? achar(icone) : undefined;
+---
+<div class="aba-painel" data-aba>
+  <p class="aba-titulo">{img && <Image src={img} width={32} height={32} alt="" layout="fixed" />}<span>{rotulo}</span></p>
+  <div class="aba-corpo"><slot /></div>
+</div>

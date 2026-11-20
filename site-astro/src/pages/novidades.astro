@@ -1,0 +1,81 @@
+---
+// Página de Novidades (changelog): /novidades.html, no padrão "diário de campo" (Fase 6).
+// Topo: faixa de arte (a da novidade mais nova) com o título. Cada entrada: a data grande em display dourado numa
+// coluna à esquerda (presa ao rolar no desktop), separada por um fio de ouro; à direita o título, o resumo, a
+// contagem por tipo (Selo com número) e as mudanças agrupadas por guia (ícone do guia + nome), cada uma numa linha
+// com o tipo discreto, o texto e uma seta; o link sublinha só no hover.
+// Os dados ficam em src/novidades.ts.
+import { Image } from 'astro:assets';
+import Cabeca from '../components/Cabeca.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Selo from '../components/Selo.astro';
+import Rodape from '../components/Rodape.astro';
+import { NOVIDADES, dataCurta, recente, expiraNovo, type Novidade, type TipoMudanca } from '../novidades';
+import { GUIAS } from '../site';
+import { icone, imagem } from '../lib/arquivos';
+import { lucide } from '../lib/lucide';
+
+const areas = [...GUIAS.map((g) => ({ id: g.guia, nome: g.nome, marca: g.marca })), { id: 'site', nome: 'Site', marca: 'monitor' }];
+const grupos = (n: Novidade) =>
+  areas.map((a) => ({ ...a, itens: n.mudancas.filter((m) => m.area === a.id) })).filter((g) => g.itens.length);
+const TIPOS: TipoMudanca[] = ['novo', 'atualizado', 'corrigido'];
+const contagem = (n: Novidade) =>
+  TIPOS.map((t) => [t, n.mudancas.filter((m) => m.tipo === t).length] as const).filter(([, q]) => q > 0);
+const partes = (iso: string) => { const [d, m, a] = dataCurta(iso).split(' '); return { dia: `${d} ${m.replace('.', '')}`, ano: a }; };
+const topo = NOVIDADES[0];
+const arte = imagem(topo.arte ?? 'endgame/arte.webp');
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca titulo="Novidades" descricao="O que mudou nos guias da guilda DIVINE: conteúdo novo, atualizações e correções, da mais nova para a mais antiga." caminho="/novidades.html" />
+</head>
+<body>
+<div class="pagina">
+<Cabecalho atual="novidades" aviso="pagina" />
+<header class="novidades-topo">
+  <Image class="novidades-arte" src={arte} alt="" widths={[640, 1024, 1600, 2560].filter((w) => w <= arte.width)} sizes="100vw" loading="eager" fetchpriority="high" layout="full-width" style={`object-position:${topo.foco ?? '50% 40%'}`} />
+  <div class="novidades-topo-texto">
+    <h1>Novidades</h1>
+    <p>Aqui a gente conta tudo o que mudou nos guias, da novidade mais recente para a mais antiga. Clique num item para ir direto ao ponto.</p>
+  </div>
+</header>
+<main id="conteudo" class="novidades">
+  <ol class="novidades-lista">
+    {NOVIDADES.map((n) => {
+      const { dia, ano } = partes(n.data);
+      return (
+        <li class="novidade" id={n.id}>
+          <p class="novidade-data"><time datetime={n.data}><b>{dia}</b> <span>{ano}</span></time>{recente(n) && <Selo tipo="novo" expira={expiraNovo(n)} />}</p>
+          <article aria-labelledby={`titulo-${n.id}`}>
+            <h2 id={`titulo-${n.id}`}>{n.titulo}</h2>
+            <p class="novidade-resumo">{n.resumo}</p>
+            <ul class="novidade-contagem" aria-label="Mudanças por tipo">
+              {contagem(n).map(([t, q]) => <li><Selo tipo={t} quantidade={q} /></li>)}
+            </ul>
+            {grupos(n).map((g) => {
+              const img = icone(g.marca);
+              return (
+                <div class="novidade-grupo">
+                  <h3 id={`${n.id}-${g.id}`}>
+                    <span class="novidade-grupo-ico" aria-hidden="true">{img ? <Image src={img} width={16} height={16} alt="" layout="fixed" /> : <Fragment set:html={lucide(g.marca)} />}</span>
+                    {g.nome}
+                  </h3>
+                  <ul>
+                    {g.itens.map((m) => m.href
+                      ? <li><a href={m.href}><Selo tipo={m.tipo} variante="discreto" /><span class="novidade-texto">{m.texto}</span><Fragment set:html={lucide('arrow-right')} /></a></li>
+                      : <li><span class="novidade-linha"><Selo tipo={m.tipo} variante="discreto" /><span class="novidade-texto">{m.texto}</span></span></li>)}
+                  </ul>
+                </div>
+              );
+            })}
+          </article>
+        </li>
+      );
+    })}
+  </ol>
+</main>
+</div>
+<Rodape atalhos />
+</body>
+</html>

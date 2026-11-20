@@ -1,0 +1,446 @@
+---
+// Vitrine, Fase 3: componentes de guia de GW2. Exemplos reais, tirados dos guias (src/content/guias/).
+// Mesma estrutura da Fase 2: ao vivo (segue o tema do topo), estados nos dois temas (painéis inert), uso e regras.
+import Estados from './Estados.astro';
+import Encontro from '../Encontro.astro';
+import Abas from '../Abas.astro';
+import Aba from '../Aba.astro';
+import Funcao from '../Funcao.astro';
+import Efeito from '../Efeito.astro';
+import LinhaDoTempo from '../LinhaDoTempo.astro';
+import Marco from '../Marco.astro';
+import Banner from '../Banner.astro';
+import Recurso from '../Recurso.astro';
+import Mapa from '../Mapa.astro';
+import Dungeon from '../Dungeon.astro';
+import Info from '../Info.astro';
+import Path from '../Path.astro';
+import Boss from '../Boss.astro';
+import FichaCmLado from '../FichaCmLado.astro';
+import FaixaNovidade from '../FaixaNovidade.astro';
+import { lucide } from '../../lib/lucide';
+import { ultimaNovidade, dataCurta } from '../../novidades';
+import { Image } from 'astro:assets';
+import { icone } from '../../lib/arquivos';
+import { EFEITOS } from '../../lib/efeitos';
+
+const st = (e: string) => (e === 'hover' ? 'is-hover' : e === 'foco' ? 'is-foco' : undefined);
+const UNICO = { normal: 'Único estado: não é clicável' };
+const W = 'https://wiki.guildwars2.com/wiki/';
+const cmIcone = icone('challenge-mode');
+const nQtd = ultimaNovidade.mudancas.length;
+// textos reais do guia de Raids (raids.mdx) para a ficha de CM
+const mursaat = ['A cada 30 segundos, alguns quadrados do chão acendem em azul por 4 segundos. Quem não estiver em cima de um quadrado azul quando o tempo acaba, morre.', 'Cada jogador vê um desenho diferente, então não adianta seguir o colega: olhe o seu chão.'];
+const mursaatDica = 'Sempre existe um quadrado azul encostado no seu, às vezes na diagonal. Um passo costuma bastar.';
+const olc = ['As fases em que os três bosses têm defiance bar ao mesmo tempo acontecem em 100%, 60% e 20% de vida.', 'A ordem das barras muda a cada vez, e as AoEs que mostram qual quebrar primeiro ficam na tela só por alguns segundos. Alguém do squad precisa ler e avisar rápido.'];
+
+// guia de Raids: Wings em ordem, com o que o próprio guia diz de cada uma
+const wings: [string, string, string, string[]][] = [
+  ['Wing 1', 'Spirit Vale', 'spirit-vale', ['Heart of Thorns', '4 encontros', 'sem CM']],
+  ['Wing 2', 'Salvation Pass', 'salvation-pass', ['Heart of Thorns', '3 encontros', 'sem CM']],
+  ['Wing 3', 'Stronghold of the Faithful', 'stronghold-of-the-faithful', ['Heart of Thorns', '4 encontros', 'CM: Keep Construct']],
+  ['Wing 4', 'Bastion of the Penitent', 'bastion-of-the-penitent', ['Heart of Thorns', '4 encontros', 'CM em todos']],
+  ['Wing 5', 'Hall of Chains', 'hall-of-chains', ['Path of Fire', '4 encontros', 'CM: Soulless Horror e Dhuum']],
+  ['Wing 6', 'Mythwright Gambit', 'mythwright-gambit', ['Path of Fire', '3 encontros', 'CM em todos']],
+  ['Wing 7', 'The Key of Ahdashim', 'the-key-of-ahdashim', ['Path of Fire', '3 encontros', 'CM em todos']],
+  ['Wing 8', 'Mount Balrior', 'mount-balrior', ['Janthir Wilds', '3 encontros', 'CM em todos', 'LM: Ura']],
+];
+// guia de Fractals: tabela "Tiers e escalas"
+const tiers: [string, string, string[]][] = [
+  ['Tier 1', 'Initiate', ['Níveis 1 a 25', '0 instabilidades', 'AR 17']],
+  ['Tier 2', 'Adept', ['Níveis 26 a 50', '1 instabilidade', 'AR 61']],
+  ['Tier 3', 'Expert', ['Níveis 51 a 75', '2 instabilidades', 'AR 106']],
+  ['Tier 4', 'Master', ['Níveis 76 a 100', '3 instabilidades', 'AR 150']],
+];
+// guia de Endgame: Boon Corrupt
+const corrupt: [string, string][] = [['aegis', 'burning'], ['alacrity', 'chilled'], ['fury', 'blinded'], ['might', 'weakness'], ['protection', 'vulnerability'],
+  ['quickness', 'slow'], ['regeneration', 'poisoned'], ['resistance', 'chilled'], ['resolution', 'confusion'], ['stability', 'fear'], ['swiftness', 'crippled'], ['vigor', 'bleeding']];
+const boons = Object.keys(EFEITOS).filter((k) => EFEITOS[k].tipo === 'Boon');
+const conditions = Object.keys(EFEITOS).filter((k) => EFEITOS[k].tipo === 'Condition');
+
+const modos = ['normal-mode', 'challenge-mode', 'legendary-mode'].map((n) => icone(n)!);
+const abasEx = ['Normal Mode', 'Challenge Mode', 'Legendary Mode'];
+
+const uso = {
+  encontro: `<Encontro nome="Vale Guardian" arte="raids/spirit-vale.jpg" alt="Spirit Vale"
+  onde={['Wing 1', 'Boss 1']} modos={['normal']} mecanicas={['Tank', 'Círculo verde', 'Seekers', 'Split em 3']}
+  video="https://www.youtube.com/watch?v=…" guia="https://snowcrows.com/…" wiki="https://wiki.guildwars2.com/wiki/Vale_Guardian">
+
+Primeiro boss da Wing 1. As Wings 1 e 2 não têm Challenge Mode.
+
+</Encontro>`,
+  abas: `<Abas rotulo="Modos de dificuldade das Raids">
+<Aba rotulo="Normal Mode" icone="normal-mode">
+
+Modo padrão das Raids…
+
+</Aba>
+<Aba rotulo="Challenge Mode" icone="challenge-mode">…</Aba>
+<Aba rotulo="Legendary Mode" icone="legendary-mode">…</Aba>
+</Abas>`,
+  funcao: `<Funcao papel="dps" />                                   DPS
+<Funcao papel="dps" boon="quickness" />                   Quickness DPS
+<Funcao papel="healer" boon="quickness" classe="guardian" />   Quickness Healer · Guardian
+<Funcao papel="dps">Condition DPS</Funcao>               texto próprio
+<ul class="funcoes"><Funcao como="li" papel="tank" /> …</ul>   várias, em lista`,
+  efeito: `um provedor de <Efeito nome="quickness" /> e outro de <Efeito nome="alacrity" />
+<Efeito nome="might" texto="25 stacks de Might" />     texto próprio
+<Efeito nome="fury" soIcone />                        só o ícone (o nome vira o alt)
+<Efeito nome="aegis" semBalao />                      sem balão (tabelas)`,
+  linha: `<LinhaDoTempo rotulo="Raid Wings em ordem">
+<Marco rotulo="Wing 1" nome="Spirit Vale" href="#spirit-vale" detalhes={['Heart of Thorns', '4 encontros', 'sem CM']} />
+…
+</LinhaDoTempo>
+
+<LinhaDoTempo rotulo="Tiers das Fractals" direcao="horizontal">
+<Marco rotulo="Tier 1" nome="Initiate" detalhes={['Níveis 1 a 25', '0 instabilidades', 'AR 17']} />
+…
+</LinhaDoTempo>`,
+  banner: `<Banner imagem="raids/portal-de-raids-no-aerodrome.jpg" alt="Portal de Raids no Lion's Arch Aerodrome"
+  legenda="O portal das Raids fica no Lion's Arch Aerodrome." />`,
+  recurso: `<Recurso nome="GW2 Wiki" url="https://wiki.guildwars2.com/">Referência principal…</Recurso>
+<Recurso nome="Elite Insights" url="https://github.com/…" novo>Parser oficial…</Recurso>`,
+  mapa: `<Mapa legenda="Boon Corrupt: cada boon vira uma condition" de="Boon" para="Condition"
+  pares={[['aegis', 'burning'], ['alacrity', 'chilled'], …]} />`,
+  dungeon: `<Dungeon nome="ASCALONIAN CATACOMBS" niveis="Story 30, Explo 35" arte="dungeons/ascalonian-catacombs.jpg" alt="Ascalonian Catacombs">
+<Info>**Inimigos:** Ghosts</Info>
+<Info>**Local:** Plains of Ashford</Info>
+<Path nome="Story" video="https://www.youtube.com/watch?v=…"/>
+<Path nome="Path 1" video="https://www.youtube.com/watch?v=…"/>
+</Dungeon>`,
+  fichaCm: `<Boss nome="Mursaat Overseer" video="…" cm="…" guia="…" wiki="…" cmVida="22 → 30 milhões">
+
+- A cada 30 segundos, alguns quadrados do chão acendem em azul…
+- Cada jogador vê um desenho diferente…
+
+> **Dica:** Sempre existe um quadrado azul encostado no seu…
+
+Guia em texto: [Snow Crows](https://…).   (parágrafo solto no fim: vira nota)
+
+</Boss>
+cmLimite="13 min"   (tempo limite, no lugar ou junto de cmVida)`,
+  novidades: `// src/novidades.ts: a mais nova em primeiro; um id novo reacende o sino e o balão
+{ id: '2026-11-17-challenge-modes', data: '2026-11-17', titulo: '…', resumo: '…',
+  icone: 'challenge-mode', arte: 'raids/arte.jpg', foco: '50% 30%',
+  mudancas: [{ tipo: 'novo', area: 'raids', texto: '…', href: '/guias/raids.html#…' }] }
+
+<Cabecalho atual="raids" aviso />   (o layout Guia.astro já põe: ponto em "Novidades" + balão)
+<FaixaNovidade />                                      (home, acima de "Comece por aqui")`,
+};
+---
+<!-- 20 ENCONTRO -->
+<section class="page" aria-labelledby="encontro">
+  <div class="titulo-secao"><h2 class="section" id="encontro" data-num="20">Card de boss</h2></div>
+  <p class="section-sub">Um boss ou encontro: a arte 2:1 com o nome por cima (a mesma família da Wing), os modos que ele tem, as mecânicas que o squad precisa saber, um resumo e os vídeos. Sem arte, o nome fica no topo.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <Encontro nome="Vale Guardian" arte="raids/spirit-vale.jpg" alt="Spirit Vale" onde={['Wing 1', 'Boss 1']} modos={['normal']}
+    mecanicas={['Tank', 'Círculo verde', 'Seekers', 'Split em 3']}
+    video="https://www.youtube.com/watch?v=qtzMDCVHlLg" guia="https://snowcrows.com/guides/raids/spirit-vale/vale-guardian" wiki={`${W}Vale_Guardian`}>
+    <p>Primeiro boss da Wing 1. As Wings 1 e 2 não têm Challenge Mode.</p>
+  </Encontro>
+  <Encontro nome="Ura, the Steamshrieker" arte="raids/mount-balrior.jpg" alt="Mount Balrior" onde={['Wing 8', 'Boss 3']} modos={['normal', 'cm', 'lm']}
+    video="https://www.youtube.com/watch?v=zu2ps3YZtpE" wiki={`${W}Ura,_the_Steamshrieker`}>
+    <p>Um dos três encontros com Legendary Mode, escolhido no mesmo Challenge Mote do CM.</p>
+  </Encontro>
+  <h3 class="ds-h3">Sem arte</h3>
+  <Encontro nome="Old Lion's Court" onde={['Living World Season 1']} modos={['normal', 'cm']}
+    video="https://www.youtube.com/watch?v=q0gDvzZ3Gtw" guia="https://snowcrows.com/guides/strikes/old-lions-court-cm" wiki={`${W}Old_Lion's_Court`} />
+  <h3 class="ds-h3">Nos dois temas</h3>
+  <Estados estados={['normal']} nomes={{ normal: 'Os botões seguem os estados de Botões' }} class="ds-largo" linhas={[{ id: 'e' }]}>
+    {() => <Encontro nome="Ura, the Steamshrieker" arte="raids/mount-balrior.jpg" alt="Mount Balrior" onde={['Wing 8', 'Boss 3']} modos={['normal', 'cm', 'lm']} video="#" wiki="#"><p>Um dos três encontros com Legendary Mode.</p></Encontro>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.encontro}</code></pre>
+  <ul class="ds-regras">
+    <li>O nome é um <code>h3</code> e entra no sumário com o <code>id</code> (como a Wing). "Vídeo" é o botão principal; Vídeo do CM, Guia e Wiki são secundários.</li>
+    <li>Modos (a dificuldade que o encontro oferece) levam o ícone oficial da Wiki e o nome escrito. Mecânicas são chips: curtas, sem frase.</li>
+    <li>Cada botão diz de quem é para o leitor de tela: "Vídeo de Vale Guardian". As etiquetas são listas dentro de uma <code>&lt;dl&gt;</code> (Modos, Mecânicas).</li>
+    <li>Para listar vários bosses de uma Wing sem arte própria, continue usando as linhas <code>&lt;Boss&gt;</code> dentro da <code>&lt;Wing&gt;</code>.</li>
+  </ul>
+</section>
+
+<!-- 21 ABAS -->
+<section class="page" aria-labelledby="abas">
+  <div class="titulo-secao"><h2 class="section" id="abas" data-num="21">Abas</h2></div>
+  <p class="section-sub">Para a mesma coisa em versões que se excluem, como Normal, CM e Legendary Mode: o leitor vê só a que interessa. A aba aberta ganha a barra de ouro do sumário.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <Abas rotulo="Modos de dificuldade das Raids">
+    <Aba rotulo="Normal Mode" icone="normal-mode"><p>Modo padrão das Raids, sem efeitos adicionais aos jogadores e sem mudanças nas mecânicas dos bosses, com as recompensas básicas.</p></Aba>
+    <Aba rotulo="Challenge Mode" icone="challenge-mode"><p>Modo desafio habilitado antes de cada boss, no <b>Challenge Mote</b>. Altera vida do boss e algumas mecânicas, com recompensas superiores.</p><p>Recompensa extra: uma vez por boss por semana, 2 de gold, 10 Magnetite Shards, experiência e uma peça exótica, somadas às do Normal Mode.</p></Aba>
+    <Aba rotulo="Legendary Mode" icone="legendary-mode"><p>Versão ainda mais difícil do desafio. Poucas mecânicas mudam, mas a vida do boss é significativamente maior. Recompensa: título colorido.</p><p>Existe em Ura (Mount Balrior), Cerus (Temple of Febe) e Vloxx (Nexus of Eternity).</p></Aba>
+  </Abas>
+  <h3 class="ds-h3">Estados</h3>
+  <Estados estados={['normal', 'hover', 'foco']} nomes={{ normal: 'Normal (a 1ª aberta)', hover: 'Hover na 2ª', foco: 'Foco na 2ª (teclado)' }} class="ds-largo" linhas={[{ id: 'a' }]}>
+    {(e: string) => (
+      <div class="abas-lista">
+        {abasEx.map((t, i) => <button type="button" class:list={['aba', i === 1 && st(e)]} aria-selected={i === 0 ? 'true' : 'false'}><Image src={modos[i]} width={32} height={32} alt="" layout="fixed" />{t}</button>)}
+      </div>
+    )}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.abas}</code></pre>
+  <ul class="ds-regras">
+    <li>Padrão WAI-ARIA de abas: <code>tablist</code>, <code>tab</code> com <code>aria-selected</code> e <code>aria-controls</code>, <code>tabpanel</code> com <code>aria-labelledby</code>.</li>
+    <li>Teclado: Tab entra na aba aberta; ← e → trocam (dão a volta), Home e End vão à primeira e à última; Tab de novo vai para o painel.</li>
+    <li>Sem JavaScript e no PDF, as abas somem e os painéis aparecem um embaixo do outro, cada um com o seu título. Nada fica escondido.</li>
+    <li>Abas dentro de abas não funcionam. Se o conteúdo é para ler inteiro, não use abas.</li>
+  </ul>
+</section>
+
+<!-- 22 FUNÇÕES -->
+<section class="page" aria-labelledby="funcoes">
+  <div class="titulo-secao"><h2 class="section" id="funcoes" data-num="22">Etiquetas de função</h2></div>
+  <p class="section-sub">A role de cada um no squad. As cores por função saíram na Fase 1 (a comunidade não tem padrão): quem diferencia é o ícone, o boon oficial da Wiki para quem dá Quickness ou Alacrity. A cor que fica é a da profissão, sempre com o nome.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <ul class="funcoes">
+    <Funcao como="li" papel="dps" />
+    <Funcao como="li" papel="dps" boon="quickness" />
+    <Funcao como="li" papel="dps" boon="alacrity" />
+    <Funcao como="li" papel="healer" />
+    <Funcao como="li" papel="tank" />
+    <Funcao como="li" papel="kiter" />
+  </ul>
+  <h3 class="ds-h3">Com a profissão</h3>
+  <ul class="funcoes">
+    <Funcao como="li" papel="healer" boon="quickness" classe="guardian" />
+    <Funcao como="li" papel="dps" boon="quickness" classe="mesmer" />
+  </ul>
+  <h3 class="ds-h3">Nos dois temas</h3>
+  <Estados estados={['normal']} nomes={UNICO} linhas={[{ id: 'f' }]}>
+    {() => <div class="ds-fila"><Funcao papel="dps" boon="alacrity" /><Funcao papel="healer" boon="quickness" classe="guardian" /><Funcao papel="tank" /></div>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.funcao}</code></pre>
+  <ul class="ds-regras">
+    <li>Papéis: <code>dps</code>, <code>healer</code>, <code>tank</code>, <code>kiter</code>, com os ícones do guia de Endgame. <code>boon</code> soma Quickness ou Alacrity ao nome e troca o ícone.</li>
+    <li>O ícone é decorativo (o nome está escrito). A profissão leva ponto (≥3:1) e nome no tom de texto da classe (≥4.5:1).</li>
+  </ul>
+</section>
+
+<!-- 23 BOONS E CONDITIONS -->
+<section class="page" aria-labelledby="efeitos">
+  <div class="titulo-secao"><h2 class="section" id="efeitos" data-num="23">Boons e conditions</h2></div>
+  <p class="section-sub">O ícone oficial da Wiki no meio do texto, com o nome ao lado e a definição no mesmo balão do Termo. As definições resumem o guia de Endgame.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <p>Cada grupo funciona como uma Party isolada e deve permanecer junto, tendo um provedor de <Efeito nome="quickness" /> e outro de <Efeito nome="alacrity" />.</p>
+  <p>Healer: foco em prover boons ao grupo: <Efeito nome="might" soIcone /> <Efeito nome="protection" soIcone /> <Efeito nome="fury" soIcone /> (só os ícones, cada um com o nome no balão e no texto alternativo).</p>
+  <h3 class="ds-h3">Todos</h3>
+  <p class="ds-linha-nome">Boons</p>
+  <ul class="ds-efeitos">{boons.map((b) => <li><Efeito nome={b} /></li>)}</ul>
+  <p class="ds-linha-nome">Conditions</p>
+  <ul class="ds-efeitos">{conditions.map((c) => <li><Efeito nome={c} /></li>)}</ul>
+  <h3 class="ds-h3">Estados</h3>
+  <Estados estados={['normal', 'hover', 'foco', 'aberto']} nomes={{ aberto: 'Tocado (fica aberto)' }} class="ds-alto" linhas={[{ id: 'b' }]}>
+    {(e: string) => <p class="ds-frase">Um provedor de <Efeito nome="quickness" estado={e === 'normal' ? undefined : (e as 'hover' | 'foco' | 'aberto')} /> por grupo.</p>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.efeito}</code></pre>
+  <ul class="ds-regras">
+    <li>Com o nome escrito, o ícone tem <code>alt=""</code>; só o ícone, o <code>alt</code> é o nome. O balão diz o nome e se é Boon ou Condition.</li>
+    <li>Teclado, toque, Esc e leitor de tela: igual ao Termo. No PDF, ícone e nome, sem balão.</li>
+    <li>Nomes como na Wiki (Blinded, Chilled, Crippled, Poisoned). Ícones em <code>src/assets/icones/</code>; definições em <code>src/lib/efeitos.ts</code>.</li>
+  </ul>
+</section>
+
+<!-- 24 LINHA DO TEMPO -->
+<section class="page" aria-labelledby="linha">
+  <div class="titulo-secao"><h2 class="section" id="linha" data-num="24">Linha do tempo</h2></div>
+  <p class="section-sub">Para sequências em que a ordem é informação: as Wings em ordem de progressão, os Tiers do mais fácil ao mais difícil. Cada nó de ouro é um marco; o nome pode levar à seção do guia.</p>
+  <h3 class="ds-h3">Raid Wings (vertical)</h3>
+  <LinhaDoTempo rotulo="Raid Wings em ordem">
+    {wings.map(([r, n, id, d]) => <Marco rotulo={r} nome={n} href={`/guias/raids.html#${id}`} detalhes={d} />)}
+  </LinhaDoTempo>
+  <h3 class="ds-h3">Tiers das Fractals (horizontal)</h3>
+  <LinhaDoTempo rotulo="Tiers das Fractals" direcao="horizontal">
+    {tiers.map(([r, n, d]) => <Marco rotulo={r} nome={n} detalhes={d} />)}
+  </LinhaDoTempo>
+  <h3 class="ds-h3">Nos dois temas</h3>
+  <Estados estados={['normal', 'hover']} nomes={{ hover: 'Hover no nome (link)' }} class="ds-largo" linhas={[{ id: 'l' }]}>
+    {(e: string) => (
+      <ol class="linha" aria-label="Exemplo">
+        <li class="marco"><span class="marco-rotulo">Wing 1</span><div class="marco-corpo"><p class="marco-nome"><a href="#linha" class={st(e)}>Spirit Vale</a></p><ul class="marco-detalhes"><li class="chip chip-suave">4 encontros</li></ul></div></li>
+        <li class="marco"><span class="marco-rotulo">Wing 2</span><div class="marco-corpo"><p class="marco-nome"><a href="#linha">Salvation Pass</a></p><ul class="marco-detalhes"><li class="chip chip-suave">3 encontros</li></ul></div></li>
+      </ol>
+    )}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.linha}</code></pre>
+  <ul class="ds-regras">
+    <li>É uma lista ordenada (<code>&lt;ol&gt;</code>) com nome para o leitor de tela; nó e trilho são decoração.</li>
+    <li>Horizontal só até 4 marcos e só acima de 640px; no celular e no PDF vira vertical.</li>
+  </ul>
+</section>
+
+<!-- 25 BANNER -->
+<section class="page" aria-labelledby="banner">
+  <div class="titulo-secao"><h2 class="section" id="banner" data-num="25">Banner com revelação</h2></div>
+  <p class="section-sub">Arte 2:1, a proporção do herói, das Wings e do card com imagem. Ao entrar na tela, o recorte abre e a arte assenta (referência: Cartier, só a revelação). Role a página devagar para ver.</p>
+  <Banner imagem="raids/portal-de-raids-no-aerodrome.jpg" alt="Portal de Raids no Lion's Arch Aerodrome" legenda="O portal das Raids fica no Lion's Arch Aerodrome." />
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.banner}</code></pre>
+  <ul class="ds-regras">
+    <li>Só CSS: <code>animation-timeline: view()</code>, ligado à rolagem e não ao relógio. Para no meio se você para de rolar.</li>
+    <li>A imagem já nasce visível. Sem suporte no navegador, com "reduzir movimento" ligado no sistema e no PDF, ela só aparece, parada.</li>
+    <li>Um banner por bloco, no máximo. Revelação em tudo vira ruído.</li>
+  </ul>
+</section>
+
+<!-- 26 RECURSO -->
+<section class="page" aria-labelledby="recurso">
+  <div class="titulo-secao"><h2 class="section" id="recurso" data-num="26">Card de recurso</h2></div>
+  <p class="section-sub">Um site da lista de Sites úteis: nome, uma frase e a URL. O card inteiro é clicável e abre o site em nova aba.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <div class="ds-recursos">
+    <Recurso nome="GW2 Wiki" url="https://wiki.guildwars2.com/">Referência principal para itens, achievements, eventos, coleções, mapas, NPCs, mecânicas e praticamente tudo do jogo.</Recurso>
+    <Recurso nome="Elite Insights" url="https://github.com/baaron4/GW2-Elite-Insights-Parser/releases" novo>Parser oficial dos logs do ArcDPS (.evtc/.zevtc): gera um relatório HTML detalhado da luta.</Recurso>
+  </div>
+  <h3 class="ds-h3">Estados</h3>
+  <Estados estados={['normal', 'hover', 'foco']} class="ds-largo" linhas={[{ id: 'r' }]}>
+    {(e: string) => <Recurso nome="dps.report" url="https://dps.report/" class={st(e)}>Hospedagem e análise de logs do ArcDPS.</Recurso>}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.recurso}</code></pre>
+  <ul class="ds-regras">
+    <li>O nome é um <code>h3</code>: com o leitor de tela, dá para pular de site em site pelos títulos.</li>
+    <li>O link é a URL, esticada sobre o card. O leitor de tela ouve "GW2 Wiki: https://wiki.guildwars2.com/ (abre em nova aba)". O anel de foco contorna o card inteiro.</li>
+    <li>Em telas de 900px ou mais e no PDF, os recursos de um capítulo ficam em 2 colunas.</li>
+  </ul>
+</section>
+
+<!-- 27 MAPA -->
+<section class="page" aria-labelledby="mapa">
+  <div class="titulo-secao"><h2 class="section" id="mapa" data-num="27">Tabela de mapa</h2></div>
+  <p class="section-sub">Quando cada linha diz que uma coisa vira outra, como no Boon Corrupt do Endgame. É a Tabela da Fase 2 com uma coluna de seta, e substitui o <code>&lt;table class="map"&gt;</code> antigo.</p>
+  <Mapa legenda="Boon Corrupt: cada boon vira uma condition" de="Boon" para="Condition" pares={corrupt} />
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.mapa}</code></pre>
+  <ul class="ds-regras">
+    <li>Id de boon ou condition vira ícone + nome (sem balão: seriam 12 balões numa tabela). Outro texto sai como está.</li>
+    <li>A seta é um ícone; o leitor de tela ouve "Aegis, vira, Burning". A coluna tem nome só para leitor de tela ("Relação").</li>
+    <li>Cabe em 390px. Se um dia não couber, rola dentro da própria caixa, como a Tabela.</li>
+  </ul>
+</section>
+
+<!-- 28 DUNGEON / PATH -->
+<section class="page" aria-labelledby="dungeon">
+  <div class="titulo-secao"><h2 class="section" id="dungeon" data-num="28">Dungeon e Path</h2></div>
+  <p class="section-sub">Uma dungeon: arte 2:1 com o nome e os níveis por cima, as informações de acesso e uma linha por path com o vídeo. Na Fase 3 o nome virou título (h3) e os níveis, uma lista.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <Dungeon nome="ASCALONIAN CATACOMBS" niveis="Story 30, Explo 35" arte="dungeons/ascalonian-catacombs.jpg" alt="Ascalonian Catacombs" id="ex-ascalonian-catacombs">
+    <Info><b>Inimigos:</b> Ghosts</Info>
+    <Info><b>Local:</b> Plains of Ashford</Info>
+    <Info><b>Waypoint:</b> <a href="https://wiki.guildwars2.com/wiki/Phasmatis_Corridor#Ascalonian_Catacombs_Waypoint">Ascalonian Catacombs Waypoint</a></Info>
+    <Path nome="Story" video="https://www.youtube.com/watch?v=o-853dj6hUg" />
+    <Path nome="Path 1" video="https://www.youtube.com/watch?v=YUi-jNv0E9E" />
+    <Path nome="Path 2" video="https://www.youtube.com/watch?v=FI3Aw8XNN7s" />
+    <Path nome="Path 3" video="https://www.youtube.com/watch?v=WMhBseWHUJg" />
+  </Dungeon>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.dungeon}</code></pre>
+  <ul class="ds-regras">
+    <li>Mesma família da Wing e do card de boss: arte 2:1, nome em display sobre o degradê, chips sobre a arte.</li>
+    <li>O nome é um <code>h3</code> com o <code>id</code> da âncora (o sumário e os links do Discord continuam iguais).</li>
+    <li>Path aceita <code>video</code>, <code>cm</code>, <code>guia</code> e <code>wiki</code>; o botão de vídeo segue os estados de Botões (pequeno, secundário).</li>
+  </ul>
+</section>
+
+
+<!-- 29 FICHA DE CM -->
+<section class="page" aria-labelledby="ficha-cm">
+  <div class="titulo-secao"><h2 class="section" id="ficha-cm" data-num="29">Ficha de CM do boss</h2></div>
+  <p class="section-sub">O que muda no Challenge Mode de um boss, dentro do próprio boss e recolhido. O botão "CM" da linha vira um botão dividido dourado: "▶ CM" abre o vídeo, "O que muda" abre a ficha logo embaixo. Usado em 25 bosses de Raids e em 7 Fractals.</p>
+  <h3 class="ds-h3">Ao vivo</h3>
+  <div class="card ds-bosses"><div class="bosses">
+    <Boss nome="Mursaat Overseer" video="https://www.youtube.com/watch?v=iHMzAPWoLDU" cm="https://www.youtube.com/watch?v=Hwd7v0Vr2eY&t=94s" guia="https://snowcrows.com/guides/raids/bastion-penitent/mursaat-overseer" wiki={`${W}Mursaat_Overseer`} cmVida="22 → 30 milhões">
+      <ul>{mursaat.map((m) => <li>{m}</li>)}</ul>
+      <blockquote><p><strong>Dica:</strong> {mursaatDica}</p></blockquote>
+    </Boss>
+  </div></div>
+  <h3 class="ds-h3">Estados do botão</h3>
+  <Estados estados={['normal', 'hover', 'foco', 'aberto']} nomes={{ hover: 'Hover em "O que muda"', foco: 'Foco em "O que muda"', aberto: 'Aberto (seta para cima)' }} class="ds-largo" linhas={[{ id: 'b' }]}>
+    {(e: string) => (
+      <div class="boss"><span>Mursaat Overseer</span><span class="links">
+        <span class:list={['cm-par', { 'is-hover': e === 'hover' }]}><a href="#ficha-cm"><Fragment set:html={lucide('play')} />CM</a><button type="button" class:list={['boss-cm-botao', st(e)]} aria-expanded={e === 'aberto' ? 'true' : 'false'}>O que muda<Fragment set:html={lucide('chevron-down')} /></button></span>
+      </span></div>
+    )}
+  </Estados>
+  <h3 class="ds-h3">A ficha</h3>
+  <Estados estados={['normal']} nomes={{ normal: 'Aberta' }} class="ds-largo" linhas={[{ id: 'vida', nome: 'Com vida e dica' }, { id: 'limite', nome: 'Com tempo limite e nota' }]}>
+    {(_e: string, l: string) => (
+      <div class="boss-cm is-aberto">
+        {l === 'vida' ? <FichaCmLado vida="22 → 30 milhões" /> : <FichaCmLado limite="13 min" />}
+        <div class="boss-cm-texto">
+          <ul>{(l === 'vida' ? mursaat : olc).map((m) => <li>{m}</li>)}</ul>
+          {l === 'vida'
+            ? <blockquote><p><strong>Dica:</strong> {mursaatDica}</p></blockquote>
+            : <p>Guia em texto: <a href="https://snowcrows.com/guides/strikes/old-lions-court-cm">Snow Crows</a>.</p>}
+        </div>
+      </div>
+    )}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.fichaCm}</code></pre>
+  <ul class="ds-regras">
+    <li>Escrever texto dentro do <code>&lt;Boss&gt;</code> é o que cria a ficha. Cada tópico ganha um losango de ouro; <code>&gt; **Dica:**</code> vira a dica (fio tracejado em cima, "Dica:" em ouro); um parágrafo solto no fim vira nota em <code>--text-mute</code>.</li>
+    <li>A coluna da esquerda tem o ícone oficial de CM (44px), "Challenge Mode" e os números em display dourado. Se o <code>cmVida</code> tem "→", a vida fica empilhada e centralizada: "Vida", o valor normal (menor, discreto), uma seta entre dois fios de ouro e o valor do CM (grande, em ouro); o leitor de tela ouve "Normal: … No Challenge Mode: …". Sem "→", o rótulo é "Vida no CM". O <code>cmLimite</code> aparece como "Tempo limite".</li>
+    <li>Aberto, o botão continua dourado e só a seta vira (pedido do usuário). O leitor de tela ouve "O que muda no Challenge Mode de &lt;boss&gt;", com <code>aria-expanded</code> e <code>aria-controls</code>. Esc dentro da ficha fecha a ficha e devolve o foco ao botão.</li>
+    <li>No celular, o nome do boss fica numa linha e os botões embaixo, à esquerda. A coluna da esquerda vira uma faixa no topo da ficha.</li>
+    <li>Sem script e no PDF, a ficha já vem aberta e o "O que muda" some (fica só o "▶ CM"). No PDF a tinta de ouro da coluna sai e ficam só os fios.</li>
+  </ul>
+</section>
+
+<!-- 30 NOVIDADES -->
+<section class="page" aria-labelledby="novidades-ds">
+  <div class="titulo-secao"><h2 class="section" id="novidades-ds" data-num="30">Novidades</h2></div>
+  <p class="section-sub">Como o site avisa que algo mudou: o ponto no sino da barra dos guias, o balão que sai dele, a faixa da home e a página <a href="/novidades.html">Novidades</a>, no formato de diário de campo. Tudo vem de <code>src/novidades.ts</code>.</p>
+  <h3 class="ds-h3">Sino e balão</h3>
+  <Estados estados={['normal', 'balao']} nomes={{ normal: 'Sino com novidade não vista', balao: 'Balão aberto' }} class="ds-largo" linhas={[{ id: 's' }]}>
+    {(e: string) => (
+      <div class="tem-novidade ds-sino">
+        <span class="sino-ancora">
+          <span class="btn btn-secundario btn-sino"><span class="sino-ico" aria-hidden="true"><Fragment set:html={lucide('bell')} /></span><span class="lbl">Novidades</span></span>
+          {e === 'balao' && (
+            <div class="aviso-novidade is-aberto">
+              <div class="aviso-novidade-cab">
+                <span class="aviso-novidade-ico" aria-hidden="true">{cmIcone && <Image src={cmIcone} width={22} height={22} alt="" layout="fixed" />}</span>
+                <div class="aviso-novidade-texto">
+                  <p class="aviso-novidade-titulo">{ultimaNovidade.titulo}</p>
+                  <p class="aviso-novidade-meta"><time datetime={ultimaNovidade.data}>{dataCurta(ultimaNovidade.data)}</time> · {nQtd} mudanças</p>
+                </div>
+                <span class="aviso-novidade-fechar" aria-hidden="true"><Fragment set:html={lucide('x')} /></span>
+              </div>
+              <div class="aviso-novidade-acoes tema-escuro"><span class="btn btn-primario btn-sm">Ver o que mudou</span><span class="aviso-novidade-depois">Depois</span></div>
+            </div>
+          )}
+        </span>
+      </div>
+    )}
+  </Estados>
+  <h3 class="ds-h3">Faixa da home</h3>
+  <FaixaNovidade class="ds-faixa" />
+  <Estados estados={['normal', 'hover', 'foco']} class="ds-largo" linhas={[{ id: 'f' }]}>
+    {(e: string) => <FaixaNovidade class={`ds-faixa ${st(e) ?? ''}`} />}
+  </Estados>
+  <h3 class="ds-h3">Uso</h3>
+  <pre class="ds-codigo"><code>{uso.novidades}</code></pre>
+  <ul class="ds-regras">
+    <li>Para anunciar: uma entrada nova no TOPO de <code>NOVIDADES</code>, com um <code>id</code> novo. É o id novo que acende de novo o ponto do sino e o balão para quem já tinha visto a novidade anterior.</li>
+    <li>O balão sai do sino, nas cores do balão do Termo, 1,2 s depois de abrir um guia, e só nos 30 dias seguintes à data. Não é modal. "Ver o que mudou" e o X marcam a novidade como vista; o Esc fecha de qualquer lugar, mas só marca como vista se o foco estava no balão ou no sino; "Depois" esconde o balão até a próxima visita. Ao fechar, o foco do teclado volta ao sino. No celular, ele ocupa a largura toda logo abaixo da barra. O leitor de tela ouve "Novidade: &lt;título&gt;".</li>
+    <li>O ponto do sino é decoração (<code>--accent</code>). Quem usa leitor de tela fica sabendo pelo nome do botão, que passa a ser "Novidades (há uma atualização que você ainda não viu)".</li>
+    <li>A faixa é da família do card de guia: a arte com o ícone da novidade, o título em display e o selo "Novo", que só aparece nos 30 dias seguintes. O cartão inteiro é o link.</li>
+    <li>Na página, a arte da novidade fica no topo e a data grande à esquerda, presa ao rolar. A contagem usa <code>Selo quantidade</code>, e as mudanças, agrupadas por guia, usam <code>Selo variante="discreto"</code>, com sublinhado só no hover. Só a página imprime; o sino, o balão e a faixa não.</li>
+  </ul>
+</section>
+
+<style is:global>
+  .ds-efeitos{list-style:none;margin:0 0 var(--space-4);padding:0;display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-4);}
+  .ds-recursos{display:grid;gap:var(--space-3-5);}
+  @media (min-width:900px){ /* --bp-lg */ .ds-recursos{grid-template-columns:repeat(2,minmax(0,1fr));} .ds-recursos > .resource{margin:0;} }
+  .ds-largo .ds-palco > .encontro, .ds-largo .ds-palco > .resource, .ds-largo .ds-palco > .linha{margin:0;}
+  .ds-bosses{padding:0;} .ds-bosses > .bosses{padding:var(--space-2) var(--space-5) var(--space-3);}
+  .ds-palco > .boss-cm{margin:0;}
+  .ds-faixa{margin:0 0 var(--space-6);} .ds-palco > .ds-faixa{margin:0;}
+  .ds-sino{padding-bottom:var(--space-2);}
+  .ds-sino .aviso-novidade{position:relative;top:auto;left:auto;margin-top:calc(var(--tip-tail) + var(--space-1-5));}
+  .ds-sino .sino-ancora{flex-direction:column;align-items:flex-start;}
+</style>

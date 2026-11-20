@@ -1,0 +1,366 @@
+/* =====================================================================
+   Tokens do Codex DIVINE (design system, Fase 1)
+   Documentação: DESIGN.md (Style Foundations). Vitrine: /design-system.html.
+
+   Duas camadas:
+   1. PRIMITIVOS: valores crus (paleta, escalas). Componentes não usam direto.
+   2. SEMÂNTICOS: o papel de cada valor (superfície, texto, borda, destaque,
+      estados). É isto que os componentes usam, e é aqui que os temas mudam.
+
+   Cores: as oficiais da guilda (logo principal): azul-marinho, ouro e prata.
+   Rampas geradas em OKLCH a partir da logo; preto e branco nunca puros.
+   Fase 2: os drifts da auditoria (design-system/auditoria-fase-1.md) foram
+   consolidados: 12.5→12, 15.5→15, raios 8/12/16 → 6/10/14, alfas sobre arte.
+   ===================================================================== */
+
+/* =====================================================================
+   1. PRIMITIVOS
+   ===================================================================== */
+:root{
+  /* ---------- Neutros: cinza com um toque de marinho (fundos, texto, linhas) ----------
+     Nada de #000 nem #fff: o branco mais claro é ink-0 e o preto do tema escuro é ink-950. */
+  --ink-0:#f9fafc;     /* branco suave: superfícies no claro */
+  --ink-25:#f3f4f8;    /* fundo da página no claro */
+  --ink-50:#eceef3;
+  --ink-75:#e4e6ec;    /* texto no escuro (branco que não ofusca) */
+  --ink-100:#d9dce5;
+  --ink-200:#c4c9d4;
+  --ink-300:#b4b9c5;
+  --ink-400:#8e94a0;
+  --ink-500:#5d6476;
+  --ink-600:#474f64;
+  --ink-700:#303646;
+  --ink-750:#242a38;
+  --ink-800:#191e2a;
+  --ink-850:#121620;
+  --ink-900:#0e1528;   /* texto no claro: preto-marinho */
+  --ink-950:#0a0c11;   /* preto do tema escuro (~95%) */
+  --ink-1000:#040508;  /* véus e degradês sob arte */
+
+  /* ---------- Azul-marinho (anel da logo) ---------- */
+  --navy-100:#dae4fd;
+  --navy-300:#a0b6ef;
+  --navy-500:#4c6ac8;
+  --navy-600:#2f479b;
+  --navy-700:#203274;
+  --navy-800:#16255c;
+  --navy-900:#0f1c48;
+
+  /* ---------- Ouro (nós e estrelas da logo) ---------- */
+  --gold-100:#fceed6;
+  --gold-200:#f9daa1;
+  --gold-300:#eec066;
+  --gold-400:#e2b254;  /* ouro da logo */
+  --gold-500:#ba8d30;
+  --gold-600:#a17924;
+  --gold-700:#825f0f;
+  --gold-800:#644803;
+
+  /* ---------- Prata (nós da logo) ---------- */
+  --silver-100:#eef0f3;
+  --silver-300:#c9ccd1;
+  --silver-500:#9a9fa6;
+  --silver-700:#6c727a;
+
+  /* papel do PDF: o único branco puro, só na impressão */
+  --paper:#ffffff;
+
+
+  /* ---------- Profissões (Guild Wars 2 Wiki, Template:Color) ----------
+     -500 = "medium" · -800 = "dark" · -200 = "light" (valores da Wiki)
+     -700 = texto no claro · -300 = texto no escuro (derivados em OKLCH para AA) */
+  --prof-guardian-500:#72c1d9;     --prof-guardian-800:#186885;     --prof-guardian-200:#bce8fd;     --prof-guardian-700:#197187;     --prof-guardian-300:#72c1d9;
+  --prof-revenant-500:#d16e5a;     --prof-revenant-800:#a66356;     --prof-revenant-200:#e4aea3;     --prof-revenant-700:#a54735;     --prof-revenant-300:#e6806c;
+  --prof-warrior-500:#ffd166;      --prof-warrior-800:#caaa2a;      --prof-warrior-200:#fff2a4;      --prof-warrior-700:#886600;      --prof-warrior-300:#ffd166;
+  --prof-engineer-500:#d09c59;     --prof-engineer-800:#87581d;     --prof-engineer-200:#e8bc84;     --prof-engineer-700:#8d5d11;     --prof-engineer-300:#d09c59;
+  --prof-ranger-500:#8cdc82;       --prof-ranger-800:#67a833;       --prof-ranger-200:#d2f6bc;       --prof-ranger-700:#2a7a21;       --prof-ranger-300:#8cdc82;
+  --prof-thief-500:#c08f95;        --prof-thief-800:#974550;        --prof-thief-200:#dec6c9;        --prof-thief-700:#875a60;        --prof-thief-300:#c39298;
+  --prof-elementalist-500:#f68a87; --prof-elementalist-800:#dc423e; --prof-elementalist-200:#f6bebc; --prof-elementalist-700:#ab4747; --prof-elementalist-300:#f68a87;
+  --prof-mesmer-500:#b679d5;       --prof-mesmer-800:#69278a;       --prof-mesmer-200:#d09eea;       --prof-mesmer-700:#874ca4;       --prof-mesmer-300:#c385e2;
+  --prof-necromancer-500:#52a76f;  --prof-necromancer-800:#2c9d5d;  --prof-necromancer-200:#bfe6d0;  --prof-necromancer-700:#197641;  --prof-necromancer-300:#5cb078;
+
+  /* ---------- Estados (sucesso e perigo; aviso = ouro, info = marinho) ---------- */
+  --green-500:#2fa35a; --green-700:#027639; --green-300:#43b369;
+  --red-500:#e5484d;   --red-700:#c12130;   --red-300:#ff6767;
+
+  /* ---------- Tipografia ---------- */
+  --font-display:"Mona Sans","Arial Narrow","Segoe UI",sans-serif;   /* títulos: Mona Sans condensada */
+  --font-body:"Mona Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:"Geist Mono",Consolas,"Courier New",monospace;
+
+  --fw-regular:400; --fw-medium:500; --fw-semibold:600; --fw-bold:700;
+  --fw-display:750;        /* títulos em caixa alta (Mona Sans é variável: qualquer peso de 200 a 900) */
+  --display-stretch:87.5%; /* largura dos títulos: 75% = condensada, 100% = normal */
+
+  /* escala fixa (texto e interface) */
+  --fs-2xs:11px;
+  --fs-xs:12px;
+  --fs-sm-minus:13px;
+  --fs-sm:14px;
+  --fs-md:15px;
+  --fs-base:16px;
+  --fs-lg:17px;
+  --fs-xl:18px;
+  --fs-2xl:28px;
+  --fs-3xl:30px;
+  /* escala fluida: mínimo até 400px de tela, máximo a partir de 1280px */
+  --fs-fluid-title:clamp(19px, 18.09px + .2273vw, 21px);     /* 19 → 21 */
+  --fs-fluid-lead:clamp(16.5px, 15.82px + .1705vw, 18px);    /* 16.5 → 18 */
+  --fs-fluid-art:clamp(21px, 18.73px + .5682vw, 26px);       /* 21 → 26 */
+  --fs-fluid-h2:clamp(28px, 24.36px + .9091vw, 36px);        /* 28 → 36 */
+  --fs-fluid-feature:clamp(34px, 29.45px + 1.1364vw, 44px);  /* 34 → 44 */
+  --fs-fluid-h1:clamp(40px, 29.09px + 2.7273vw, 64px);       /* 40 → 64 */
+  --fs-fluid-slide:clamp(44px, 27.64px + 4.0909vw, 80px);    /* 44 → 80: nome do guia no slide da home (Fase 4) */
+
+  --lh-display-tight:.98; --lh-display:1; --lh-heading:1.05; --lh-title:1.25;
+  --lh-snug:1.35; --lh-lead:1.5; --lh-body:1.6;
+
+  --tracking-tight:.02em; --tracking-art:.03em; --tracking-wide:.06em; --tracking-wider:.08em;
+  --tracking-label:.12em; --tracking-brand:.18em; --tracking-sub:.28em;
+
+  /* ---------- Espaçamento (grade de 4px, com meios-passos de 2px) ---------- */
+  --space-px:1px;
+  --space-0-5:2px;
+  --space-1:4px;
+  --space-1-5:6px;
+  --space-2:8px;
+  --space-2-5:10px;
+  --space-3:12px;
+  --space-3-5:14px;
+  --space-4:16px;
+  --space-4-5:18px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-7:28px;
+  --space-8:32px;
+  --space-9:36px;
+  --space-10:40px;
+  --space-12:48px;
+  --space-14:56px;
+  --space-16:64px;
+  --space-18:72px;
+
+  /* ---------- Raios (3 passos; o de dentro é sempre menor que o de fora) ---------- */
+  --radius-sm:6px;    /* chips, selos, código, anel de foco de link */
+  --radius-md:10px;   /* botões, ícones, balão, e o que fica dentro de card: imagens, tabelas, avisos */
+  --radius-lg:14px;   /* cards e blocos de primeiro nível: card, wing, recurso, sumário no celular */
+  --radius-round:50%; /* só o emblema */
+
+  /* ---------- Dimensões de componente ---------- */
+  --control-sm:32px;   /* botão pequeno: vídeo, URL, copiar link */
+  --control-md:36px;   /* botões da barra do topo */
+  --control-lg:44px;   /* botões principais (alvo de toque confortável) */
+  --icon-xs:12px;      /* ícone em botão pequeno */
+  --icon-sm:16px;      /* ícone em botão, aviso, linha */
+  --icon-tag:20px;     /* ícone da Wiki em etiqueta: modo (Encontro), função, aba (Fase 3) */
+  --icon-md:22px;      /* ícone de card */
+  --icon-box-sm:28px;  /* ícone de linha (Item) */
+  --icon-box-md:44px;  /* ícone de card */
+  --emblem-sm:30px; --emblem-md:96px; --emblem-lg:124px;
+  --tip-max:280px;     /* largura máxima do balão do Termo */
+  --tip-tail:8px;      /* ponta do balão */
+  /* Fase 6: ficha de CM e Novidades */
+  --w-ficha-lado:11rem;   /* coluna dourada da ficha de CM */
+  --w-balao:22rem;        /* balão de novidade que sai do sino */
+  --w-data:7.5rem;        /* coluna da data na página de Novidades */
+  --w-tipo:6.5rem;        /* coluna do tipo (Selo discreto) nos itens das Novidades */
+  --w-faixa-arte-min:9rem; --w-faixa-arte-max:15rem;   /* arte da faixa da home (22% entre os dois) */
+  --h-topo-novidades:clamp(180px, 22vw, 260px);        /* faixa de arte no topo das Novidades */
+  --anel-ponto:0 0 0 2px; /* anel em volta do ponto do sino (cor: a do botão) */
+
+  /* ---------- Movimento ---------- */
+  --dur-fast:150ms;   /* hover e foco */
+  --dur-base:200ms;   /* cards que sobem */
+  --dur-slow:320ms;   /* troca de página (fundo), sombra da página que sobe */
+  --dur-page:260ms;   /* troca de página: a arte do card que vira o herói (View Transitions, Fase 4; era 420ms, o usuário achou lento) */
+  --ease-out:cubic-bezier(0,0,.58,1);       /* = ease-out */
+  --ease-in-out:cubic-bezier(.42,0,.58,1);  /* = ease-in-out */
+  --ease-emphasized:cubic-bezier(.2,0,0,1); /* chegadas: troca de página (Fase 4) */
+  --lift:-2px;        /* quanto um card sobe no hover */
+
+  /* ---------- Camadas ---------- */
+  --z-art:1;        /* texto sobre arte */
+  --z-art-bar:2;    /* barra sobre o herói */
+  --z-sticky:20;    /* barra do topo */
+  --z-skip:30;      /* "Pular para o conteúdo" */
+  --z-overlay:40;   /* reserva: menus, Ctrl+K */
+  --z-tooltip:50;   /* balão do Termo e do "link copiado" */
+
+  /* ---------- Layout ---------- */
+  --w-page:1160px; --w-hero:860px; --w-column:760px; --w-sidebar:232px;
+  --gutter:20px; --gap-sidebar:56px;
+  --nav-offset:76px;     /* topo do sumário fixo */
+  --anchor-offset:84px;  /* scroll-margin dos títulos */
+  --measure-lead:58ch; --measure-card:60ch; --measure-sub:62ch;
+
+  /* ---------- Breakpoints (só documentação: @media não lê variável) ----------
+     Cada @media do CSS cita o token num comentário. */
+  --bp-sm:600px;   /* sumário em 1 coluna, favoritos */
+  --bp-md:640px;   /* celular */
+  --bp-home:820px; /* página inicial */
+  --bp-lg:900px;   /* recursos em 2 colunas */
+  --bp-xl:1100px;  /* sumário fixo à esquerda */
+}
+
+
+
+/* =====================================================================
+   2. SEMÂNTICOS · tema claro (padrão e impressão)
+   Marinho conduz (links, botão, foco); ouro marca (números, ativo, datas, anel do emblema).
+   .tema-claro / .tema-escuro: forçam um tema num trecho da página (vitrine). O .tema-escuro também
+   entra aqui para que os tokens derivados (ex.: --warning-text: var(--gold)) sejam recalculados
+   no trecho; o bloco escuro, mais abaixo, sobrescreve o resto.
+   ===================================================================== */
+:root, .tema-claro, .tema-escuro{
+  /* superfícies */
+  --bg:var(--ink-25);
+  --surface:var(--ink-0);
+  --surface-2:var(--ink-50);
+  --nav-bg:color-mix(in srgb, var(--ink-25) 86%, transparent);
+  --hero-scrim:color-mix(in srgb, var(--ink-950) 38%, transparent);
+  --selection:var(--navy-100);
+
+  /* texto */
+  --text:var(--ink-900);
+  --text-soft:var(--ink-600);
+  --text-mute:var(--ink-500);
+
+  /* bordas */
+  --line:var(--ink-100);
+  --line-strong:var(--ink-200);
+  --line-input:color-mix(in srgb, var(--ink-400) 50%, var(--ink-500)); /* borda de campo e caixinha: 3:1 sobre a superfície (WCAG 1.4.11) */
+
+  /* destaque */
+  --accent:var(--gold-500);         /* decoração: anel do emblema, hover de borda */
+  --accent-text:var(--navy-600);    /* links e texto de destaque */
+  --accent-tint:color-mix(in srgb, var(--navy-500) 10%, transparent);
+  --accent-line:color-mix(in srgb, var(--navy-500) 30%, transparent);
+  --link-underline:color-mix(in srgb, var(--accent-text) 45%, transparent);
+  --gold:var(--gold-700);
+  --gold-tint:color-mix(in srgb, var(--gold-400) 16%, transparent);
+  --gold-line:color-mix(in srgb, var(--gold-500) 45%, transparent);
+  --focus-ring:var(--navy-600);
+
+  /* ação (botão principal) */
+  --action-bg:var(--navy-700);
+  --action-bg-hover:var(--navy-800);
+  --on-action:var(--ink-0);
+
+  /* sobre arte (igual nos dois temas: a arte é sempre escura embaixo) */
+  --on-art:var(--ink-0);
+  --art-scrim:linear-gradient(to top, color-mix(in srgb, var(--ink-1000) 88%, transparent) 0%, color-mix(in srgb, var(--ink-1000) 55%, transparent) 55%, color-mix(in srgb, var(--ink-1000) 0%, transparent) 100%);
+  --art-chip-bg:color-mix(in srgb, var(--ink-0) 14%, transparent);
+  --art-chip-line:color-mix(in srgb, var(--ink-0) 32%, transparent);
+  --art-mark-bg:color-mix(in srgb, var(--ink-1000) 55%, transparent);
+
+  /* sombras */
+  --shadow:0 1px 2px color-mix(in srgb, var(--ink-900) 5%, transparent), 0 8px 24px color-mix(in srgb, var(--ink-900) 6%, transparent);
+  --shadow-emblem:0 6px 16px color-mix(in srgb, var(--ink-1000) 30%, transparent); /* drop-shadow da logo: segue o contorno */
+  --shadow-tip:0 1px 2px color-mix(in srgb, var(--ink-900) 10%, transparent), 0 10px 28px color-mix(in srgb, var(--ink-900) 18%, transparent);
+  /* borda de baixo da página que sobe e revela o rodapé (Fase 4): igual nos dois temas, cai sobre o rodapé escuro */
+  --shadow-pagina:0 20px 36px -18px color-mix(in srgb, var(--ink-1000) 55%, transparent);
+  --text-shadow-art:0 1px 2px color-mix(in srgb, var(--ink-1000) 40%, transparent);
+
+  /* balão do Termo (tooltip): marinho da logo no claro, como um balão de fala */
+  --tip-bg:var(--navy-900); --tip-text:var(--ink-0); --tip-title:var(--gold-300); --tip-line:var(--navy-900);
+
+  /* estados (caixas Dica / Atenção / Importante) */
+  --info-text:var(--accent-text);    --info-tint:var(--accent-tint);  --info-line:var(--accent-line);
+  --success-text:var(--green-700);   --success-tint:color-mix(in srgb, var(--green-500) 12%, transparent); --success-line:color-mix(in srgb, var(--green-500) 40%, transparent);
+  --warning-text:var(--gold);        --warning-tint:var(--gold-tint); --warning-line:var(--gold-line);
+  --danger-text:var(--red-700);      --danger-tint:color-mix(in srgb, var(--red-500) 12%, transparent);   --danger-line:color-mix(in srgb, var(--red-500) 40%, transparent);
+
+  /* profissões. --prof-x: ponto, borda, ícone (≥3:1) · -text: texto (≥4.5:1) · -tint: fundo da etiqueta.
+     No claro, ponto e texto usam o tom derivado (-700): o tom da Wiki some no branco. */
+  --prof-tint-amount:12%;
+  --prof-guardian:var(--prof-guardian-700); --prof-guardian-text:var(--prof-guardian-700); --prof-guardian-tint:color-mix(in srgb, var(--prof-guardian-500) var(--prof-tint-amount), transparent);
+  --prof-revenant:var(--prof-revenant-700); --prof-revenant-text:var(--prof-revenant-700); --prof-revenant-tint:color-mix(in srgb, var(--prof-revenant-500) var(--prof-tint-amount), transparent);
+  --prof-warrior:var(--prof-warrior-700); --prof-warrior-text:var(--prof-warrior-700); --prof-warrior-tint:color-mix(in srgb, var(--prof-warrior-500) var(--prof-tint-amount), transparent);
+  --prof-engineer:var(--prof-engineer-700); --prof-engineer-text:var(--prof-engineer-700); --prof-engineer-tint:color-mix(in srgb, var(--prof-engineer-500) var(--prof-tint-amount), transparent);
+  --prof-ranger:var(--prof-ranger-700); --prof-ranger-text:var(--prof-ranger-700); --prof-ranger-tint:color-mix(in srgb, var(--prof-ranger-500) var(--prof-tint-amount), transparent);
+  --prof-thief:var(--prof-thief-700); --prof-thief-text:var(--prof-thief-700); --prof-thief-tint:color-mix(in srgb, var(--prof-thief-500) var(--prof-tint-amount), transparent);
+  --prof-elementalist:var(--prof-elementalist-700); --prof-elementalist-text:var(--prof-elementalist-700); --prof-elementalist-tint:color-mix(in srgb, var(--prof-elementalist-500) var(--prof-tint-amount), transparent);
+  --prof-mesmer:var(--prof-mesmer-700); --prof-mesmer-text:var(--prof-mesmer-700); --prof-mesmer-tint:color-mix(in srgb, var(--prof-mesmer-500) var(--prof-tint-amount), transparent);
+  --prof-necromancer:var(--prof-necromancer-700); --prof-necromancer-text:var(--prof-necromancer-700); --prof-necromancer-tint:color-mix(in srgb, var(--prof-necromancer-500) var(--prof-tint-amount), transparent);
+
+  /* compatibilidade com estilos inline antigos */
+  --texto-soft:var(--text-soft); --azul-esc:var(--accent-text);
+  color-scheme:light;
+}
+
+/* No PDF a página tem ~690px de largura: a escala fluida fica no tamanho de desktop. */
+@media print{
+  :root{
+    --fs-fluid-title:21px; --fs-fluid-lead:18px; --fs-fluid-art:26px;
+    --fs-fluid-h2:36px; --fs-fluid-feature:44px; --fs-fluid-h1:64px;
+  }
+}
+
+/* =====================================================================
+   2. SEMÂNTICOS · tema escuro (sistema ou botão; nunca na impressão)
+   Preto ~95%, superfícies com um toque de marinho, texto branco suave e prata, ouro conduz.
+   Os dois blocos abaixo têm de ser IGUAIS: um vale quando o sistema está
+   no escuro e o usuário não escolheu claro; o outro, quando escolheu escuro.
+   ===================================================================== */
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--ink-950); --surface:var(--ink-850); --surface-2:var(--ink-800);
+    --nav-bg:color-mix(in srgb, var(--ink-950) 82%, transparent);
+    --hero-scrim:color-mix(in srgb, var(--ink-1000) 45%, transparent);
+    --selection:var(--navy-800);
+    --text:var(--ink-75); --text-soft:var(--silver-300); --text-mute:var(--silver-500);
+    --line:var(--ink-750); --line-strong:var(--ink-700); --line-input:color-mix(in srgb, var(--ink-400) 35%, var(--ink-500));
+    --accent:var(--gold-400); --accent-text:var(--gold-300);
+    --accent-tint:color-mix(in srgb, var(--gold-400) 12%, transparent);
+    --accent-line:color-mix(in srgb, var(--gold-400) 35%, transparent);
+    --gold:var(--gold-400);
+    --gold-tint:color-mix(in srgb, var(--gold-400) 12%, transparent);
+    --gold-line:color-mix(in srgb, var(--gold-400) 40%, transparent);
+    --focus-ring:var(--gold-300);
+    --action-bg:var(--gold-400); --action-bg-hover:var(--gold-300); --on-action:var(--ink-1000);
+    --shadow:none; --shadow-tip:none; --shadow-emblem:0 4px 22px color-mix(in srgb, var(--gold-400) 22%, transparent);
+    --tip-bg:var(--ink-750); --tip-text:var(--ink-75); --tip-title:var(--gold-300); --tip-line:var(--gold-line);
+    --info-text:var(--navy-300); --info-tint:color-mix(in srgb, var(--navy-300) 14%, transparent); --info-line:color-mix(in srgb, var(--navy-300) 40%, transparent);
+    --success-text:var(--green-300); --danger-text:var(--red-300);
+    --prof-tint-amount:16%;
+    --prof-guardian:var(--prof-guardian-500); --prof-revenant:var(--prof-revenant-500); --prof-warrior:var(--prof-warrior-500);
+    --prof-engineer:var(--prof-engineer-500); --prof-ranger:var(--prof-ranger-500); --prof-thief:var(--prof-thief-500);
+    --prof-elementalist:var(--prof-elementalist-500); --prof-mesmer:var(--prof-mesmer-500); --prof-necromancer:var(--prof-necromancer-500);
+    --prof-guardian-text:var(--prof-guardian-300); --prof-revenant-text:var(--prof-revenant-300); --prof-warrior-text:var(--prof-warrior-300);
+    --prof-engineer-text:var(--prof-engineer-300); --prof-ranger-text:var(--prof-ranger-300); --prof-thief-text:var(--prof-thief-300);
+    --prof-elementalist-text:var(--prof-elementalist-300); --prof-mesmer-text:var(--prof-mesmer-300); --prof-necromancer-text:var(--prof-necromancer-300);
+    color-scheme:dark;
+  }
+}
+@media screen{
+  :root[data-theme="dark"], .tema-escuro{
+    --bg:var(--ink-950); --surface:var(--ink-850); --surface-2:var(--ink-800);
+    --nav-bg:color-mix(in srgb, var(--ink-950) 82%, transparent);
+    --hero-scrim:color-mix(in srgb, var(--ink-1000) 45%, transparent);
+    --selection:var(--navy-800);
+    --text:var(--ink-75); --text-soft:var(--silver-300); --text-mute:var(--silver-500);
+    --line:var(--ink-750); --line-strong:var(--ink-700); --line-input:color-mix(in srgb, var(--ink-400) 35%, var(--ink-500));
+    --accent:var(--gold-400); --accent-text:var(--gold-300);
+    --accent-tint:color-mix(in srgb, var(--gold-400) 12%, transparent);
+    --accent-line:color-mix(in srgb, var(--gold-400) 35%, transparent);
+    --gold:var(--gold-400);
+    --gold-tint:color-mix(in srgb, var(--gold-400) 12%, transparent);
+    --gold-line:color-mix(in srgb, var(--gold-400) 40%, transparent);
+    --focus-ring:var(--gold-300);
+    --action-bg:var(--gold-400); --action-bg-hover:var(--gold-300); --on-action:var(--ink-1000);
+    --shadow:none; --shadow-tip:none; --shadow-emblem:0 4px 22px color-mix(in srgb, var(--gold-400) 22%, transparent);
+    --tip-bg:var(--ink-750); --tip-text:var(--ink-75); --tip-title:var(--gold-300); --tip-line:var(--gold-line);
+    --info-text:var(--navy-300); --info-tint:color-mix(in srgb, var(--navy-300) 14%, transparent); --info-line:color-mix(in srgb, var(--navy-300) 40%, transparent);
+    --success-text:var(--green-300); --danger-text:var(--red-300);
+    --prof-tint-amount:16%;
+    --prof-guardian:var(--prof-guardian-500); --prof-revenant:var(--prof-revenant-500); --prof-warrior:var(--prof-warrior-500);
+    --prof-engineer:var(--prof-engineer-500); --prof-ranger:var(--prof-ranger-500); --prof-thief:var(--prof-thief-500);
+    --prof-elementalist:var(--prof-elementalist-500); --prof-mesmer:var(--prof-mesmer-500); --prof-necromancer:var(--prof-necromancer-500);
+    --prof-guardian-text:var(--prof-guardian-300); --prof-revenant-text:var(--prof-revenant-300); --prof-warrior-text:var(--prof-warrior-300);
+    --prof-engineer-text:var(--prof-engineer-300); --prof-ranger-text:var(--prof-ranger-300); --prof-thief-text:var(--prof-thief-300);
+    --prof-elementalist-text:var(--prof-elementalist-300); --prof-mesmer-text:var(--prof-mesmer-300); --prof-necromancer-text:var(--prof-necromancer-300);
+    color-scheme:dark;
+  }
+}
+/* trecho com tema forçado (vitrine): fundo e texto do próprio tema */
+.tema-claro, .tema-escuro{background:var(--bg);color:var(--text);}

@@ -1,0 +1,6 @@
+{
+  // O site não tem .prettierrc: formatar ao salvar reescreveria o estilo à mão dos .astro
+  // (aspas simples, linhas longas, CSS compacto). Para ligar, crie um .prettierrc aqui e apague isto.
+  "[astro]": { "editor.formatOnSave": false },
+  "search.exclude": { "comparacao": true }
+}

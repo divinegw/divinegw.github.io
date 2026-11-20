@@ -1,0 +1,176 @@
+---
+// Barra do topo de TODAS as páginas (header único, Fase 7, 19/11/2026; substituiu a barra dos guias e a CabecalhoInicio).
+//   ≥ 1100px  logo · Guias ▾ · Galeria · Sorteio · Novidades · busca · Discord · tema
+//   820–1099  a busca vira uma lupa que abre o campo numa linha embaixo; o Discord fica só com o ícone
+//   < 820     logo · lupa · tema · ☰ (o ☰ abre a gaveta: os guias, Galeria, Novidades, Créditos e o Discord)
+// "Guias ▾" abre um painel com os guias de GUIAS (site.ts), cada um com o ícone do card e a frase curta (`curto`).
+// Onde a pessoa está: traço de ouro embaixo do link (Guias, Galeria ou Novidades) e o guia aberto destacado no painel
+// e na gaveta, com aria-current. Novidades: ponto de ouro quando há novidade não vista (AvisoNovidades.astro).
+// Fica presa no topo ao rolar.
+//   atual:   slug do guia aberto, ou 'galeria' | 'sorteio' | 'novidades' | 'creditos' | 'inicio'
+//   aviso:   põe o balão de novidade (AvisoNovidades.astro) apontando para "Novidades" (no celular, para o ☰);
+//            'pagina' na própria página de Novidades; 'ponto' só acende o ponto, sem balão (home: lá a faixa faz o papel)
+//   exemplo: versão estática para a vitrine (sem "pular", sem prender no topo, sem script)
+import { Image } from 'astro:assets';
+import AvisoNovidades from './AvisoNovidades.astro';
+import LogoDivine from './LogoDivine.astro';
+import BotaoTema from './BotaoTema.astro';
+import Botao from './Botao.astro';
+import Busca from './Busca.astro';
+import { lucide } from '../lib/lucide';
+import { icone } from '../lib/arquivos';
+import { GUIAS, SITE } from '../site';
+
+interface Props { atual?: string; exemplo?: boolean; aviso?: boolean | 'pagina' | 'ponto' }
+const { atual, exemplo, aviso } = Astro.props;
+const px = exemplo ? `ex${Math.random().toString(36).slice(2, 7)}-` : ''; // ids únicos: a vitrine põe o exemplo mais de uma vez
+const emGuia = GUIAS.some((g) => g.guia === atual);
+// ícone de cada guia: arquivo de src/assets/icones/ (mono-*) ou ícone Lucide
+const guias = GUIAS.map((g) => ({ ...g, img: icone(g.marca), svg: icone(g.marca) ? '' : lucide(g.marca) }));
+const cur = (sim: boolean) => (sim ? 'page' : undefined);
+---
+{!exemplo && <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>}
+<header class:list={['sitehead', { 'is-estatico': exemplo }]} data-sitehead={exemplo ? undefined : ''}>
+  <div class="sitehead-inner">
+    <a class="sitehead-marca" href="/" aria-label={`${SITE.nome}: início`} aria-current={cur(atual === 'inicio')}>
+      <LogoDivine altura={32} class="sitehead-logo" />
+    </a>
+
+    <nav class="sitehead-nav" aria-label={exemplo ? 'Exemplo de navegação do site' : 'Navegação do site'}>
+      <div class="sitehead-guias">
+        <button type="button" class:list={['sitehead-link', { 'is-atual': emGuia }]} aria-expanded="false" aria-controls={`${px}sitehead-painel`} data-abre-guias>
+          Guias{emGuia && <span class="sr-only"> (você está num guia)</span>}<Fragment set:html={lucide('chevron-down', 'sitehead-seta')} />
+        </button>
+        <div class="sitehead-painel" id={`${px}sitehead-painel`} hidden>
+          <ul>
+            {guias.map((g) => (
+              <li>
+                <a class="sitehead-guia" href={`/guias/${g.guia}.html`} aria-current={cur(g.guia === atual)}>
+                  <span class="sitehead-guia-ico" aria-hidden="true">{g.img ? <Image src={g.img} width={16} height={16} alt="" layout="fixed" /> : <Fragment set:html={g.svg} />}</span>
+                  <span class="sitehead-guia-txt">
+                    <b>{g.nome}{g.guia === atual && <em>Você está aqui</em>}</b>
+                    <span>{g.curto}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <a class:list={['sitehead-link', { 'is-atual': atual === 'galeria' }]} href="/galeria.html" aria-current={cur(atual === 'galeria')}>Galeria</a>
+      <a class:list={['sitehead-link', { 'is-atual': atual === 'sorteio' }]} href="/sorteio.html" aria-current={cur(atual === 'sorteio')}>Sorteio</a>
+      <a class:list={['sitehead-link', { 'is-atual': atual === 'novidades' }]} href="/novidades.html" aria-current={cur(atual === 'novidades')} data-sino="">Novidades<span class="sino-ico" aria-hidden="true"></span></a>
+    </nav>
+
+    <div class="sitehead-busca" id={`${px}sitehead-busca`}><Busca id={`${px}busca-topo`} /></div>
+
+    <div class="sitehead-acoes">
+      <button type="button" class="btn btn-icone sitehead-abre-busca" aria-expanded="false" aria-controls={`${px}sitehead-busca`} aria-label="Buscar nos guias"><Fragment set:html={lucide('search')} /></button>
+      <Botao href={SITE.discord} externo icone="discord" class="sitehead-discord" rotulo="Discord da guilda DIVINE (abre em nova aba)"><span class="lbl">Discord</span></Botao>
+      {exemplo
+        ? <span class="btn btn-icone" aria-hidden="true"><Fragment set:html={lucide('moon')} /></span>
+        : <BotaoTema />}
+      <button type="button" class="btn btn-icone sitehead-abre-gaveta" aria-expanded="false" aria-controls={`${px}sitehead-gaveta`} aria-label="Abrir menu" data-sino-menu=""><Fragment set:html={lucide('menu')} /><span class="sino-ico" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  {/* o balão fica fora da navegação (que some no celular) e se posiciona pelo link visível */}
+  {aviso && !exemplo && <AvisoNovidades pagina={aviso === 'pagina'} balao={aviso !== 'ponto'} />}
+
+  {/* gaveta do celular: <dialog> nativo (Esc fecha, o foco fica dentro e volta ao ☰ ao fechar) */}
+  <dialog class="sitehead-gaveta" id={`${px}sitehead-gaveta`} aria-label="Menu do site">
+    <div class="sitehead-gaveta-topo">
+      <a href="/" aria-label={`${SITE.nome}: início`}><LogoDivine altura={28} /></a>
+      <button type="button" class="btn btn-icone" aria-label="Fechar menu" data-fecha-gaveta autofocus><Fragment set:html={lucide('x')} /></button>
+    </div>
+    <nav aria-label="Guias">
+      <p class="sitehead-gaveta-titulo" aria-hidden="true">Guias</p>
+      <ul class="sitehead-gaveta-lista">
+        {guias.map((g) => (
+          <li><a href={`/guias/${g.guia}.html`} aria-current={cur(g.guia === atual)}>
+            <span class="sitehead-guia-ico" aria-hidden="true">{g.img ? <Image src={g.img} width={16} height={16} alt="" layout="fixed" /> : <Fragment set:html={g.svg} />}</span>{g.nome}{g.guia === atual && <em>Você está aqui</em>}
+          </a></li>
+        ))}
+      </ul>
+    </nav>
+    <nav aria-label="Site">
+      <p class="sitehead-gaveta-titulo" aria-hidden="true">Site</p>
+      <ul class="sitehead-gaveta-lista sitehead-gaveta-site">
+        <li><a href="/galeria.html" aria-current={cur(atual === 'galeria')}><Fragment set:html={lucide('images')} />Galeria</a></li>
+        <li><a href="/sorteio.html" aria-current={cur(atual === 'sorteio')}><Fragment set:html={lucide('dices')} />Sorteio</a></li>
+        <li><a href="/novidades.html" aria-current={cur(atual === 'novidades')} data-sino=""><Fragment set:html={lucide('bell')} />Novidades<span class="sino-ico" aria-hidden="true"></span></a></li>
+        <li><a href="/creditos.html" aria-current={cur(atual === 'creditos')}><Fragment set:html={lucide('scroll-text')} />Créditos e licenças</a></li>
+      </ul>
+    </nav>
+    <div class="sitehead-gaveta-base">
+      <Botao href={SITE.discord} externo icone="discord" variante="primario" rotulo="Entrar no Discord da guilda DIVINE (abre em nova aba)">Entrar no Discord</Botao>
+    </div>
+  </dialog>
+</header>
+
+<script>
+  // só a barra de verdade tem data-sitehead (o exemplo da vitrine fica parado)
+  const cab = document.querySelector<HTMLElement>('[data-sitehead]');
+  if (cab) {
+    // "Guias ▾": painel suspenso (padrão de divulgação: botão com aria-expanded). Esc e clique fora fecham.
+    const botao = cab.querySelector<HTMLButtonElement>('[data-abre-guias]')!;
+    const painel = cab.querySelector<HTMLElement>('.sitehead-painel')!;
+    const guias = (abre: boolean, foco = false) => {
+      botao.setAttribute('aria-expanded', String(abre));
+      painel.hidden = !abre;
+      if (abre && foco) painel.querySelector<HTMLAnchorElement>('a')?.focus();
+    };
+    botao.addEventListener('click', () => guias(painel.hidden));
+    botao.addEventListener('keydown', (e) => { if (e.key === 'ArrowDown') { e.preventDefault(); guias(true, true); } });
+    painel.addEventListener('keydown', (e) => {
+      const links = [...painel.querySelectorAll<HTMLAnchorElement>('a')];
+      const i = links.indexOf(document.activeElement as HTMLAnchorElement);
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        links[(i + (e.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length].focus();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !painel.hidden) { guias(false); botao.focus(); }
+    });
+    document.addEventListener('click', (e) => {
+      if (!painel.hidden && !(e.target as Element).closest('.sitehead-guias')) guias(false);
+    });
+    // o foco saiu do botão ou do painel (Tab ou Shift+Tab): fecha
+    const bloco = cab.querySelector<HTMLElement>('.sitehead-guias')!;
+    bloco.addEventListener('focusout', (e) => {
+      const para = e.relatedTarget as Node | null;
+      if (para && !bloco.contains(para)) guias(false);
+    });
+
+    // lupa (abaixo de 1100px): mostra o campo numa linha embaixo
+    const lupa = cab.querySelector<HTMLButtonElement>('.sitehead-abre-busca')!;
+    lupa.addEventListener('click', () => {
+      const abre = lupa.getAttribute('aria-expanded') !== 'true';
+      lupa.setAttribute('aria-expanded', String(abre));
+      cab.classList.toggle('is-busca', abre);
+      if (abre) cab.querySelector<HTMLInputElement>('.busca-campo')?.focus();
+    });
+
+    // gaveta do celular
+    const gaveta = cab.querySelector<HTMLDialogElement>('.sitehead-gaveta')!;
+    const abreGaveta = cab.querySelector<HTMLButtonElement>('.sitehead-abre-gaveta')!;
+    abreGaveta.addEventListener('click', () => {
+      gaveta.showModal();
+      abreGaveta.setAttribute('aria-expanded', 'true');
+      document.documentElement.classList.add('gaveta-aberta');
+    });
+    gaveta.querySelector('[data-fecha-gaveta]')!.addEventListener('click', () => gaveta.close());
+    // toque no fundo escuro, fora da gaveta (o padding da própria gaveta não conta)
+    gaveta.addEventListener('click', (e) => {
+      const r = gaveta.getBoundingClientRect();
+      if (e.target === gaveta && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) gaveta.close();
+    });
+    gaveta.addEventListener('close', () => {
+      abreGaveta.setAttribute('aria-expanded', 'false');
+      document.documentElement.classList.remove('gaveta-aberta');
+      abreGaveta.focus();
+    });
+    // a tela cresceu com a gaveta aberta (girou o celular): fecha
+    matchMedia('(min-width: 820px)').addEventListener('change', (m) => { if (m.matches && gaveta.open) gaveta.close(); });
+  }
+</script>

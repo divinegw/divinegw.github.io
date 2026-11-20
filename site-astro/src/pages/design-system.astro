@@ -1,0 +1,490 @@
+---
+// Vitrine do design system. Fase 1: fundamentos (cada token no tema atual e o contraste
+// de todos os pares nos dois temas, ao vivo). Fase 2: componentes base (vitrine/Componentes.astro).
+import Cabeca from '../components/Cabeca.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Sumario from '../components/Sumario.astro';
+import Rodape from '../components/Rodape.astro';
+import CopiarLink from '../components/CopiarLink.astro';
+import Chip from '../components/Chip.astro';
+import Componentes from '../components/vitrine/Componentes.astro';
+import ComponentesGuia from '../components/vitrine/ComponentesGuia.astro';
+import { SITE } from '../site';
+
+const capitulos = [
+  { id: 'cores', titulo: 'Cores' },
+  { id: 'contraste', titulo: 'Contraste' },
+  { id: 'tipografia', titulo: 'Tipografia' },
+  { id: 'espacamento', titulo: 'Espaçamento' },
+  { id: 'raios', titulo: 'Raios' },
+  { id: 'sombras', titulo: 'Sombras' },
+  { id: 'movimento', titulo: 'Movimento' },
+  { id: 'estrutura', titulo: 'Camadas e layout' },
+  { id: 'botoes', titulo: 'Botões' },
+  { id: 'links', titulo: 'Links' },
+  { id: 'chips', titulo: 'Chips e selos' },
+  { id: 'cards', titulo: 'Cards' },
+  { id: 'avisos', titulo: 'Avisos' },
+  { id: 'tabela', titulo: 'Tabela' },
+  { id: 'sumario', titulo: 'Sumário' },
+  { id: 'cabecalho', titulo: 'Cabeçalho' },
+  { id: 'rodape', titulo: 'Rodapé' },
+  { id: 'copiar', titulo: 'Copiar link' },
+  { id: 'termo', titulo: 'Termo com definição' },
+  { id: 'encontro', titulo: 'Card de boss' },
+  { id: 'abas', titulo: 'Abas' },
+  { id: 'funcoes', titulo: 'Etiquetas de função' },
+  { id: 'efeitos', titulo: 'Boons e conditions' },
+  { id: 'linha', titulo: 'Linha do tempo' },
+  { id: 'banner', titulo: 'Banner com revelação' },
+  { id: 'recurso', titulo: 'Card de recurso' },
+  { id: 'mapa', titulo: 'Tabela de mapa' },
+  { id: 'dungeon', titulo: 'Dungeon e Path' },
+  { id: 'ficha-cm', titulo: 'Ficha de CM do boss' },
+  { id: 'novidades-ds', titulo: 'Novidades' },
+];
+
+const semanticos = [
+  { titulo: 'Superfícies', itens: [
+    ['bg', 'fundo da página'], ['surface', 'cards, botões, sumário'], ['surface-2', 'chips, cabeçalho de tabela, código'],
+  ] },
+  { titulo: 'Texto', itens: [
+    ['text', 'títulos e texto corrido'], ['text-soft', 'subtítulos, descrições'], ['text-mute', 'rótulos, migalha'],
+  ] },
+  { titulo: 'Bordas', itens: [
+    ['line', 'bordas e divisórias'], ['line-strong', 'hover de card, barra de rolagem'],
+  ] },
+  { titulo: 'Destaque e ação', itens: [
+    ['accent', 'anel do emblema, hover de borda (só decoração)'], ['accent-text', 'links e texto de destaque'],
+    ['gold', 'números de capítulo, item ativo, datas'], ['action-bg', 'botão principal'], ['focus-ring', 'anel de foco do teclado']
+  ] },
+];
+
+const rampas = [
+  { titulo: 'Azul-marinho', nota: 'anel da logo: links, botão e foco no claro', tokens: ['navy-100', 'navy-300', 'navy-500', 'navy-600', 'navy-700', 'navy-800', 'navy-900'] },
+  { titulo: 'Ouro', nota: 'nós e estrelas da logo: números, item ativo, botão e links no escuro', tokens: ['gold-100', 'gold-200', 'gold-300', 'gold-400', 'gold-500', 'gold-600', 'gold-700', 'gold-800'] },
+  { titulo: 'Prata', nota: 'nós da logo: texto secundário no escuro', tokens: ['silver-100', 'silver-300', 'silver-500', 'silver-700'] },
+  { titulo: 'Neutros', nota: 'cinza com toque de marinho; branco e preto nunca puros', tokens: ['ink-0', 'ink-25', 'ink-50', 'ink-75', 'ink-100', 'ink-200', 'ink-300', 'ink-400', 'ink-500', 'ink-600', 'ink-700', 'ink-750', 'ink-800', 'ink-850', 'ink-900', 'ink-950', 'ink-1000'] },
+];
+
+const profissoes = [['guardian', 'Guardian'], ['revenant', 'Revenant'], ['warrior', 'Warrior'], ['engineer', 'Engineer'], ['ranger', 'Ranger'],
+  ['thief', 'Thief'], ['elementalist', 'Elementalist'], ['mesmer', 'Mesmer'], ['necromancer', 'Necromancer']];
+const estados = [['info', 'Dica', 'Use o golem de treino antes da primeira raid.'], ['success', 'Feito', 'Build salva no template 1.'],
+  ['warning', 'Atenção', 'O CM exige Agony Resistance 150.'], ['danger', 'Importante', 'Não use a Mist Potion antes do boss.']];
+
+// pares de contraste: fundo = camadas de baixo para cima; o pior caso entre os fundos vale
+const S = ['var(--bg)'], SF = ['var(--surface)'], S2 = ['var(--surface-2)'];
+const superficies = [S, SF, S2];
+type Par = { rotulo: string; fg: string; fundos: string[][]; min: number };
+const pares: { grupo: string; itens: Par[] }[] = [
+  { grupo: 'Texto sobre as superfícies (bg, surface, surface-2)', itens: [
+    { rotulo: 'Texto principal · --text', fg: 'var(--text)', fundos: superficies, min: 4.5 },
+    { rotulo: 'Texto secundário · --text-soft', fg: 'var(--text-soft)', fundos: superficies, min: 4.5 },
+    { rotulo: 'Texto apagado · --text-mute', fg: 'var(--text-mute)', fundos: superficies, min: 4.5 },
+    { rotulo: 'Link · --accent-text', fg: 'var(--accent-text)', fundos: superficies, min: 4.5 },
+    { rotulo: 'Dourado · --gold', fg: 'var(--gold)', fundos: superficies, min: 4.5 },
+  ] },
+  { grupo: 'Texto sobre fundos coloridos', itens: [
+    { rotulo: 'Texto no destaque marinho/ouro', fg: 'var(--text)', fundos: [[...SF, 'var(--accent-tint)'], [...S, 'var(--accent-tint)']], min: 4.5 },
+    { rotulo: 'Texto na nota dourada', fg: 'var(--text)', fundos: [[...SF, 'var(--gold-tint)'], [...S, 'var(--gold-tint)']], min: 4.5 },
+    { rotulo: 'Dourado na nota e no chip de data', fg: 'var(--gold)', fundos: [[...SF, 'var(--gold-tint)'], [...S, 'var(--gold-tint)']], min: 4.5 },
+    { rotulo: 'Botão principal (normal e hover)', fg: 'var(--on-action)', fundos: [['var(--action-bg)'], ['var(--action-bg-hover)']], min: 4.5 },
+    { rotulo: 'Botão desativado · --text-mute', fg: 'var(--text-mute)', fundos: [S2], min: 4.5 },
+    { rotulo: 'Texto do balão (Termo, link copiado)', fg: 'var(--tip-text)', fundos: [['var(--tip-bg)']], min: 4.5 },
+    { rotulo: 'Nome do termo no balão', fg: 'var(--tip-title)', fundos: [['var(--tip-bg)']], min: 4.5 },
+    { rotulo: 'Nome sobre a arte (véu 75% sobre arte branca)', fg: 'var(--on-art)', fundos: [['var(--paper)', 'color-mix(in srgb, var(--ink-1000) 75%, transparent)']], min: 4.5 },
+    { rotulo: 'Chip sobre a arte', fg: 'var(--on-art)', fundos: [['var(--paper)', 'color-mix(in srgb, var(--ink-1000) 75%, transparent)', 'var(--art-chip-bg)']], min: 4.5 },
+  ] },
+  { grupo: 'Estados (texto sobre a própria tinta)', itens: estados.map(([id, nome]) => (
+    { rotulo: `${nome} · --${id}-text`, fg: `var(--${id}-text)`, fundos: [[...SF], [...SF, `var(--${id}-tint)`], [...S, `var(--${id}-tint)`]], min: 4.5 })) },
+  { grupo: 'Profissões (texto)', itens: profissoes.map(([id, nome]) => (
+    { rotulo: `${nome} · --prof-${id}-text`, fg: `var(--prof-${id}-text)`, fundos: [...superficies, [...SF, `var(--prof-${id}-tint)`]], min: 4.5 })) },
+  { grupo: 'Elementos que não são texto (mínimo 3:1)', itens: [
+    { rotulo: 'Anel de foco · --focus-ring', fg: 'var(--focus-ring)', fundos: superficies, min: 3 },
+    ...profissoes.map(([id, nome]) => ({ rotulo: `${nome} (ponto, borda) · --prof-${id}`, fg: `var(--prof-${id})`, fundos: [SF, S2], min: 3 })),
+  ] },
+];
+
+const tipos = [
+  { token: 'fs-fluid-h1', faixa: '40 → 64', uso: 'Título da página', classe: 'display', amostra: 'Fractals' },
+  { token: 'fs-fluid-feature', faixa: '34 → 44', uso: 'Guia em destaque na home', classe: 'display', amostra: 'Endgame' },
+  { token: 'fs-fluid-h2', faixa: '28 → 36', uso: 'Capítulo (h2)', classe: 'display', amostra: 'Instabilidades' },
+  { token: 'fs-3xl', faixa: '30', uso: 'Nome do guia nos cards da home', classe: 'display', amostra: 'Dungeons' },
+  { token: 'fs-2xl', faixa: '28', uso: 'Título de bloco da home', classe: 'display', amostra: 'Comece por aqui' },
+  { token: 'fs-fluid-art', faixa: '21 → 26', uso: 'Nome de wing e dungeon sobre a arte', classe: 'display', amostra: 'Spirit Vale' },
+  { token: 'fs-fluid-title', faixa: '19 → 21', uso: 'Título de card (h3)', classe: 'title', amostra: 'Agony Resistance' },
+  { token: 'fs-fluid-lead', faixa: '16.5 → 18', uso: 'Frase do topo', classe: 'body', amostra: 'Agony, instabilidades e recompensas diárias.' },
+  { token: 'fs-xl', faixa: '18', uso: 'Nome de recurso', classe: 'strong', amostra: 'GW2 Efficiency' },
+  { token: 'fs-lg', faixa: '17', uso: 'h4, subtítulo de capítulo, rodapé', classe: 'body', amostra: 'Tudo o que muda a partir do Tier 4.' },
+  { token: 'fs-base', faixa: '16', uso: 'Texto corrido', classe: 'body', amostra: 'Cada fractal sorteia até três instabilidades.' },
+  { token: 'fs-md', faixa: '15', uso: 'Sumário, tabelas, avisos, descrições', classe: 'body', amostra: 'Recompensas diárias' },
+  { token: 'fs-sm', faixa: '14', uso: 'Barra do topo, botões, subitens, balão', classe: 'body', amostra: 'Observação em letra menor.' },
+  { token: 'fs-sm-minus', faixa: '13', uso: 'Botão pequeno, "link copiado"', classe: 'body', amostra: 'Vídeo' },
+  { token: 'fs-xs', faixa: '12', uso: 'Chips, URLs, rótulos, números do sumário', classe: 'mono', amostra: 'TIER 4 · NÍVEL 76-100' },
+  { token: 'fs-2xs', faixa: '11', uso: 'Selos "Novo" e "Atualizado"', classe: 'mono', amostra: 'NOVO' },
+];
+
+const espacos = ['px', '0-5', '1', '1-5', '2', '2-5', '3', '3-5', '4', '4-5', '5', '6', '7', '8', '9', '10', '12', '14', '16', '18'];
+const raios = [['sm', 'chips, selos, código, foco de link'], ['md', 'botões, ícones, balão; imagens, tabelas e avisos dentro de card'],
+  ['lg', 'cards, wings, recursos, sumário no celular'], ['round', 'só o emblema']];
+const sombras = [['shadow', 'cards e wings (some no escuro)'], ['shadow-emblem', 'sombra da logo (contorno); no escuro, brilho de ouro'], ['shadow-tip', 'balão do Termo (some no escuro; a borda de ouro separa)']];
+const movimentos = [['dur-fast', 'ease-out', 'hover e foco de botões e links'], ['dur-base', 'ease-out', 'card da home que sobe'],
+  ['dur-slow', 'ease-emphasized', 'reserva: revelações (Fase 4)']];
+const camadas = [['z-art', 'texto sobre arte'], ['z-art-bar', 'barra sobre o herói'], ['z-sticky', 'barra do topo'], ['z-skip', 'pular para o conteúdo'],
+  ['z-overlay', 'reserva: menus, Ctrl+K'], ['z-tooltip', 'balão do Termo e do link copiado']];
+const dimensoes = [['control-sm', 'botão pequeno, URL, copiar link'], ['control-md', 'botões da barra do topo'], ['control-lg', 'botões principais'],
+  ['icon-xs', 'ícone em botão pequeno'], ['icon-sm', 'ícone em botão, aviso, linha'], ['icon-md', 'ícone de card'],
+  ['icon-box-sm', 'caixa do ícone de linha'], ['icon-box-md', 'caixa do ícone de card'], ['emblem-sm', 'emblema da barra'], ['emblem-md', 'emblema no celular'],
+  ['emblem-lg', 'emblema do topo'], ['tip-max', 'largura máxima do balão'], ['tip-tail', 'ponta do balão']];
+const breakpoints = [['bp-sm', 'sumário em 1 coluna, favoritos'], ['bp-md', 'celular'], ['bp-home', 'página inicial'], ['bp-lg', 'recursos em 2 colunas'],
+  ['bp-xl', 'sumário fixo à esquerda']];
+const medidas = [['w-page', 'largura da página'], ['w-hero', 'texto do herói'], ['w-column', 'coluna do guia'], ['w-sidebar', 'sumário fixo'],
+  ['gutter', 'margem lateral'], ['measure-lead', 'frase do topo'], ['measure-sub', 'subtítulo de capítulo']];
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca titulo="Design system" descricao="Tokens do Codex DIVINE: cores, contraste, tipografia, espaçamento, raios, sombras e movimento." caminho="/design-system.html" />
+<meta name="robots" content="noindex">
+</head>
+<body>
+<div class="pagina">
+<Cabecalho />
+
+<header class="ds-head">
+  <h1>Design system</h1>
+  <p class="hero-sub">Codex DIVINE · Fundamentos e componentes</p>
+  <p class="ds-desc">Os tokens e os componentes que desenham o manual, dos fundamentos aos blocos de guia de GW2. Os fundamentos aparecem no tema atual (troque no botão do topo); os componentes mostram cada estado nos dois temas.</p>
+  <ul class="hero-chips"><Chip como="li">tokens.css</Chip><Chip como="li">Fases 1 a 3</Chip><Chip como="li" tom="data">Atualizado em {SITE.atualizado}</Chip></ul>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <Sumario titulo="Nesta página" plano={false} itens={capitulos.map((c) => ({ id: c.id, text: c.titulo, subs: [] }))} />
+  </aside>
+
+  <main id="conteudo" class="content">
+    <!-- 01 CORES -->
+    <section class="page" aria-labelledby="cores">
+      <div class="titulo-secao"><h2 class="section" id="cores" data-num="01">Cores</h2></div>
+      <p class="section-sub">Componentes usam só os semânticos. Os primitivos ficam embaixo, para consulta.</p>
+
+      {semanticos.map((g) => (
+        <>
+          <h3 class="ds-h3">{g.titulo}</h3>
+          <ul class="ds-swatches">
+            {g.itens.map(([t, uso]) => (
+              <li class="ds-swatch">
+                <span class="ds-chip" style={`--c:var(--${t})`}></span>
+                <code>--{t}</code>
+                <span class="ds-val" data-var={t}></span>
+                <span class="ds-uso">{uso}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      ))}
+
+      <h3 class="ds-h3">Estados</h3>
+      <p class="ds-nota">Base das caixas Dica / Atenção / Importante da Fase 2: tinta de 12% e borda de 1px, nunca borda lateral grossa.</p>
+      <div class="ds-estados">
+        {estados.map(([id, nome, frase]) => (
+          <p class="ds-estado" style={`--t:var(--${id}-text);--b:var(--${id}-tint);--l:var(--${id}-line)`}><b>{nome}:</b> {frase}</p>
+        ))}
+      </div>
+
+      <h3 class="ds-h3">Profissões</h3>
+      <p class="ds-nota">Cores da Guild Wars 2 Wiki (Template:Color). No tema claro, o texto e o ponto usam um tom mais escuro da mesma cor para passar no contraste.</p>
+      <ul class="ds-tags">
+        {profissoes.map(([id, nome]) => <li class="ds-tag" style={`--d:var(--prof-${id});--t:var(--prof-${id}-text);--b:var(--prof-${id}-tint)`}>{nome}</li>)}
+      </ul>
+
+      <h3 class="ds-h3">Primitivos</h3>
+      {rampas.map((r) => (
+        <div class="ds-rampa">
+          <p class="ds-rampa-tit"><b>{r.titulo}</b> <span>{r.nota}</span></p>
+          <ul>
+            {r.tokens.map((t) => <li><span class="ds-chip" style={`--c:var(--${t})`}></span><code>{t}</code><span class="ds-val" data-var={t}></span></li>)}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <!-- 02 CONTRASTE -->
+    <section class="page" aria-labelledby="contraste">
+      <div class="titulo-secao"><h2 class="section" id="contraste" data-num="02">Contraste</h2></div>
+      <p class="section-sub">WCAG AA: texto 4.5:1, elementos que não são texto 3:1. Cada linha mostra o pior caso entre os fundos onde o par aparece, medido no navegador nos dois temas.</p>
+      <p class="ds-resumo" id="ds-resumo" aria-live="polite">Medindo…</p>
+      {pares.map((g) => (
+        <div class="ds-tabela">
+          <table class="map">
+            <caption>{g.grupo}</caption>
+            <thead><tr><th scope="col">Par</th><th scope="col">Claro</th><th scope="col">Escuro</th><th scope="col">Mínimo</th></tr></thead>
+            <tbody>
+              {g.itens.map((p) => (
+                <tr data-fg={p.fg} data-fundos={JSON.stringify(p.fundos)} data-min={p.min}>
+                  <th scope="row">{p.rotulo}</th><td class="ds-r" data-tema="light">…</td><td class="ds-r" data-tema="dark">…</td><td>{p.min}:1</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
+    </section>
+
+    <!-- 03 TIPOGRAFIA -->
+    <section class="page" aria-labelledby="tipografia">
+      <div class="titulo-secao"><h2 class="section" id="tipografia" data-num="03">Tipografia</h2></div>
+      <p class="section-sub">Mona Sans (variável: largura e peso) nos títulos e no texto, Geist Mono nos dados. Servidas pelo próprio site, licença OFL. Os tamanhos fluidos crescem entre 400 e 1280px de tela; no PDF ficam no tamanho de desktop.</p>
+      <div class="ds-familias">
+        <p class="ds-fam ds-fam-display"><span>Mona Sans · títulos: largura 87.5%, peso 750</span>Fractals of the Mists</p>
+        <p class="ds-fam ds-fam-body"><span>Mona Sans · texto: largura 100%, pesos 400/600/700</span>Cada fractal sorteia até três instabilidades por dia.</p>
+        <p class="ds-fam ds-fam-mono"><span>Geist Mono 500 · só dados</span>TIER 4 · 76-100 · 150 AR</p>
+      </div>
+      <ul class="ds-escala">
+        {tipos.map((t) => (
+          <li>
+            <div class="ds-escala-meta"><code>--{t.token}</code><span>{t.faixa}px · agora <b class="ds-px" data-fs={t.token}></b></span><span>{t.uso}</span></div>
+            <p class={`ds-amostra ds-${t.classe}`} style={`font-size:var(--${t.token})`}>{t.amostra}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- 04 ESPAÇAMENTO -->
+    <section class="page" aria-labelledby="espacamento">
+      <div class="titulo-secao"><h2 class="section" id="espacamento" data-num="04">Espaçamento</h2></div>
+      <p class="section-sub">Grade de 4px com meios-passos de 2px, que o código já usava em botões e chips. O nome é o múltiplo de 4: --space-3 = 12px.</p>
+      <ul class="ds-espacos">
+        {espacos.map((s) => <li><code>--space-{s}</code><span class="ds-val" data-len={`space-${s}`}></span><span class="ds-barra" style={`width:var(--space-${s})`}></span></li>)}
+      </ul>
+    </section>
+
+    <!-- 05 RAIOS -->
+    <section class="page" aria-labelledby="raios">
+      <div class="titulo-secao"><h2 class="section" id="raios" data-num="05">Raios</h2></div>
+      <p class="section-sub">Três passos. Na Fase 2 os drifts viraram o passo mais próximo: 8 → 10 (botões de vídeo, URLs), 12 → 10 (imagens, tabelas, avisos dentro de card; 12 → 14 nos recursos) e 16 → 14 (cards da home).</p>
+      <ul class="ds-raios">
+        {raios.map(([r, uso]) => <li><span class="ds-raio" style={`border-radius:var(--radius-${r})`}></span><code>--radius-{r}</code><span class="ds-val" data-len={`radius-${r}`}></span><span class="ds-uso">{uso}</span></li>)}
+      </ul>
+    </section>
+
+    <!-- 06 SOMBRAS -->
+    <section class="page" aria-labelledby="sombras">
+      <div class="titulo-secao"><h2 class="section" id="sombras" data-num="06">Sombras</h2></div>
+      <p class="section-sub">Sombra só no tema claro. No escuro, a profundidade vem da diferença entre bg, surface e surface-2.</p>
+      <ul class="ds-sombras">
+        {sombras.map(([s, uso]) => <li><span class="ds-sombra" style={s === 'shadow-emblem' ? 'filter:drop-shadow(var(--shadow-emblem))' : `box-shadow:var(--${s})`}></span><code>--{s}</code><span class="ds-uso">{uso}</span></li>)}
+      </ul>
+    </section>
+
+    <!-- 07 MOVIMENTO -->
+    <section class="page" aria-labelledby="movimento">
+      <div class="titulo-secao"><h2 class="section" id="movimento" data-num="07">Movimento</h2></div>
+      <p class="section-sub">Curto e só em resposta ao usuário: hover e foco. Nada em loop. Com "reduzir movimento" ligado no sistema, tudo para.</p>
+      <ul class="ds-movs">
+        {movimentos.map(([d, e, uso]) => (
+          <li>
+            <button type="button" class="ds-mov" style={`--d:var(--${d});--e:var(--${e})`} aria-label={`Testar --${d} com --${e}`}><span></span></button>
+            <code>--{d}</code><span class="ds-val" data-time={d}></span><code>--{e}</code><span class="ds-uso">{uso}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="ds-nota">Passe o mouse ou foque cada trilho para ver a duração.</p>
+    </section>
+
+    <!-- 08 CAMADAS E LAYOUT -->
+    <section class="page" aria-labelledby="estrutura">
+      <div class="titulo-secao"><h2 class="section" id="estrutura" data-num="08">Camadas e layout</h2></div>
+      <p class="section-sub">Breakpoints não podem ser variáveis dentro de @media: os tokens --bp-* documentam o valor, e cada @media cita o token num comentário.</p>
+      <div class="ds-tabela">
+        <table class="map">
+          <caption>Camadas (z-index)</caption>
+          <thead><tr><th scope="col">Token</th><th scope="col">Valor</th><th scope="col">Uso</th></tr></thead>
+          <tbody>{camadas.map(([t, uso]) => <tr><th scope="row"><code>--{t}</code></th><td class="ds-val" data-raw={t}></td><td>{uso}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="ds-tabela">
+        <table class="map">
+          <caption>Breakpoints</caption>
+          <thead><tr><th scope="col">Token</th><th scope="col">Valor</th><th scope="col">Uso</th></tr></thead>
+          <tbody>{breakpoints.map(([t, uso]) => <tr><th scope="row"><code>--{t}</code></th><td class="ds-val" data-raw={t}></td><td>{uso}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="ds-tabela">
+        <table class="map">
+          <caption>Medidas</caption>
+          <thead><tr><th scope="col">Token</th><th scope="col">Valor</th><th scope="col">Uso</th></tr></thead>
+          <tbody>{medidas.map(([t, uso]) => <tr><th scope="row"><code>--{t}</code></th><td class="ds-val" data-raw={t}></td><td>{uso}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="ds-tabela">
+        <table class="map">
+          <caption>Dimensões de componente</caption>
+          <thead><tr><th scope="col">Token</th><th scope="col">Valor</th><th scope="col">Uso</th></tr></thead>
+          <tbody>{dimensoes.map(([t, uso]) => <tr><th scope="row"><code>--{t}</code></th><td class="ds-val" data-raw={t}></td><td>{uso}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </section>
+
+    <Componentes />
+    <ComponentesGuia />
+  </main>
+</div>
+</div>
+<Rodape atalhos />
+<CopiarLink />
+
+<script is:inline>
+(function () {
+  var root = document.documentElement;
+  var probe = document.createElement('div');
+  probe.setAttribute('aria-hidden', 'true');
+  probe.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;visibility:hidden';
+  document.body.appendChild(probe);
+  var cv = document.createElement('canvas'); cv.width = cv.height = 1;
+  var cx = cv.getContext('2d', { willReadFrequently: true });
+
+  function cor(css) { probe.style.backgroundColor = ''; probe.style.backgroundColor = css; return getComputedStyle(probe).backgroundColor; }
+  function pinta(camadas) {
+    cx.clearRect(0, 0, 1, 1);
+    camadas.forEach(function (c) { cx.fillStyle = '#000'; cx.fillStyle = cor(c); cx.fillRect(0, 0, 1, 1); });
+    var d = cx.getImageData(0, 0, 1, 1).data; return [d[0], d[1], d[2], d[3]];
+  }
+  function lum(c) { return c.slice(0, 3).map(function (v) { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); })
+    .reduce(function (s, v, i) { return s + v * [0.2126, 0.7152, 0.0722][i]; }, 0); }
+  function razao(a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+  function hex(c) { return '#' + c.slice(0, 3).map(function (v) { return v.toString(16).padStart(2, '0'); }).join(''); }
+  function raw(nome) { return getComputedStyle(root).getPropertyValue('--' + nome).trim(); }
+
+  // valores ao vivo dos swatches (tema atual)
+  function atualiza() {
+    document.querySelectorAll('[data-var]').forEach(function (el) {
+      var c = pinta(['var(--' + el.dataset.var + ')']);
+      el.textContent = c[3] === 255 ? hex(c) : hex(c) + ' · ' + Math.round(c[3] / 2.55) + '%';
+    });
+    document.querySelectorAll('[data-len]').forEach(function (el) {
+      probe.style.width = 'var(--' + el.dataset.len + ')'; el.textContent = raw(el.dataset.len);
+    });
+    document.querySelectorAll('[data-raw]').forEach(function (el) { el.textContent = raw(el.dataset.raw); });
+    document.querySelectorAll('[data-time]').forEach(function (el) { el.textContent = raw(el.dataset.time); });
+    document.querySelectorAll('[data-fs]').forEach(function (el) {
+      probe.style.fontSize = 'var(--' + el.dataset.fs + ')';
+      el.textContent = parseFloat(getComputedStyle(probe).fontSize).toFixed(1).replace('.0', '') + 'px';
+    });
+  }
+
+  // contraste nos dois temas: troca o tema por um instante, mede e devolve
+  function mede() {
+    var antes = root.getAttribute('data-theme'), falhas = 0, total = 0;
+    ['light', 'dark'].forEach(function (tema) {
+      root.setAttribute('data-theme', tema);
+      document.querySelectorAll('tr[data-fg]').forEach(function (tr) {
+        var fundos = JSON.parse(tr.dataset.fundos), min = parseFloat(tr.dataset.min), pior = Infinity;
+        fundos.forEach(function (f) {
+          var base = ['var(--paper)'].concat(f);
+          pior = Math.min(pior, razao(pinta(base.concat(tr.dataset.fg)), pinta(base)));
+        });
+        var td = tr.querySelector('td[data-tema="' + tema + '"]'), ok = pior >= min;
+        td.textContent = pior.toFixed(2) + ':1 ' + (ok ? 'passa' : 'falha');
+        td.className = 'ds-r ' + (ok ? 'is-ok' : 'is-falha');
+        total++; if (!ok) falhas++;
+      });
+    });
+    if (antes) root.setAttribute('data-theme', antes); else root.removeAttribute('data-theme');
+    var r = document.getElementById('ds-resumo');
+    r.textContent = falhas ? falhas + ' de ' + total + ' medições abaixo do mínimo.' : 'Todas as ' + total + ' medições passam (' + total / 2 + ' pares × 2 temas).';
+    r.className = 'ds-resumo ' + (falhas ? 'is-falha' : 'is-ok');
+    window.__dsContraste = { total: total, falhas: falhas };
+  }
+
+  atualiza(); mede();
+  new MutationObserver(atualiza).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+</script>
+
+<style>
+  .ds-head{max-width:var(--w-hero);margin:0 auto;padding:var(--space-14) var(--gutter) var(--space-2);text-align:center;}
+  .ds-head h1{font-family:var(--font-display);font-stretch:var(--display-stretch);font-weight:var(--fw-display);text-transform:uppercase;font-size:var(--fs-fluid-h1);line-height:var(--lh-display-tight);letter-spacing:var(--tracking-tight);margin:0;text-wrap:balance;}
+  .ds-head .hero-sub{font-family:var(--font-display);font-stretch:var(--display-stretch);font-weight:var(--fw-semibold);text-transform:uppercase;letter-spacing:var(--tracking-sub);font-size:var(--fs-md);color:var(--accent-text);margin:var(--space-2-5) 0 0;}
+  .ds-desc{max-width:var(--measure-lead);margin:var(--space-4) auto 0;font-size:var(--fs-fluid-lead);line-height:var(--lh-lead);color:var(--text-soft);text-wrap:balance;}
+
+  .ds-h3{font-size:var(--fs-fluid-title);font-weight:var(--fw-bold);line-height:var(--lh-title);margin:var(--space-10) 0 var(--space-3-5);}
+  .ds-h3:first-of-type{margin-top:var(--space-6);}
+  .ds-nota{color:var(--text-soft);font-size:var(--fs-md);max-width:var(--measure-sub);}
+  code{white-space:nowrap;}
+
+  /* swatches */
+  .ds-swatches{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--space-3);}
+  .ds-swatch{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto auto;column-gap:var(--space-3);row-gap:var(--space-0-5);align-items:center;
+    padding:var(--space-3);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);}
+  .ds-swatch .ds-chip{grid-row:1 / 4;width:48px;height:48px;}
+  .ds-swatch code{justify-self:start;}
+  .ds-chip{display:block;flex-shrink:0;width:32px;height:32px;border-radius:var(--radius-md);background:var(--c);border:1px solid var(--line);}
+  .ds-val{font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--text-soft);font-variant-numeric:tabular-nums;}
+  .ds-uso{font-size:var(--fs-sm);color:var(--text-mute);line-height:var(--lh-snug);}
+
+  .ds-estados{display:grid;gap:var(--space-3);}
+  .ds-estado{margin:0;padding:var(--space-3-5) var(--space-4-5);border-radius:var(--radius-md);background:var(--b);border:1px solid var(--l);font-size:var(--fs-md);}
+  .ds-estado b{color:var(--t);}
+
+  .ds-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-2);}
+  .ds-tag{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--t);
+    background:var(--b);border:1px solid color-mix(in srgb, var(--d) 45%, transparent);border-radius:var(--radius-sm);padding:var(--space-1) var(--space-2-5);}
+  .ds-tag::before{content:"";width:8px;height:8px;border-radius:var(--radius-round);background:var(--d);}
+
+  .ds-rampa{margin:0 0 var(--space-6);}
+  .ds-rampa-tit{margin:0 0 var(--space-2);}
+  .ds-rampa-tit span{color:var(--text-mute);font-size:var(--fs-sm);margin-left:var(--space-2);}
+  .ds-rampa ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:var(--space-2);}
+  .ds-rampa li{display:grid;gap:var(--space-1);}
+  .ds-rampa .ds-chip{width:100%;height:40px;}
+  .ds-rampa code{font-size:var(--fs-xs);background:none;border:0;padding:0;}
+
+  /* contraste */
+  .ds-resumo{font-weight:var(--fw-semibold);padding:var(--space-2-5) var(--space-3-5);border-radius:var(--radius-lg);border:1px solid var(--line);background:var(--surface);}
+  .ds-resumo.is-ok{color:var(--success-text);border-color:var(--success-line);background:var(--success-tint);}
+  .ds-resumo.is-falha{color:var(--danger-text);border-color:var(--danger-line);background:var(--danger-tint);}
+  .ds-tabela{overflow-x:auto;margin:0 0 var(--space-6);}
+  .ds-tabela table.map{margin:0;background:var(--surface);}
+  .ds-tabela caption{text-align:left;font-weight:var(--fw-bold);padding:0 0 var(--space-2);caption-side:top;}
+  .ds-tabela tbody th{font-family:var(--font-body);font-size:var(--fs-md);font-weight:var(--fw-regular);letter-spacing:0;text-transform:none;color:var(--text);background:none;}
+  .ds-r{font-family:var(--font-mono);font-size:var(--fs-xs);white-space:nowrap;}
+  .ds-r.is-ok{color:var(--success-text);}
+  .ds-r.is-falha{color:var(--danger-text);font-weight:var(--fw-bold);}
+
+  /* tipografia */
+  .ds-familias{display:grid;gap:var(--space-3);margin:0 0 var(--space-8);}
+  .ds-fam{margin:0;padding:var(--space-4) var(--space-4-5);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);font-size:var(--fs-xl);}
+  .ds-fam span{display:block;font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--text-mute);margin-bottom:var(--space-1);text-transform:none;letter-spacing:0;}
+  .ds-fam-display{font-family:var(--font-display);font-stretch:var(--display-stretch);font-weight:var(--fw-display);text-transform:uppercase;letter-spacing:var(--tracking-tight);font-size:var(--fs-fluid-h2);line-height:var(--lh-heading);}
+  .ds-fam-mono{font-family:var(--font-mono);font-weight:var(--fw-medium);}
+  .ds-escala{list-style:none;margin:0;padding:0;}
+  .ds-escala li{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:var(--space-2) var(--space-6);align-items:baseline;padding:var(--space-3-5) 0;border-top:1px solid var(--line);}
+  .ds-escala-meta{display:grid;gap:var(--space-0-5);font-size:var(--fs-sm);color:var(--text-mute);}
+  .ds-escala-meta code{justify-self:start;}
+  .ds-escala-meta b{font-family:var(--font-mono);font-weight:var(--fw-medium);color:var(--text-soft);}
+  .ds-amostra{margin:0;min-width:0;overflow-wrap:anywhere;}
+  .ds-display{font-family:var(--font-display);font-stretch:var(--display-stretch);font-weight:var(--fw-display);text-transform:uppercase;letter-spacing:var(--tracking-tight);line-height:var(--lh-heading);}
+  .ds-title, .ds-strong{font-weight:var(--fw-bold);line-height:var(--lh-title);}
+  .ds-mono{font-family:var(--font-mono);font-weight:var(--fw-medium);letter-spacing:var(--tracking-tight);}
+  @media (max-width:640px){ /* --bp-md */ .ds-escala li{grid-template-columns:1fr;} }
+
+  /* espaço, raio, sombra */
+  .ds-espacos{list-style:none;margin:0;padding:0;}
+  .ds-espacos li{display:grid;grid-template-columns:120px 56px 1fr;gap:var(--space-3);align-items:center;padding:var(--space-1-5) 0;}
+  .ds-barra{display:block;height:12px;background:var(--accent-text);border-radius:var(--space-0-5);min-width:1px;}
+  .ds-raios, .ds-sombras{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:var(--space-5);}
+  .ds-raios li, .ds-sombras li{display:grid;gap:var(--space-1);align-content:start;}
+  .ds-raio{display:block;height:80px;background:var(--surface-2);border:2px solid var(--accent-text);margin-bottom:var(--space-2);}
+  .ds-sombra{display:block;height:96px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);margin-bottom:var(--space-3);}
+
+  /* movimento */
+  .ds-movs{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-4);}
+  .ds-movs li{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2) var(--space-3);}
+  .ds-mov{position:relative;width:200px;height:36px;padding:0;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface-2);cursor:pointer;}
+  .ds-mov span{position:absolute;top:7px;left:7px;width:20px;height:20px;border-radius:var(--radius-sm);background:var(--gold);transition:transform var(--d) var(--e);}
+  .ds-mov:hover span, .ds-mov:focus-visible span{transform:translateX(164px);}
+</style>
+</body>
+</html>

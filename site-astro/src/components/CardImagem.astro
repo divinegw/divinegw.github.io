@@ -1,0 +1,17 @@
+---
+// Card com imagem: arte 2:1 de ponta a ponta no topo do card, e o conteúdo embaixo.
+// Use quando a imagem é o assunto do card (item lendário, mapa, boss). Para imagem de apoio
+// no meio do texto, use o Card comum com ![alt](arquivo "banner").
+//   imagem: caminho em src/assets/guias/ (ex.: "fractals/ad-infinitum.jpg") · alt: descrição da imagem
+//   id / sumario / semSumario: como no Card
+import { Image } from 'astro:assets';
+import { imagem as achar } from '../lib/arquivos';
+
+interface Props { imagem: string; alt: string; id?: string; sumario?: string; semSumario?: boolean; class?: string }
+const { imagem, alt, class: extra } = Astro.props;
+const img = achar(imagem);
+---
+<div class:list={['card', 'card-imagem', extra]}>
+  <Image class="card-media" src={img} alt={alt} widths={[380, 760, 1140, 1520].filter((w) => w <= img.width)} sizes="(min-width: 800px) 760px, 100vw" />
+  <div class="card-corpo"><slot /></div>
+</div>

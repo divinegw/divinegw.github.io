@@ -1,0 +1,63 @@
+---
+// Termo de GW2 com definição num balão de fala (tooltip acessível).
+//   <Termo def="Estado em que o personagem cai ao chegar a 0 de vida...">downed</Termo>
+//   nome: título no balão (padrão: o próprio texto do termo)
+// Mouse: abre ao passar por cima e o balão aceita o ponteiro (dá para ler e selecionar).
+// Teclado: abre no foco; Esc fecha. Toque: toca para abrir e fixar, toca de novo (ou fora) para fechar.
+// Leitor de tela: o botão anuncia o termo e lê a definição como descrição (aria-describedby).
+// Sem JavaScript, abre no hover e no foco do mesmo jeito (só CSS). No PDF, sai só o texto.
+//   estado: só na vitrine (hover, foco, aberto), para mostrar o balão parado
+interface Props { def: string; nome?: string; estado?: 'hover' | 'foco' | 'aberto' }
+const { def, estado } = Astro.props;
+const texto = (await Astro.slots.render('default')).replace(/<[^>]+>/g, '').trim();
+const nome = Astro.props.nome ?? texto;
+const g = globalThis as { __termo?: number };
+g.__termo = (g.__termo ?? 0) + 1;
+const id = `termo-${g.__termo}`;
+---
+<span class:list={['termo', { 'is-hover': estado === 'hover', 'is-mostra': estado === 'foco', 'is-aberto': estado === 'aberto' }]} data-termo><button type="button" class:list={['termo-gatilho', { 'is-foco': estado === 'foco' }]} aria-describedby={id}><slot /></button><span class="termo-balao" role="tooltip" id={id}><b class="termo-nome">{nome}</b> {def}</span></span>
+
+<script>
+  // Uma vez por página (o Astro junta os <script> repetidos).
+  const termos = [...document.querySelectorAll<HTMLElement>('[data-termo]')];
+  const margem = 12; // folga até a borda da tela
+
+  // Mantém o balão dentro da tela: desloca na horizontal e vira para baixo se não couber em cima.
+  function posiciona(t: HTMLElement) {
+    const b = t.querySelector<HTMLElement>('.termo-balao');
+    if (!b) return;
+    t.classList.remove('abaixo');
+    t.style.removeProperty('--tip-desloca');
+    const r = b.getBoundingClientRect();
+    const topo = document.querySelector('.sitehead')?.getBoundingClientRect().bottom ?? 0;
+    if (r.top < Math.max(topo, 0) + margem) t.classList.add('abaixo');
+    let d = 0;
+    if (r.left < margem) d = margem - r.left;
+    else if (r.right > innerWidth - margem) d = innerWidth - margem - r.right;
+    if (d) t.style.setProperty('--tip-desloca', `${Math.round(d)}px`);
+  }
+  function fecha(t: HTMLElement) { t.classList.remove('is-aberto'); }
+
+  termos.forEach((t) => {
+    const btn = t.querySelector('button')!;
+    ['mouseenter', 'focusin'].forEach((ev) => t.addEventListener(ev, () => { t.classList.remove('is-fechado'); posiciona(t); }));
+    t.addEventListener('mouseleave', () => t.classList.remove('is-fechado'));
+    t.addEventListener('focusout', () => { t.classList.remove('is-fechado'); fecha(t); });
+    // toque e clique: fixa aberto (no toque não existe hover)
+    btn.addEventListener('click', () => {
+      const abrir = !t.classList.contains('is-aberto');
+      termos.forEach(fecha);
+      if (abrir) { t.classList.add('is-aberto'); t.classList.remove('is-fechado'); posiciona(t); }
+      else t.classList.add('is-fechado');
+    });
+  });
+  // Esc fecha o que estiver aberto, mesmo com o mouse em cima (WCAG 1.4.13)
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    termos.forEach((t) => { if (t.matches(':hover, :focus-within, .is-aberto')) { fecha(t); t.classList.add('is-fechado'); } });
+  });
+  // toque fora fecha
+  document.addEventListener('pointerdown', (e) => {
+    termos.forEach((t) => { if (!t.contains(e.target as Node)) fecha(t); });
+  });
+</script>

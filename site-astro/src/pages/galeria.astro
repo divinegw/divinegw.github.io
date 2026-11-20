@@ -1,0 +1,173 @@
+---
+// Galeria: /galeria.html. As artes que a guilda fez para os guias, separadas por guia (ordem de GUIAS).
+// Topo: faixa de arte com o título (padrão da página de Novidades). Cada arte é um quadro 2:1 com o nome embaixo.
+// Clicar abre o visor (<dialog> nativo): a arte inteira, o nome, "3 de 55", anterior/próxima (← →), "Ver no guia"
+// e "Baixar PNG" (o arquivo de 3200 px do Release do GitHub, como saiu do Upscayl). Esc fecha e o foco volta ao quadro.
+// Sem script: o quadro é um link para a imagem grande e o PNG fica no link de download ao lado do nome.
+// Dados em src/galeria.ts; imagens em src/assets/galeria/ (scripts/galeria.mjs).
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Cabeca from '../components/Cabeca.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Botao from '../components/Botao.astro';
+import Rodape from '../components/Rodape.astro';
+import { ARTES, GALERIA } from '../galeria';
+import { GUIAS } from '../site';
+import { lucide } from '../lib/lucide';
+
+const arquivos = import.meta.glob<ImageMetadata>('../assets/galeria/*.jpg', { eager: true, import: 'default' });
+const img = (nome: string) => {
+  const i = arquivos[`../assets/galeria/${nome}.jpg`];
+  if (!i) throw new Error(`Galeria: falta src/assets/galeria/${nome}.jpg (rode node scripts/galeria.mjs)`);
+  return i;
+};
+
+const itens = await Promise.all(ARTES.map(async (a, i) => {
+  const src = img(a.arquivo);
+  const [media, grande] = await Promise.all([1200, 2400].map((w) => getImage({ src, width: Math.min(w, src.width), format: 'webp' })));
+  const guia = GUIAS.find((g) => g.guia === a.guia)!;
+  return {
+    ...a, i, src, guiaNome: guia.nome,
+    href: `/guias/${a.guia}.html${a.ancora ? `#${a.ancora}` : ''}`,
+    png: `${GALERIA.release}${a.arquivo}.png`,
+    srcset: `${media.src} ${media.attributes.width}w, ${grande.src} ${grande.attributes.width}w`,
+    grande: grande.src,
+  };
+}));
+const grupos = GUIAS.map((g) => ({ ...g, artes: itens.filter((a) => a.guia === g.guia) })).filter((g) => g.artes.length);
+const total = itens.length;
+const topo = img('raids-wing-3-stronghold-xera');
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca titulo="Galeria" descricao={`As artes dos guias da guilda DIVINE como wallpapers de Guild Wars 2, para baixar em alta resolução (${GALERIA.largura} px).`} caminho="/galeria.html" />
+</head>
+<body>
+<div class="pagina">
+<Cabecalho atual="galeria" aviso />
+<header class="novidades-topo galeria-topo">
+  <Image class="novidades-arte" src={topo} alt="" widths={[640, 1024, 1600, 2400].filter((w) => w <= topo.width)} sizes="100vw" loading="eager" fetchpriority="high" layout="full-width" style="object-position:50% 30%" />
+  <div class="novidades-topo-texto galeria-topo-texto">
+    <h1>Galeria</h1>
+    <p>Todas as artes dos nossos guias, prontas para virar wallpaper. Abra a que você quiser e baixe em alta resolução, {GALERIA.largura} px.</p>
+  </div>
+</header>
+<main id="conteudo" class="galeria">
+  {grupos.map((g) => (
+    <section class="galeria-grupo" aria-labelledby={`galeria-${g.guia}`}>
+      <div class="galeria-grupo-titulo">
+        <h2 id={`galeria-${g.guia}`}>{g.nome}</h2>
+        <span class="galeria-conta">{g.artes.length} {g.artes.length === 1 ? 'arte' : 'artes'}</span>
+      </div>
+      <ul class="galeria-grade">
+        {g.artes.map((a) => (
+          <li>
+            <figure class="galeria-item">
+              <a class="galeria-quadro" href={a.grande} data-galeria={a.i} data-srcset={a.srcset} data-titulo={a.titulo}
+                 data-detalhe={a.detalhe ?? ''} data-guia={a.href} data-guia-nome={a.guiaNome} data-png={a.png}
+                 aria-label={`Ver ${a.titulo} em tela cheia`}>
+                <Image src={a.src} alt="" widths={[380, 760]} sizes="(min-width: 1160px) 370px, (min-width: 640px) 45vw, 100vw" />
+              </a>
+              <figcaption>
+                <span class="galeria-nome">
+                  <b>{a.titulo}</b>
+                  {a.detalhe && <span>{a.detalhe}</span>}
+                </span>
+                <a class="galeria-baixar" href={a.png} aria-label={`Baixar ${a.titulo} em PNG de ${GALERIA.largura} px`}><Fragment set:html={lucide('download')} /></a>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</main>
+
+<dialog class="galeria-visor tema-escuro" aria-labelledby="visor-titulo" data-visor data-largura={GALERIA.largura}>
+  <p class="sr-only" aria-live="polite" data-visor-anuncio></p>
+  <div class="visor-barra">
+    <p class="visor-conta" data-visor-conta></p>
+    <Botao variante="icone" icone="x" rotulo="Fechar" data-visor-fechar="" />
+  </div>
+  <div class="visor-palco">
+    <Botao variante="icone" icone="chevron-left" rotulo="Arte anterior" class="visor-seta visor-ant" data-visor-ant="" />
+    <Botao variante="icone" icone="chevron-right" rotulo="Próxima arte" class="visor-seta visor-prox" data-visor-prox="" />
+  </div>
+  <div class="visor-rodape">
+    <div class="visor-texto">
+      <h2 id="visor-titulo" data-visor-titulo></h2>
+      <p data-visor-detalhe></p>
+    </div>
+    <div class="visor-acoes">
+      <Botao href="#" icone="book-open" data-visor-guia="">Ver no guia</Botao>
+      <Botao href="#" icone="download" variante="primario" data-visor-png="">Baixar PNG</Botao>
+    </div>
+  </div>
+</dialog>
+</div>
+<Rodape atalhos atual="galeria" />
+
+<script>
+  const visor = document.querySelector<HTMLDialogElement>('[data-visor]')!;
+  const quadros = [...document.querySelectorAll<HTMLAnchorElement>('[data-galeria]')];
+  const $ = <T extends HTMLElement>(s: string) => visor.querySelector<T>(s)!;
+  // a <img> do visor só entra na página na primeira abertura (vazia no HTML, contaria como imagem quebrada)
+  const imgEl = document.createElement('img');
+  imgEl.className = 'visor-img'; imgEl.sizes = '100vw'; imgEl.decoding = 'async';
+  let atual = 0, origem: HTMLElement | null = null;
+
+  function mostrar(i: number) {
+    atual = (i + quadros.length) % quadros.length;
+    const q = quadros[atual].dataset;
+    if (!imgEl.isConnected) $('[data-visor-prox]').before(imgEl);
+    imgEl.removeAttribute('src');
+    imgEl.srcset = q.srcset!;
+    imgEl.src = quadros[atual].href;
+    imgEl.alt = `Arte de ${q.titulo}`;
+    $('[data-visor-titulo]').textContent = q.titulo!;
+    const det = $('[data-visor-detalhe]');
+    det.textContent = [q.detalhe, `Guia de ${q.guiaNome}`].filter(Boolean).join(' · ');
+    $('[data-visor-conta]').textContent = `${atual + 1} de ${quadros.length}`;
+    // o leitor de tela ouve a posição e o nome a cada troca (o título visível não é região viva)
+    $('[data-visor-anuncio]').textContent = `${atual + 1} de ${quadros.length}: ${q.titulo}`;
+    const guia = $<HTMLAnchorElement>('[data-visor-guia]');
+    guia.href = q.guia!;
+    guia.setAttribute('aria-label', `Ver ${q.titulo} no guia de ${q.guiaNome}`);
+    const png = $<HTMLAnchorElement>('[data-visor-png]');
+    png.href = q.png!;
+    png.setAttribute('aria-label', `Baixar ${q.titulo} em PNG de ${visor.dataset.largura} px`);
+    // pré-carrega a vizinha da direita
+    const prox = quadros[(atual + 1) % quadros.length];
+    const pre = new Image(); pre.sizes = '100vw'; pre.srcset = prox.dataset.srcset!;
+  }
+
+  quadros.forEach((q, i) => q.addEventListener('click', (e) => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return; // nova aba continua funcionando
+    e.preventDefault();
+    origem = q;
+    mostrar(i);
+    document.documentElement.classList.add('visor-aberto'); // trava a rolagem do fundo (o evento toggle do dialog não existe em todo navegador)
+    visor.showModal();
+  }));
+  $('[data-visor-ant]').addEventListener('click', () => mostrar(atual - 1));
+  $('[data-visor-prox]').addEventListener('click', () => mostrar(atual + 1));
+  $('[data-visor-fechar]').addEventListener('click', () => visor.close());
+  visor.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); mostrar(atual - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); mostrar(atual + 1); }
+  });
+  // clique no fundo escuro (fora da imagem e dos controles) fecha
+  visor.addEventListener('click', (e) => { if (e.target === visor || (e.target as HTMLElement).classList.contains('visor-palco')) visor.close(); });
+  // ao fechar, o foco volta ao quadro da arte que estava aberta
+  visor.addEventListener('close', () => { (quadros[atual] ?? origem)?.focus(); document.documentElement.classList.remove('visor-aberto'); });
+  // deslizar no celular troca de arte (só gesto claramente horizontal)
+  let x0 = 0, y0 = 0;
+  imgEl.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  imgEl.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > 2 * Math.abs(dy)) mostrar(atual + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+# Gera, testa e publica o site em https://divinegw.github.io/
+# - Pull request: build + QA. Se algo quebrar, o PR mostra o erro e nada é publicado.
+# - Push na main (merge de PR): build + QA + publicação no GitHub Pages.
+# - Manual (aba Actions → "Site" → Run workflow): igual ao push; marque "pdf" para gerar os PDFs completos dos guias.
+# Requisito, uma vez só: Settings → Pages → Build and deployment → Source = "GitHub Actions".
+name: Site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      pdf:
+        description: Gerar os PDFs completos dos guias (sem isso, /pdfs/<guia>.pdf é um aviso com o link do guia)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  # só PR cancela a rodada anterior; na main cada publicação termina (inclusive a com PDF)
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site-astro
+    env:
+      PDF_CHANNEL: chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site-astro/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - if: ${{ inputs.pdf }}
+        run: npm run pdf
+      - run: npm run pdf-aviso
+      - run: npm run qa
+      # a vitrine do design system é só para quem mantém o site
+      - run: rm -f dist/design-system.html
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site-astro/dist
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,28 @@
+---
+// Faixa da última novidade (Fase 6): da família do card de guia. Arte à esquerda com o ícone da novidade, título em
+// display, resumo, selo "Novo" (só nos AVISO_DIAS dias seguintes) + data e "Ver o que mudou". O cartão inteiro é o
+// link para /novidades.html#<id>. Na home fica logo acima de "Comece por aqui" e faz o papel do aviso dos guias.
+// Os dados vêm de src/novidades.ts (a mais nova, ou a `novidade` passada). Não imprime.
+import { Image } from 'astro:assets';
+import Selo from './Selo.astro';
+import { ultimaNovidade, dataCurta, recente, expiraNovo, type Novidade } from '../novidades';
+import { icone, imagem } from '../lib/arquivos';
+import { lucide } from '../lib/lucide';
+
+interface Props { novidade?: Novidade; class?: string }
+const { novidade = ultimaNovidade, class: extra } = Astro.props;
+const arte = imagem(novidade.arte ?? 'endgame/arte.webp');
+const icoNovidade = novidade.icone ? icone(novidade.icone) : undefined;
+---
+<a class:list={["faixa-novidade", extra]} href={`/novidades.html#${novidade.id}`}>
+  <span class="faixa-novidade-arte" aria-hidden="true">
+    <Image src={arte} alt="" widths={[320, 640].filter((w) => w <= arte.width)} sizes="(min-width: 641px) 240px, 100vw" style={`object-position:${novidade.foco ?? '50% 40%'}`} />
+    {icoNovidade && <span class="faixa-novidade-ico"><Image src={icoNovidade} width={28} height={28} alt="" layout="fixed" /></span>}
+  </span>
+  <span class="faixa-novidade-texto">
+    <span class="faixa-novidade-titulo">{novidade.titulo}</span>
+    <span class="faixa-novidade-resumo">{novidade.resumo}</span>
+    <span class="faixa-novidade-meta">{recente(novidade) && <Selo tipo="novo" expira={expiraNovo(novidade)} />}<time datetime={novidade.data}>{dataCurta(novidade.data)}</time></span>
+  </span>
+  <span class="faixa-novidade-ir"><span class="btn btn-secundario btn-sm">Ver o que mudou<Fragment set:html={lucide('arrow-right')} /></span></span>
+</a>

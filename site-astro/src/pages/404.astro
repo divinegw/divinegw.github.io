@@ -1,0 +1,40 @@
+---
+// Página "não encontrada" (o GitHub Pages usa /404.html sozinho, em qualquer endereço que não existe;
+// por isso todo caminho aqui é absoluto). Mesmo herói da página inicial, mais baixo, com a busca:
+// quem chegou por um link antigo do Discord acha o assunto sem passar pela home. Barra do topo: a mesma de todas as páginas.
+import { Image } from 'astro:assets';
+import Cabeca from '../components/Cabeca.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Emblema from '../components/Emblema.astro';
+import Botao from '../components/Botao.astro';
+import Busca from '../components/Busca.astro';
+import Rodape from '../components/Rodape.astro';
+import arte from '../assets/home/arte.jpg';
+import '../styles/inicio.css';
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<Cabeca titulo="Página não encontrada" descricao="Esta página não existe. Volte para a lista de guias da guilda DIVINE." caminho="/404.html" />
+<meta name="robots" content="noindex">
+</head>
+<body>
+<div class="pagina">
+<Cabecalho aviso />
+<header class="hero hero-home hero-404">
+  <div class="hero-bg">
+    <Image class="hero-banner-img" src={arte} alt="" widths={[640, 768, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" layout="full-width" />
+  </div>
+</header>
+<main class="hero-inner hero-404-inner" id="conteudo">
+  <Emblema tamanho="lg" />
+  <h1>Página não encontrada</h1>
+  <p class="hero-sub">Erro 404</p>
+  <p class="hero-desc">Esse link se perdeu nas Mists. Procure o assunto na busca ou volte para a lista de guias.</p>
+  <Busca />
+  <p class="hero-acao"><Botao variante="primario" tamanho="lg" href="/" icone="arrow-left">Ver todos os guias</Botao></p>
+</main>
+</div>
+<Rodape />
+</body>
+</html>

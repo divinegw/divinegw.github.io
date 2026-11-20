@@ -1,0 +1,16 @@
+---
+// Ícone de card ou de linha. `icone` é:
+//   - o nome de um arquivo em src/assets/icones/ (sem extensão), ex.: "agony"
+//   - ou o nome de um ícone Lucide (lucide.dev/icons), ex.: "shield"
+import { Image } from 'astro:assets';
+import { icone as achar } from '../lib/arquivos';
+import { lucide } from '../lib/lucide';
+
+interface Props { icone?: string; tipo: 'card' | 'tier' }
+const { icone, tipo } = Astro.props;
+const img = icone ? achar(icone) : undefined;
+const px = Math.min(tipo === 'card' ? 64 : 56, img?.width ?? 64); // 2x do tamanho exibido
+---
+{img
+  ? <Image src={img} width={px} height={px} alt="" class={tipo === 'card' ? 'icon' : undefined} layout="fixed" />
+  : icone && <span class="ico-wrap" aria-hidden="true" set:html={lucide(icone)} />}

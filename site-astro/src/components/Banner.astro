@@ -1,0 +1,19 @@
+---
+// Banner 2:1 (a mesma proporção do herói, das Wings e do card com imagem) que se revela ao entrar
+// na tela: o recorte abre e a arte assenta, só com CSS (animation-timeline: view()).
+// A imagem já nasce visível: em navegador sem suporte, com "reduzir movimento" ou no PDF, ela só aparece.
+//   imagem: caminho em src/assets/guias/ · alt: descrição da imagem · legenda: texto embaixo (opcional)
+//   posicao: object-position, quando o assunto não está no centro (ex.: "center 30%")
+import { Image } from 'astro:assets';
+import { imagem as achar } from '../lib/arquivos';
+interface Props { imagem: string; alt: string; legenda?: string; posicao?: string; class?: string }
+const { imagem, alt, legenda, posicao, class: extra } = Astro.props;
+const img = achar(imagem);
+---
+<figure class:list={['banner', extra]}>
+  <div class="banner-moldura">
+    <Image class="banner-img" src={img} alt={alt} widths={[380, 760, 1140, 1520].filter((w) => w <= img.width)}
+      sizes="(min-width: 800px) 760px, 100vw" style={posicao ? `object-position:${posicao}` : undefined} />
+  </div>
+  {legenda && <figcaption>{legenda}</figcaption>}
+</figure>

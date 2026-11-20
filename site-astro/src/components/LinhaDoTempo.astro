@@ -1,0 +1,13 @@
+---
+// Linha do tempo: uma sequência em que a ordem importa (Wings de Raid, Tiers das Fractals).
+// Lista ordenada (<ol>), cada <Marco> com rótulo (WING 1, TIER 2), nome e detalhes.
+//   rotulo: nome da lista para o leitor de tela (ex.: "Raid Wings em ordem")
+//   direcao: vertical (padrão; boa para 5 ou mais marcos) · horizontal (até 4 marcos lado a lado;
+//            abaixo de 640px e no PDF vira vertical)
+//   <LinhaDoTempo rotulo="Raid Wings em ordem">
+//     <Marco rotulo="Wing 1" nome="Spirit Vale" href="#spirit-vale" detalhes={['Heart of Thorns', '4 encontros']} />
+//   </LinhaDoTempo>
+interface Props { rotulo: string; direcao?: 'vertical' | 'horizontal'; class?: string }
+const { rotulo, direcao = 'vertical', class: extra } = Astro.props;
+---
+<ol class:list={['linha', `linha-${direcao}`, extra]} aria-label={rotulo}><slot /></ol>

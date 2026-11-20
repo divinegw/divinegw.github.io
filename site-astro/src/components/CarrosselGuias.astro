@@ -1,0 +1,112 @@
+---
+// Slide do topo da página inicial: os 5 guias (ordem de GUIAS em src/site.ts), com a arte de cada guia,
+// o nome, a frase do card e "Abrir guia" (o "PDF" saiu na Fase 7).
+// Base sem script: uma faixa com rolagem lateral e encaixe (scroll-snap); dá para arrastar no celular.
+// Com script: pontos embaixo (sem setas e sem botão de pausa, a pedido do usuário) e troca sozinha a cada 7 s.
+// Para não prender quem precisa de calma (WCAG 2.2.2), a troca automática:
+//   · para de vez quando a pessoa mexe no slide: clica num ponto, arrasta, rola de lado ou usa ← →;
+//   · espera enquanto o ponteiro ou o foco do teclado está no slide, a aba está escondida ou o slide saiu da tela;
+//   · não começa com "reduzir movimento" ligado.
+// Os slides fora da tela ficam inertes (o Tab não cai num botão que não se vê).
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { GUIAS } from '../site';
+import Botao from './Botao.astro';
+
+const slides = await Promise.all(GUIAS.filter((g) => g.slide !== false).map(async (g) => {
+  const e = await getEntry('guias', g.guia);
+  if (!e) throw new Error(`Guia não encontrado: ${g.guia}`);
+  return { ...g, arte: e.data.arte, foco: e.data.foco };
+}));
+const total = slides.length;
+---
+<section class="carrossel" aria-roledescription="carrossel" aria-label="Os guias da guilda" data-carrossel>
+  <div class="carrossel-trilho" id="carrossel-trilho" aria-live="off">
+    {slides.map((s, i) => (
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} de ${total}: ${s.nome}`} id={`slide-${s.guia}`}>
+        <Image class="slide-arte" src={s.arte} alt="" widths={[640, 1024, 1600, 1920].filter((w) => w <= s.arte.width)} sizes="100vw" quality={68} style={`object-position:${s.foco}`}
+          loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} />
+        <div class="slide-conteudo">
+          <h2 class="slide-nome">{s.nome}</h2>
+          <p class="slide-texto">{s.texto}</p>
+          <div class="slide-acoes">
+            <Botao variante="primario" tamanho="lg" href={`/guias/${s.guia}.html`}>Abrir guia<span class="sr-only"> de {s.nome}</span></Botao>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="carrossel-controles">
+    <div class="carrossel-pontos" role="group" aria-label="Escolher guia">
+      {slides.map((s, i) => (
+        <button type="button" class="carrossel-ponto" aria-label={s.nome} aria-controls={`slide-${s.guia}`} aria-current={i === 0 ? 'true' : undefined}><span></span></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const TEMPO = 7000;
+  const raiz = document.querySelector<HTMLElement>('[data-carrossel]');
+  if (raiz) {
+    const trilho = raiz.querySelector<HTMLElement>('.carrossel-trilho')!;
+    const slides = [...raiz.querySelectorAll<HTMLElement>('.slide')];
+    const pontos = [...raiz.querySelectorAll<HTMLButtonElement>('.carrossel-ponto')];
+    const reduz = matchMedia('(prefers-reduced-motion: reduce)');
+    let atual = 0, timer = 0, sobre = false, naTela = true;
+    let parado = reduz.matches; // de vez: a pessoa mexeu no slide, ou "reduzir movimento"
+    raiz.classList.add('is-pronto');
+
+    const rodando = () => !parado && !sobre && naTela && !document.hidden;
+    const agenda = () => {
+      clearTimeout(timer);
+      raiz.classList.toggle('is-rodando', rodando());
+      trilho.setAttribute('aria-live', parado ? 'polite' : 'off');
+      if (rodando()) timer = window.setTimeout(() => vai(atual + 1), TEMPO);
+    };
+    const para = () => { if (!parado) { parado = true; agenda(); } };
+    const vai = (i: number) => {
+      const alvo = slides[(i + slides.length) % slides.length];
+      trilho.scrollTo({ left: alvo.offsetLeft, behavior: reduz.matches ? 'auto' : 'smooth' });
+    };
+    const marca = (i: number) => {
+      if (i === atual && raiz.dataset.iniciado) return;
+      raiz.dataset.iniciado = '1';
+      atual = i;
+      slides.forEach((s, j) => { s.inert = j !== i; });
+      pontos.forEach((p, j) => { if (j === i) p.setAttribute('aria-current', 'true'); else p.removeAttribute('aria-current'); });
+      // reinicia a barrinha do tempo no ponto ativo
+      raiz.classList.remove('is-rodando'); void raiz.offsetWidth;
+      agenda();
+    };
+    marca(0);
+
+    // qual slide está na tela (a rolagem pode vir da troca automática, dos pontos, do arraste ou do teclado)
+    const obs = new IntersectionObserver((es) => {
+      for (const e of es) if (e.isIntersecting) marca(slides.indexOf(e.target as HTMLElement));
+    }, { root: trilho, threshold: 0.6 });
+    slides.forEach((s) => obs.observe(s));
+    new IntersectionObserver(([e]) => { naTela = e.isIntersecting; agenda(); }, { threshold: 0.25 }).observe(raiz);
+
+    // mexeu no slide: a troca automática para de vez
+    pontos.forEach((p, i) => p.addEventListener('click', () => { para(); vai(i); }));
+    trilho.addEventListener('pointerdown', para);
+    trilho.addEventListener('touchstart', para, { passive: true });
+    trilho.addEventListener('wheel', (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) para(); }, { passive: true });
+    raiz.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); para(); vai(atual + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); para(); vai(atual - 1); }
+    });
+    // ponteiro ou foco em cima: espera
+    raiz.addEventListener('pointerenter', () => { sobre = true; agenda(); });
+    raiz.addEventListener('pointerleave', () => { sobre = false; agenda(); });
+    raiz.addEventListener('focusin', () => { sobre = true; agenda(); });
+    raiz.addEventListener('focusout', (e) => { if (!raiz.contains(e.relatedTarget as Node)) { sobre = false; agenda(); } });
+    document.addEventListener('visibilitychange', agenda);
+    // depois que a página carregou, baixa as artes dos outros slides (para não aparecerem em branco)
+    addEventListener('load', () => {
+      const pede = () => raiz.querySelectorAll<HTMLImageElement>('.slide-arte[loading="lazy"]').forEach((img) => { img.loading = 'eager'; });
+      setTimeout(pede, 2500); // bem antes da 1ª troca (7 s)
+    });
+  }
+</script>

@@ -1,0 +1,38 @@
+---
+// Vitrine: mostra um componente em cada estado, nos dois temas lado a lado (claro em cima, escuro embaixo).
+// Uso: <Estados linhas={[{ id: 'p', nome: 'Primário' }]} estados={['normal','hover','foco','desativado']}>
+//        {(estado, linha) => <Botao ... class={...} />}
+//      </Estados>
+// Os painéis são `inert`: são retratos dos estados (o hover e o foco são forçados com .is-hover / .is-foco),
+// então não entram no Tab nem no leitor de tela. O exemplo "ao vivo" de cada seção é o que se testa.
+interface Linha { id: string; nome?: string }
+interface Props { estados?: string[]; linhas?: Linha[]; nomes?: Record<string, string>; class?: string }
+const NOMES: Record<string, string> = { normal: 'Normal', hover: 'Hover', foco: 'Foco (teclado)', desativado: 'Desativado' };
+const { estados = ['normal', 'hover', 'foco', 'desativado'], linhas = [{ id: '' }], nomes = {}, class: extra } = Astro.props;
+const nome = (e: string) => nomes[e] ?? NOMES[e] ?? e;
+const temas = [{ id: 'claro', nome: 'Tema claro' }, { id: 'escuro', nome: 'Tema escuro' }];
+const html: Record<string, string> = {};
+for (const t of temas) for (const l of linhas) for (const e of estados) {
+  html[`${t.id}|${l.id}|${e}`] = await Astro.slots.render('default', [e, l.id]);
+}
+---
+<div class:list={['ds-temas', extra]}>
+  {temas.map((t) => (
+    <div class={`ds-tema tema-${t.id}`} inert>
+      <p class="ds-tema-nome">{t.nome}</p>
+      {linhas.map((l) => (
+        <div class="ds-linha">
+          {l.nome && <p class="ds-linha-nome">{l.nome}</p>}
+          <div class="ds-grade">
+            {estados.map((e) => (
+              <figure class="ds-celula">
+                <div class="ds-palco" set:html={html[`${t.id}|${l.id}|${e}`]} />
+                <figcaption>{nome(e)}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  ))}
+</div>

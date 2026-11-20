@@ -1,0 +1,11 @@
+---
+// Link de texto. Externo (http...) abre em nova aba, com seta e aviso para leitor de tela.
+// No Markdown, [texto](url) já sai com o mesmo estilo; use este componente fora do Markdown.
+import { lucide } from '../lib/lucide';
+
+interface Props { href: string; externo?: boolean; class?: string }
+const { href, externo = /^https?:\/\//.test(href), class: extra } = Astro.props;
+---
+{externo
+  ? <a class:list={['link', 'link-externo', extra]} href={href} target="_blank" rel="noopener"><slot /><Fragment set:html={lucide('arrow-up-right')} /><span class="sr-only"> (abre em nova aba)</span></a>
+  : <a class:list={['link', extra]} href={href}><slot /></a>}

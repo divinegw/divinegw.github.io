@@ -1,0 +1,21 @@
+---
+// Botão lua/sol que troca o tema e guarda a escolha (localStorage "divine-tema"). Um por página.
+// Visual: Botao variante="icone". aria-pressed = tema escuro ligado.
+import { lucide } from '../lib/lucide';
+---
+<button type="button" class="btn btn-icone theme-toggle" aria-label="Tema escuro"><Fragment set:html={lucide('moon', 'i-lua') + lucide('sun', 'i-sol')} /></button>
+<script is:inline>
+(function () {
+  var b = document.querySelector('.theme-toggle'); if (!b) return;
+  var r = document.documentElement;
+  function eff() { var t = r.getAttribute('data-theme'); if (t) return t;
+    return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+  function sync() { var d = eff() === 'dark'; b.setAttribute('aria-pressed', d ? 'true' : 'false');
+    b.title = d ? 'Usar tema claro' : 'Usar tema escuro'; }
+  b.addEventListener('click', function () { var n = eff() === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', n); try { localStorage.setItem('divine-tema', n); } catch (e) {} sync(); });
+  if (window.matchMedia) { try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync); } catch (e) {} }
+  addEventListener('divine-tema', sync); // o <head> reaplicou o tema salvo (voltar do cache, outra aba)
+  sync();
+})();
+</script>

@@ -1,0 +1,29 @@
+---
+// Selo de estado: "Novo" (ouro), "Atualizado" (marinho) ou "Corrigido" (verde).
+//   <Selo tipo="novo" />                         caixa alta, mono 11 (padrão)
+//   <Selo tipo="atualizado" data="2026-11" rotuloData="nov. 2026" />   com data
+//   <Selo tipo="novo" icone />                   com o ícone do tipo (+ novo, ↻ atualizado, ✓ corrigido)
+//   <Selo tipo="novo" quantidade={8} />          contagem: "8 novos" (já com o ícone)
+//   <Selo tipo="corrigido" variante="discreto" /> para listas longas: ponto + palavra, sem caixa
+//   <Selo tipo="novo" expira="2026-12-17T00:00:00.000Z" />  some sozinho no navegador depois dessa data (ISO)
+// O tipo vai sempre escrito: a cor nunca trabalha sozinha.
+import { lucide } from '../lib/lucide';
+
+interface Props { tipo: 'novo' | 'atualizado' | 'corrigido'; data?: string; rotuloData?: string; icone?: boolean; quantidade?: number; variante?: 'discreto'; expira?: string; class?: string }
+const { tipo, data, rotuloData, icone, quantidade, variante, expira, class: extra } = Astro.props;
+const NOMES = { novo: ['Novo', 'novos'], atualizado: ['Atualizado', 'atualizados'], corrigido: ['Corrigido', 'corrigidos'] } as const;
+const ICONES = { novo: 'plus', atualizado: 'refresh-cw', corrigido: 'check' } as const;
+const [singular, plural] = NOMES[tipo];
+const discreto = variante === 'discreto';
+const comIcone = !discreto && (icone || quantidade !== undefined);
+---
+<span class:list={['selo', `selo-${tipo}`, { 'selo-discreto': discreto }, extra]} data-expira={expira}>{comIcone && <Fragment set:html={lucide(ICONES[tipo])} />}{quantidade !== undefined
+  ? <><span class="selo-n">{quantidade}</span> {quantidade === 1 ? singular.toLowerCase() : plural}</>
+  : singular}{rotuloData && <><span aria-hidden="true">·</span>{data ? <time datetime={data}>{rotuloData}</time> : <span>{rotuloData}</span>}</>}</span>
+
+<script>
+  // selo com prazo (`expira`): some depois da data, sem precisar de uma build nova
+  document.querySelectorAll<HTMLElement>('.selo[data-expira]').forEach((s) => {
+    if (Date.now() > Date.parse(s.dataset.expira ?? '')) s.remove();
+  });
+</script>

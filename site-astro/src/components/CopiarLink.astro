@@ -1,0 +1,43 @@
+---
+// Botão "copiar link da seção" nos títulos. Inclua UMA vez por página (no layout).
+// O rehype-divine.mjs põe cada capítulo (h2) num .titulo-secao e cada título de card (h3) num .titulo-card;
+// este script coloca o botão em cada um. Sem JavaScript não aparece nada (o botão só funciona com ele).
+// O botão fica ao lado do título, não dentro: assim o nome do título continua limpo para o leitor de tela.
+// Ao copiar: o ícone vira um "certo", um balão diz "Link copiado" e uma região aria-live anuncia o mesmo.
+import { lucide } from '../lib/lucide';
+---
+<template id="tpl-copiar-link"><button type="button" class="btn btn-icone btn-sm btn-fantasma copiar-link"><Fragment set:html={lucide('link', 'i-link') + lucide('check', 'i-ok')} /><span class="copiar-balao" aria-hidden="true">Link copiado</span></button></template>
+<p class="sr-only" aria-live="polite" id="anuncio-copia"></p>
+
+<script>
+  const tpl = document.getElementById('tpl-copiar-link') as HTMLTemplateElement | null;
+  const anuncio = document.getElementById('anuncio-copia');
+  if (tpl && anuncio) {
+    document.querySelectorAll<HTMLElement>('.titulo-secao, .titulo-card').forEach((caixa) => {
+      const h = caixa.querySelector<HTMLElement>('h2[id], h3[id]');
+      if (!h || caixa.querySelector('.copiar-link')) return;
+      const btn = (tpl.content.firstElementChild as HTMLButtonElement).cloneNode(true) as HTMLButtonElement;
+      const nome = (h.textContent || '').trim();
+      btn.setAttribute('aria-label', `Copiar link da seção ${nome}`);
+      btn.dataset.alvo = h.id;
+      caixa.append(btn);
+    });
+
+    let tempo = 0;
+    document.addEventListener('click', async (e) => {
+      const btn = (e.target as Element).closest<HTMLButtonElement>('.copiar-link');
+      if (!btn || !btn.dataset.alvo) return;
+      const url = `${location.origin}${location.pathname}#${btn.dataset.alvo}`;
+      let msg = 'Link copiado';
+      try { await navigator.clipboard.writeText(url); }
+      catch { history.replaceState(null, '', `#${btn.dataset.alvo}`); msg = 'Link na barra de endereço'; }
+      document.querySelectorAll('.copiar-link.is-copiado').forEach((b) => b.classList.remove('is-copiado'));
+      btn.querySelector('.copiar-balao')!.textContent = msg;
+      btn.classList.add('is-copiado');
+      anuncio.textContent = '';
+      requestAnimationFrame(() => { anuncio.textContent = msg; });
+      clearTimeout(tempo);
+      tempo = window.setTimeout(() => btn.classList.remove('is-copiado'), 1800);
+    });
+  }
+</script>

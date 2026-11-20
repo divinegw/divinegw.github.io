@@ -1,0 +1,25 @@
+---
+// Tabela responsiva. Dentro, uma tabela em Markdown (| a | b |) ou <table>.
+//   legenda: nome da tabela (vira <caption>; lida pelo leitor de tela e mostrada acima)
+//   legendaOculta: a legenda fica só para leitor de tela (quando o título do card já diz tudo)
+// Em tela estreita a tabela rola na horizontal, com sombra na borda indicando que há mais;
+// quando rola, a área ganha foco pelo teclado (tabindex) para dar para rolar com as setas.
+interface Props { legenda: string; legendaOculta?: boolean; class?: string }
+const { legenda, legendaOculta, class: extra } = Astro.props;
+const g = globalThis as { __tabela?: number };
+g.__tabela = (g.__tabela ?? 0) + 1;
+const id = `tabela-${g.__tabela}`;
+const html = await Astro.slots.render('default');
+const caption = `<caption id="${id}"${legendaOculta ? ' class="sr-only"' : ''}>${legenda.replace(/[<&]/g, (c) => (c === '<' ? '&lt;' : '&amp;'))}</caption>`;
+const comLegenda = html.replace(/<table([^>]*)>/, `<table$1>${caption}`);
+---
+<div class:list={['tabela', extra]} role="region" aria-labelledby={id} data-tabela set:html={comLegenda} />
+
+<script>
+  // Só vira parada do Tab quando há o que rolar. Uma vez por página.
+  const marca = () => document.querySelectorAll('[data-tabela]').forEach((t) => {
+    if (t.scrollWidth > t.clientWidth + 1) t.setAttribute('tabindex', '0'); else t.removeAttribute('tabindex');
+  });
+  addEventListener('resize', marca);
+  marca();
+</script>

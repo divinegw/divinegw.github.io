@@ -1,0 +1,11 @@
+---
+// Grupo de recomendados (Recursos Úteis, capítulo "Recomendados"): título do grupo (h3) e os <Favorito> em grade.
+//   <Favoritos titulo="Builds"> <Favorito nome="Snow Crows" url="https://snowcrows.com/" para="Builds e rotações de endgame"/> </Favoritos>
+// O rehype-divine.mjs dá o id (do título) e põe o grupo no sumário, dentro do capítulo.
+interface Props { titulo: string; id?: string }
+const { titulo, id } = Astro.props;
+---
+<section class="favoritos" aria-labelledby={id}>
+  <h3 class="fav-titulo" id={id}>{titulo}</h3>
+  <ul class="featured-grid"><slot /></ul>
+</section>

@@ -1,0 +1,39 @@
+---
+// Coluna da esquerda da ficha de CM (Boss.astro e vitrine): ícone oficial, "Challenge Mode" e os números,
+// tudo empilhado e centralizado (pedido do usuário).
+//   vida "30 → 40 milhões": VIDA / 30 milhões (normal, discreto) / fio · seta · fio / 40 milhões (CM, ouro).
+//     A unidade do lado direito vale para os dois ("~10 → 17 milhões" vira "~10 milhões" e "17 milhões").
+//     O leitor de tela ouve "Normal: 30 milhões. No Challenge Mode: 40 milhões".
+//   vida sem "→" ("42 milhões", "maior"): rótulo "Vida no CM" e o valor em ouro.
+//   limite "13 min": rótulo "Tempo limite".
+// No celular a coluna vira uma faixa no topo da ficha e a vida fica numa linha (seta para a direita).
+import { Image } from 'astro:assets';
+import { icone } from '../lib/arquivos';
+import { lucide } from '../lib/lucide';
+
+interface Props { vida?: string; limite?: string }
+const { vida, limite } = Astro.props;
+const img = icone('challenge-mode');
+let de: string | undefined, para: string | undefined;
+if (vida?.includes('→')) {
+  [de, para] = vida.split('→').map((s) => s.trim());
+  const unidade = para.replace(/^[~≈]?[\d.,]+\s*/, '');
+  if (unidade && /^[~≈]?[\d.,]+$/.test(de)) de = `${de} ${unidade}`;
+}
+---
+<div class="boss-cm-lado">
+  {img && <Image class="boss-cm-icone" src={img} width={44} height={44} alt="" layout="fixed" />}
+  <p class="boss-cm-titulo">Challenge<br />Mode</p>
+  {(vida || limite) && (
+    <dl class="boss-cm-dados">
+      {vida && (para
+        ? <div><dt>Vida</dt><dd class="boss-cm-vida">
+            <span class="boss-cm-de"><span class="sr-only">Normal: </span>{de}</span>
+            <span class="boss-cm-seta" aria-hidden="true"><Fragment set:html={lucide('arrow-down')} /></span>
+            <span class="boss-cm-para"><span class="sr-only">. No Challenge Mode: </span>{para}</span>
+          </dd></div>
+        : <div><dt>Vida no CM</dt><dd>{vida}</dd></div>)}
+      {limite && <div><dt>Tempo limite</dt><dd>{limite}</dd></div>}
+    </dl>
+  )}
+</div>

@@ -1,0 +1,19 @@
+---
+// Logo DIVINE monocromática (emblema + nome), para as barras do topo: preta no tema claro, branca no escuro.
+// Escolha do usuário na Fase 5 (17/11/2026). O emblema colorido continua no centro do topo dos guias (Emblema.astro).
+// Originais recortados em design-system/logo/divine-mono-preto.png e divine-mono-branco.png.
+//   altura: altura exibida em px (a largura sai da proporção, 4.25:1). É decorativa: o nome fica no link que a envolve.
+import { Image } from 'astro:assets';
+import preta from '../assets/marca/divine-mono-preto.png';
+import branca from '../assets/marca/divine-mono-branco.png';
+
+//   tarde: carrega só perto da tela (rodapé); nas barras do topo, carrega já
+interface Props { altura: number; class?: string; tarde?: boolean }
+const { altura, class: extra, tarde } = Astro.props;
+const loading = tarde ? 'lazy' : 'eager';
+const largura = Math.round((altura * preta.width) / preta.height);
+---
+<span class:list={['logo-divine', extra]} style={`--logo-alt:${altura}px;--logo-prop:${preta.width}/${preta.height}`}>
+  <Image class="logo-divine-claro" src={preta} width={largura} height={altura} alt="" layout="fixed" format="webp" loading={loading} />
+  <Image class="logo-divine-escuro" src={branca} width={largura} height={altura} alt="" layout="fixed" format="webp" loading={loading} />
+</span>
