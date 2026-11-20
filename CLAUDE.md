@@ -38,15 +38,24 @@ O clarify não entra em título, card, novidade nem abertura de capítulo: ali e
 | 2 | `editor` | conforme o tipo: `layout-system` (grid, responsivo), `typography-system`, `color-system` (cor e contraste, sempre via `tokens.css`), `emil-design-eng` (animação, hover, clique), `accessibility-excellence` (teclado, ARIA, foco), `security-and-hardening` (dado de fora: Firebase do sorteio, API do GW2), `ux-writing` (rótulos) | arquivos alterados + build passou |
 | 3 | `verificador` | — | passou / lista de falhas |
 | 4 | `revisor` | `impeccable` modo `critique`, `product-design-review`, `web-design-guidelines`, `pre-flight-check` | lista priorizada |
-| 5 | sessão principal | `verification-before-completion` | só agora diz "pronto" |
+| 5 | sessão principal | `verification-before-completion` | novidade feita (ver **Novidade**) e só agora diz "pronto" |
 
 ### Bug
 
-`diagnosing-bugs` na sessão principal (reproduzir, achar a causa) → `editor` aplica a correção → `verificador` → `revisor` se a correção mudar algo visível.
+`diagnosing-bugs` na sessão principal (reproduzir, achar a causa) → `editor` aplica a correção → `verificador` → `revisor` se a correção mudar algo visível → novidade do tipo `corrigido` se o leitor notava o bug.
+
+### Novidade (fecha toda entrega)
+
+Toda entrega que quem visita o site percebe termina com uma novidade em `site-astro/src/novidades.ts`: feature nova, página ou guia novo, guia atualizado ou reescrito, visual novo, correção que o leitor nota. Ela vai **no mesmo commit** da mudança. Pela regra, a entrega só fica pronta quando a novidade estiver feita.
+
+- **Quando entra:** a mudança aparece para o visitante. Refatoração, teste, ajuste de build e documentação do repositório (`CLAUDE.md`, `DESIGN.md`, README) não geram novidade.
+- **Como fazer:** o formato está no topo de `novidades.ts`. O texto segue a cadeia de **Texto** acima: `voz-divine` → `humanizer-pt-br`, sem clarify. O título tem até 6 palavras e "!". Cada item de `mudancas` aponta com `href` para a seção que mudou.
+- **Uma por dia:** se já existe uma entrada com a data de hoje, acrescente os itens de `mudancas` nela e mantenha o `id`. Um `id` novo acende o aviso de novo para todo mundo, então crie outra entrada só quando for um anúncio separado.
+- **Conferência:** o `verificador` roda com a novidade já no lugar, e o `revisor` audita o texto dela na voz. Na dúvida se uma mudança merece novidade, pergunte ao mantenedor antes do commit.
 
 ### Publicação
 
-Mudança pronta → commit local com mensagem de verdade (o histórico é público) → quando o mantenedor pedir: `publicar.ps1 -Mensagem "..."` (testa local, faz push; o Actions publica). Contribuição externa entra por pull request, e o Actions roda os mesmos testes.
+Mudança pronta, com a novidade → commit local com mensagem de verdade (o histórico é público) → quando o mantenedor pedir: `publicar.ps1 -Mensagem "..."` (testa local, faz push; o Actions publica). Contribuição externa entra por pull request, e o Actions roda os mesmos testes.
 
 ### Regras da orquestração
 
