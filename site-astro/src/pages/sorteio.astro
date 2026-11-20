@@ -95,14 +95,9 @@ const ICONES_OUTRO = [
   <div class="sorteio-grade">
   {/* Sorteios ao vivo abertos agora (lidos pela API REST do Firestore em sorteio.ts). Some quando a página abre um sorteio (?s=). */}
     {FIREBASE && (
-      <section class="ao-vivo" data-ao-vivo aria-labelledby="ao-vivo-titulo">
+      <section class="ao-vivo" data-ao-vivo aria-labelledby="ao-vivo-titulo" hidden>
         <div class="ao-vivo-topo">
           <h2 id="ao-vivo-titulo">Sorteios ao vivo</h2>
-        </div>
-        <div class="ao-vivo-vazio" data-ao-vivo-vazio hidden>
-          <Fragment set:html={ico('radio')} />
-          <p class="ao-vivo-vazio-titulo">Nenhum sorteio aberto agora</p>
-          <p>Abra um em <a href="#faca-titulo">Faça um sorteio</a> e ele aparece aqui para todo mundo.</p>
         </div>
         <ul class="ao-vivo-lista" data-ao-vivo-lista aria-busy="true"></ul>
         <button type="button" class="btn btn-secundario btn-sm ao-vivo-mais" data-ao-vivo-mais hidden aria-expanded="false"></button>

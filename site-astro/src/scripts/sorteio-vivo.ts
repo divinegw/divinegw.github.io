@@ -135,10 +135,8 @@ function cardVivo(s: SorteioRest, inscritos: number | null) {
 export function aoVivo(raiz: HTMLElement, c: Config) {
   const sec = raiz.querySelector<HTMLElement>('[data-ao-vivo]');
   const ul = sec?.querySelector<HTMLUListElement>('[data-ao-vivo-lista]');
-  const vazio = sec?.querySelector<HTMLElement>('[data-ao-vivo-vazio]');
-  if (!sec || !ul || !vazio) return;
+  if (!sec || !ul) return;
   const mais = sec.querySelector<HTMLButtonElement>('[data-ao-vivo-mais]')!;
-  const vazioHtml = vazio.innerHTML; // o estado vazio desenhado no HTML (um erro troca por texto; o próximo carregamento devolve)
   const VISIVEIS = 3;
   let total = 0;
   let todos = false;
@@ -174,17 +172,14 @@ export function aoVivo(raiz: HTMLElement, c: Config) {
         contagens.set(s.id, n);
         return n;
       }));
-      vazio.hidden = lista.length > 0;
-      vazio.innerHTML = vazioHtml;
+      sec.hidden = lista.length === 0; // sem sorteio aberto, a coluna some e o formulário ocupa a página
       if (ul.contains(document.activeElement)) return; // não tira o foco de quem está navegando nos cards
       const novo = lista.map((s, i) => cardVivo(s, contas[i])).join('');
       if (novo !== ultimoHtml) { ultimoHtml = novo; ul.innerHTML = novo; } // sem mudança, o leitor de tela não perde o lugar
       total = lista.length;
       mostraTodos(todos);
     } catch {
-      if (ul.childElementCount) return; // já tem cards na tela: fica com eles e tenta de novo depois
-      vazio.hidden = false;
-      vazio.textContent = 'Não deu para carregar os sorteios agora. A gente tenta de novo em alguns minutos.';
+      // sem conexão: se já havia cards, ficam na tela; se não, a coluna continua escondida. Tenta de novo depois.
     } finally { ul.removeAttribute('aria-busy'); carregando = false; }
   };
   carrega();

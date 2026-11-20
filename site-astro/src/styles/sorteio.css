@@ -170,10 +170,6 @@ select.campo-entrada option{background:var(--surface);color:var(--text);}
 .ao-vivo[hidden]{display:none;}
 .ao-vivo-topo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-3);}
 .ao-vivo-topo h2{margin:0;line-height:var(--lh-heading);font-family:var(--font-display);font-stretch:var(--display-stretch);font-weight:var(--fw-display);text-transform:uppercase;letter-spacing:var(--tracking-tight);font-size:var(--fs-fluid-title);}
-.ao-vivo-vazio{display:grid;justify-items:center;gap:var(--space-2);padding:var(--space-8) var(--space-5);border:1px dashed var(--line-input);border-radius:var(--radius-lg);text-align:center;font-size:var(--fs-sm);color:var(--text-soft);text-wrap:balance;}
-.ao-vivo-vazio p{margin:0;}
-.ao-vivo-vazio svg{width:var(--space-8);height:var(--space-8);margin-bottom:var(--space-1);color:var(--gold);}
-.ao-vivo-vazio-titulo{font-size:var(--fs-md);font-weight:var(--fw-semibold);color:var(--text);}
 .ao-vivo-acoes{display:flex;flex-wrap:wrap;gap:var(--space-2);}
 .ao-vivo .ganhadores{padding-bottom:var(--space-8);border-bottom:1px solid var(--line);}
 .ao-vivo-lista{display:grid;grid-template-columns:repeat(auto-fill, minmax(min(100%, 18rem), 1fr));gap:var(--space-4);margin:0;padding:0;list-style:none;}
@@ -602,3 +598,7 @@ dialog.confirma p{margin:0 0 var(--space-5);font-size:var(--fs-md);line-height:v
 .icone-op:has(input:focus-visible){outline:2px solid var(--focus-ring);outline-offset:2px;}
 @media (hover:hover) and (pointer:fine){ .icone-op:hover{border-color:var(--text-mute);} }
 @media (forced-colors:active){ .icone-op:has(input:checked){outline:3px solid Highlight;} }
+/* sem a coluna "ao vivo", o título do topo acompanha a coluna única centralizada (e a página de um sorteio) */
+@media (min-width:64rem){
+  body:not(:has(.ao-vivo:not([hidden]))) .sorteio-topo .novidades-topo-texto{max-width:calc(var(--w-hero) + 2 * var(--gutter));}
+}
