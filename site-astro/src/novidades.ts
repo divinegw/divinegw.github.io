@@ -20,6 +20,22 @@ export const AVISO_DIAS = 30;
 
 export const NOVIDADES: Novidade[] = [
   {
+    id: '2026-11-20-sorteio',
+    data: '2026-11-20',
+    titulo: 'Sorteio da guilda no site!',
+    resumo: 'Agora dá para sortear prêmios ao vivo com a galera, aqui no site. Você abre o sorteio, a guilda se inscreve com a conta do Guild Wars 2 e a roleta gira na tela de todo mundo.',
+    icone: 'essence-chest',
+    arte: 'dungeons/arte.jpg',
+    mudancas: [
+      { tipo: 'novo', area: 'site', texto: 'Sorteio ao vivo: você abre um sorteio com o prêmio, manda o link no Discord e cada um se inscreve com a conta do Guild Wars 2. Na hora de sortear, a roleta gira para todo mundo ver.', href: '/sorteio.html' },
+      { tipo: 'novo', area: 'site', texto: 'Você pode pedir que o prêmio seja aceito em 1 minuto. Quem ganha clica em "Aceitar o prêmio". Se o tempo acabar, você sorteia outra pessoa no lugar.' },
+      { tipo: 'novo', area: 'site', texto: 'Criamos a página Ganhadores, com os últimos sorteios ao vivo e quem levou cada prêmio. Para conferir um deles, cole o código em "Conferir pelo código".', href: '/sorteio/ganhadores.html' },
+      { tipo: 'novo', area: 'site', texto: 'Também dá para sortear na hora, sem inscrição: uma lista de contas, números ou squads. Na aba Extras tem dados, cara ou coroa e um sorteio do que jogar.', href: '/sorteio.html' },
+      { tipo: 'novo', area: 'site', texto: 'Todo resultado tem um código. Nas abas Lista de contas, Números e Squads, cole o código em "Conferir um sorteio antigo" para ver o mesmo resultado de novo.' },
+      { tipo: 'corrigido', area: 'site', texto: 'Corrigimos os avisos de erro do sorteio, que agora chegam a quem usa leitor de tela. No tema claro, as cores dos prêmios também ficaram mais fáceis de ler.' },
+    ],
+  },
+  {
     id: '2026-11-19-galeria-e-barra',
     data: '2026-11-19',
     titulo: 'Galeria de wallpapers e novo visual!',
