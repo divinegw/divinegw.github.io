@@ -283,6 +283,12 @@
   --prof-mesmer:var(--prof-mesmer-700); --prof-mesmer-text:var(--prof-mesmer-700); --prof-mesmer-tint:color-mix(in srgb, var(--prof-mesmer-500) var(--prof-tint-amount), transparent);
   --prof-necromancer:var(--prof-necromancer-700); --prof-necromancer-text:var(--prof-necromancer-700); --prof-necromancer-tint:color-mix(in srgb, var(--prof-necromancer-500) var(--prof-tint-amount), transparent);
 
+  /* raridades do jogo (sorteio). Matiz do jogo; no claro, escurecidas para a borda do ícone dar ≥3:1
+     sobre bg, surface, surface-2 e o preenchimento do ícone. O nome do prêmio mistura 50% com --text (≥4.5:1). */
+  --rar-legendary:#9c53f7; --rar-ascended:#e5227b; --rar-exotic:#ad6e07; --rar-rare:#957a06; --rar-masterwork:#048f2a;
+  --rar-fine:#4082b6; --rar-basic:#797d87; --rar-junk:#7d7d7d; --rar-gema:#277ed7;
+  --rar-ouro:var(--gold); --rar-expansao:var(--gold); --rar-texto:var(--gold);
+
   /* compatibilidade com estilos inline antigos */
   --texto-soft:var(--text-soft); --azul-esc:var(--accent-text);
   color-scheme:light;
@@ -329,6 +335,8 @@
     --prof-guardian-text:var(--prof-guardian-300); --prof-revenant-text:var(--prof-revenant-300); --prof-warrior-text:var(--prof-warrior-300);
     --prof-engineer-text:var(--prof-engineer-300); --prof-ranger-text:var(--prof-ranger-300); --prof-thief-text:var(--prof-thief-300);
     --prof-elementalist-text:var(--prof-elementalist-300); --prof-mesmer-text:var(--prof-mesmer-300); --prof-necromancer-text:var(--prof-necromancer-300);
+    --rar-legendary:#a35bff; --rar-ascended:#fb3e8d; --rar-exotic:#ffa405; --rar-rare:#f2c80f; --rar-masterwork:#38b24a;
+    --rar-fine:#62a4da; --rar-basic:#c7ccd6; --rar-junk:#8c8c8c; --rar-gema:#4fa3ff;
     color-scheme:dark;
   }
 }
@@ -359,6 +367,8 @@
     --prof-guardian-text:var(--prof-guardian-300); --prof-revenant-text:var(--prof-revenant-300); --prof-warrior-text:var(--prof-warrior-300);
     --prof-engineer-text:var(--prof-engineer-300); --prof-ranger-text:var(--prof-ranger-300); --prof-thief-text:var(--prof-thief-300);
     --prof-elementalist-text:var(--prof-elementalist-300); --prof-mesmer-text:var(--prof-mesmer-300); --prof-necromancer-text:var(--prof-necromancer-300);
+    --rar-legendary:#a35bff; --rar-ascended:#fb3e8d; --rar-exotic:#ffa405; --rar-rare:#f2c80f; --rar-masterwork:#38b24a;
+    --rar-fine:#62a4da; --rar-basic:#c7ccd6; --rar-junk:#8c8c8c; --rar-gema:#4fa3ff;
     color-scheme:dark;
   }
 }

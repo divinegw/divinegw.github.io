@@ -62,6 +62,10 @@ a:hover, a.is-hover{text-decoration-color:currentColor;}
   border:1px solid transparent;border-radius:var(--radius-md);text-decoration:none;cursor:pointer;
   transition:background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
+/* Telas abaixo de 360px (sem token --bp-*): rótulo longo quebra em vez de passar da tela */
+@media (max-width:359px){
+  .btn, .boss .links a, .path .links a{max-width:100%;white-space:normal;text-align:center;}
+}
 .btn svg, .boss .links a svg, .path .links a svg{width:var(--icon-sm);height:var(--icon-sm);flex-shrink:0;}
 .btn-primario{background:var(--action-bg);color:var(--on-action);}
 .btn-primario:hover, .btn-primario.is-hover{background:var(--action-bg-hover);}

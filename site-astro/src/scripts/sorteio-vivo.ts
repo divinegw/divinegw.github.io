@@ -137,6 +137,7 @@ export function aoVivo(raiz: HTMLElement, c: Config) {
   const ul = sec?.querySelector<HTMLUListElement>('[data-ao-vivo-lista]');
   if (!sec || !ul) return;
   const mais = sec.querySelector<HTMLButtonElement>('[data-ao-vivo-mais]')!;
+  const erro = sec.querySelector<HTMLElement>('[data-ao-vivo-erro]')!;
   const VISIVEIS = 3;
   let total = 0;
   let todos = false;
@@ -172,6 +173,7 @@ export function aoVivo(raiz: HTMLElement, c: Config) {
         contagens.set(s.id, n);
         return n;
       }));
+      erro.hidden = true; erro.textContent = '';
       sec.hidden = lista.length === 0; // sem sorteio aberto, a coluna some e o formulário ocupa a página
       if (ul.contains(document.activeElement)) return; // não tira o foco de quem está navegando nos cards
       const novo = lista.map((s, i) => cardVivo(s, contas[i])).join('');
@@ -179,7 +181,12 @@ export function aoVivo(raiz: HTMLElement, c: Config) {
       total = lista.length;
       mostraTodos(todos);
     } catch {
-      // sem conexão: se já havia cards, ficam na tela; se não, a coluna continua escondida. Tenta de novo depois.
+      // sem conexão: se já havia cards, ficam na tela; se não, a seção aparece só com o aviso. Tenta de novo depois.
+      if (!ul.children.length) {
+        erro.textContent = 'Não deu para carregar os sorteios ao vivo. Recarregue a página daqui a pouco.';
+        erro.hidden = false;
+        sec.hidden = false;
+      }
     } finally { ul.removeAttribute('aria-busy'); carregando = false; }
   };
   carrega();
@@ -252,6 +259,7 @@ export function ganhadores(raiz: HTMLElement, c: Config) {
     } catch {
       carregou = false;
       vazio.hidden = false;
+      vazio.setAttribute('role', 'alert');
       vazio.textContent = 'Não deu para carregar os ganhadores agora. Recarregue a página para tentar de novo.';
     } finally { ul.removeAttribute('aria-busy'); }
   };

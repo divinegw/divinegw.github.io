@@ -10,10 +10,10 @@ interface Props { classe: 'boss' | 'path'; nome: string; texto?: string; video?:
 const { classe, nome, texto, video, cm, guia, wiki, painel } = Astro.props;
 type L = { url: string; icone: string; texto: string; rotulo: string; cm?: boolean };
 const links = [
-  video && { url: video, icone: 'play', texto: 'Vídeo', rotulo: `Vídeo de ${nome}` },
-  cm && { url: cm, icone: 'play', texto: 'CM', rotulo: `CM: vídeo do Challenge Mode de ${nome}`, cm: true },
-  guia && { url: guia, icone: 'file-text', texto: 'Guia', rotulo: `Guia em texto de ${nome}` },
-  wiki && { url: wiki, icone: 'book-open', texto: 'Wiki', rotulo: `${nome} na Wiki` },
+  video && { url: video, icone: 'play', texto: 'Vídeo', rotulo: `Vídeo de ${nome} (abre em nova aba)` },
+  cm && { url: cm, icone: 'play', texto: 'CM', rotulo: `CM: vídeo do Challenge Mode de ${nome} (abre em nova aba)`, cm: true },
+  guia && { url: guia, icone: 'file-text', texto: 'Guia', rotulo: `Guia em texto de ${nome} (abre em nova aba)` },
+  wiki && { url: wiki, icone: 'book-open', texto: 'Wiki', rotulo: `${nome} na Wiki (abre em nova aba)` },
 ].filter(Boolean) as L[];
 ---
 <div class={classe}><span>{texto ?? nome}</span><span class="links">{links.map((l) => l.cm && painel

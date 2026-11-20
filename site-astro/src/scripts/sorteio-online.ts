@@ -224,6 +224,8 @@ export function sala(config: FirebaseOptions, id: string, bloco: HTMLElement) {
 
   function pinta() {
     if (!s) return;
+    bloco.removeAttribute('aria-busy');
+    $('[data-i-estado]').removeAttribute('role'); // sem live region: o relógio reescreve este texto a cada segundo; só o erro vira alert
     titulo().textContent = s.titulo;
     tituloSala = `${s.titulo} - Sorteio - Guild DIVINE`;
     if (!document.title.startsWith('Você ganhou')) document.title = tituloSala;
@@ -648,6 +650,8 @@ export function sala(config: FirebaseOptions, id: string, bloco: HTMLElement) {
   onSnapshot(doc(d, 'sorteios', id), (snap) => {
     if (!snap.exists()) {
       titulo().textContent = 'Sorteio não encontrado';
+      bloco.removeAttribute('aria-busy');
+      $('[data-i-estado]').setAttribute('role', 'alert');
       $('[data-i-estado]').textContent = 'Confira se o link está completo. Se estiver, o sorteio já acabou e saiu do ar, ou foi apagado por quem organizou.';
       form.hidden = true; painelDono.hidden = true;
       return;
@@ -655,7 +659,12 @@ export function sala(config: FirebaseOptions, id: string, bloco: HTMLElement) {
     s = snap.data({ serverTimestamps: 'estimate' }) as Sorteio;
     pinta();
     primeira = false;
-  }, () => { titulo().textContent = 'Não deu para abrir o sorteio'; $('[data-i-estado]').textContent = 'Verifique sua internet e recarregue a página.'; });
+  }, () => {
+    titulo().textContent = 'Não deu para abrir o sorteio';
+    bloco.removeAttribute('aria-busy');
+    $('[data-i-estado]').setAttribute('role', 'alert');
+    $('[data-i-estado]').textContent = 'Verifique sua internet e recarregue a página.';
+  });
 
   onSnapshot(collection(d, 'sorteios', id, 'inscritos'), (snap) => {
     inscritos = snap.docs.map((x) => ({ chave: x.id, conta: String(x.data().conta) })).sort((a, b) => (a.chave < b.chave ? -1 : 1));

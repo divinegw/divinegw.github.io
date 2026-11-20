@@ -47,7 +47,7 @@ const ICONES_OUTRO = [
   <Image class="novidades-arte" src={arte} alt="" widths={[640, 1024, 1600].filter((w) => w <= arte.width)} sizes="100vw" loading="eager" fetchpriority="high" layout="full-width" style="object-position:50% 18%" />
   <div class="novidades-topo-texto">
     <h1>Sorteio</h1>
-    <p>Sorteie número, conta, prêmio ou squad, aqui ou ao vivo com a galera. Todo resultado tem um código para conferir.</p>
+    <p>Sorteie um prêmio ao vivo com a galera, ou número, conta e squad na hora. Todo resultado tem um código para conferir.</p>
   </div>
 </header>
 
@@ -55,7 +55,7 @@ const ICONES_OUTRO = [
 
 
   {/* Página de um sorteio ao vivo (?s=...): o script mostra este bloco e preenche com o sorteio */}
-  <section class="inscricao" data-inscricao hidden aria-labelledby="inscricao-titulo">
+  <section class="inscricao" data-inscricao hidden aria-busy="true" aria-labelledby="inscricao-titulo">
     <div class="sala-dono" data-i-dono hidden></div>
     <nav class="sala-nav" aria-label="Sorteio">
       <a href="/sorteio.html"><Fragment set:html={ico('arrow-left')} />Todos os sorteios</a>
@@ -99,6 +99,7 @@ const ICONES_OUTRO = [
         <div class="ao-vivo-topo">
           <h2 id="ao-vivo-titulo">Sorteios ao vivo</h2>
         </div>
+        <p class="ao-vivo-erro" data-ao-vivo-erro role="alert" hidden></p>
         <ul class="ao-vivo-lista" data-ao-vivo-lista aria-busy="true"></ul>
         <button type="button" class="btn btn-secundario btn-sm ao-vivo-mais" data-ao-vivo-mais hidden aria-expanded="false"></button>
       </section>

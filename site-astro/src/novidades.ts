@@ -58,7 +58,7 @@ export const NOVIDADES: Novidade[] = [
   {
     id: '2026-11-17-challenge-modes',
     data: '2026-11-17',
-    titulo: 'Resumo do Challenge Mode em cada boss',
+    titulo: 'Resumo do CM em cada boss!',
     resumo: 'Cada boss de Raid e cada Fractal com Challenge Mode ganhou um vídeo do CM e um resumo do que muda na luta. Também reescrevemos os guias para ficarem mais claros.',
     icone: 'challenge-mode',
     arte: 'raids/arte.jpg',

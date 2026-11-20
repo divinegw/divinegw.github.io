@@ -150,12 +150,7 @@ select.campo-entrada option{background:var(--surface);color:var(--text);}
   filter:drop-shadow(0 1px 1px var(--ink-1000));
 }
 
-/* ---------- Prêmio: ícone com a cor da raridade (cores do jogo, clareadas para ler no fundo escuro) ---------- */
-.sorteio{
-  --rar-legendary:#a35bff; --rar-ascended:#fb3e8d; --rar-exotic:#ffa405; --rar-rare:#f2c80f; --rar-masterwork:#38b24a;
-  --rar-fine:#62a4da; --rar-basic:#c7ccd6; --rar-junk:#8c8c8c; --rar-gema:#4fa3ff;
-  --rar-ouro:var(--gold); --rar-expansao:var(--gold); --rar-texto:var(--gold);
-}
+/* ---------- Prêmio: ícone com a cor da raridade (--rar-* ficam em tokens.css, com valor por tema) ---------- */
 .premio-ico{--rar:var(--rar-texto);flex:none;display:grid;place-items:center;width:3.5rem;height:3.5rem;border:2px solid var(--rar);border-radius:var(--radius-md);background:color-mix(in srgb, var(--rar) 14%, var(--surface-2));color:var(--rar);overflow:hidden;}
 .premio-ico img{display:block;width:100%;height:100%;object-fit:cover;}
 .premio-ico svg{width:55%;height:55%;}
@@ -174,6 +169,8 @@ select.campo-entrada option{background:var(--surface);color:var(--text);}
 .ao-vivo .ganhadores{padding-bottom:var(--space-8);border-bottom:1px solid var(--line);}
 .ao-vivo-lista{display:grid;grid-template-columns:repeat(auto-fill, minmax(min(100%, 18rem), 1fr));gap:var(--space-4);margin:0;padding:0;list-style:none;}
 .ao-vivo-lista:empty{display:none;}
+.ao-vivo-erro{margin:0;color:var(--text-mute);font-size:var(--fs-sm);}
+.ao-vivo-erro[hidden]{display:none;}
 /* Card A2 · ficha do item: nome na cor da raridade, o que é, o "sobre" de quem organiza e o tempo no pé */
 .vivo-card{--rar:var(--rar-texto);--rar-nome:color-mix(in oklab, var(--rar) 50%, var(--text));}
 .vivo-link{display:grid;grid-template-rows:auto 1fr auto;height:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;color:var(--text);text-decoration:none;transition:border-color var(--dur-fast) ease, translate var(--dur-fast) ease;}

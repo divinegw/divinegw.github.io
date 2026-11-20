@@ -26,8 +26,9 @@ const DEF = {
 };
 
 const sumarioEx = [
-  { id: 'ex-fund', text: 'Fundamentos', subs: [{ id: 'ex-intro', text: 'Introdução às Fractals', subs: [] }, { id: 'ex-tiers', text: 'Tiers e escalas', subs: [] }, { id: 'ex-agony', text: 'Agony', subs: [] }] },
-  { id: 'ex-prog', text: 'Progressão e recompensas', subs: [{ id: 'ex-ad', text: 'Ad Infinitum', subs: [] }] },
+  // os ids apontam para seções reais desta página (o exemplo não pode ter link quebrado)
+  { id: 'cards', text: 'Fundamentos', subs: [{ id: 'chips', text: 'Introdução às Fractals', subs: [] }, { id: 'tabela', text: 'Tiers e escalas', subs: [] }, { id: 'avisos', text: 'Agony', subs: [] }] },
+  { id: 'termo', text: 'Progressão e recompensas', subs: [{ id: 'links', text: 'Ad Infinitum', subs: [] }] },
 ];
 
 const tabelaTiers = `<table><thead><tr><th scope="col">Tier</th><th scope="col">Níveis</th><th scope="col" align="right">Instabilidades</th><th scope="col" align="right">AR no último nível</th></tr></thead>
@@ -200,7 +201,7 @@ O rehype-divine.mjs prepara cada "##" e cada "###" de card; o botão aparece soz
   <div class="titulo-secao"><h2 class="section" id="sumario" data-num="15">Sumário</h2></div>
   <p class="section-sub">"Neste guia": capítulos numerados em ouro, cada um com seus itens. No desktop fica fixo à esquerda e marca a seção que está na tela (barra de ouro); abaixo de 1100px vira um card no topo.</p>
   <Estados estados={['normal', 'ativo', 'hover', 'foco']} nomes={{ ativo: 'Item ativo (seção na tela)' }} linhas={[{ id: 's' }]}>
-    {(e: string) => <Sumario itens={sumarioEx} marcar={false} rotulo="Exemplo de sumário" realce="ex-tiers" realceClasse={e === 'ativo' ? 'is-active' : st(e)} />}
+    {(e: string) => <Sumario itens={sumarioEx} marcar={false} rotulo="Exemplo de sumário" realce="tabela" realceClasse={e === 'ativo' ? 'is-active' : st(e)} />}
   </Estados>
   <h3 class="ds-h3">Uso</h3>
   <pre class="ds-codigo"><code>{uso.sumario}</code></pre>
@@ -268,15 +269,15 @@ O rehype-divine.mjs prepara cada "##" e cada "###" de card; o botão aparece soz
   .ds-tema-nome{font-family:var(--font-mono);font-size:var(--fs-xs);font-weight:var(--fw-medium);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-mute);margin:0 0 var(--space-3);}
   .ds-linha + .ds-linha{border-top:1px solid var(--line);padding-top:var(--space-3);}
   .ds-linha-nome{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--text-soft);margin:0 0 var(--space-2);}
-  .ds-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-3) var(--space-4);}
+  .ds-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:var(--space-3) var(--space-4);}
   .ds-celula{margin:0 0 var(--space-3);min-width:0;}
   .ds-palco{display:flex;align-items:center;min-height:var(--control-lg);}
   .ds-palco > *{margin:0;}
   .ds-celula figcaption{font-size:var(--fs-xs);color:var(--text-mute);margin-top:var(--space-1-5);}
-  .ds-largo .ds-grade{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+  .ds-largo .ds-grade{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));}
   .ds-largo .ds-palco{display:block;}
   .ds-largo .ds-palco > .card, .ds-largo .ds-palco > .aviso, .ds-largo .ds-palco .tabela{margin:0;}
-  .ds-alto .ds-grade{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+  .ds-alto .ds-grade{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));}
   .ds-alto .ds-palco{padding-top:calc(var(--space-18) + var(--space-12));align-items:flex-end;}
   .ds-alto-pouco .ds-palco{padding-top:var(--space-10);}
   .ds-alto-pouco .titulo-card{margin:0;width:100%;}

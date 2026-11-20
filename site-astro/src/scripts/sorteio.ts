@@ -210,12 +210,18 @@ function iniciar(raiz: HTMLElement) {
       h1.id = h2.id; h1.setAttribute('data-i-titulo', ''); h1.textContent = h2.textContent;
       h2.remove();
     }
+    // erro: o estado vira alert (o leitor de tela lê na hora) e a seção deixa de estar "carregando"
+    const falha = (tituloTxt: string, estadoTxt: string) => {
+      const est = raiz.querySelector<HTMLElement>('[data-i-estado]')!;
+      est.setAttribute('role', 'alert');
+      document.querySelector('[data-i-titulo]')!.textContent = tituloTxt;
+      est.textContent = estadoTxt;
+      bloco.removeAttribute('aria-busy');
+    };
     if (!config) {
-      document.querySelector('[data-i-titulo]')!.textContent = 'Este link de sorteio não funciona aqui';
-      raiz.querySelector('[data-i-estado]')!.textContent = 'O sorteio ao vivo ainda não está ligado no site. Peça um link novo para quem organizou.';
+      falha('Este link de sorteio não funciona aqui', 'O sorteio ao vivo ainda não está ligado no site. Peça um link novo para quem organizou.');
     } else import('./sorteio-online').then((m) => m.sala(JSON.parse(config), sid, bloco)).catch(() => {
-      document.querySelector('[data-i-titulo]')!.textContent = 'Não deu para carregar este sorteio';
-      raiz.querySelector('[data-i-estado]')!.textContent = 'Recarregue a página. Se continuar assim, peça um link novo para quem organizou o sorteio.';
+      falha('Não deu para carregar este sorteio', 'Recarregue a página. Se continuar assim, peça um link novo para quem organizou o sorteio.');
     });
   } else if (config) aoVivo(raiz, JSON.parse(config));
   if (config && painel && tabOnline) {
