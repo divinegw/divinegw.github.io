@@ -24,6 +24,7 @@ if (-not $SemTeste) {
     try {
       if (-not (Test-Path node_modules)) { & npm ci; if ($LASTEXITCODE) { throw 'npm ci do site-next falhou; nada foi publicado.' } }
       & npm run lint; if ($LASTEXITCODE) { throw 'O lint do site-next falhou; nada foi publicado.' }
+      & npm test; if ($LASTEXITCODE) { throw 'Os testes do site-next falharam; nada foi publicado.' }
       $env:NEXT_TELEMETRY_DISABLED = '1'
       & npm run build; if ($LASTEXITCODE) { throw 'A build do site-next falhou; nada foi publicado.' }
       & node scripts/juntar.mjs; if ($LASTEXITCODE) { throw 'A junção do site-next falhou; nada foi publicado.' }

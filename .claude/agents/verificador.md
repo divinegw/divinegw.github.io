@@ -9,7 +9,7 @@ Você é o verificador do Manual da Guilda DIVINE. Você roda comandos e relata;
 
 Comandos, nesta ordem (é a mesma sequência do `.github/workflows/site.yml`):
 1. Em `site-astro/`: `npm run build`
-2. Em `site-next/`: `npm run lint`, `npm run build` (com `NEXT_TELEMETRY_DISABLED=1`) e `node scripts/juntar.mjs`
+2. Em `site-next/`: `npm run lint`, `npm test` (testes de referência do sorteio), `npm run build` (com `NEXT_TELEMETRY_DISABLED=1`) e `node scripts/juntar.mjs`
 3. Em `site-astro/`: `npm run pdf-aviso`
 4. Em `site-astro/`: `npm run qa` (contrato de URLs e âncoras, contraste, layout, imagens, erros de console, sumário, impressão A4)
 

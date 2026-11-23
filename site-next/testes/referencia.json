@@ -1,0 +1,4579 @@
+{
+ "gerador|K7PX-3QMA-9RTD|u32": {
+  "cod": "K7PX-3QMA-9RTD",
+  "saida": [
+   758354543,
+   1321876702,
+   939156074,
+   2681436346,
+   3323947647,
+   203158785
+  ]
+ },
+ "gerador|K7PX-3QMA-9RTD|abaixo-entre-indice": {
+  "cod": "K7PX-3QMA-9RTD",
+  "saida": [
+   "737",
+   "91748688149097043964",
+   "0",
+   2,
+   "0",
+   "0"
+  ]
+ },
+ "gerador|K7PX-3QMA-9RTD|embaralha": {
+  "cod": "K7PX-3QMA-9RTD",
+  "saida": [
+   11,
+   6,
+   7,
+   9,
+   2,
+   0,
+   10,
+   3,
+   1,
+   8,
+   5,
+   4
+  ]
+ },
+ "numeros|K7PX-3QMA-9RTD|1-10|5|unico": {
+  "cod": "K7PX-3QMA-9RTD",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": false,
+  "saida": [
+   "3",
+   "10",
+   "8",
+   "1",
+   "2"
+  ]
+ },
+ "numeros|K7PX-3QMA-9RTD|1-10|5|repete": {
+  "cod": "K7PX-3QMA-9RTD",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": true,
+  "saida": [
+   "3",
+   "5",
+   "4",
+   "10",
+   "1"
+  ]
+ },
+ "numeros|K7PX-3QMA-9RTD|1-1000|10|unico": {
+  "cod": "K7PX-3QMA-9RTD",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": false,
+  "saida": [
+   "983",
+   "793",
+   "181",
+   "187",
+   "224",
+   "49",
+   "24",
+   "316",
+   "664",
+   "640"
+  ]
+ },
+ "numeros|K7PX-3QMA-9RTD|1-1000|10|repete": {
+  "cod": "K7PX-3QMA-9RTD",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": true,
+  "saida": [
+   "181",
+   "316",
+   "224",
+   "640",
+   "793",
+   "49",
+   "664",
+   "187",
+   "24",
+   "983"
+  ]
+ },
+ "numeros|K7PX-3QMA-9RTD|1-1000000000000|6|unico": {
+  "cod": "K7PX-3QMA-9RTD",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": false,
+  "saida": [
+   "25033207030",
+   "194138763087",
+   "850930597645",
+   "815074038072",
+   "240423955104",
+   "712157911855"
+  ]
+ },
+ "numeros|K7PX-3QMA-9RTD|1-1000000000000|6|repete": {
+  "cod": "K7PX-3QMA-9RTD",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": true,
+  "saida": [
+   "194138763087",
+   "240423955104",
+   "850930597645",
+   "712157911855",
+   "25033207030",
+   "815074038072"
+  ]
+ },
+ "numeros|K7PX-3QMA-9RTD|-50-50|8|unico": {
+  "cod": "K7PX-3QMA-9RTD",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": false,
+  "saida": [
+   "-27",
+   "-44",
+   "-23",
+   "-28",
+   "29",
+   "-11",
+   "32",
+   "-48"
+  ]
+ },
+ "numeros|K7PX-3QMA-9RTD|-50-50|8|repete": {
+  "cod": "K7PX-3QMA-9RTD",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": true,
+  "saida": [
+   "-28",
+   "-11",
+   "-23",
+   "29",
+   "49",
+   "-44",
+   "32",
+   "-27"
+  ]
+ },
+ "gerador|ABCD-EFGH-JKMN|u32": {
+  "cod": "ABCD-EFGH-JKMN",
+  "saida": [
+   4153770309,
+   608837788,
+   3749527659,
+   84082014,
+   195007589,
+   120758617
+  ]
+ },
+ "gerador|ABCD-EFGH-JKMN|abaixo-entre-indice": {
+  "cod": "ABCD-EFGH-JKMN",
+  "saida": [
+   "10",
+   "94025481451868822617",
+   "-5",
+   1,
+   "0",
+   "0"
+  ]
+ },
+ "gerador|ABCD-EFGH-JKMN|embaralha": {
+  "cod": "ABCD-EFGH-JKMN",
+  "saida": [
+   0,
+   6,
+   11,
+   1,
+   10,
+   2,
+   8,
+   9,
+   4,
+   5,
+   7,
+   3
+  ]
+ },
+ "numeros|ABCD-EFGH-JKMN|1-10|5|unico": {
+  "cod": "ABCD-EFGH-JKMN",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": false,
+  "saida": [
+   "7",
+   "1",
+   "10",
+   "9",
+   "2"
+  ]
+ },
+ "numeros|ABCD-EFGH-JKMN|1-10|5|repete": {
+  "cod": "ABCD-EFGH-JKMN",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": true,
+  "saida": [
+   "3",
+   "1",
+   "1",
+   "1",
+   "2"
+  ]
+ },
+ "numeros|ABCD-EFGH-JKMN|1-1000|10|unico": {
+  "cod": "ABCD-EFGH-JKMN",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": false,
+  "saida": [
+   "119",
+   "779",
+   "894",
+   "350",
+   "21",
+   "57",
+   "47",
+   "991",
+   "146",
+   "29"
+  ]
+ },
+ "numeros|ABCD-EFGH-JKMN|1-1000|10|repete": {
+  "cod": "ABCD-EFGH-JKMN",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": true,
+  "saida": [
+   "991",
+   "146",
+   "894",
+   "21",
+   "47",
+   "29",
+   "119",
+   "779",
+   "57",
+   "350"
+  ]
+ },
+ "numeros|ABCD-EFGH-JKMN|1-1000000000000|6|unico": {
+  "cod": "ABCD-EFGH-JKMN",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": false,
+  "saida": [
+   "959879080710",
+   "127269408451",
+   "60730181976",
+   "87262509582",
+   "49921942792",
+   "357564717980"
+  ]
+ },
+ "numeros|ABCD-EFGH-JKMN|1-1000000000000|6|repete": {
+  "cod": "ABCD-EFGH-JKMN",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": true,
+  "saida": [
+   "959879080710",
+   "49921942792",
+   "127269408451",
+   "60730181976",
+   "357564717980",
+   "87262509582"
+  ]
+ },
+ "numeros|ABCD-EFGH-JKMN|-50-50|8|unico": {
+  "cod": "ABCD-EFGH-JKMN",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": false,
+  "saida": [
+   "-48",
+   "-47",
+   "-43",
+   "-7",
+   "47",
+   "-32",
+   "-36",
+   "-45"
+  ]
+ },
+ "numeros|ABCD-EFGH-JKMN|-50-50|8|repete": {
+  "cod": "ABCD-EFGH-JKMN",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": true,
+  "saida": [
+   "-32",
+   "-48",
+   "-45",
+   "-47",
+   "-36",
+   "47",
+   "-43",
+   "-7"
+  ]
+ },
+ "gerador|divine guild|u32": {
+  "cod": "divine guild",
+  "saida": [
+   874833054,
+   3956755172,
+   1360209107,
+   2002382281,
+   4237587226,
+   1421664883
+  ]
+ },
+ "gerador|divine guild|abaixo-entre-indice": {
+  "cod": "divine guild",
+  "saida": [
+   "663",
+   "68619169992102063304",
+   "3",
+   5,
+   "0",
+   "0"
+  ]
+ },
+ "gerador|divine guild|embaralha": {
+  "cod": "divine guild",
+  "saida": [
+   5,
+   11,
+   4,
+   9,
+   2,
+   10,
+   0,
+   6,
+   8,
+   1,
+   7,
+   3
+  ]
+ },
+ "numeros|divine guild|1-10|5|unico": {
+  "cod": "divine guild",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": false,
+  "saida": [
+   "2",
+   "3",
+   "8",
+   "4",
+   "6"
+  ]
+ },
+ "numeros|divine guild|1-10|5|repete": {
+  "cod": "divine guild",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": true,
+  "saida": [
+   "4",
+   "6",
+   "8",
+   "6",
+   "8"
+  ]
+ },
+ "numeros|divine guild|1-1000|10|unico": {
+  "cod": "divine guild",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": false,
+  "saida": [
+   "478",
+   "579",
+   "339",
+   "325",
+   "838",
+   "504",
+   "512",
+   "209",
+   "944",
+   "730"
+  ]
+ },
+ "numeros|divine guild|1-1000|10|repete": {
+  "cod": "divine guild",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": true,
+  "saida": [
+   "209",
+   "944",
+   "325",
+   "478",
+   "339",
+   "512",
+   "838",
+   "504",
+   "579",
+   "730"
+  ]
+ },
+ "numeros|divine guild|1-1000000000000|6|unico": {
+  "cod": "divine guild",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": false,
+  "saida": [
+   "348213531512",
+   "782850788245",
+   "549470266834",
+   "540718661265",
+   "223957262060",
+   "77762715909"
+  ]
+ },
+ "numeros|divine guild|1-1000000000000|6|repete": {
+  "cod": "divine guild",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": true,
+  "saida": [
+   "223957262060",
+   "348213531512",
+   "549470266834",
+   "540718661265",
+   "782850788245",
+   "77762715909"
+  ]
+ },
+ "numeros|divine guild|-50-50|8|unico": {
+  "cod": "divine guild",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": false,
+  "saida": [
+   "-10",
+   "41",
+   "9",
+   "-8",
+   "12",
+   "22",
+   "-24",
+   "13"
+  ]
+ },
+ "numeros|divine guild|-50-50|8|repete": {
+  "cod": "divine guild",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": true,
+  "saida": [
+   "-24",
+   "-10",
+   "9",
+   "-8",
+   "13",
+   "12",
+   "22",
+   "41"
+  ]
+ },
+ "gerador|sorteio de teste 1|u32": {
+  "cod": "sorteio de teste 1",
+  "saida": [
+   3105316630,
+   3687315244,
+   2217964429,
+   1497297745,
+   657777145,
+   3986194269
+  ]
+ },
+ "gerador|sorteio de teste 1|abaixo-entre-indice": {
+  "cod": "sorteio de teste 1",
+  "saida": [
+   "707",
+   "85361485796073103070",
+   "-5",
+   2,
+   "0",
+   "0"
+  ]
+ },
+ "gerador|sorteio de teste 1|embaralha": {
+  "cod": "sorteio de teste 1",
+  "saida": [
+   2,
+   7,
+   11,
+   10,
+   8,
+   6,
+   4,
+   9,
+   5,
+   1,
+   0,
+   3
+  ]
+ },
+ "numeros|sorteio de teste 1|1-10|5|unico": {
+  "cod": "sorteio de teste 1",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": false,
+  "saida": [
+   "7",
+   "5",
+   "3",
+   "6",
+   "9"
+  ]
+ },
+ "numeros|sorteio de teste 1|1-10|5|repete": {
+  "cod": "sorteio de teste 1",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": true,
+  "saida": [
+   "9",
+   "6",
+   "3",
+   "8",
+   "4"
+  ]
+ },
+ "numeros|sorteio de teste 1|1-1000|10|unico": {
+  "cod": "sorteio de teste 1",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": false,
+  "saida": [
+   "357",
+   "860",
+   "157",
+   "951",
+   "880",
+   "468",
+   "228",
+   "984",
+   "529",
+   "741"
+  ]
+ },
+ "numeros|sorteio de teste 1|1-1000|10|repete": {
+  "cod": "sorteio de teste 1",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": true,
+  "saida": [
+   "741",
+   "880",
+   "529",
+   "357",
+   "157",
+   "951",
+   "860",
+   "468",
+   "228",
+   "984"
+  ]
+ },
+ "numeros|sorteio de teste 1|1-1000000000000|6|unico": {
+  "cod": "sorteio de teste 1",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": false,
+  "saida": [
+   "567798893914",
+   "243916230646",
+   "922754229109",
+   "44407968558",
+   "168390949358",
+   "794961057500"
+  ]
+ },
+ "numeros|sorteio de teste 1|1-1000000000000|6|repete": {
+  "cod": "sorteio de teste 1",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": true,
+  "saida": [
+   "794961057500",
+   "567798893914",
+   "168390949358",
+   "922754229109",
+   "243916230646",
+   "44407968558"
+  ]
+ },
+ "numeros|sorteio de teste 1|-50-50|8|unico": {
+  "cod": "sorteio de teste 1",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": false,
+  "saida": [
+   "-31",
+   "-45",
+   "8",
+   "-22",
+   "16",
+   "-28",
+   "-6",
+   "42"
+  ]
+ },
+ "numeros|sorteio de teste 1|-50-50|8|repete": {
+  "cod": "sorteio de teste 1",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": true,
+  "saida": [
+   "42",
+   "16",
+   "-6",
+   "-31",
+   "8",
+   "-22",
+   "-45",
+   "-28"
+  ]
+ },
+ "gerador|ZZZZ-2222-9999|u32": {
+  "cod": "ZZZZ-2222-9999",
+  "saida": [
+   1539501495,
+   2132919244,
+   3870671371,
+   1057139986,
+   347345430,
+   2583321858
+  ]
+ },
+ "gerador|ZZZZ-2222-9999|abaixo-entre-indice": {
+  "cod": "ZZZZ-2222-9999",
+  "saida": [
+   "972",
+   "22910817997484581535",
+   "-1",
+   0,
+   "0",
+   "0"
+  ]
+ },
+ "gerador|ZZZZ-2222-9999|embaralha": {
+  "cod": "ZZZZ-2222-9999",
+  "saida": [
+   4,
+   5,
+   2,
+   1,
+   3,
+   10,
+   6,
+   9,
+   7,
+   0,
+   11,
+   8
+  ]
+ },
+ "numeros|ZZZZ-2222-9999|1-10|5|unico": {
+  "cod": "ZZZZ-2222-9999",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": false,
+  "saida": [
+   "8",
+   "9",
+   "3",
+   "4",
+   "2"
+  ]
+ },
+ "numeros|ZZZZ-2222-9999|1-10|5|repete": {
+  "cod": "ZZZZ-2222-9999",
+  "min": "1",
+  "max": "10",
+  "qtd": 5,
+  "repetir": true,
+  "saida": [
+   "6",
+   "8",
+   "4",
+   "2",
+   "10"
+  ]
+ },
+ "numeros|ZZZZ-2222-9999|1-1000|10|unico": {
+  "cod": "ZZZZ-2222-9999",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": false,
+  "saida": [
+   "368",
+   "155",
+   "253",
+   "509",
+   "83",
+   "923",
+   "616",
+   "501",
+   "668",
+   "853"
+  ]
+ },
+ "numeros|ZZZZ-2222-9999|1-1000|10|repete": {
+  "cod": "ZZZZ-2222-9999",
+  "min": "1",
+  "max": "1000",
+  "qtd": 10,
+  "repetir": true,
+  "saida": [
+   "368",
+   "509",
+   "923",
+   "253",
+   "83",
+   "616",
+   "501",
+   "155",
+   "668",
+   "853"
+  ]
+ },
+ "numeros|ZZZZ-2222-9999|1-1000000000000|6|unico": {
+  "cod": "ZZZZ-2222-9999",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": false,
+  "saida": [
+   "537805675815",
+   "394112382848",
+   "990891871040",
+   "782082796958",
+   "88920430234",
+   "716617809366"
+  ]
+ },
+ "numeros|ZZZZ-2222-9999|1-1000000000000|6|repete": {
+  "cod": "ZZZZ-2222-9999",
+  "min": "1",
+  "max": "1000000000000",
+  "qtd": 6,
+  "repetir": true,
+  "saida": [
+   "394112382848",
+   "990891871040",
+   "88920430234",
+   "537805675815",
+   "716617809366",
+   "782082796958"
+  ]
+ },
+ "numeros|ZZZZ-2222-9999|-50-50|8|unico": {
+  "cod": "ZZZZ-2222-9999",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": false,
+  "saida": [
+   "13",
+   "-5",
+   "-19",
+   "-40",
+   "33",
+   "26",
+   "12",
+   "-31"
+  ]
+ },
+ "numeros|ZZZZ-2222-9999|-50-50|8|repete": {
+  "cod": "ZZZZ-2222-9999",
+  "min": "-50",
+  "max": "50",
+  "qtd": 8,
+  "repetir": true,
+  "saida": [
+   "-5",
+   "13",
+   "-19",
+   "-40",
+   "26",
+   "12",
+   "-31",
+   "33"
+  ]
+ },
+ "gerador|contexto-diferente": {
+  "saida": [
+   1655049422,
+   2737769706,
+   1655049422
+  ]
+ },
+ "comPeso|K7PX-3QMA-9RTD|1": {
+  "cod": "K7PX-3QMA-9RTD",
+  "qtd": 1,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   }
+  ]
+ },
+ "comPeso|K7PX-3QMA-9RTD|3": {
+  "cod": "K7PX-3QMA-9RTD",
+  "qtd": 3,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   },
+   {
+    "n": "b",
+    "bilhetes": 5
+   },
+   {
+    "n": "c",
+    "bilhetes": 20
+   }
+  ]
+ },
+ "comPeso|K7PX-3QMA-9RTD|10": {
+  "cod": "K7PX-3QMA-9RTD",
+  "qtd": 10,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   },
+   {
+    "n": "b",
+    "bilhetes": 5
+   },
+   {
+    "n": "c",
+    "bilhetes": 20
+   },
+   {
+    "n": "a",
+    "bilhetes": 1
+   },
+   {
+    "n": "f",
+    "bilhetes": 3
+   },
+   {
+    "n": "d",
+    "bilhetes": 1
+   }
+  ]
+ },
+ "comPeso|ABCD-EFGH-JKMN|1": {
+  "cod": "ABCD-EFGH-JKMN",
+  "qtd": 1,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   }
+  ]
+ },
+ "comPeso|ABCD-EFGH-JKMN|3": {
+  "cod": "ABCD-EFGH-JKMN",
+  "qtd": 3,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   },
+   {
+    "n": "c",
+    "bilhetes": 20
+   },
+   {
+    "n": "b",
+    "bilhetes": 5
+   }
+  ]
+ },
+ "comPeso|ABCD-EFGH-JKMN|10": {
+  "cod": "ABCD-EFGH-JKMN",
+  "qtd": 10,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   },
+   {
+    "n": "c",
+    "bilhetes": 20
+   },
+   {
+    "n": "b",
+    "bilhetes": 5
+   },
+   {
+    "n": "f",
+    "bilhetes": 3
+   },
+   {
+    "n": "a",
+    "bilhetes": 1
+   },
+   {
+    "n": "d",
+    "bilhetes": 1
+   }
+  ]
+ },
+ "comPeso|divine guild|1": {
+  "cod": "divine guild",
+  "qtd": 1,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   }
+  ]
+ },
+ "comPeso|divine guild|3": {
+  "cod": "divine guild",
+  "qtd": 3,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   },
+   {
+    "n": "c",
+    "bilhetes": 20
+   },
+   {
+    "n": "f",
+    "bilhetes": 3
+   }
+  ]
+ },
+ "comPeso|divine guild|10": {
+  "cod": "divine guild",
+  "qtd": 10,
+  "saida": [
+   {
+    "n": "e",
+    "bilhetes": 100
+   },
+   {
+    "n": "c",
+    "bilhetes": 20
+   },
+   {
+    "n": "f",
+    "bilhetes": 3
+   },
+   {
+    "n": "b",
+    "bilhetes": 5
+   },
+   {
+    "n": "d",
+    "bilhetes": 1
+   },
+   {
+    "n": "a",
+    "bilhetes": 1
+   }
+  ]
+ },
+ "sortearAoVivo|K7PX-3QMA-9RTD|1|sem-excluidos": {
+  "cod": "K7PX-3QMA-9RTD",
+  "venc": 1,
+  "saida": {
+   "ganhadores": [
+    "Yara.2073"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|K7PX-3QMA-9RTD|1|com-excluidos": {
+  "cod": "K7PX-3QMA-9RTD",
+  "venc": 1,
+  "saida": {
+   "ganhadores": [
+    "Zé Pedro.1074"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|K7PX-3QMA-9RTD|3|sem-excluidos": {
+  "cod": "K7PX-3QMA-9RTD",
+  "venc": 3,
+  "saida": {
+   "ganhadores": [
+    "Yara.2073",
+    "王秀英.8888",
+    "Rafa.1814"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|K7PX-3QMA-9RTD|3|com-excluidos": {
+  "cod": "K7PX-3QMA-9RTD",
+  "venc": 3,
+  "saida": {
+   "ganhadores": [
+    "Zé Pedro.1074",
+    "Tiago.1888",
+    "Caio.1259"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|K7PX-3QMA-9RTD|60|sem-excluidos": {
+  "cod": "K7PX-3QMA-9RTD",
+  "venc": 60,
+  "saida": {
+   "ganhadores": [
+    "Yara.2073",
+    "王秀英.8888",
+    "Rafa.1814",
+    "Bia.2295",
+    "Benachrichtigungseinstellungen.1234",
+    "Marcos.1111",
+    "Wagner.1999",
+    "ÚRSULA.2258",
+    "Jão.1518",
+    "Gui.1407",
+    "Quézia.1777",
+    "Zé Pedro.1074",
+    "Nando.1666",
+    "Zeca.2110",
+    "Lia.1592",
+    "Ônix.2221",
+    "Edu.1333",
+    "Ana Clara.1148",
+    "Caio.1259",
+    "Uriel.1925",
+    "Bruna.1222",
+    "Mel.1629",
+    "Dani.1296",
+    "Hugo.1444",
+    "Iris.1481",
+    "Joana.1000",
+    "ÁLVARO.2147",
+    "Paulo.1740",
+    "Íris Maria.2184",
+    "Otto.1703",
+    "Fabi.1370",
+    "Christopher Alexander Montgome.5678",
+    "Tiago.1888",
+    "Xande.2036",
+    "Ágata Lima.1037",
+    "Kátia.1555",
+    "Sol.1851",
+    "🦊 Fox.4242",
+    "Vivi.1962",
+    "Léo.1185"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|K7PX-3QMA-9RTD|60|com-excluidos": {
+  "cod": "K7PX-3QMA-9RTD",
+  "venc": 60,
+  "saida": {
+   "ganhadores": [
+    "Zé Pedro.1074",
+    "Tiago.1888",
+    "Caio.1259",
+    "Bia.2295",
+    "Nando.1666",
+    "Léo.1185",
+    "Ônix.2221",
+    "Paulo.1740",
+    "Lia.1592",
+    "Iris.1481",
+    "Vivi.1962",
+    "ÚRSULA.2258",
+    "Rafa.1814",
+    "Íris Maria.2184",
+    "Mel.1629",
+    "Gui.1407",
+    "Ana Clara.1148",
+    "Dani.1296",
+    "Yara.2073",
+    "Christopher Alexander Montgome.5678",
+    "Quézia.1777",
+    "Edu.1333",
+    "Wagner.1999",
+    "Hugo.1444",
+    "Jão.1518",
+    "Kátia.1555",
+    "Uriel.1925",
+    "Sol.1851",
+    "Joana.1000",
+    "Fabi.1370",
+    "Zeca.2110",
+    "王秀英.8888",
+    "🦊 Fox.4242",
+    "Marcos.1111",
+    "Xande.2036",
+    "ÁLVARO.2147",
+    "Otto.1703"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|ABCD-EFGH-JKMN|1|sem-excluidos": {
+  "cod": "ABCD-EFGH-JKMN",
+  "venc": 1,
+  "saida": {
+   "ganhadores": [
+    "Fabi.1370"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|ABCD-EFGH-JKMN|1|com-excluidos": {
+  "cod": "ABCD-EFGH-JKMN",
+  "venc": 1,
+  "saida": {
+   "ganhadores": [
+    "Hugo.1444"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|ABCD-EFGH-JKMN|3|sem-excluidos": {
+  "cod": "ABCD-EFGH-JKMN",
+  "venc": 3,
+  "saida": {
+   "ganhadores": [
+    "Fabi.1370",
+    "Benachrichtigungseinstellungen.1234",
+    "Wagner.1999"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|ABCD-EFGH-JKMN|3|com-excluidos": {
+  "cod": "ABCD-EFGH-JKMN",
+  "venc": 3,
+  "saida": {
+   "ganhadores": [
+    "Hugo.1444",
+    "Bia.2295",
+    "Yara.2073"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|ABCD-EFGH-JKMN|60|sem-excluidos": {
+  "cod": "ABCD-EFGH-JKMN",
+  "venc": 60,
+  "saida": {
+   "ganhadores": [
+    "Fabi.1370",
+    "Benachrichtigungseinstellungen.1234",
+    "Wagner.1999",
+    "Léo.1185",
+    "Lia.1592",
+    "Vivi.1962",
+    "Mel.1629",
+    "Quézia.1777",
+    "Zeca.2110",
+    "Marcos.1111",
+    "Hugo.1444",
+    "Zé Pedro.1074",
+    "Ônix.2221",
+    "Ana Clara.1148",
+    "🦊 Fox.4242",
+    "Christopher Alexander Montgome.5678",
+    "Kátia.1555",
+    "Xande.2036",
+    "Sol.1851",
+    "Jão.1518",
+    "Caio.1259",
+    "王秀英.8888",
+    "Nando.1666",
+    "Paulo.1740",
+    "Bia.2295",
+    "Bruna.1222",
+    "Rafa.1814",
+    "Otto.1703",
+    "ÚRSULA.2258",
+    "ÁLVARO.2147",
+    "Yara.2073",
+    "Íris Maria.2184",
+    "Edu.1333",
+    "Dani.1296",
+    "Gui.1407",
+    "Tiago.1888",
+    "Joana.1000",
+    "Iris.1481",
+    "Ágata Lima.1037",
+    "Uriel.1925"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|ABCD-EFGH-JKMN|60|com-excluidos": {
+  "cod": "ABCD-EFGH-JKMN",
+  "venc": 60,
+  "saida": {
+   "ganhadores": [
+    "Hugo.1444",
+    "Bia.2295",
+    "Yara.2073",
+    "Mel.1629",
+    "Marcos.1111",
+    "Lia.1592",
+    "Vivi.1962",
+    "Iris.1481",
+    "Jão.1518",
+    "Íris Maria.2184",
+    "Quézia.1777",
+    "Kátia.1555",
+    "Ônix.2221",
+    "Ana Clara.1148",
+    "Edu.1333",
+    "Paulo.1740",
+    "Zé Pedro.1074",
+    "Wagner.1999",
+    "Otto.1703",
+    "Dani.1296",
+    "Rafa.1814",
+    "Xande.2036",
+    "ÚRSULA.2258",
+    "Joana.1000",
+    "Caio.1259",
+    "Christopher Alexander Montgome.5678",
+    "Uriel.1925",
+    "Tiago.1888",
+    "王秀英.8888",
+    "Sol.1851",
+    "Gui.1407",
+    "Fabi.1370",
+    "Léo.1185",
+    "Zeca.2110",
+    "ÁLVARO.2147",
+    "Nando.1666",
+    "🦊 Fox.4242"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|divine guild|1|sem-excluidos": {
+  "cod": "divine guild",
+  "venc": 1,
+  "saida": {
+   "ganhadores": [
+    "王秀英.8888"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|divine guild|1|com-excluidos": {
+  "cod": "divine guild",
+  "venc": 1,
+  "saida": {
+   "ganhadores": [
+    "Sol.1851"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|divine guild|3|sem-excluidos": {
+  "cod": "divine guild",
+  "venc": 3,
+  "saida": {
+   "ganhadores": [
+    "王秀英.8888",
+    "Quézia.1777",
+    "Caio.1259"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|divine guild|3|com-excluidos": {
+  "cod": "divine guild",
+  "venc": 3,
+  "saida": {
+   "ganhadores": [
+    "Sol.1851",
+    "Dani.1296",
+    "Otto.1703"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|divine guild|60|sem-excluidos": {
+  "cod": "divine guild",
+  "venc": 60,
+  "saida": {
+   "ganhadores": [
+    "王秀英.8888",
+    "Quézia.1777",
+    "Caio.1259",
+    "Mel.1629",
+    "Ana Clara.1148",
+    "ÁLVARO.2147",
+    "Christopher Alexander Montgome.5678",
+    "Fabi.1370",
+    "Léo.1185",
+    "Rafa.1814",
+    "Xande.2036",
+    "🦊 Fox.4242",
+    "Uriel.1925",
+    "Kátia.1555",
+    "Vivi.1962",
+    "Edu.1333",
+    "Paulo.1740",
+    "ÚRSULA.2258",
+    "Otto.1703",
+    "Yara.2073",
+    "Nando.1666",
+    "Bia.2295",
+    "Ônix.2221",
+    "Zé Pedro.1074",
+    "Marcos.1111",
+    "Tiago.1888",
+    "Wagner.1999",
+    "Lia.1592",
+    "Iris.1481",
+    "Bruna.1222",
+    "Gui.1407",
+    "Hugo.1444",
+    "Íris Maria.2184",
+    "Joana.1000",
+    "Zeca.2110",
+    "Benachrichtigungseinstellungen.1234",
+    "Dani.1296",
+    "Ágata Lima.1037",
+    "Jão.1518",
+    "Sol.1851"
+   ],
+   "total": 40,
+   "impressao": "D606CAFC"
+  }
+ },
+ "sortearAoVivo|divine guild|60|com-excluidos": {
+  "cod": "divine guild",
+  "venc": 60,
+  "saida": {
+   "ganhadores": [
+    "Sol.1851",
+    "Dani.1296",
+    "Otto.1703",
+    "Ana Clara.1148",
+    "ÚRSULA.2258",
+    "Caio.1259",
+    "Edu.1333",
+    "Mel.1629",
+    "Tiago.1888",
+    "Zeca.2110",
+    "Wagner.1999",
+    "Léo.1185",
+    "Xande.2036",
+    "Hugo.1444",
+    "Rafa.1814",
+    "Quézia.1777",
+    "Zé Pedro.1074",
+    "Paulo.1740",
+    "Christopher Alexander Montgome.5678",
+    "🦊 Fox.4242",
+    "Íris Maria.2184",
+    "Nando.1666",
+    "Vivi.1962",
+    "Yara.2073",
+    "Marcos.1111",
+    "Jão.1518",
+    "Fabi.1370",
+    "Iris.1481",
+    "Joana.1000",
+    "王秀英.8888",
+    "Kátia.1555",
+    "ÁLVARO.2147",
+    "Bia.2295",
+    "Gui.1407",
+    "Ônix.2221",
+    "Lia.1592",
+    "Uriel.1925"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|ordem-invertida": {
+  "saida": {
+   "ganhadores": [
+    "Zé Pedro.1074",
+    "Tiago.1888",
+    "Caio.1259"
+   ],
+   "total": 37,
+   "impressao": "24535638"
+  }
+ },
+ "sortearAoVivo|vazio": {
+  "saida": {
+   "ganhadores": [],
+   "total": 0,
+   "impressao": "E3B0C442"
+  }
+ },
+ "confere|valido": {
+  "saida": true
+ },
+ "confere|ganhador-trocado": {
+  "saida": false
+ },
+ "confere|lista-alterada": {
+  "saida": false
+ },
+ "confere|codigo-errado": {
+  "saida": false
+ },
+ "confere|impressao-errada": {
+  "saida": false
+ },
+ "confere|mantidos": {
+  "saida": true
+ },
+ "impressao|0": {
+  "texto": "",
+  "saida": "E3B0C442"
+ },
+ "impressao|1": {
+  "texto": "joana.1234\nmarcos.5678",
+  "saida": "C69889CC"
+ },
+ "impressao|2": {
+  "texto": "Texto com acentuação e 🦊 emoji",
+  "saida": "33E0812F"
+ },
+ "lerLista|simples|soGw2=false": {
+  "texto": "Joana.1234\nMarcos.5678\nAna Clara.4321",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|simples|soGw2=false|peso": {
+  "texto": "Joana.1234\nMarcos.5678\nAna Clara.4321",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|simples|soGw2=false|funcao": {
+  "texto": "Joana.1234\nMarcos.5678\nAna Clara.4321",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|simples|soGw2=false|peso+funcao": {
+  "texto": "Joana.1234\nMarcos.5678\nAna Clara.4321",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|simples|soGw2=true": {
+  "texto": "Joana.1234\nMarcos.5678\nAna Clara.4321",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|simples|soGw2=true|peso": {
+  "texto": "Joana.1234\nMarcos.5678\nAna Clara.4321",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|simples|soGw2=true|funcao": {
+  "texto": "Joana.1234\nMarcos.5678\nAna Clara.4321",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|simples|soGw2=true|peso+funcao": {
+  "texto": "Joana.1234\nMarcos.5678\nAna Clara.4321",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|repetidas|soGw2=false": {
+  "texto": "Joana.1234\njoana.1234\nJOANA.1234\nMarcos.5678",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [
+    "joana.1234",
+    "JOANA.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|repetidas|soGw2=false|peso": {
+  "texto": "Joana.1234\njoana.1234\nJOANA.1234\nMarcos.5678",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 3,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [
+    "joana.1234",
+    "JOANA.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|repetidas|soGw2=false|funcao": {
+  "texto": "Joana.1234\njoana.1234\nJOANA.1234\nMarcos.5678",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [
+    "joana.1234",
+    "JOANA.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|repetidas|soGw2=false|peso+funcao": {
+  "texto": "Joana.1234\njoana.1234\nJOANA.1234\nMarcos.5678",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 3,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [
+    "joana.1234",
+    "JOANA.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|repetidas|soGw2=true": {
+  "texto": "Joana.1234\njoana.1234\nJOANA.1234\nMarcos.5678",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [
+    "joana.1234",
+    "JOANA.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|repetidas|soGw2=true|peso": {
+  "texto": "Joana.1234\njoana.1234\nJOANA.1234\nMarcos.5678",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 3,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [
+    "joana.1234",
+    "JOANA.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|repetidas|soGw2=true|funcao": {
+  "texto": "Joana.1234\njoana.1234\nJOANA.1234\nMarcos.5678",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [
+    "joana.1234",
+    "JOANA.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|repetidas|soGw2=true|peso+funcao": {
+  "texto": "Joana.1234\njoana.1234\nJOANA.1234\nMarcos.5678",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 3,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [
+    "joana.1234",
+    "JOANA.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|invalidas|soGw2=false": {
+  "texto": "Joana.1234\nsem numero\nMarcos.56\n.1234\nNome Muito Muito Muito Muito Longo.1234\nOk.9999",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "sem numero",
+     "chave": "sem numero",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Marcos.56",
+     "chave": "marcos.56",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": ".1234",
+     "chave": ".1234",
+     "bilhetes": 1,
+     "linha": 4
+    },
+    {
+     "nome": "Nome Muito Muito Muito Muito Longo.1234",
+     "chave": "nome muito muito muito muito longo.1234",
+     "bilhetes": 1,
+     "linha": 5
+    },
+    {
+     "nome": "Ok.9999",
+     "chave": "ok.9999",
+     "bilhetes": 1,
+     "linha": 6
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|invalidas|soGw2=false|peso": {
+  "texto": "Joana.1234\nsem numero\nMarcos.56\n.1234\nNome Muito Muito Muito Muito Longo.1234\nOk.9999",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "sem numero",
+     "chave": "sem numero",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Marcos.56",
+     "chave": "marcos.56",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": ".1234",
+     "chave": ".1234",
+     "bilhetes": 1,
+     "linha": 4
+    },
+    {
+     "nome": "Nome Muito Muito Muito Muito Longo.1234",
+     "chave": "nome muito muito muito muito longo.1234",
+     "bilhetes": 1,
+     "linha": 5
+    },
+    {
+     "nome": "Ok.9999",
+     "chave": "ok.9999",
+     "bilhetes": 1,
+     "linha": 6
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|invalidas|soGw2=false|funcao": {
+  "texto": "Joana.1234\nsem numero\nMarcos.56\n.1234\nNome Muito Muito Muito Muito Longo.1234\nOk.9999",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "sem numero",
+     "chave": "sem numero",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Marcos.56",
+     "chave": "marcos.56",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": ".1234",
+     "chave": ".1234",
+     "bilhetes": 1,
+     "linha": 4
+    },
+    {
+     "nome": "Nome Muito Muito Muito Muito Longo.1234",
+     "chave": "nome muito muito muito muito longo.1234",
+     "bilhetes": 1,
+     "linha": 5
+    },
+    {
+     "nome": "Ok.9999",
+     "chave": "ok.9999",
+     "bilhetes": 1,
+     "linha": 6
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|invalidas|soGw2=false|peso+funcao": {
+  "texto": "Joana.1234\nsem numero\nMarcos.56\n.1234\nNome Muito Muito Muito Muito Longo.1234\nOk.9999",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "sem numero",
+     "chave": "sem numero",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Marcos.56",
+     "chave": "marcos.56",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": ".1234",
+     "chave": ".1234",
+     "bilhetes": 1,
+     "linha": 4
+    },
+    {
+     "nome": "Nome Muito Muito Muito Muito Longo.1234",
+     "chave": "nome muito muito muito muito longo.1234",
+     "bilhetes": 1,
+     "linha": 5
+    },
+    {
+     "nome": "Ok.9999",
+     "chave": "ok.9999",
+     "bilhetes": 1,
+     "linha": 6
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|invalidas|soGw2=true": {
+  "texto": "Joana.1234\nsem numero\nMarcos.56\n.1234\nNome Muito Muito Muito Muito Longo.1234\nOk.9999",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Ok.9999",
+     "chave": "ok.9999",
+     "bilhetes": 1,
+     "linha": 6
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 2,
+     "texto": "sem numero"
+    },
+    {
+     "linha": 3,
+     "texto": "Marcos.56"
+    },
+    {
+     "linha": 4,
+     "texto": ".1234"
+    },
+    {
+     "linha": 5,
+     "texto": "Nome Muito Muito Muito Muito Longo.1234"
+    }
+   ]
+  }
+ },
+ "lerLista|invalidas|soGw2=true|peso": {
+  "texto": "Joana.1234\nsem numero\nMarcos.56\n.1234\nNome Muito Muito Muito Muito Longo.1234\nOk.9999",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Ok.9999",
+     "chave": "ok.9999",
+     "bilhetes": 1,
+     "linha": 6
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 2,
+     "texto": "sem numero"
+    },
+    {
+     "linha": 3,
+     "texto": "Marcos.56"
+    },
+    {
+     "linha": 4,
+     "texto": ".1234"
+    },
+    {
+     "linha": 5,
+     "texto": "Nome Muito Muito Muito Muito Longo.1234"
+    }
+   ]
+  }
+ },
+ "lerLista|invalidas|soGw2=true|funcao": {
+  "texto": "Joana.1234\nsem numero\nMarcos.56\n.1234\nNome Muito Muito Muito Muito Longo.1234\nOk.9999",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Ok.9999",
+     "chave": "ok.9999",
+     "bilhetes": 1,
+     "linha": 6
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 2,
+     "texto": "sem numero"
+    },
+    {
+     "linha": 3,
+     "texto": "Marcos.56"
+    },
+    {
+     "linha": 4,
+     "texto": ".1234"
+    },
+    {
+     "linha": 5,
+     "texto": "Nome Muito Muito Muito Muito Longo.1234"
+    }
+   ]
+  }
+ },
+ "lerLista|invalidas|soGw2=true|peso+funcao": {
+  "texto": "Joana.1234\nsem numero\nMarcos.56\n.1234\nNome Muito Muito Muito Muito Longo.1234\nOk.9999",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Ok.9999",
+     "chave": "ok.9999",
+     "bilhetes": 1,
+     "linha": 6
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 2,
+     "texto": "sem numero"
+    },
+    {
+     "linha": 3,
+     "texto": "Marcos.56"
+    },
+    {
+     "linha": 4,
+     "texto": ".1234"
+    },
+    {
+     "linha": 5,
+     "texto": "Nome Muito Muito Muito Muito Longo.1234"
+    }
+   ]
+  }
+ },
+ "lerLista|separadores|soGw2=false": {
+  "texto": "a, b; c\nd,e",
+  "saida": {
+   "validos": [
+    {
+     "nome": "a",
+     "chave": "a",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "b",
+     "chave": "b",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "c",
+     "chave": "c",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "d",
+     "chave": "d",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "e",
+     "chave": "e",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|separadores|soGw2=false|peso": {
+  "texto": "a, b; c\nd,e",
+  "saida": {
+   "validos": [
+    {
+     "nome": "a, b; c",
+     "chave": "a, b; c",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "d,e",
+     "chave": "d,e",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|separadores|soGw2=false|funcao": {
+  "texto": "a, b; c\nd,e",
+  "saida": {
+   "validos": [
+    {
+     "nome": "a, b; c",
+     "chave": "a, b; c",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "d,e",
+     "chave": "d,e",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|separadores|soGw2=false|peso+funcao": {
+  "texto": "a, b; c\nd,e",
+  "saida": {
+   "validos": [
+    {
+     "nome": "a, b; c",
+     "chave": "a, b; c",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "d,e",
+     "chave": "d,e",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|separadores|soGw2=true": {
+  "texto": "a, b; c\nd,e",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "a"
+    },
+    {
+     "linha": 1,
+     "texto": "b"
+    },
+    {
+     "linha": 1,
+     "texto": "c"
+    },
+    {
+     "linha": 2,
+     "texto": "d"
+    },
+    {
+     "linha": 2,
+     "texto": "e"
+    }
+   ]
+  }
+ },
+ "lerLista|separadores|soGw2=true|peso": {
+  "texto": "a, b; c\nd,e",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "a, b; c"
+    },
+    {
+     "linha": 2,
+     "texto": "d,e"
+    }
+   ]
+  }
+ },
+ "lerLista|separadores|soGw2=true|funcao": {
+  "texto": "a, b; c\nd,e",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "a, b; c"
+    },
+    {
+     "linha": 2,
+     "texto": "d,e"
+    }
+   ]
+  }
+ },
+ "lerLista|separadores|soGw2=true|peso+funcao": {
+  "texto": "a, b; c\nd,e",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "a, b; c"
+    },
+    {
+     "linha": 2,
+     "texto": "d,e"
+    }
+   ]
+  }
+ },
+ "lerLista|pesoX3|soGw2=false": {
+  "texto": "Joana.1234 x3\nMarcos.5678 *2\nAna.4321 = 5\nJoana.1234 x2\nBia.1111",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 x3",
+     "chave": "joana.1234 x3",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678 *2",
+     "chave": "marcos.5678 *2",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321 = 5",
+     "chave": "ana.4321 = 5",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": "Joana.1234 x2",
+     "chave": "joana.1234 x2",
+     "bilhetes": 1,
+     "linha": 4
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "linha": 5
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|pesoX3|soGw2=false|peso": {
+  "texto": "Joana.1234 x3\nMarcos.5678 *2\nAna.4321 = 5\nJoana.1234 x2\nBia.1111",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 5,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 2,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 5,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "linha": 5
+    }
+   ],
+   "repetidos": [
+    "Joana.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|pesoX3|soGw2=false|funcao": {
+  "texto": "Joana.1234 x3\nMarcos.5678 *2\nAna.4321 = 5\nJoana.1234 x2\nBia.1111",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 x3",
+     "chave": "joana.1234 x3",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678 *2",
+     "chave": "marcos.5678 *2",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321 = 5",
+     "chave": "ana.4321 = 5",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": "Joana.1234 x2",
+     "chave": "joana.1234 x2",
+     "bilhetes": 1,
+     "linha": 4
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "linha": 5
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|pesoX3|soGw2=false|peso+funcao": {
+  "texto": "Joana.1234 x3\nMarcos.5678 *2\nAna.4321 = 5\nJoana.1234 x2\nBia.1111",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 5,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 2,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 5,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "linha": 5
+    }
+   ],
+   "repetidos": [
+    "Joana.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|pesoX3|soGw2=true": {
+  "texto": "Joana.1234 x3\nMarcos.5678 *2\nAna.4321 = 5\nJoana.1234 x2\nBia.1111",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "linha": 5
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x3"
+    },
+    {
+     "linha": 2,
+     "texto": "Marcos.5678 *2"
+    },
+    {
+     "linha": 3,
+     "texto": "Ana.4321 = 5"
+    },
+    {
+     "linha": 4,
+     "texto": "Joana.1234 x2"
+    }
+   ]
+  }
+ },
+ "lerLista|pesoX3|soGw2=true|peso": {
+  "texto": "Joana.1234 x3\nMarcos.5678 *2\nAna.4321 = 5\nJoana.1234 x2\nBia.1111",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 5,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 2,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 5,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "linha": 5
+    }
+   ],
+   "repetidos": [
+    "Joana.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|pesoX3|soGw2=true|funcao": {
+  "texto": "Joana.1234 x3\nMarcos.5678 *2\nAna.4321 = 5\nJoana.1234 x2\nBia.1111",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "linha": 5
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x3"
+    },
+    {
+     "linha": 2,
+     "texto": "Marcos.5678 *2"
+    },
+    {
+     "linha": 3,
+     "texto": "Ana.4321 = 5"
+    },
+    {
+     "linha": 4,
+     "texto": "Joana.1234 x2"
+    }
+   ]
+  }
+ },
+ "lerLista|pesoX3|soGw2=true|peso+funcao": {
+  "texto": "Joana.1234 x3\nMarcos.5678 *2\nAna.4321 = 5\nJoana.1234 x2\nBia.1111",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 5,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 2,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 5,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "linha": 5
+    }
+   ],
+   "repetidos": [
+    "Joana.1234"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|pesoZero|soGw2=false": {
+  "texto": "Joana.1234 x0\nMarcos.5678 x1",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 x0",
+     "chave": "joana.1234 x0",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678 x1",
+     "chave": "marcos.5678 x1",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|pesoZero|soGw2=false|peso": {
+  "texto": "Joana.1234 x0\nMarcos.5678 x1",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x0"
+    }
+   ]
+  }
+ },
+ "lerLista|pesoZero|soGw2=false|funcao": {
+  "texto": "Joana.1234 x0\nMarcos.5678 x1",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 x0",
+     "chave": "joana.1234 x0",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678 x1",
+     "chave": "marcos.5678 x1",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|pesoZero|soGw2=false|peso+funcao": {
+  "texto": "Joana.1234 x0\nMarcos.5678 x1",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x0"
+    }
+   ]
+  }
+ },
+ "lerLista|pesoZero|soGw2=true": {
+  "texto": "Joana.1234 x0\nMarcos.5678 x1",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x0"
+    },
+    {
+     "linha": 2,
+     "texto": "Marcos.5678 x1"
+    }
+   ]
+  }
+ },
+ "lerLista|pesoZero|soGw2=true|peso": {
+  "texto": "Joana.1234 x0\nMarcos.5678 x1",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x0"
+    }
+   ]
+  }
+ },
+ "lerLista|pesoZero|soGw2=true|funcao": {
+  "texto": "Joana.1234 x0\nMarcos.5678 x1",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x0"
+    },
+    {
+     "linha": 2,
+     "texto": "Marcos.5678 x1"
+    }
+   ]
+  }
+ },
+ "lerLista|pesoZero|soGw2=true|peso+funcao": {
+  "texto": "Joana.1234 x0\nMarcos.5678 x1",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x0"
+    }
+   ]
+  }
+ },
+ "lerLista|funcao|soGw2=false": {
+  "texto": "Joana.1234 - Heal\nMarcos.5678 – DPS\nAna.4321\nBia.1111 - Quick - Boon",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 - Heal",
+     "chave": "joana.1234 - heal",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678 – DPS",
+     "chave": "marcos.5678 – dps",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111 - Quick - Boon",
+     "chave": "bia.1111 - quick - boon",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcao|soGw2=false|peso": {
+  "texto": "Joana.1234 - Heal\nMarcos.5678 – DPS\nAna.4321\nBia.1111 - Quick - Boon",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 - Heal",
+     "chave": "joana.1234 - heal",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678 – DPS",
+     "chave": "marcos.5678 – dps",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111 - Quick - Boon",
+     "chave": "bia.1111 - quick - boon",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcao|soGw2=false|funcao": {
+  "texto": "Joana.1234 - Heal\nMarcos.5678 – DPS\nAna.4321\nBia.1111 - Quick - Boon",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "funcao": "Heal",
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "funcao": "DPS",
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "funcao": "Quick - Boon",
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcao|soGw2=false|peso+funcao": {
+  "texto": "Joana.1234 - Heal\nMarcos.5678 – DPS\nAna.4321\nBia.1111 - Quick - Boon",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "funcao": "Heal",
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "funcao": "DPS",
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "funcao": "Quick - Boon",
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcao|soGw2=true": {
+  "texto": "Joana.1234 - Heal\nMarcos.5678 – DPS\nAna.4321\nBia.1111 - Quick - Boon",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 - Heal"
+    },
+    {
+     "linha": 2,
+     "texto": "Marcos.5678 – DPS"
+    },
+    {
+     "linha": 4,
+     "texto": "Bia.1111 - Quick - Boon"
+    }
+   ]
+  }
+ },
+ "lerLista|funcao|soGw2=true|peso": {
+  "texto": "Joana.1234 - Heal\nMarcos.5678 – DPS\nAna.4321\nBia.1111 - Quick - Boon",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 - Heal"
+    },
+    {
+     "linha": 2,
+     "texto": "Marcos.5678 – DPS"
+    },
+    {
+     "linha": 4,
+     "texto": "Bia.1111 - Quick - Boon"
+    }
+   ]
+  }
+ },
+ "lerLista|funcao|soGw2=true|funcao": {
+  "texto": "Joana.1234 - Heal\nMarcos.5678 – DPS\nAna.4321\nBia.1111 - Quick - Boon",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "funcao": "Heal",
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "funcao": "DPS",
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "funcao": "Quick - Boon",
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcao|soGw2=true|peso+funcao": {
+  "texto": "Joana.1234 - Heal\nMarcos.5678 – DPS\nAna.4321\nBia.1111 - Quick - Boon",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "funcao": "Heal",
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "funcao": "DPS",
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 3
+    },
+    {
+     "nome": "Bia.1111",
+     "chave": "bia.1111",
+     "bilhetes": 1,
+     "funcao": "Quick - Boon",
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcaoPeso|soGw2=false": {
+  "texto": "Joana.1234 x2 - Heal\nMarcos.5678 - DPS x3",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 x2 - Heal",
+     "chave": "joana.1234 x2 - heal",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678 - DPS x3",
+     "chave": "marcos.5678 - dps x3",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcaoPeso|soGw2=false|peso": {
+  "texto": "Joana.1234 x2 - Heal\nMarcos.5678 - DPS x3",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 x2 - Heal",
+     "chave": "joana.1234 x2 - heal",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678 - DPS",
+     "chave": "marcos.5678 - dps",
+     "bilhetes": 3,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcaoPeso|soGw2=false|funcao": {
+  "texto": "Joana.1234 x2 - Heal\nMarcos.5678 - DPS x3",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234 x2",
+     "chave": "joana.1234 x2",
+     "bilhetes": 1,
+     "funcao": "Heal",
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "funcao": "DPS x3",
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcaoPeso|soGw2=false|peso+funcao": {
+  "texto": "Joana.1234 x2 - Heal\nMarcos.5678 - DPS x3",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 2,
+     "funcao": "Heal",
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "funcao": "DPS x3",
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|funcaoPeso|soGw2=true": {
+  "texto": "Joana.1234 x2 - Heal\nMarcos.5678 - DPS x3",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x2 - Heal"
+    },
+    {
+     "linha": 2,
+     "texto": "Marcos.5678 - DPS x3"
+    }
+   ]
+  }
+ },
+ "lerLista|funcaoPeso|soGw2=true|peso": {
+  "texto": "Joana.1234 x2 - Heal\nMarcos.5678 - DPS x3",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x2 - Heal"
+    },
+    {
+     "linha": 2,
+     "texto": "Marcos.5678 - DPS x3"
+    }
+   ]
+  }
+ },
+ "lerLista|funcaoPeso|soGw2=true|funcao": {
+  "texto": "Joana.1234 x2 - Heal\nMarcos.5678 - DPS x3",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "funcao": "DPS x3",
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": [
+    {
+     "linha": 1,
+     "texto": "Joana.1234 x2 - Heal"
+    }
+   ]
+  }
+ },
+ "lerLista|funcaoPeso|soGw2=true|peso+funcao": {
+  "texto": "Joana.1234 x2 - Heal\nMarcos.5678 - DPS x3",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 2,
+     "funcao": "Heal",
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "funcao": "DPS x3",
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|windows|soGw2=false": {
+  "texto": "Joana.1234\r\nMarcos.5678\r\n\r\n  Ana.4321  \t ",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|windows|soGw2=false|peso": {
+  "texto": "Joana.1234\r\nMarcos.5678\r\n\r\n  Ana.4321  \t ",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|windows|soGw2=false|funcao": {
+  "texto": "Joana.1234\r\nMarcos.5678\r\n\r\n  Ana.4321  \t ",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|windows|soGw2=false|peso+funcao": {
+  "texto": "Joana.1234\r\nMarcos.5678\r\n\r\n  Ana.4321  \t ",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|windows|soGw2=true": {
+  "texto": "Joana.1234\r\nMarcos.5678\r\n\r\n  Ana.4321  \t ",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|windows|soGw2=true|peso": {
+  "texto": "Joana.1234\r\nMarcos.5678\r\n\r\n  Ana.4321  \t ",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|windows|soGw2=true|funcao": {
+  "texto": "Joana.1234\r\nMarcos.5678\r\n\r\n  Ana.4321  \t ",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|windows|soGw2=true|peso+funcao": {
+  "texto": "Joana.1234\r\nMarcos.5678\r\n\r\n  Ana.4321  \t ",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana.4321",
+     "chave": "ana.4321",
+     "bilhetes": 1,
+     "linha": 4
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|espacos|soGw2=false": {
+  "texto": "Ana   Clara.4321\n\tZé Pedro.1000",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Zé Pedro.1000",
+     "chave": "zé pedro.1000",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|espacos|soGw2=false|peso": {
+  "texto": "Ana   Clara.4321\n\tZé Pedro.1000",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Zé Pedro.1000",
+     "chave": "zé pedro.1000",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|espacos|soGw2=false|funcao": {
+  "texto": "Ana   Clara.4321\n\tZé Pedro.1000",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Zé Pedro.1000",
+     "chave": "zé pedro.1000",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|espacos|soGw2=false|peso+funcao": {
+  "texto": "Ana   Clara.4321\n\tZé Pedro.1000",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Zé Pedro.1000",
+     "chave": "zé pedro.1000",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|espacos|soGw2=true": {
+  "texto": "Ana   Clara.4321\n\tZé Pedro.1000",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Zé Pedro.1000",
+     "chave": "zé pedro.1000",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|espacos|soGw2=true|peso": {
+  "texto": "Ana   Clara.4321\n\tZé Pedro.1000",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Zé Pedro.1000",
+     "chave": "zé pedro.1000",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|espacos|soGw2=true|funcao": {
+  "texto": "Ana   Clara.4321\n\tZé Pedro.1000",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Zé Pedro.1000",
+     "chave": "zé pedro.1000",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|espacos|soGw2=true|peso+funcao": {
+  "texto": "Ana   Clara.4321\n\tZé Pedro.1000",
+  "saida": {
+   "validos": [
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Zé Pedro.1000",
+     "chave": "zé pedro.1000",
+     "bilhetes": 1,
+     "linha": 2
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|unicode|soGw2=false": {
+  "texto": "🦊 Fox.4242\n王秀英.8888\nÁgata Lima.1037\nágata lima.1037",
+  "saida": {
+   "validos": [
+    {
+     "nome": "🦊 Fox.4242",
+     "chave": "🦊 fox.4242",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "王秀英.8888",
+     "chave": "王秀英.8888",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ágata Lima.1037",
+     "chave": "ágata lima.1037",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [
+    "ágata lima.1037"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|unicode|soGw2=false|peso": {
+  "texto": "🦊 Fox.4242\n王秀英.8888\nÁgata Lima.1037\nágata lima.1037",
+  "saida": {
+   "validos": [
+    {
+     "nome": "🦊 Fox.4242",
+     "chave": "🦊 fox.4242",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "王秀英.8888",
+     "chave": "王秀英.8888",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ágata Lima.1037",
+     "chave": "ágata lima.1037",
+     "bilhetes": 2,
+     "linha": 3
+    }
+   ],
+   "repetidos": [
+    "ágata lima.1037"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|unicode|soGw2=false|funcao": {
+  "texto": "🦊 Fox.4242\n王秀英.8888\nÁgata Lima.1037\nágata lima.1037",
+  "saida": {
+   "validos": [
+    {
+     "nome": "🦊 Fox.4242",
+     "chave": "🦊 fox.4242",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "王秀英.8888",
+     "chave": "王秀英.8888",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ágata Lima.1037",
+     "chave": "ágata lima.1037",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [
+    "ágata lima.1037"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|unicode|soGw2=false|peso+funcao": {
+  "texto": "🦊 Fox.4242\n王秀英.8888\nÁgata Lima.1037\nágata lima.1037",
+  "saida": {
+   "validos": [
+    {
+     "nome": "🦊 Fox.4242",
+     "chave": "🦊 fox.4242",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "王秀英.8888",
+     "chave": "王秀英.8888",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ágata Lima.1037",
+     "chave": "ágata lima.1037",
+     "bilhetes": 2,
+     "linha": 3
+    }
+   ],
+   "repetidos": [
+    "ágata lima.1037"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|unicode|soGw2=true": {
+  "texto": "🦊 Fox.4242\n王秀英.8888\nÁgata Lima.1037\nágata lima.1037",
+  "saida": {
+   "validos": [
+    {
+     "nome": "🦊 Fox.4242",
+     "chave": "🦊 fox.4242",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "王秀英.8888",
+     "chave": "王秀英.8888",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ágata Lima.1037",
+     "chave": "ágata lima.1037",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [
+    "ágata lima.1037"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|unicode|soGw2=true|peso": {
+  "texto": "🦊 Fox.4242\n王秀英.8888\nÁgata Lima.1037\nágata lima.1037",
+  "saida": {
+   "validos": [
+    {
+     "nome": "🦊 Fox.4242",
+     "chave": "🦊 fox.4242",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "王秀英.8888",
+     "chave": "王秀英.8888",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ágata Lima.1037",
+     "chave": "ágata lima.1037",
+     "bilhetes": 2,
+     "linha": 3
+    }
+   ],
+   "repetidos": [
+    "ágata lima.1037"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|unicode|soGw2=true|funcao": {
+  "texto": "🦊 Fox.4242\n王秀英.8888\nÁgata Lima.1037\nágata lima.1037",
+  "saida": {
+   "validos": [
+    {
+     "nome": "🦊 Fox.4242",
+     "chave": "🦊 fox.4242",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "王秀英.8888",
+     "chave": "王秀英.8888",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ágata Lima.1037",
+     "chave": "ágata lima.1037",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [
+    "ágata lima.1037"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|unicode|soGw2=true|peso+funcao": {
+  "texto": "🦊 Fox.4242\n王秀英.8888\nÁgata Lima.1037\nágata lima.1037",
+  "saida": {
+   "validos": [
+    {
+     "nome": "🦊 Fox.4242",
+     "chave": "🦊 fox.4242",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "王秀英.8888",
+     "chave": "王秀英.8888",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ágata Lima.1037",
+     "chave": "ágata lima.1037",
+     "bilhetes": 2,
+     "linha": 3
+    }
+   ],
+   "repetidos": [
+    "ágata lima.1037"
+   ],
+   "erros": []
+  }
+ },
+ "lerLista|vazia|soGw2=false": {
+  "texto": "",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|vazia|soGw2=false|peso": {
+  "texto": "",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|vazia|soGw2=false|funcao": {
+  "texto": "",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|vazia|soGw2=false|peso+funcao": {
+  "texto": "",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|vazia|soGw2=true": {
+  "texto": "",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|vazia|soGw2=true|peso": {
+  "texto": "",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|vazia|soGw2=true|funcao": {
+  "texto": "",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|vazia|soGw2=true|peso+funcao": {
+  "texto": "",
+  "saida": {
+   "validos": [],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerLista|sem-opcoes": {
+  "saida": {
+   "validos": [
+    {
+     "nome": "Joana.1234",
+     "chave": "joana.1234",
+     "bilhetes": 1,
+     "linha": 1
+    },
+    {
+     "nome": "Marcos.5678",
+     "chave": "marcos.5678",
+     "bilhetes": 1,
+     "linha": 2
+    },
+    {
+     "nome": "Ana Clara.4321",
+     "chave": "ana clara.4321",
+     "bilhetes": 1,
+     "linha": 3
+    }
+   ],
+   "repetidos": [],
+   "erros": []
+  }
+ },
+ "lerItens|0": {
+  "texto": "Legendary x2\nBolsa\n\nGemas x600",
+  "saida": [
+   "Legendary",
+   "Legendary",
+   "Bolsa",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas",
+   "Gemas"
+  ]
+ },
+ "lerItens|1": {
+  "texto": "A x0\nB *3",
+  "saida": [
+   "B",
+   "B",
+   "B"
+  ]
+ },
+ "lerItens|2": {
+  "texto": "X = 2",
+  "saida": [
+   "X",
+   "X"
+  ]
+ },
+ "textoDeArquivo|csv": {
+  "saida": "Joana.1234 x3\nMarcos.5678\nAna.4321 x2"
+ },
+ "textoDeArquivo|txt": {
+  "saida": "a\nb"
+ },
+ "CONTA_GW2": {
+  "saida": [
+   true,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false
+  ]
+ },
+ "limpaCodigo": {
+  "saida": [
+   "K7PX3QMA9RTD",
+   "ABC",
+   "",
+   "ÇÃ"
+  ]
+ },
+ "inteiro": {
+  "saida": [
+   "1000",
+   "-5",
+   null,
+   "12",
+   "1000",
+   null,
+   null,
+   "99999999999999999999",
+   null,
+   "1000"
+  ]
+ },
+ "chaveDe": {
+  "saida": [
+   "joana.1234",
+   "ágata.1",
+   "i̇stanbul.1",
+   "ωmega.1"
+  ]
+ }
+}

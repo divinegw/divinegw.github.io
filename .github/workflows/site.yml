@@ -45,10 +45,12 @@ jobs:
             site-next/package-lock.json
       - run: npm ci
       - run: npm run build
-      # site novo: build, lint e junção das rotas migradas (lista ROTAS no juntar.mjs)
+      # site novo: lint, testes (sorteio dá o mesmo resultado de antes), build e junção das rotas migradas (ROTAS no juntar.mjs)
       - run: npm ci
         working-directory: site-next
       - run: npm run lint
+        working-directory: site-next
+      - run: npm test
         working-directory: site-next
       - run: npm run build
         working-directory: site-next

@@ -12,7 +12,7 @@ Site estático com os guias da guilda (Raids, Fractals, Dungeons, Endgame, Recur
 - Contrato dos links do Discord: `site-astro/scripts/qa/contrato.json` lista as URLs e âncoras que não podem sumir, e o `npm run qa` confere. Regravar só quando o mantenedor aprovar a mudança de um link: em `site-astro/`, `node scripts/qa/contrato.mjs gravar`, que lê o `dist/` como está (depois do `juntar`, já com as páginas do Next).
 - Build e testes, a mesma sequência do Actions:
   1. em `site-astro/`: `npm run build`;
-  2. em `site-next/`: `npm run lint`, `npm run build` e `node scripts/juntar.mjs`;
+  2. em `site-next/`: `npm run lint`, `npm test`, `npm run build` e `node scripts/juntar.mjs`;
   3. em `site-astro/`: `npm run pdf-aviso` e `npm run qa`.
 - O site não oferece PDF desde 19/11/2026: `npm run pdf` só sob pedido (`publicar.ps1 -ComPdf`, ou o botão "Run workflow" com `pdf` marcado). Sem ele, cada `/pdfs/<guia>.pdf` é um aviso com o link do guia.
 - Fato só muda com fonte. Texto confuso, seco ou robótico pode e deve ser reescrito. Use os nomes oficiais atuais do jogo ("Raid Encounters", não "Strikes").

@@ -17,6 +17,7 @@ cd site-astro
 npm run build
 cd ..\site-next
 npm run lint
+npm test
 npm run build
 node scripts/juntar.mjs
 cd ..\site-astro
@@ -24,7 +25,7 @@ npm run pdf-aviso
 npm run qa
 ```
 
-- `npm run lint` e `npm run build` (em `site-next/`) conferem o código e geram a pasta `out/`, com um `.html` por página.
+- `npm run lint`, `npm test` e `npm run build` (em `site-next/`) conferem o código, garantem que o sorteio dá o mesmo resultado de antes e geram a pasta `out/`, com um `.html` por página.
 - `node scripts/juntar.mjs` copia as páginas da lista `ROTAS` para o site atual (`../site-astro/dist/`).
 - `npm run qa` (em `site-astro/`) testa tudo. Um dos testes é o contrato dos links do Discord: nenhuma URL ou link com `#` pode sumir.
 

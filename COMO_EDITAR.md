@@ -48,6 +48,7 @@ No terminal, dentro de `site-astro/`:
    # site novo: confere, gera e junta as páginas já migradas ao dist/ (um comando por vez)
    cd ..\site-next
    npm run lint
+   npm test
    npm run build
    node scripts/juntar.mjs
    cd ..\site-astro
