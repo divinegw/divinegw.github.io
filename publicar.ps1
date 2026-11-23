@@ -19,6 +19,15 @@ if (-not $SemTeste) {
     if (-not (Test-Path node_modules)) { & npm ci; if ($LASTEXITCODE) { throw 'npm ci falhou; nada foi publicado.' } }
     Write-Host '1/3  Gerando o site...' -ForegroundColor Cyan
     & npm run build; if ($LASTEXITCODE) { throw 'A build falhou; nada foi publicado.' }
+    # site novo (Next): gera e junta as rotas já migradas ao dist/ do Astro
+    Push-Location ../site-next
+    try {
+      if (-not (Test-Path node_modules)) { & npm ci; if ($LASTEXITCODE) { throw 'npm ci do site-next falhou; nada foi publicado.' } }
+      & npm run lint; if ($LASTEXITCODE) { throw 'O lint do site-next falhou; nada foi publicado.' }
+      $env:NEXT_TELEMETRY_DISABLED = '1'
+      & npm run build; if ($LASTEXITCODE) { throw 'A build do site-next falhou; nada foi publicado.' }
+      & node scripts/juntar.mjs; if ($LASTEXITCODE) { throw 'A junção do site-next falhou; nada foi publicado.' }
+    } finally { Pop-Location }
     & npm run pdf-aviso; if ($LASTEXITCODE) { throw 'Os PDFs de aviso falharam; nada foi publicado.' }
     Write-Host '2/3  Rodando os testes...' -ForegroundColor Cyan
     & npm run qa; if ($LASTEXITCODE) { throw 'Os testes falharam; nada foi publicado.' }

@@ -32,6 +32,8 @@ divinegw.github.io/
 
 > **Regra de ouro:** nunca edite `site-astro/dist/`. É gerado e sobrescrito a cada build.
 
+> **Site novo em construção:** a próxima versão do site (Next.js + shadcn/ui, só tema escuro) está sendo feita na pasta `site-next/`, em etapas. Enquanto isso, o site publicado continua vindo do `site-astro/`, e só as páginas já prontas no site novo entram por cima dele (lista `ROTAS` em `site-next/scripts/juntar.mjs`). **Quem edita guias não precisa mexer em nada:** continue pelo `site-astro/`. Só quem mexe no `site-next/` precisa ler o `site-next/README.md`.
+
 ---
 
 ## 2. O ciclo de edição
@@ -43,8 +45,14 @@ No terminal, dentro de `site-astro/`:
 3. **Gerar e testar** (a mesma sequência que o GitHub roda):
    ```powershell
    npm run build      # gera dist/
+   # site novo: confere, gera e junta as páginas já migradas ao dist/ (um comando por vez)
+   cd ..\site-next
+   npm run lint
+   npm run build
+   node scripts/juntar.mjs
+   cd ..\site-astro
    npm run pdf-aviso  # põe em dist/pdfs/ o aviso com o link de cada guia
-   npm run qa         # testes: contraste, layout, sumário, imagens, impressão
+   npm run qa         # testes: links do Discord (contrato), contraste, layout, sumário, imagens, impressão
    ```
    `npm run pdf` gera os PDFs completos. Rode só quando alguém pedir: o site não oferece mais PDF.
 4. **Publicar** (na pasta do projeto):

@@ -1,4 +1,6 @@
 # Gera, testa e publica o site em https://divinegw.github.io/
+# Enquanto o site novo (Next, site-next/) convive com o atual (Astro, site-astro/), as duas builds rodam
+# e o site-next/scripts/juntar.mjs põe as rotas já migradas do Next por cima do dist/ do Astro.
 # - Pull request: build + QA. Se algo quebrar, o PR mostra o erro e nada é publicado.
 # - Push na main (merge de PR): build + QA + publicação no GitHub Pages.
 # - Manual (aba Actions → "Site" → Run workflow): igual ao push; marque "pdf" para gerar os PDFs completos dos guias.
@@ -38,9 +40,22 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: site-astro/package-lock.json
+          cache-dependency-path: |
+            site-astro/package-lock.json
+            site-next/package-lock.json
       - run: npm ci
       - run: npm run build
+      # site novo: build, lint e junção das rotas migradas (lista ROTAS no juntar.mjs)
+      - run: npm ci
+        working-directory: site-next
+      - run: npm run lint
+        working-directory: site-next
+      - run: npm run build
+        working-directory: site-next
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+      - run: node scripts/juntar.mjs
+        working-directory: site-next
       - if: ${{ inputs.pdf }}
         run: npm run pdf
       - run: npm run pdf-aviso

@@ -8,7 +8,13 @@ Site estático com os guias da guilda (Raids, Fractals, Dungeons, Endgame, Recur
 
 - Onde fica cada coisa: `COMO_EDITAR.md` e `site-astro/README.md` (blocos dos `.mdx`). Visual: `DESIGN.md`. Voz: `VOZ.md`. Contribuição externa: `CONTRIBUTING.md`. Histórico: `site-astro/RELATORIO.md`.
 - Texto dos guias: `site-astro/src/content/guias/*.mdx`. Nunca edite `site-astro/dist/` (gerado).
-- Build e testes, em `site-astro/`: `npm run build`, `npm run pdf-aviso`, `npm run qa`. É a mesma sequência do Actions. O site não oferece PDF desde 19/11/2026: `npm run pdf` só sob pedido (`publicar.ps1 -ComPdf`, ou o botão "Run workflow" com `pdf` marcado). Sem ele, cada `/pdfs/<guia>.pdf` é um aviso com o link do guia.
+- **Site novo em transição (desde 23/11/2026):** a próxima versão é feita em Next.js + shadcn na pasta `site-next/`, em etapas (plano aprovado em `design-system/plano-site/PLANO.md`, fora do git). Enquanto os dois convivem, `site-next/scripts/juntar.mjs` põe as rotas já migradas (lista `ROTAS`) por cima do `site-astro/dist/`. Antes de mexer no `site-next/`, leia o `site-next/README.md` e a documentação do Next em `site-next/node_modules/next/dist/docs/`, porque a versão 16 muda APIs. A sequência de testes está no item "Build e testes".
+- Contrato dos links do Discord: `site-astro/scripts/qa/contrato.json` lista as URLs e âncoras que não podem sumir, e o `npm run qa` confere. Regravar só quando o mantenedor aprovar a mudança de um link: em `site-astro/`, `node scripts/qa/contrato.mjs gravar`, que lê o `dist/` como está (depois do `juntar`, já com as páginas do Next).
+- Build e testes, a mesma sequência do Actions:
+  1. em `site-astro/`: `npm run build`;
+  2. em `site-next/`: `npm run lint`, `npm run build` e `node scripts/juntar.mjs`;
+  3. em `site-astro/`: `npm run pdf-aviso` e `npm run qa`.
+- O site não oferece PDF desde 19/11/2026: `npm run pdf` só sob pedido (`publicar.ps1 -ComPdf`, ou o botão "Run workflow" com `pdf` marcado). Sem ele, cada `/pdfs/<guia>.pdf` é um aviso com o link do guia.
 - Fato só muda com fonte. Texto confuso, seco ou robótico pode e deve ser reescrito. Use os nomes oficiais atuais do jogo ("Raid Encounters", não "Strikes").
 - Mantenha URLs (`/guias/<guia>.html`, `/pdfs/<guia>.pdf`) e âncoras: há links para elas no Discord.
 - Publicar (`publicar.ps1`, `git push` na `main`, merge de PR) só com pedido explícito do mantenedor. Commit local pode.

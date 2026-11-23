@@ -4,8 +4,30 @@
     {
       "name": "site-astro",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "site-astro", "run", "preview", "--", "--port", "4322"],
+      "runtimeArgs": [
+        "--prefix",
+        "site-astro",
+        "run",
+        "preview",
+        "--",
+        "--port",
+        "4322"
+      ],
       "port": 4322
+    },
+    {
+      "name": "site-next",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "site-next",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3010"
+      ],
+      "port": 3010
     }
   ]
 }

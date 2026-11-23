@@ -1,4 +1,5 @@
-// Testes automáticos do site gerado (dist/): sobe um servidor local e roda
+// Testes automáticos do site gerado (dist/): confere o contrato de URLs e âncoras, sobe um servidor local e roda
+//   contrato.mjs  nenhuma URL ou âncora do contrato.json some (links do Discord)
 //   qa_audit.cjs  contraste, rolagem horizontal, alvos de toque, títulos, imagens, erros, banners (6 páginas × 4 combinações)
 //   qa_toc.cjs    clique em cada item do "Neste guia", fim da página e volta ao topo
 //   qa_pdf.cjs    páginas em branco nos PDFs (precisa de npm run pdf antes)
@@ -6,7 +7,7 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -23,6 +24,12 @@ await new Promise((r) => srv.listen(0, '127.0.0.1', r));
 const url = `http://127.0.0.1:${srv.address().port}`;
 
 let falhou = false;
+// Contrato de URLs e âncoras (links do Discord): roda antes de tudo, sem navegador
+console.log('\n== contrato.mjs');
+{
+  const r = spawnSync(process.execPath, [path.join(HERE, 'contrato.mjs')], { stdio: 'inherit' });
+  if (r.status) falhou = true;
+}
 const roda = (script, arg) => new Promise((ok) => {
   console.log(`\n== ${script}`);
   spawn(process.execPath, [path.join(HERE, script), arg], { stdio: 'inherit' }).on('exit', (code) => { if (code) falhou = true; ok(); });
