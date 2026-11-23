@@ -12,9 +12,19 @@ const guias = ['raids', 'fractals', 'dungeons', 'endgame', 'recursos-uteis', 'cu
     // na distância do scroll-margin-top, e não só "em algum ponto da tela".
     const ctx = await b.newContext({ viewport: { width: 1280, height: 900 } });
     const pg = await ctx.newPage();
+    // "Parou" = 250 ms na mesma posição COM a página desenhando quadros. Logo depois do load, o navegador sem tela
+    // ainda pinta as artes e não desenha quadro nenhum: a rolagem congela no meio e parecia ter parado (23/11/2026,
+    // falha no 1º link de Raids, Fractals e Cursores). Teto de 10 s para não travar o teste.
     const parado = () => pg.evaluate(() => new Promise((ok) => {
-      let y = scrollY, n = 0;
-      const t = setInterval(() => { if (scrollY === y) { if (++n > 4) { clearInterval(t); ok(); } } else { y = scrollY; n = 0; } }, 50);
+      let y = scrollY, n = 0, quadros = 0, vivo = true;
+      const conta = () => { quadros++; if (vivo) requestAnimationFrame(conta); };
+      requestAnimationFrame(conta);
+      const fim = () => { vivo = false; clearInterval(t); ok(); };
+      const t = setInterval(() => {
+        if (scrollY !== y) { y = scrollY; n = 0; quadros = 0; return; }
+        if (++n > 4 && quadros >= 5) fim();
+      }, 50);
+      setTimeout(fim, 10000);
     }));
     const onde = (h) => pg.evaluate((h) => {
       const t = document.getElementById(decodeURIComponent(h.slice(1)));
