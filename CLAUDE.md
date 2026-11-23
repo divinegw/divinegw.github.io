@@ -34,11 +34,26 @@ O clarify não entra em título, card, novidade nem abertura de capítulo: ali e
 
 | # | Quem | Skills | Sai daqui |
 |---|---|---|---|
-| 1 | sessão principal | `grilling` se o pedido estiver ambíguo; `ponytail` para escolher a menor solução que resolve; `design-foundations` + `DESIGN.md` | plano curto: arquivos, o que muda, como testar |
-| 2 | `editor` | conforme o tipo: `layout-system` (grid, responsivo), `typography-system`, `color-system` (cor e contraste, sempre via `tokens.css`), `emil-design-eng` (animação, hover, clique), `accessibility-excellence` (teclado, ARIA, foco), `security-and-hardening` (dado de fora: Firebase do sorteio, API do GW2), `ux-writing` (rótulos) | arquivos alterados + build passou |
-| 3 | `verificador` | — | passou / lista de falhas |
-| 4 | `revisor` | `impeccable` modo `critique`, `product-design-review`, `web-design-guidelines`, `pre-flight-check` | lista priorizada |
-| 5 | sessão principal | `verification-before-completion` | novidade feita (ver **Novidade**) e só agora diz "pronto" |
+| 1 | sessão principal | `grilling` se o pedido estiver ambíguo; `ponytail` para escolher a menor solução que resolve; `design-foundations` + `DESIGN.md`; `craft` para desenhar a tela (ver **Craft** abaixo) | plano curto: arquivos, o que muda, como testar, lista de estados e a direção escolhida |
+| 2 | `editor` | conforme o tipo: `layout-system` (grid, responsivo), `typography-system`, `color-system` (cor e contraste, sempre via `tokens.css`), `emil-design-eng` (animação, hover, clique), `accessibility-excellence` (teclado, ARIA, foco), `security-and-hardening` (dado de fora: Firebase do sorteio, API do GW2), `ux-writing` (rótulos), `better-ui` (acabamento: raio, sombra, alinhamento de ícone) | arquivos alterados + build passou |
+| 3 | sessão principal, só em tela que mostra dado de fora (sorteio, API do GW2) | `stress` (nome de 30 letras, 0 e 500 inscritos, texto vazio) | o que quebrou → volta para o `editor` |
+| 4 | `verificador` | — | passou / lista de falhas |
+| 5 | `revisor` | `impeccable` modo `critique`, `product-design-review`, `web-design-guidelines`, `pre-flight-check` | lista priorizada |
+| 6 | sessão principal | `verification-before-completion` | novidade feita (ver **Novidade**) e só agora diz "pronto" |
+
+#### Craft (passo 1)
+
+O craft (`.claude/skills/craft*`) desenha antes de codar. A `using-craft` é o roteador dele. Neste projeto ele trabalha dentro desta cadeia: desenha e decide no passo 1, e os agentes fazem o resto.
+
+- **Tela ou pedaço de tela:** `craft`. Ele chama `craft-states` para listar todos os estados (vazio, carregando, erro, muitos itens, celular) e, antes de mostrar qualquer coisa, `craft-critique`.
+- **Mais de um caminho bom, ou o pedido de "opções":** `craft-explore`. O quadro com o Atual e as direções vai para `design-system/explorations/<tema>/` (fora do git) e espera o mantenedor escolher. Depois da escolha, a pasta é apagada.
+- **Peça reutilizável nova ou ajuste em várias telas:** `craft-system`.
+- **Fora daqui:** `craft-setup` e `craft-sync`. O `DESIGN.md` já existe e o projeto não usa ferramenta de design (Figma, Paper).
+- Direções de cor, fonte ou visual só entram quando o pedido for por algo novo ou fora do que existe. Nesse caso, a proposta sai do `tokens.css` e diz o que mudaria no `DESIGN.md`.
+
+### Auditoria de deriva (componentes que se afastaram do sistema)
+
+`improve-ui` na sessão principal (só lê o código; grava os planos em `design-plans/`, fora do git) → o mantenedor escolhe quais planos entram → `editor` aplica → `verificador` → `revisor`. Use antes de reorganizar um conjunto de telas (por exemplo, os painéis do sorteio) ou quando o visual parecer inconsistente.
 
 ### Bug
 

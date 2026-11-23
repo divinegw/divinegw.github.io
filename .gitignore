@@ -5,6 +5,8 @@ site-astro/.astro/
 
 # Material de trabalho grande (capturas, protótipos): fica só no computador de quem mantém
 design-system/
+# planos da skill improve-ui (auditoria de deriva; ver CLAUDE.md)
+design-plans/
 site-astro/comparacao/
 
 # Claude: só os agentes, a skill voz-divine e as configurações do projeto vão para o repositório.

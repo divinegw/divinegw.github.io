@@ -24,6 +24,7 @@ Carregue com a ferramenta Skill só as que a tarefa pede. Se uma não estiver in
 | Teclado, foco, ARIA | `accessibility-excellence` |
 | Dado de fora (Firebase do sorteio, API do GW2) | `security-and-hardening` |
 | Rótulo, botão, mensagem de erro | `ux-writing` |
+| Acabamento de superfície e ícone (raio, sombra, alinhamento óptico) | `better-ui` (os valores do `DESIGN.md` mandam mais que os dela) |
 
 ## Regras do projeto
 
