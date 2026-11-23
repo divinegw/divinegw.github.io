@@ -1,0 +1,1217 @@
+{
+ "ordenada": [
+  "ana clara.4321",
+  "bruna.1111",
+  "bruno tank.1290",
+  "christopher alexander montgome.5678",
+  "draknos.6624",
+  "kaelith.4821",
+  "lua.2207",
+  "mirela.7342",
+  "zé pedro.1000",
+  "ágata lima.1037",
+  "🦊 fox.4242"
+ ],
+ "impressaoDe|sem-peso": "B6E3067F",
+ "impressaoDe|com-peso": "B16EF7F1",
+ "codigoDe": [
+  {
+   "codigo": "K7PX3QMA9RTD",
+   "conferindo": true
+  },
+  {
+   "codigo": "ABC",
+   "conferindo": true
+  },
+  {
+   "vazio": false
+  }
+ ],
+ "lista|K7PX-3QMA-9RTD|1+0|igual": {
+  "saiu": [
+   "Bruno Tank.1290"
+  ],
+  "rotulos": [
+   "1º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º Bruno Tank.1290",
+  "resumo": "Bruno Tank.1290 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "lista|K7PX-3QMA-9RTD|1+0|peso": {
+  "saiu": [
+   "Joana.1234"
+  ],
+  "rotulos": [
+   "1º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234",
+  "resumo": "Joana.1234 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "lista|K7PX-3QMA-9RTD|3+2|igual": {
+  "saiu": [
+   "Bruno Tank.1290",
+   "🦊 Fox.4242",
+   "ágata lima.1037",
+   "bruna.1111",
+   "Mirela.7342"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "R1",
+   "R2"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º Bruno Tank.1290\n2º 🦊 Fox.4242\n3º ágata lima.1037\nR1 bruna.1111\nR2 Mirela.7342",
+  "resumo": "Bruno Tank.1290, 🦊 Fox.4242, ágata lima.1037 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "lista|K7PX-3QMA-9RTD|3+2|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Marcos.5678",
+   "Caio.2222",
+   "Ana.4321"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "R1",
+   "R2"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Marcos.5678\nR1 Caio.2222\nR2 Ana.4321",
+  "resumo": "Joana.1234, Léo.9999, Marcos.5678 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "lista|K7PX-3QMA-9RTD|5+0|igual": {
+  "saiu": [
+   "Bruno Tank.1290",
+   "🦊 Fox.4242",
+   "ágata lima.1037",
+   "bruna.1111",
+   "Mirela.7342"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º Bruno Tank.1290\n2º 🦊 Fox.4242\n3º ágata lima.1037\n4º bruna.1111\n5º Mirela.7342",
+  "resumo": "Bruno Tank.1290, 🦊 Fox.4242, ágata lima.1037, bruna.1111, Mirela.7342 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "lista|K7PX-3QMA-9RTD|5+0|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Marcos.5678",
+   "Caio.2222",
+   "Ana.4321"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Marcos.5678\n4º Caio.2222\n5º Ana.4321",
+  "resumo": "Joana.1234, Léo.9999, Marcos.5678, Caio.2222, Ana.4321 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "ordem|K7PX-3QMA-9RTD|igual": {
+  "saiu": [
+   "Bruno Tank.1290",
+   "🦊 Fox.4242",
+   "ágata lima.1037",
+   "bruna.1111",
+   "Mirela.7342",
+   "Christopher Alexander Montgome.5678",
+   "Ana Clara.4321",
+   "Lua.2207",
+   "Zé Pedro.1000",
+   "Kaelith.4821",
+   "Draknos.6624"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º",
+   "6º",
+   "7º",
+   "8º",
+   "9º",
+   "10º",
+   "11º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º Bruno Tank.1290\n2º 🦊 Fox.4242\n3º ágata lima.1037\n4º bruna.1111\n5º Mirela.7342\n6º Christopher Alexander Montgome.5678\n7º Ana Clara.4321\n8º Lua.2207\n9º Zé Pedro.1000\n10º Kaelith.4821\n11º Draknos.6624",
+  "resumo": "Ordem de 11 pessoas: Bruno Tank.1290, 🦊 Fox.4242, ágata lima.1037…",
+  "impressao": "B6E3067F"
+ },
+ "ordem|K7PX-3QMA-9RTD|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Marcos.5678",
+   "Caio.2222",
+   "Ana.4321",
+   "Bia.1111"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º",
+   "6º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Marcos.5678\n4º Caio.2222\n5º Ana.4321\n6º Bia.1111",
+  "resumo": "Ordem de 6 pessoas: Joana.1234, Léo.9999, Marcos.5678…",
+  "impressao": "B16EF7F1"
+ },
+ "premios|K7PX-3QMA-9RTD|unico": {
+  "quem": [
+   "Ana Clara.4321",
+   "Lua.2207",
+   "ágata lima.1037",
+   "bruna.1111",
+   "Kaelith.4821",
+   "Zé Pedro.1000",
+   "Bruno Tank.1290"
+  ],
+  "discord": "**Sorteio DIVINE** · prêmios\nLegendary Insight: Ana Clara.4321\nLegendary Insight: Lua.2207\n100 gold: ágata lima.1037\nMini Llama: bruna.1111\nGift of Battle: Kaelith.4821\nGift of Battle: Zé Pedro.1000\nGift of Battle: Bruno Tank.1290",
+  "resumo": "Legendary Insight: Ana Clara.4321 · Legendary Insight: Lua.2207 · 100 gold: ágata lima.1037…",
+  "impressao": "2F8B9B7A"
+ },
+ "premios|K7PX-3QMA-9RTD|repete": {
+  "quem": [
+   "Draknos.6624",
+   "Ana Clara.4321",
+   "Lua.2207",
+   "Bruno Tank.1290",
+   "Christopher Alexander Montgome.5678",
+   "🦊 Fox.4242",
+   "bruna.1111"
+  ],
+  "discord": "**Sorteio DIVINE** · prêmios\nLegendary Insight: Draknos.6624\nLegendary Insight: Ana Clara.4321\n100 gold: Lua.2207\nMini Llama: Bruno Tank.1290\nGift of Battle: Christopher Alexander Montgome.5678\nGift of Battle: 🦊 Fox.4242\nGift of Battle: bruna.1111",
+  "resumo": "Legendary Insight: Draknos.6624 · Legendary Insight: Ana Clara.4321 · 100 gold: Lua.2207…",
+  "impressao": "2F8B9B7A"
+ },
+ "numeros|K7PX-3QMA-9RTD|1-100|1|unico|solto": {
+  "saiu": [
+   "23"
+  ],
+  "faixa": "1 a 100",
+  "discord": "**Sorteio DIVINE** · números de 1 a 100\n23",
+  "resumo": "Saiu 23 (de 1 a 100)"
+ },
+ "numeros|K7PX-3QMA-9RTD|1-10|5|unico|ordenado": {
+  "saiu": [
+   "1",
+   "2",
+   "3",
+   "8",
+   "10"
+  ],
+  "faixa": "1 a 10",
+  "discord": "**Sorteio DIVINE** · números de 1 a 10\n1, 2, 3, 8, 10",
+  "resumo": "5 números de 1 a 10: 1, 2, 3, 8, 10"
+ },
+ "numeros|K7PX-3QMA-9RTD|1-10|8|repete|solto": {
+  "saiu": [
+   "3",
+   "5",
+   "4",
+   "10",
+   "1",
+   "3",
+   "1",
+   "4"
+  ],
+  "faixa": "1 a 10",
+  "discord": "**Sorteio DIVINE** · números de 1 a 10\n3, 5, 4, 10, 1, 3, 1, 4",
+  "resumo": "8 números de 1 a 10: 3, 5, 4, 10, 1, 3, 1, 4"
+ },
+ "numeros|K7PX-3QMA-9RTD|-50-50|6|unico|ordenado": {
+  "saiu": [
+   "-44",
+   "-28",
+   "-23",
+   "-11",
+   "29",
+   "49"
+  ],
+  "faixa": "-50 a 50",
+  "discord": "**Sorteio DIVINE** · números de -50 a 50\n-44, -28, -23, -11, 29, 49",
+  "resumo": "6 números de -50 a 50: -44, -28, -23, -11, 29, 49"
+ },
+ "numeros|K7PX-3QMA-9RTD|1-1000000000000|4|repete|solto": {
+  "saiu": [
+   "194138763087",
+   "240423955104",
+   "850930597645",
+   "712157911855"
+  ],
+  "faixa": "1 a 1.000.000.000.000",
+  "discord": "**Sorteio DIVINE** · números de 1 a 1.000.000.000.000\n194.138.763.087, 240.423.955.104, 850.930.597.645, 712.157.911.855",
+  "resumo": "4 números de 1 a 1.000.000.000.000: 194.138.763.087, 240.423.955.104, 850.930.597.645, 712.157.911.855"
+ },
+ "numeros|K7PX-3QMA-9RTD|5-5|1|unico|solto": {
+  "saiu": [
+   "5"
+  ],
+  "faixa": "5 a 5",
+  "discord": "**Sorteio DIVINE** · números de 5 a 5\n5",
+  "resumo": "Saiu 5 (de 5 a 5)"
+ },
+ "lista|ABCD-EFGH-JKMN|1+0|igual": {
+  "saiu": [
+   "ágata lima.1037"
+  ],
+  "rotulos": [
+   "1º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º ágata lima.1037",
+  "resumo": "ágata lima.1037 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "lista|ABCD-EFGH-JKMN|1+0|peso": {
+  "saiu": [
+   "Joana.1234"
+  ],
+  "rotulos": [
+   "1º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234",
+  "resumo": "Joana.1234 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "lista|ABCD-EFGH-JKMN|3+2|igual": {
+  "saiu": [
+   "ágata lima.1037",
+   "Ana Clara.4321",
+   "bruna.1111",
+   "🦊 Fox.4242",
+   "Draknos.6624"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "R1",
+   "R2"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º ágata lima.1037\n2º Ana Clara.4321\n3º bruna.1111\nR1 🦊 Fox.4242\nR2 Draknos.6624",
+  "resumo": "ágata lima.1037, Ana Clara.4321, bruna.1111 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "lista|ABCD-EFGH-JKMN|3+2|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Bia.1111",
+   "Marcos.5678",
+   "Caio.2222"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "R1",
+   "R2"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Bia.1111\nR1 Marcos.5678\nR2 Caio.2222",
+  "resumo": "Joana.1234, Léo.9999, Bia.1111 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "lista|ABCD-EFGH-JKMN|5+0|igual": {
+  "saiu": [
+   "ágata lima.1037",
+   "Ana Clara.4321",
+   "bruna.1111",
+   "🦊 Fox.4242",
+   "Draknos.6624"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º ágata lima.1037\n2º Ana Clara.4321\n3º bruna.1111\n4º 🦊 Fox.4242\n5º Draknos.6624",
+  "resumo": "ágata lima.1037, Ana Clara.4321, bruna.1111, 🦊 Fox.4242, Draknos.6624 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "lista|ABCD-EFGH-JKMN|5+0|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Bia.1111",
+   "Marcos.5678",
+   "Caio.2222"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Bia.1111\n4º Marcos.5678\n5º Caio.2222",
+  "resumo": "Joana.1234, Léo.9999, Bia.1111, Marcos.5678, Caio.2222 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "ordem|ABCD-EFGH-JKMN|igual": {
+  "saiu": [
+   "ágata lima.1037",
+   "Ana Clara.4321",
+   "bruna.1111",
+   "🦊 Fox.4242",
+   "Draknos.6624",
+   "Bruno Tank.1290",
+   "Zé Pedro.1000",
+   "Lua.2207",
+   "Kaelith.4821",
+   "Mirela.7342",
+   "Christopher Alexander Montgome.5678"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º",
+   "6º",
+   "7º",
+   "8º",
+   "9º",
+   "10º",
+   "11º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º ágata lima.1037\n2º Ana Clara.4321\n3º bruna.1111\n4º 🦊 Fox.4242\n5º Draknos.6624\n6º Bruno Tank.1290\n7º Zé Pedro.1000\n8º Lua.2207\n9º Kaelith.4821\n10º Mirela.7342\n11º Christopher Alexander Montgome.5678",
+  "resumo": "Ordem de 11 pessoas: ágata lima.1037, Ana Clara.4321, bruna.1111…",
+  "impressao": "B6E3067F"
+ },
+ "ordem|ABCD-EFGH-JKMN|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Bia.1111",
+   "Marcos.5678",
+   "Caio.2222",
+   "Ana.4321"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º",
+   "6º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Bia.1111\n4º Marcos.5678\n5º Caio.2222\n6º Ana.4321",
+  "resumo": "Ordem de 6 pessoas: Joana.1234, Léo.9999, Bia.1111…",
+  "impressao": "B16EF7F1"
+ },
+ "premios|ABCD-EFGH-JKMN|unico": {
+  "quem": [
+   "ágata lima.1037",
+   "Draknos.6624",
+   "Bruno Tank.1290",
+   "Zé Pedro.1000",
+   "Ana Clara.4321",
+   "Kaelith.4821",
+   "bruna.1111"
+  ],
+  "discord": "**Sorteio DIVINE** · prêmios\nLegendary Insight: ágata lima.1037\nLegendary Insight: Draknos.6624\n100 gold: Bruno Tank.1290\nMini Llama: Zé Pedro.1000\nGift of Battle: Ana Clara.4321\nGift of Battle: Kaelith.4821\nGift of Battle: bruna.1111",
+  "resumo": "Legendary Insight: ágata lima.1037 · Legendary Insight: Draknos.6624 · 100 gold: Bruno Tank.1290…",
+  "impressao": "2F8B9B7A"
+ },
+ "premios|ABCD-EFGH-JKMN|repete": {
+  "quem": [
+   "Lua.2207",
+   "🦊 Fox.4242",
+   "Mirela.7342",
+   "bruna.1111",
+   "Kaelith.4821",
+   "Zé Pedro.1000",
+   "Christopher Alexander Montgome.5678"
+  ],
+  "discord": "**Sorteio DIVINE** · prêmios\nLegendary Insight: Lua.2207\nLegendary Insight: 🦊 Fox.4242\n100 gold: Mirela.7342\nMini Llama: bruna.1111\nGift of Battle: Kaelith.4821\nGift of Battle: Zé Pedro.1000\nGift of Battle: Christopher Alexander Montgome.5678",
+  "resumo": "Legendary Insight: Lua.2207 · Legendary Insight: 🦊 Fox.4242 · 100 gold: Mirela.7342…",
+  "impressao": "2F8B9B7A"
+ },
+ "numeros|ABCD-EFGH-JKMN|1-100|1|unico|solto": {
+  "saiu": [
+   "19"
+  ],
+  "faixa": "1 a 100",
+  "discord": "**Sorteio DIVINE** · números de 1 a 100\n19",
+  "resumo": "Saiu 19 (de 1 a 100)"
+ },
+ "numeros|ABCD-EFGH-JKMN|1-10|5|unico|ordenado": {
+  "saiu": [
+   "1",
+   "2",
+   "7",
+   "9",
+   "10"
+  ],
+  "faixa": "1 a 10",
+  "discord": "**Sorteio DIVINE** · números de 1 a 10\n1, 2, 7, 9, 10",
+  "resumo": "5 números de 1 a 10: 1, 2, 7, 9, 10"
+ },
+ "numeros|ABCD-EFGH-JKMN|1-10|8|repete|solto": {
+  "saiu": [
+   "3",
+   "1",
+   "1",
+   "1",
+   "2",
+   "1",
+   "6",
+   "6"
+  ],
+  "faixa": "1 a 10",
+  "discord": "**Sorteio DIVINE** · números de 1 a 10\n3, 1, 1, 1, 2, 1, 6, 6",
+  "resumo": "8 números de 1 a 10: 3, 1, 1, 1, 2, 1, 6, 6"
+ },
+ "numeros|ABCD-EFGH-JKMN|-50-50|6|unico|ordenado": {
+  "saiu": [
+   "-48",
+   "-47",
+   "-45",
+   "-36",
+   "-32",
+   "47"
+  ],
+  "faixa": "-50 a 50",
+  "discord": "**Sorteio DIVINE** · números de -50 a 50\n-48, -47, -45, -36, -32, 47",
+  "resumo": "6 números de -50 a 50: -48, -47, -45, -36, -32, 47"
+ },
+ "numeros|ABCD-EFGH-JKMN|1-1000000000000|4|repete|solto": {
+  "saiu": [
+   "959879080710",
+   "49921942792",
+   "127269408451",
+   "60730181976"
+  ],
+  "faixa": "1 a 1.000.000.000.000",
+  "discord": "**Sorteio DIVINE** · números de 1 a 1.000.000.000.000\n959.879.080.710, 49.921.942.792, 127.269.408.451, 60.730.181.976",
+  "resumo": "4 números de 1 a 1.000.000.000.000: 959.879.080.710, 49.921.942.792, 127.269.408.451, 60.730.181.976"
+ },
+ "numeros|ABCD-EFGH-JKMN|5-5|1|unico|solto": {
+  "saiu": [
+   "5"
+  ],
+  "faixa": "5 a 5",
+  "discord": "**Sorteio DIVINE** · números de 5 a 5\n5",
+  "resumo": "Saiu 5 (de 5 a 5)"
+ },
+ "lista|divine guild|1+0|igual": {
+  "saiu": [
+   "ágata lima.1037"
+  ],
+  "rotulos": [
+   "1º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º ágata lima.1037",
+  "resumo": "ágata lima.1037 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "lista|divine guild|1+0|peso": {
+  "saiu": [
+   "Joana.1234"
+  ],
+  "rotulos": [
+   "1º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234",
+  "resumo": "Joana.1234 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "lista|divine guild|3+2|igual": {
+  "saiu": [
+   "ágata lima.1037",
+   "Bruno Tank.1290",
+   "🦊 Fox.4242",
+   "Zé Pedro.1000",
+   "Kaelith.4821"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "R1",
+   "R2"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º ágata lima.1037\n2º Bruno Tank.1290\n3º 🦊 Fox.4242\nR1 Zé Pedro.1000\nR2 Kaelith.4821",
+  "resumo": "ágata lima.1037, Bruno Tank.1290, 🦊 Fox.4242 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "lista|divine guild|3+2|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Ana.4321",
+   "Marcos.5678",
+   "Caio.2222"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "R1",
+   "R2"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Ana.4321\nR1 Marcos.5678\nR2 Caio.2222",
+  "resumo": "Joana.1234, Léo.9999, Ana.4321 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "lista|divine guild|5+0|igual": {
+  "saiu": [
+   "ágata lima.1037",
+   "Bruno Tank.1290",
+   "🦊 Fox.4242",
+   "Zé Pedro.1000",
+   "Kaelith.4821"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º ágata lima.1037\n2º Bruno Tank.1290\n3º 🦊 Fox.4242\n4º Zé Pedro.1000\n5º Kaelith.4821",
+  "resumo": "ágata lima.1037, Bruno Tank.1290, 🦊 Fox.4242, Zé Pedro.1000, Kaelith.4821 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "lista|divine guild|5+0|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Ana.4321",
+   "Marcos.5678",
+   "Caio.2222"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Ana.4321\n4º Marcos.5678\n5º Caio.2222",
+  "resumo": "Joana.1234, Léo.9999, Ana.4321, Marcos.5678, Caio.2222 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "ordem|divine guild|igual": {
+  "saiu": [
+   "ágata lima.1037",
+   "Bruno Tank.1290",
+   "🦊 Fox.4242",
+   "Zé Pedro.1000",
+   "Kaelith.4821",
+   "Ana Clara.4321",
+   "Lua.2207",
+   "Draknos.6624",
+   "bruna.1111",
+   "Mirela.7342",
+   "Christopher Alexander Montgome.5678"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º",
+   "6º",
+   "7º",
+   "8º",
+   "9º",
+   "10º",
+   "11º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º ágata lima.1037\n2º Bruno Tank.1290\n3º 🦊 Fox.4242\n4º Zé Pedro.1000\n5º Kaelith.4821\n6º Ana Clara.4321\n7º Lua.2207\n8º Draknos.6624\n9º bruna.1111\n10º Mirela.7342\n11º Christopher Alexander Montgome.5678",
+  "resumo": "Ordem de 11 pessoas: ágata lima.1037, Bruno Tank.1290, 🦊 Fox.4242…",
+  "impressao": "B6E3067F"
+ },
+ "ordem|divine guild|peso": {
+  "saiu": [
+   "Joana.1234",
+   "Léo.9999",
+   "Ana.4321",
+   "Marcos.5678",
+   "Caio.2222",
+   "Bia.1111"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º",
+   "6º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Joana.1234\n2º Léo.9999\n3º Ana.4321\n4º Marcos.5678\n5º Caio.2222\n6º Bia.1111",
+  "resumo": "Ordem de 6 pessoas: Joana.1234, Léo.9999, Ana.4321…",
+  "impressao": "B16EF7F1"
+ },
+ "premios|divine guild|unico": {
+  "quem": [
+   "Ana Clara.4321",
+   "Zé Pedro.1000",
+   "Draknos.6624",
+   "Kaelith.4821",
+   "Bruno Tank.1290",
+   "Mirela.7342",
+   "Christopher Alexander Montgome.5678"
+  ],
+  "discord": "**Sorteio DIVINE** · prêmios\nLegendary Insight: Ana Clara.4321\nLegendary Insight: Zé Pedro.1000\n100 gold: Draknos.6624\nMini Llama: Kaelith.4821\nGift of Battle: Bruno Tank.1290\nGift of Battle: Mirela.7342\nGift of Battle: Christopher Alexander Montgome.5678",
+  "resumo": "Legendary Insight: Ana Clara.4321 · Legendary Insight: Zé Pedro.1000 · 100 gold: Draknos.6624…",
+  "impressao": "2F8B9B7A"
+ },
+ "premios|divine guild|repete": {
+  "quem": [
+   "Christopher Alexander Montgome.5678",
+   "Bruno Tank.1290",
+   "Christopher Alexander Montgome.5678",
+   "Christopher Alexander Montgome.5678",
+   "Lua.2207",
+   "Lua.2207",
+   "Kaelith.4821"
+  ],
+  "discord": "**Sorteio DIVINE** · prêmios\nLegendary Insight: Christopher Alexander Montgome.5678\nLegendary Insight: Bruno Tank.1290\n100 gold: Christopher Alexander Montgome.5678\nMini Llama: Christopher Alexander Montgome.5678\nGift of Battle: Lua.2207\nGift of Battle: Lua.2207\nGift of Battle: Kaelith.4821",
+  "resumo": "Legendary Insight: Christopher Alexander Montgome.5678 · Legendary Insight: Bruno Tank.1290 · 100 gold: Christopher Alexander Montgome.5678…",
+  "impressao": "2F8B9B7A"
+ },
+ "numeros|divine guild|1-100|1|unico|solto": {
+  "saiu": [
+   "27"
+  ],
+  "faixa": "1 a 100",
+  "discord": "**Sorteio DIVINE** · números de 1 a 100\n27",
+  "resumo": "Saiu 27 (de 1 a 100)"
+ },
+ "numeros|divine guild|1-10|5|unico|ordenado": {
+  "saiu": [
+   "2",
+   "3",
+   "4",
+   "6",
+   "8"
+  ],
+  "faixa": "1 a 10",
+  "discord": "**Sorteio DIVINE** · números de 1 a 10\n2, 3, 4, 6, 8",
+  "resumo": "5 números de 1 a 10: 2, 3, 4, 6, 8"
+ },
+ "numeros|divine guild|1-10|8|repete|solto": {
+  "saiu": [
+   "4",
+   "6",
+   "8",
+   "6",
+   "8",
+   "8",
+   "10",
+   "10"
+  ],
+  "faixa": "1 a 10",
+  "discord": "**Sorteio DIVINE** · números de 1 a 10\n4, 6, 8, 6, 8, 8, 10, 10",
+  "resumo": "8 números de 1 a 10: 4, 6, 8, 6, 8, 8, 10, 10"
+ },
+ "numeros|divine guild|-50-50|6|unico|ordenado": {
+  "saiu": [
+   "-24",
+   "-10",
+   "-8",
+   "9",
+   "12",
+   "13"
+  ],
+  "faixa": "-50 a 50",
+  "discord": "**Sorteio DIVINE** · números de -50 a 50\n-24, -10, -8, 9, 12, 13",
+  "resumo": "6 números de -50 a 50: -24, -10, -8, 9, 12, 13"
+ },
+ "numeros|divine guild|1-1000000000000|4|repete|solto": {
+  "saiu": [
+   "223957262060",
+   "348213531512",
+   "549470266834",
+   "540718661265"
+  ],
+  "faixa": "1 a 1.000.000.000.000",
+  "discord": "**Sorteio DIVINE** · números de 1 a 1.000.000.000.000\n223.957.262.060, 348.213.531.512, 549.470.266.834, 540.718.661.265",
+  "resumo": "4 números de 1 a 1.000.000.000.000: 223.957.262.060, 348.213.531.512, 549.470.266.834, 540.718.661.265"
+ },
+ "numeros|divine guild|5-5|1|unico|solto": {
+  "saiu": [
+   "5"
+  ],
+  "faixa": "5 a 5",
+  "discord": "**Sorteio DIVINE** · números de 5 a 5\n5",
+  "resumo": "Saiu 5 (de 5 a 5)"
+ },
+ "lista|ZZZZ-2222-9999|1+0|igual": {
+  "saiu": [
+   "Draknos.6624"
+  ],
+  "rotulos": [
+   "1º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º Draknos.6624",
+  "resumo": "Draknos.6624 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "lista|ZZZZ-2222-9999|1+0|peso": {
+  "saiu": [
+   "Léo.9999"
+  ],
+  "rotulos": [
+   "1º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Léo.9999",
+  "resumo": "Léo.9999 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "lista|ZZZZ-2222-9999|3+2|igual": {
+  "saiu": [
+   "Draknos.6624",
+   "Kaelith.4821",
+   "Bruno Tank.1290",
+   "bruna.1111",
+   "Mirela.7342"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "R1",
+   "R2"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º Draknos.6624\n2º Kaelith.4821\n3º Bruno Tank.1290\nR1 bruna.1111\nR2 Mirela.7342",
+  "resumo": "Draknos.6624, Kaelith.4821, Bruno Tank.1290 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "lista|ZZZZ-2222-9999|3+2|peso": {
+  "saiu": [
+   "Léo.9999",
+   "Joana.1234",
+   "Ana.4321",
+   "Caio.2222",
+   "Bia.1111"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "R1",
+   "R2"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Léo.9999\n2º Joana.1234\n3º Ana.4321\nR1 Caio.2222\nR2 Bia.1111",
+  "resumo": "Léo.9999, Joana.1234, Ana.4321 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "lista|ZZZZ-2222-9999|5+0|igual": {
+  "saiu": [
+   "Draknos.6624",
+   "Kaelith.4821",
+   "Bruno Tank.1290",
+   "bruna.1111",
+   "Mirela.7342"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º Draknos.6624\n2º Kaelith.4821\n3º Bruno Tank.1290\n4º bruna.1111\n5º Mirela.7342",
+  "resumo": "Draknos.6624, Kaelith.4821, Bruno Tank.1290, bruna.1111, Mirela.7342 (de 11)",
+  "impressao": "B6E3067F",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "lista|ZZZZ-2222-9999|5+0|peso": {
+  "saiu": [
+   "Léo.9999",
+   "Joana.1234",
+   "Ana.4321",
+   "Caio.2222",
+   "Bia.1111"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Léo.9999\n2º Joana.1234\n3º Ana.4321\n4º Caio.2222\n5º Bia.1111",
+  "resumo": "Léo.9999, Joana.1234, Ana.4321, Caio.2222, Bia.1111 (de 6)",
+  "impressao": "B16EF7F1",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "ordem|ZZZZ-2222-9999|igual": {
+  "saiu": [
+   "Draknos.6624",
+   "Kaelith.4821",
+   "Bruno Tank.1290",
+   "bruna.1111",
+   "Mirela.7342",
+   "Lua.2207",
+   "ágata lima.1037",
+   "Christopher Alexander Montgome.5678",
+   "Ana Clara.4321",
+   "🦊 Fox.4242",
+   "Zé Pedro.1000"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º",
+   "6º",
+   "7º",
+   "8º",
+   "9º",
+   "10º",
+   "11º"
+  ],
+  "discord": "**Sorteio DIVINE** · 11 participantes\n1º Draknos.6624\n2º Kaelith.4821\n3º Bruno Tank.1290\n4º bruna.1111\n5º Mirela.7342\n6º Lua.2207\n7º ágata lima.1037\n8º Christopher Alexander Montgome.5678\n9º Ana Clara.4321\n10º 🦊 Fox.4242\n11º Zé Pedro.1000",
+  "resumo": "Ordem de 11 pessoas: Draknos.6624, Kaelith.4821, Bruno Tank.1290…",
+  "impressao": "B6E3067F"
+ },
+ "ordem|ZZZZ-2222-9999|peso": {
+  "saiu": [
+   "Léo.9999",
+   "Joana.1234",
+   "Ana.4321",
+   "Caio.2222",
+   "Bia.1111",
+   "Marcos.5678"
+  ],
+  "rotulos": [
+   "1º",
+   "2º",
+   "3º",
+   "4º",
+   "5º",
+   "6º"
+  ],
+  "discord": "**Sorteio DIVINE** · 6 participantes\n1º Léo.9999\n2º Joana.1234\n3º Ana.4321\n4º Caio.2222\n5º Bia.1111\n6º Marcos.5678",
+  "resumo": "Ordem de 6 pessoas: Léo.9999, Joana.1234, Ana.4321…",
+  "impressao": "B16EF7F1"
+ },
+ "premios|ZZZZ-2222-9999|unico": {
+  "quem": [
+   "Lua.2207",
+   "🦊 Fox.4242",
+   "Christopher Alexander Montgome.5678",
+   "bruna.1111",
+   "Mirela.7342",
+   "Bruno Tank.1290",
+   "ágata lima.1037"
+  ],
+  "discord": "**Sorteio DIVINE** · prêmios\nLegendary Insight: Lua.2207\nLegendary Insight: 🦊 Fox.4242\n100 gold: Christopher Alexander Montgome.5678\nMini Llama: bruna.1111\nGift of Battle: Mirela.7342\nGift of Battle: Bruno Tank.1290\nGift of Battle: ágata lima.1037",
+  "resumo": "Legendary Insight: Lua.2207 · Legendary Insight: 🦊 Fox.4242 · 100 gold: Christopher Alexander Montgome.5678…",
+  "impressao": "2F8B9B7A"
+ },
+ "premios|ZZZZ-2222-9999|repete": {
+  "quem": [
+   "Draknos.6624",
+   "Christopher Alexander Montgome.5678",
+   "Kaelith.4821",
+   "🦊 Fox.4242",
+   "bruna.1111",
+   "Zé Pedro.1000",
+   "Kaelith.4821"
+  ],
+  "discord": "**Sorteio DIVINE** · prêmios\nLegendary Insight: Draknos.6624\nLegendary Insight: Christopher Alexander Montgome.5678\n100 gold: Kaelith.4821\nMini Llama: 🦊 Fox.4242\nGift of Battle: bruna.1111\nGift of Battle: Zé Pedro.1000\nGift of Battle: Kaelith.4821",
+  "resumo": "Legendary Insight: Draknos.6624 · Legendary Insight: Christopher Alexander Montgome.5678 · 100 gold: Kaelith.4821…",
+  "impressao": "2F8B9B7A"
+ },
+ "numeros|ZZZZ-2222-9999|1-100|1|unico|solto": {
+  "saiu": [
+   "46"
+  ],
+  "faixa": "1 a 100",
+  "discord": "**Sorteio DIVINE** · números de 1 a 100\n46",
+  "resumo": "Saiu 46 (de 1 a 100)"
+ },
+ "numeros|ZZZZ-2222-9999|1-10|5|unico|ordenado": {
+  "saiu": [
+   "2",
+   "3",
+   "4",
+   "8",
+   "9"
+  ],
+  "faixa": "1 a 10",
+  "discord": "**Sorteio DIVINE** · números de 1 a 10\n2, 3, 4, 8, 9",
+  "resumo": "5 números de 1 a 10: 2, 3, 4, 8, 9"
+ },
+ "numeros|ZZZZ-2222-9999|1-10|8|repete|solto": {
+  "saiu": [
+   "6",
+   "8",
+   "4",
+   "2",
+   "10",
+   "8",
+   "3",
+   "10"
+  ],
+  "faixa": "1 a 10",
+  "discord": "**Sorteio DIVINE** · números de 1 a 10\n6, 8, 4, 2, 10, 8, 3, 10",
+  "resumo": "8 números de 1 a 10: 6, 8, 4, 2, 10, 8, 3, 10"
+ },
+ "numeros|ZZZZ-2222-9999|-50-50|6|unico|ordenado": {
+  "saiu": [
+   "-40",
+   "-19",
+   "-5",
+   "12",
+   "13",
+   "26"
+  ],
+  "faixa": "-50 a 50",
+  "discord": "**Sorteio DIVINE** · números de -50 a 50\n-40, -19, -5, 12, 13, 26",
+  "resumo": "6 números de -50 a 50: -40, -19, -5, 12, 13, 26"
+ },
+ "numeros|ZZZZ-2222-9999|1-1000000000000|4|repete|solto": {
+  "saiu": [
+   "394112382848",
+   "990891871040",
+   "88920430234",
+   "537805675815"
+  ],
+  "faixa": "1 a 1.000.000.000.000",
+  "discord": "**Sorteio DIVINE** · números de 1 a 1.000.000.000.000\n394.112.382.848, 990.891.871.040, 88.920.430.234, 537.805.675.815",
+  "resumo": "4 números de 1 a 1.000.000.000.000: 394.112.382.848, 990.891.871.040, 88.920.430.234, 537.805.675.815"
+ },
+ "numeros|ZZZZ-2222-9999|5-5|1|unico|solto": {
+  "saiu": [
+   "5"
+  ],
+  "faixa": "5 a 5",
+  "discord": "**Sorteio DIVINE** · números de 5 a 5\n5",
+  "resumo": "Saiu 5 (de 5 a 5)"
+ },
+ "numeros|resumo-longo": {
+  "resumo": "50 números de 1 a 1.000: 339, 24, 340, 682, 435, 224, 345, 107, 226, 156, 756, 243, 456, 316, 998, 626, 7…"
+ },
+ "textoParaCopiar": "**Sorteio DIVINE** · 11 participantes\n1º Bruno Tank.1290\n2º 🦊 Fox.4242\nR1 ágata lima.1037\nCódigo: K7PX-3QMA-9RTD · lista B6E3067F\nConfira em https://divinegw.github.io/sorteio.html",
+ "somaHistorico": [
+  [
+   {
+    "modo": "Lista de contas",
+    "resumo": "y",
+    "codigo": "B",
+    "impressao": "ABCD1234",
+    "em": "2026-11-23T21:58:00.000Z"
+   },
+   {
+    "modo": "Números",
+    "resumo": "x",
+    "codigo": "A",
+    "em": "2026-11-22T20:12:00.000Z"
+   }
+  ],
+  [
+   "D",
+   "C0",
+   "C1",
+   "C2",
+   "C3",
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8",
+   "C9",
+   "C10",
+   "C11",
+   "C12",
+   "C13",
+   "C14",
+   "C15",
+   "C16",
+   "C17",
+   "C18"
+  ]
+ ],
+ "validarNumeros": [
+  {
+   "min": "1",
+   "max": "100",
+   "qtd": 1
+  },
+  {
+   "erro": {
+    "campo": "max",
+    "texto": "O \"De\" precisa ser menor que o \"Até\"."
+   }
+  },
+  {
+   "erro": {
+    "campo": "min",
+    "texto": "Use só números inteiros em \"De\" e \"Até\" (pode ter sinal de menos, como -10)."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantos números\", escolha de 1 a 10.000."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantos números\", escolha de 1 a 10.000."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "De 1 a 10 cabem 10 números sem repetir. Peça até 10, ou marque que um número pode repetir."
+   }
+  },
+  {
+   "min": "1",
+   "max": "10",
+   "qtd": 11
+  },
+  {
+   "min": "-10",
+   "max": "-1",
+   "qtd": 10
+  },
+  {
+   "min": "1000",
+   "max": "2000",
+   "qtd": 1
+  }
+ ],
+ "validarLista": [
+  {
+   "erro": {
+    "campo": "lista",
+    "texto": "Coloque pelo menos uma conta na lista."
+   }
+  },
+  {
+   "erro": {
+    "campo": "lista",
+    "texto": "Coloque pelo menos 2 participantes na lista."
+   }
+  },
+  {
+   "erro": {
+    "campo": "vencedores",
+    "texto": "Em \"Vencedores\", ponha 1 ou mais."
+   }
+  },
+  {
+   "erro": {
+    "campo": "reservas",
+    "texto": "Em \"Reservas\", ponha 0 ou mais."
+   }
+  },
+  {
+   "erro": {
+    "campo": "vencedores",
+    "texto": "Há 5 contas na lista, e você pediu 4 vencedores e 2 reservas. Diminua o número ou ponha mais gente na lista."
+   }
+  },
+  {
+   "erro": {
+    "campo": "vencedores",
+    "texto": "Há 5 contas na lista. Escolha até 5 vencedores."
+   }
+  },
+  {
+   "venc": 9,
+   "res": 9
+  },
+  {
+   "erro": {
+    "campo": "vencedores",
+    "texto": "Há 40 contas na lista. Escolha até 40 vencedores."
+   }
+  }
+ ],
+ "validarPremios": [
+  {
+   "campo": "premios",
+   "texto": "Coloque pelo menos um prêmio na lista."
+  },
+  {
+   "campo": "lista",
+   "texto": "Coloque pelo menos uma conta na lista."
+  },
+  {
+   "campo": "premios",
+   "texto": "São 12 prêmios para 4 pessoas. Marque que uma pessoa pode levar mais de um, ou tire prêmios."
+  },
+  null,
+  null
+ ]
+}

@@ -16,11 +16,14 @@ export function Campo({
   rotulo,
   ajuda,
   erro,
+  ajudaViva = false,
   children,
 }: {
   rotulo: string
   ajuda?: string
   erro?: string
+  /** A ajuda muda sozinha (ex.: a contagem de uma lista): o leitor de tela lê a mudança, sem interromper. */
+  ajudaViva?: boolean
   children: React.ReactElement<PropsDoCampo>
 }) {
   const base = React.useId()
@@ -38,12 +41,12 @@ export function Campo({
         "aria-invalid": erro ? true : children.props["aria-invalid"],
       })}
       {ajuda && (
-        <p id={idAjuda} className="text-small text-muted-foreground">
+        <p id={idAjuda} aria-live={ajudaViva ? "polite" : undefined} className="text-small text-muted-foreground [overflow-wrap:anywhere]">
           {ajuda}
         </p>
       )}
       {erro && (
-        <p id={idErro} role="alert" className="flex items-start gap-1.5 text-small text-destructive">
+        <p id={idErro} role="alert" className="flex items-start gap-1.5 text-small text-destructive [overflow-wrap:anywhere]">
           <CircleAlertIcon className="mt-0.5 size-4 shrink-0" strokeWidth={1.75} aria-hidden="true" />
           {erro}
         </p>

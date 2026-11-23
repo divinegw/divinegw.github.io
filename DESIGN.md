@@ -126,7 +126,7 @@ Os do shadcn ficam em `site-next/components/ui/` e se ajustam no próprio arquiv
 |---|---|---|---|
 | Botão | `ui/button.tsx` | principal, secundário, fantasma, link, perigo · sm, padrão, lg, ícone | Etapa 1 |
 | Campo, rótulo, área de texto | `ui/input.tsx`, `ui/label.tsx`, `ui/textarea.tsx` | normal, erro, desativado | Etapa 1 |
-| Abas | `ui/tabs.tsx` | — | Etapa 1 |
+| Abas | `ui/tabs.tsx` | trilho `fill-1` com 6 px de folga e cantos concêntricos (trilho 14, aba 8); ativa com véu `tint-selected`, sem borda; quando não cabem numa linha, dividem a largura por igual (nunca uma aba sozinha) | Etapa 1 |
 | Card | `ui/card.tsx` | título em h3 (prop `as` para outro nível) | Etapa 1 |
 | Campo com rótulo, ajuda e erro | `divine/Campo.tsx` | liga id, `aria-describedby` e `aria-invalid`; erro com `role="alert"` | Etapa 1 |
 | Etiqueta | `ui/badge.tsx` | neutra, ouro, aberto, urgente, perigo | Etapa 1 |
