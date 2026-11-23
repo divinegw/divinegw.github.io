@@ -25,6 +25,7 @@ Referências: Linear (tipografia firme, cinzas bem escalonados, borda fina), Ver
 - **Fontes** (OFL, servidas pelo site, só o subconjunto latino): **Inter** em tudo; **JetBrains Mono** só em ID (`Nome.1234`), código, número pequeno e dado (nível, horário). Número grande (relógio) em Inter com algarismos de largura fixa: o zero da mono tem um ponto e parece "Ø" em tamanho grande.
 - **Títulos em caixa normal** e Inter firme, sem condensada.
 - **Ícones:** Lucide (`lucide-react`), traço 1,75. Um conjunto só.
+- **Redes sociais e serviços usam o logo oficial da marca** (Discord, GitHub, YouTube, Twitch...), nunca um ícone genérico parecido (balão de conversa, globo). Desenhos do Simple Icons (CC0) em `site-next/components/divine/icones-marca.tsx`, na cor do texto, ao lado do nome da rede.
 
 ## Cor
 

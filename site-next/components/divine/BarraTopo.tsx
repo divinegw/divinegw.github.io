@@ -1,4 +1,4 @@
-import { MessageCircleIcon } from "lucide-react"
+import { DiscordIcon } from "@/components/divine/icones-marca"
 
 import { Button } from "@/components/ui/button"
 import { SITE } from "@/conteudo/site"
@@ -46,7 +46,7 @@ export function BarraTopo({ atual, guiaAtual }: { atual?: PaginaAtual; guiaAtual
         <div className="ml-auto flex items-center gap-2">
           <Button asChild variant="secondary" size="sm" className="hidden min-[900px]:inline-flex">
             <a href={SITE.discord} target="_blank" rel="noopener" aria-label={ROTULO_DISCORD}>
-              <MessageCircleIcon strokeWidth={1.75} aria-hidden="true" />
+              <DiscordIcon />
               Discord
             </a>
           </Button>

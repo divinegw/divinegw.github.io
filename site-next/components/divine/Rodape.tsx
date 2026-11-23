@@ -1,4 +1,5 @@
-import { ArrowUpRightIcon, MessageCircleIcon } from "lucide-react"
+import { ArrowUpRightIcon } from "lucide-react"
+import { DiscordIcon } from "@/components/divine/icones-marca"
 
 import { Button } from "@/components/ui/button"
 import { AVISO, GUIAS, SITE } from "@/conteudo/site"
@@ -36,7 +37,7 @@ export function Rodape({ atual, guiaAtual }: { atual?: PaginaAtual; guiaAtual?: 
                 rel="noopener"
                 aria-label="Entrar no Discord da guilda DIVINE (abre em nova aba)"
               >
-                <MessageCircleIcon strokeWidth={1.75} aria-hidden="true" />
+                <DiscordIcon />
                 Entrar no Discord
               </a>
             </Button>

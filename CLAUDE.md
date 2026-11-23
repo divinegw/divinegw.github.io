@@ -17,6 +17,7 @@ Site estático com os guias da guilda (Raids, Fractals, Dungeons, Endgame, Recur
 - O site não oferece PDF desde 19/11/2026: `npm run pdf` só sob pedido (`publicar.ps1 -ComPdf`, ou o botão "Run workflow" com `pdf` marcado). Sem ele, cada `/pdfs/<guia>.pdf` é um aviso com o link do guia.
 - Fato só muda com fonte. Texto confuso, seco ou robótico pode e deve ser reescrito. Use os nomes oficiais atuais do jogo ("Raid Encounters", não "Strikes").
 - Mantenha URLs (`/guias/<guia>.html`, `/pdfs/<guia>.pdf`) e âncoras: há links para elas no Discord.
+- Ícone de rede social ou serviço (Discord, GitHub, YouTube...) é sempre o logo oficial da marca, nunca um ícone genérico parecido. Os desenhos ficam em `site-next/components/divine/icones-marca.tsx` (Simple Icons, CC0).
 - Publicar (`publicar.ps1`, `git push` na `main`, merge de PR) só com pedido explícito do mantenedor. Commit local pode.
 - Commits e textos do site não mencionam o Claude nem levam `Co-Authored-By`.
 
