@@ -27,7 +27,7 @@ Navegador dos testes e dos PDFs: Edge no Windows, Chrome no Linux e no macOS (`P
 | Nome do site e data "Atualizado em" | `SITE` em `src/site.ts` |
 | Fotos e prints | `src/assets/guias/<guia>/` |
 | Ícones dos cards, linhas e boons | `src/assets/icones/` |
-| Cores, fontes, espaçamentos, raios, movimento | `src/styles/tokens.css` (tokens do `DESIGN.md`; vitrine em `/design-system.html`) |
+| Cores, fontes, espaçamentos, raios, movimento | `src/styles/tokens.css` (tokens do `DESIGN-codex.md`; vitrine em `/design-system.html`) |
 | Estilo dos blocos | `src/styles/divine.css`; página inicial em `src/styles/inicio.css` (só tokens, nada de valor solto) |
 | Estrutura da página (topo, sumário, rodapé) | `src/layouts/Guia.astro` |
 
@@ -160,7 +160,7 @@ um provedor de <Efeito nome="quickness" />               boon/condition com íco
 
 `Recurso` e `Dungeon` continuam com o mesmo jeito de escrever; na Fase 3 o nome deles virou título (h3).
 
-Listas numeradas (`<ol class="steps">`) ficam em HTML dentro do `.mdx` (exemplo no `endgame.mdx`). Tabela: `<Tabela>`; "A vira B": `<Mapa>`. Nota, Destaque, Emoji e `<table class="map">` saíram na Fase 5. Onde cada componente entra: `DESIGN.md` › Aplicação nos guias.
+Listas numeradas (`<ol class="steps">`) ficam em HTML dentro do `.mdx` (exemplo no `endgame.mdx`). Tabela: `<Tabela>`; "A vira B": `<Mapa>`. Nota, Destaque, Emoji e `<table class="map">` saíram na Fase 5. Onde cada componente entra: `DESIGN-codex.md` › Aplicação nos guias.
 Em Recursos Úteis, `quebra: false` no frontmatter faz os capítulos seguirem na mesma página do PDF.
 
 ## Guia novo

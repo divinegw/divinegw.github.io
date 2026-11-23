@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/sonner";
 
 // Fontes servidas pelo próprio site (OFL; licenças em public/assets/fonts/).
 const inter = localFont({
@@ -30,7 +32,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" className={cn("dark font-sans", inter.variable, jetbrains.variable)}>
-      <body>{children}</body>
+      <body>
+        {/* visível só quando o teclado chega nele; cada página põe id="conteudo" no <main> */}
+        <a
+          href="#conteudo"
+          className="fixed top-4 left-4 z-[60] inline-flex h-control -translate-y-[200%] items-center rounded-md bg-primary px-4 text-body font-semibold text-primary-foreground focus-visible:translate-y-0"
+        >
+          Pular para o conteúdo
+        </a>
+        <TooltipProvider>{children}</TooltipProvider>
+        <Toaster />
+      </body>
     </html>
   );
 }

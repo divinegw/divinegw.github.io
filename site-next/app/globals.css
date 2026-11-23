@@ -5,87 +5,221 @@
 /* Site só escuro: o <html> tem sempre a classe "dark", e as variantes dark: do shadcn valem sempre. */
 @custom-variant dark (&:is(.dark *));
 
-/* Tokens PROVISÓRIOS da Etapa 0, vindos de design-system/do-zero (tokens.css + tema-ouro.css).
-   Só tema escuro. A Etapa 1 fecha o sistema (escalas de tipo, espaço, estados) e o DESIGN.md novo.
-   Componentes usam só as classes do Tailwind ligadas a estes papéis (bg-background, text-primary...),
-   nunca um hex solto. */
-
-@theme inline {
-    --font-heading: var(--font-inter);
-    --font-sans: var(--font-inter);
-    --font-mono: var(--font-jetbrains);
-    --color-ring: var(--ring);
-    --color-input: var(--input);
-    --color-border: var(--border);
-    --color-destructive: var(--destructive);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-secondary: var(--secondary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-primary: var(--primary);
-    --color-primary-text: var(--primary-text);
-    --color-urgente: var(--urgente);
-    --color-aberto: var(--aberto);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
-    --color-card-foreground: var(--card-foreground);
-    --color-card: var(--card);
-    --color-foreground: var(--foreground);
-    --color-background: var(--background);
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-xl: 20px;
-}
+/* =====================================================================================================
+   Sistema DIVINE (Etapa 1, aprovado em 23/11/2026). Regras e porquês: DESIGN.md da raiz.
+   Componentes usam só as classes ligadas a estes papéis (bg-surface, text-muted-foreground, h-control...),
+   nunca um hex solto. Contraste medido sobre o fundo / o card.
+   ===================================================================================================== */
 
 :root {
-    color-scheme: dark;
-    /* contrastes medidos sobre o fundo / o card (do-zero) */
-    --background: #0b0b0c;
-    --foreground: #ededed;            /* 16.8 / 16.0 */
-    --card: #121214;
-    --card-foreground: #ededed;
-    --popover: #121214;
-    --popover-foreground: #ededed;
-    --primary: #e2b254;               /* ouro DIVINE, preenchimento: 10.1 */
-    --primary-foreground: #0b0b0c;    /* texto sobre o ouro: 10.1 */
-    --primary-text: #eec066;          /* ouro como texto: 11.6 / 11.0 */
-    --secondary: #18181b;
-    --secondary-foreground: #ededed;
-    --muted: #18181b;
-    --muted-foreground: #a1a1aa;      /* 7.7 / 7.3 */
-    --accent: #202024;
-    --accent-foreground: #ededed;
-    --destructive: #f87171;           /* 7.1 / 6.8 */
-    --urgente: #ff8a3d;               /* relógio e prazo: 8.4 / 8.0 */
-    --aberto: #4ade80;                /* só a etiqueta "Aberto" (provisório: medir na Etapa 1) */
-    --border: #27272b;
-    --input: #62626c;                 /* borda de campo: 3.1:1 */
-    --ring: #eec066;                  /* foco */
-    --radius: 10px;
+  color-scheme: dark;
+
+  /* ---------- neutros ---------- */
+  --background: #0b0b0c;          /* fundo da página */
+  --surface: #121214;             /* cards, painéis, sumário */
+  --fill-1: #18181b;              /* campo, botão secundário, área embutida */
+  --fill-2: #202024;              /* pressionado, linha ativa */
+  --border: #27272b;              /* borda de card */
+  --border-hover: #3f3f46;        /* borda no hover (decorativa) */
+  --border-field: #62626c;        /* borda de campo: 3,1:1, "aqui se digita" */
+  --border-field-hover: #7a7a85;
+  --divider: #1e1e22;             /* linha entre itens */
+
+  --foreground: #ededed;          /* 16,8 / 16,0 */
+  --muted-foreground: #a1a1aa;    /*  7,7 / 7,3 */
+  --placeholder: #82828b;         /*  4,65 sobre fill-1: mais apagado que o apoio, nunca parece digitado */
+  --disabled: #52525b;            /*  2,5: só em peça desativada (isenta) */
+
+  --tint-hover: #ffffff0d;        /* peças sem borda */
+  --tint-selected: #ffffff14;
+  --tint-pressed: #ffffff1c;
+
+  /* ---------- o destaque único: ouro da DIVINE ---------- */
+  --primary: #e2b254;             /* preenchimento: 10,1 */
+  --primary-hover: #ebc274;
+  --primary-pressed: #c99a3c;
+  --primary-foreground: #0b0b0c;  /* texto sobre o ouro: 10,1 */
+  --primary-text: #eec066;        /* ouro como texto: 11,6 / 11,0 */
+  --primary-bg: #e2b2541a;        /* área tingida: selecionado, "Você", vencedor */
+  --primary-border: #e2b25452;
+  --ring: #eec066;                /* foco do teclado, cheio */
+
+  /* ---------- estados ---------- */
+  --urgente: #ff8a3d;             /* só relógio e prazo: 8,4 / 8,0 */
+  --urgente-bg: #ff8a3d1f;
+  --aberto: #4ade80;              /* só a etiqueta "Aberto": 11,3 / 10,7 */
+  --aberto-bg: #4ade801a;
+  --destructive: #f87171;         /* erro, "não confirmou": 7,1 / 6,8 */
+  --destructive-bg: #f871711a;
+  --destructive-border: #f8717166;
+  --overlay: #000000b3;
+
+  /* ---------- cores do jogo: só ícone, ponto e etiqueta, sempre com o nome ao lado ---------- */
+  --rare: #fcd00b; --exotic: #ffa405; --ascended: #fb3e8d; --legendary: #a855f7;
+  --prof-guardian: #72c1d9; --prof-revenant: #e6806c; --prof-warrior: #ffd166;
+  --prof-engineer: #d09c59; --prof-ranger: #8cdc82; --prof-thief: #c39298;
+  --prof-elementalist: #f68a87; --prof-mesmer: #c385e2; --prof-necromancer: #5cb078;
+
+  /* ---------- nomes que o shadcn usa, ligados aos papéis acima ---------- */
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --secondary: var(--fill-1);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--fill-1);
+  --accent: var(--fill-2);
+  --accent-foreground: var(--foreground);
+  --input: var(--border-field);
+  --radius: 10px;
+}
+
+@theme inline {
+  /* fontes (next/font/local em app/layout.tsx) */
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+
+  /* cor */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-fill-1: var(--fill-1);
+  --color-fill-2: var(--fill-2);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-border-field: var(--border-field);
+  --color-border-field-hover: var(--border-field-hover);
+  --color-divider: var(--divider);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-placeholder: var(--placeholder);
+  --color-disabled: var(--disabled);
+  --color-tint-hover: var(--tint-hover);
+  --color-tint-selected: var(--tint-selected);
+  --color-tint-pressed: var(--tint-pressed);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-pressed: var(--primary-pressed);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-text: var(--primary-text);
+  --color-primary-bg: var(--primary-bg);
+  --color-primary-border: var(--primary-border);
+  --color-ring: var(--ring);
+  --color-urgente: var(--urgente);
+  --color-urgente-bg: var(--urgente-bg);
+  --color-aberto: var(--aberto);
+  --color-aberto-bg: var(--aberto-bg);
+  --color-destructive: var(--destructive);
+  --color-destructive-bg: var(--destructive-bg);
+  --color-destructive-border: var(--destructive-border);
+  --color-overlay: var(--overlay);
+  --color-rare: var(--rare);
+  --color-exotic: var(--exotic);
+  --color-ascended: var(--ascended);
+  --color-legendary: var(--legendary);
+  --color-prof-guardian: var(--prof-guardian);
+  --color-prof-revenant: var(--prof-revenant);
+  --color-prof-warrior: var(--prof-warrior);
+  --color-prof-engineer: var(--prof-engineer);
+  --color-prof-ranger: var(--prof-ranger);
+  --color-prof-thief: var(--prof-thief);
+  --color-prof-elementalist: var(--prof-elementalist);
+  --color-prof-mesmer: var(--prof-mesmer);
+  --color-prof-necromancer: var(--prof-necromancer);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-input: var(--input);
+
+  /* tipo: tamanho / entrelinha, por uso */
+  --text-caption: 12px;   --text-caption--line-height: 16px;   /* etiqueta, "há 2 min", rótulo em caixa alta */
+  --text-small: 14px;     --text-small--line-height: 20px;     /* apoio, lista, sumário */
+  --text-body: 16px;      --text-body--line-height: 24px;      /* interface, campo (16: o iPhone não dá zoom) */
+  --text-prose: 17px;     --text-prose--line-height: 28px;     /* texto corrido dos guias */
+  --text-lead: 18px;      --text-lead--line-height: 28px;      /* abertura de guia e capítulo */
+  --text-title: 22px;     --text-title--line-height: 28px;     /* título de card (h3), nome do prêmio */
+  --text-heading: clamp(28px, 24.36px + 0.9091vw, 36px); --text-heading--line-height: 1.1;   /* capítulo (h2) */
+  --text-page: clamp(36px, 26.9px + 2.2727vw, 56px);     --text-page--line-height: 1.05;    /* nome do guia (h1) */
+  --text-display: clamp(40px, 25.45px + 3.6364vw, 72px); --text-display--line-height: 1;    /* relógio, vencedor */
+  --tracking-titulo: -0.02em;
+  --tracking-caps: 0.06em;
+
+  /* cantos */
+  --radius-sm: 6px;    /* etiqueta, chip */
+  --radius-md: 10px;   /* botão, campo, linha de lista */
+  --radius-lg: 14px;   /* card */
+  --radius-xl: 20px;   /* diálogo, folha */
+
+  /* tamanhos de controle (h-control, size-control-sm...) */
+  --spacing-control-sm: 36px;
+  --spacing-control: 44px;       /* toque mínimo */
+  --spacing-control-lg: 52px;
+
+  /* larguras (max-w-page, max-w-prose...) */
+  --container-page: 1120px;
+  --container-prose: 68ch;
+  --container-toc: 240px;
+  --container-form: 440px;
+  --container-list: 360px;
+
+  /* sombra: só no que flutua */
+  --shadow-float: 0 8px 24px -4px #000000a6, 0 0 0 1px var(--border);              /* menu, popover, aviso rápido */
+  --shadow-strong: 0 24px 64px -8px #000000cc, 0 0 0 1px var(--border-hover);      /* diálogo */
+
+  /* movimento: curto e com função; abrir é mais lento que fechar */
+  --ease-divine: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --default-transition-duration: 120ms;
+  --default-transition-timing-function: var(--ease-divine);
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  /* o giro de carregando é o único movimento em loop: fica vivo, só mais lento */
+  .animate-spin {
+    animation-duration: 2s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+/* esqueleto: pulsa de fill-1 para fill-2 e volta (ui/skeleton.tsx) */
+@keyframes pulso-esqueleto {
+  50% { background-color: var(--fill-2); }
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring;
+    @apply border-border;
+  }
+  /* foco: só do teclado, igual em tudo */
+  :focus { outline: none; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-body text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
   }
   button:not(:disabled), [role="button"]:not(:disabled) {
     cursor: pointer;
   }
-  html {
-    @apply font-sans;
-  }
+  ::placeholder { color: var(--placeholder); }
+}
+
+@layer utilities {
+  /* dado: ID, código, número pequeno */
+  .dado { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-feature-settings: normal; }
+  /* rótulo em caixa alta (INSCRIÇÕES) */
+  .rotulo { font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 }

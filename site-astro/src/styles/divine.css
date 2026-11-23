@@ -1,6 +1,6 @@
 /* =====================================================================
    Codex DIVINE — design system da Guild DIVINE (Guild Wars 2)
-   Fonte da verdade: DESIGN.md. Vitrine: /design-system.html.
+   Fonte da verdade: site-astro/DESIGN-codex.md. Vitrine: /design-system.html.
    Valores: só tokens de tokens.css. As exceções são as bordas (1px; foco 2px)
    e as medidas de impressão (mm e pt, para o A4).
    Cada bloco abaixo leva o nome do componente Astro que usa a classe.

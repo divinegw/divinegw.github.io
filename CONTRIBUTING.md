@@ -62,7 +62,7 @@ Escreva no commit o que mudou, como no exemplo. O `gh pr create` abre o pull req
 | Fotos e prints de um guia | `site-astro/src/assets/guias/<guia>/` |
 | Textos dos cards da página inicial | `INICIO` em `site-astro/src/site.ts` |
 | Página Novidades | `site-astro/src/novidades.ts` (entrada nova sempre no topo) |
-| Cores, fontes e espaçamentos | `site-astro/src/styles/tokens.css` (leia o [`DESIGN.md`](DESIGN.md) antes) |
+| Cores, fontes e espaçamentos | `site-astro/src/styles/tokens.css` (leia o [`DESIGN-codex.md`](site-astro/DESIGN-codex.md) antes) |
 | Blocos usados nos guias (Card, Item, Wing...) | `site-astro/src/components/` |
 
 O [`site-astro/README.md`](site-astro/README.md) mostra cada bloco do `.mdx` com exemplo. O [`COMO_EDITAR.md`](COMO_EDITAR.md) tem a lista completa e os erros mais comuns.

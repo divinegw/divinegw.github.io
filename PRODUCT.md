@@ -38,7 +38,7 @@ Guia em português do Brasil na voz da guilda, com vídeo de cada boss gravado p
 ## Brand Commitments
 
 - Voz da guilda definida em `VOZ.md` (Parceiro de guilda): fala com "você", "nós" quando é a guilda, palavra de jogador, sem cara de manual. Todo texto passa por voz-divine, humanizer-pt-br e clarify (só em instrução).
-- Visual definido em `DESIGN.md` (Codex DIVINE) e `site-astro/src/styles/tokens.css`.
+- Visual: `DESIGN.md` (sistema novo, site-next/, só escuro, ouro); o site em Astro, enquanto no ar, segue `site-astro/DESIGN-codex.md`.
 - Nada de atribuição a ferramentas de IA em commits, no site ou nos textos.
 
 ## Evidence on Hand

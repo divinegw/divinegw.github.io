@@ -6,7 +6,7 @@ Site estático com os guias da guilda (Raids, Fractals, Dungeons, Endgame, Recur
 
 ## Regras fixas
 
-- Onde fica cada coisa: `COMO_EDITAR.md` e `site-astro/README.md` (blocos dos `.mdx`). Visual: `DESIGN.md`. Voz: `VOZ.md`. Contribuição externa: `CONTRIBUTING.md`. Histórico: `site-astro/RELATORIO.md`.
+- Onde fica cada coisa: `COMO_EDITAR.md` e `site-astro/README.md` (blocos dos `.mdx`). Visual: `DESIGN.md` (site novo) e `site-astro/DESIGN-codex.md` (site em Astro, enquanto no ar). Voz: `VOZ.md`. Contribuição externa: `CONTRIBUTING.md`. Histórico: `site-astro/RELATORIO.md`.
 - Texto dos guias: `site-astro/src/content/guias/*.mdx`. Nunca edite `site-astro/dist/` (gerado).
 - **Site novo em transição (desde 23/11/2026):** a próxima versão é feita em Next.js + shadcn na pasta `site-next/`, em etapas (plano aprovado em `design-system/plano-site/PLANO.md`, fora do git). Enquanto os dois convivem, `site-next/scripts/juntar.mjs` põe as rotas já migradas (lista `ROTAS`) por cima do `site-astro/dist/`. Antes de mexer no `site-next/`, leia o `site-next/README.md` e a documentação do Next em `site-next/node_modules/next/dist/docs/`, porque a versão 16 muda APIs. A sequência de testes está no item "Build e testes".
 - Contrato dos links do Discord: `site-astro/scripts/qa/contrato.json` lista as URLs e âncoras que não podem sumir, e o `npm run qa` confere. Regravar só quando o mantenedor aprovar a mudança de um link: em `site-astro/`, `node scripts/qa/contrato.mjs gravar`, que lê o `dist/` como está (depois do `juntar`, já com as páginas do Next).

@@ -13,7 +13,7 @@ divinegw.github.io/
 ├── publicar.ps1                ← testa aqui e envia para o GitHub (-ComPdf pede os PDFs completos)
 ├── COMO_EDITAR.md              ← este guia
 ├── CONTRIBUTING.md             ← como alguém de fora manda uma correção
-├── DESIGN.md                   ← regras de visual (cores, fontes, componentes)
+├── DESIGN.md                   ← visual do site novo (site-next/); o do Astro está em site-astro/DESIGN-codex.md
 ├── VOZ.md                      ← como a guilda escreve
 └── site-astro/
     ├── src/content/guias/      ← TEXTO DOS GUIAS (um .mdx por guia: você edita aqui)
@@ -21,7 +21,7 @@ divinegw.github.io/
     ├── src/assets/guias/       ← fotos e artes de cada guia (uma pasta por guia)
     ├── src/assets/home/        ← arte do topo da página inicial
     ├── src/assets/icones/      ← ícones dos cards, das linhas e dos boons
-    ├── src/styles/tokens.css   ← cores, fontes, espaçamentos (os tokens do DESIGN.md)
+    ├── src/styles/tokens.css   ← cores, fontes, espaçamentos (os tokens do DESIGN-codex.md)
     ├── src/styles/divine.css   ← estilo dos blocos; inicio.css = página inicial
     ├── src/components/         ← blocos usados nos guias (Card, Item, Wing...)
     ├── src/layouts/Guia.astro  ← estrutura de um guia (topo, sumário, rodapé)
@@ -83,7 +83,7 @@ npm ci
 | Nome do site e data "Atualizado em…" | `SITE` em `src/site.ts` |
 | Textos e tags dos cards da página inicial | `INICIO` em `src/site.ts` |
 | Logo (brasão) | `src/assets/emblema-claro.png` e `emblema-escuro.png` |
-| Cores, fontes, espaçamentos | `src/styles/tokens.css` (leia o `DESIGN.md` antes); estilo dos blocos em `src/styles/divine.css` |
+| Cores, fontes, espaçamentos | `src/styles/tokens.css` (leia o `site-astro/DESIGN-codex.md` antes); estilo dos blocos em `src/styles/divine.css` |
 | Guia novo | crie `src/content/guias/<nome>.mdx`; a página `/guias/<nome>.html` e o sumário saem sozinhos |
 | Anunciar uma atualização (página Novidades, ponto em "Novidades" na barra, aviso e faixa da home) | acrescente uma entrada **no topo** de `NOVIDADES` em `src/novidades.ts`, com um `id` novo (explicação no próprio arquivo). O id novo é o que faz o aviso aparecer de novo para quem já viu o anterior |
 | Imagem e texto da prévia do link (Discord, WhatsApp) | `src/components/Cabeca.astro`: a home usa a arte do Endgame; cada guia usa a própria arte, o título e a `description` do frontmatter |

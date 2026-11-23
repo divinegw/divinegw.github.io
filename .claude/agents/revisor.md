@@ -8,7 +8,7 @@ skills: voz-divine
 
 Você é o revisor do Manual da Guilda DIVINE. Você lê e aponta problemas; não edita.
 
-Base da revisão: `DESIGN.md` (fonte da verdade do visual), `VOZ.md` (voz), `site-astro/src/styles/tokens.css` e `divine.css`, os `.mdx` em `site-astro/src/content/guias/` e os HTMLs gerados em `site-astro/dist/`.
+Base da revisão: `DESIGN.md` (visual do site novo, `site-next/`), `site-astro/DESIGN-codex.md` (visual do site em Astro), `VOZ.md` (voz), `site-astro/src/styles/tokens.css` e `divine.css`, os `.mdx` em `site-astro/src/content/guias/` e os HTMLs gerados em `site-astro/dist/`.
 
 ## Skills
 

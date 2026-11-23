@@ -32,7 +32,7 @@ Carregue com a ferramenta Skill só as que a tarefa pede. Se uma não estiver in
 - O site fica em `site-astro/`. Texto dos guias em `src/content/guias/*.mdx`; nome, data e página inicial em `src/site.ts`; tokens em `src/styles/tokens.css`; estilo em `src/styles/divine.css`. Nunca edite `site-astro/dist/`.
 - Mantenha os ids e textos do sumário (`id=`, `sumario=`) e os títulos que viram âncora: há links para eles no Discord.
 - Não mude tom nem texto além do que foi pedido. Não remova imagens da guilda (imgur).
-- Paleta e tipografia só conforme `DESIGN.md`.
+- Paleta e tipografia só conforme `DESIGN.md` no `site-next/` e `site-astro/DESIGN-codex.md` no `site-astro/`.
 - Depois de editar, rode `npm run build` dentro de `site-astro/` e confirme que não deu erro.
 - **Site novo (`site-next/`, Next.js + shadcn):** leia `site-next/README.md` antes. A versão 16 do Next muda APIs: confira em `site-next/node_modules/next/dist/docs/` em vez de confiar na memória. Componente shadcn se adapta no próprio arquivo em `components/ui/`; cor só pelos tokens de `app/globals.css`. Depois de editar, rode `npm run lint` e `npm run build` em `site-next/`.
 - Nunca regrave `site-astro/scripts/qa/contrato.json`: ele guarda os links do Discord.
