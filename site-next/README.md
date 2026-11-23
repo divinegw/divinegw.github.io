@@ -31,6 +31,8 @@ npm run qa
 
 Para ver enquanto edita: `npm run dev` e abra <http://localhost:3000/design-system>.
 
+Para testar o sorteio com dados extremos (títulos longos, nenhum, 20 abertos, servidor lento ou fora do ar), sem gravar nada no banco: com o `npm run dev` no ar, `node testes/stress/rodar.mjs http://localhost:3000/sorteio`. As fotos vão para `testes/stress/fotos/` (fora do git).
+
 ## Onde fica cada coisa
 
 | O quê | Onde |
