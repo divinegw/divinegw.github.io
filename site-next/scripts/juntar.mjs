@@ -39,6 +39,10 @@ for (const r of rotas) {
 if (faltando.length) { console.error(`juntar: rota(s) sem página no out/: ${faltando.join(', ')}`); process.exit(1); }
 
 copia('_next');                 // JS, CSS e fontes do Next
-copia('assets/fonts');          // licenças das fontes (OFL)
+copia('assets');                // tudo de public/assets: imagens da marca e licenças das fontes (OFL)
+// arquivos soltos na raiz do out/ (icon.png e afins), menos páginas e dados de navegação, que só entram pela lista ROTAS
+for (const f of fs.readdirSync(OUT, { withFileTypes: true })) {
+  if (f.isFile() && !/\.(html|txt)$/.test(f.name)) copia(f.name);
+}
 fs.writeFileSync(path.join(DESTINO, '.nojekyll'), '');
 console.log(`juntar: ${rotas.length} rota(s) do Next no site publicado: ${rotas.join(', ')}.`);

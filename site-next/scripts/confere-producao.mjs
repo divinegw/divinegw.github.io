@@ -15,6 +15,13 @@ const PROIBIDOS = [
   "confirmacao-mista-3",
   "confirmacao-voce-10s",
   "ultimos-10s",
+  "ganhadores-cheia",
+  "ganhadores-vazia",
+  "ganhadores-erro",
+  "ganhadores-muitos",
+  "conferir-achou",
+  "conferir-nao-achou",
+  "NAOC-ONFE-RE00",
 ]
 const EXTENSOES = /\.(js|mjs|css|html|txt|json|map)$/i
 

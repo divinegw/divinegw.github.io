@@ -23,7 +23,10 @@ describe('conteudoSorteio', () => {
   });
   // O site de hoje (já gerado em site-astro/dist) guarda a mesma lista no HTML: a ordem e os textos têm de bater.
   const html = fileURLToPath(new URL('../../site-astro/dist/sorteio.html', import.meta.url));
-  it.skipIf(!existsSync(html))('é igual ao que o site de hoje põe em sorteio.html (mesma ordem)', () => {
+  // Pula sem o dist, e também quando o sorteio.html já é a página do Next (depois do juntar.mjs, que leva o sorteio
+  // novo ao ar): aí a lista do site de hoje não está mais no arquivo. No Actions o teste roda antes do juntar.
+  const doAstro = existsSync(html) && readFileSync(html, 'utf8').includes('data-conteudo');
+  it.skipIf(!doAstro)('é igual ao que o site de hoje põe em sorteio.html (mesma ordem)', () => {
     const m = /<script[^>]*data-conteudo[^>]*>([\s\S]*?)<\/script>/.exec(readFileSync(html, 'utf8'));
     expect(JSON.parse(m![1])).toEqual(grupos);
   });

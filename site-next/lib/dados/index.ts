@@ -5,6 +5,7 @@
 // que nunca toca no banco. A condição `process.env.NODE_ENV === "development"` é trocada por `false` na build,
 // e o import dinâmico do falso some do pacote: confira com `grep -r inscricoes-cheia out/` (não pode achar nada).
 import type * as Firebase from "./firebase"
+import type { Registro } from "./firebase"
 import { ouvirConexao } from "./conexao"
 
 type Real = typeof Firebase
@@ -22,6 +23,23 @@ export type Dados = Pick<
   ouvirConexao(aoMudar: (online: boolean) => void): () => void
   /** `true` só na camada de teste do desenvolvimento. */
   falso: boolean
+}
+
+/** O que a página de Ganhadores lê do banco (só leitura, pela REST, sem o SDK). O falso e o real têm esta mesma forma. */
+export interface DadosGanhadores {
+  lerRegistros(quantos: number, sinal?: AbortSignal): Promise<Registro[]>
+  lerRegistroPorCodigo(codigo: string, sinal?: AbortSignal): Promise<Registro | null>
+  /** `true` só na camada de teste do desenvolvimento. */
+  falso: boolean
+}
+
+export async function carregarGanhadores(cenario: string | null): Promise<DadosGanhadores> {
+  if (process.env.NODE_ENV === "development" && cenario) {
+    const { criarFalsoGanhadores } = await import("./falso")
+    return criarFalsoGanhadores(cenario)
+  }
+  const rest = await import("./rest")
+  return { lerRegistros: rest.lerRegistros, lerRegistroPorCodigo: rest.lerRegistroPorCodigo, falso: false }
 }
 
 export async function carregarDados(cenario: string | null, papel: string | null, extras: URLSearchParams): Promise<Dados> {

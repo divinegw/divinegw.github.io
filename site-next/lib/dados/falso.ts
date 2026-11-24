@@ -7,12 +7,14 @@
 //      ...&parado=1                    congela o relógio (foto estável)
 //      ...&voce=1                      você (Zyanore.3030) está inscrito e, nos cenários com resultado, ganhou
 //      ...&erro=inscrever|aceitar|sortear|tirar|trocar   a próxima gravação desse tipo falha
+//      /sorteio/ganhadores?falso=ganhadores-cheia|ganhadores-vazia|ganhadores-erro|ganhadores-muitos|conferir-achou|conferir-nao-achou
+//        (código que acha: N8F2-M325-U72K; código que não confere: NAOC-ONFE-RE00)
 // No console: window.__divineFalso.avancar(ms), .parar(), .seguir(), .conexao(false|true), .ouvintes()
 import { sortearAoVivo, chaveDe, type Inscrito } from "@/lib/sorteio/ao-vivo"
 import { novoCodigo } from "@/lib/sorteio/aleatorio"
 import { ICONE_GEMA, type PremioInfo } from "@/lib/sorteio/premio"
-import type { Dados } from "./index"
-import type { Resultado, Sorteio, Usuario, Conexao } from "./firebase"
+import type { Dados, DadosGanhadores } from "./index"
+import type { Registro, Resultado, Sorteio, Usuario, Conexao } from "./firebase"
 
 type Papel = "visitante" | "organizador"
 type Carimbo = Sorteio["fechaEm"]
@@ -37,6 +39,8 @@ export const CENARIOS = [
   "confirmacao-esperando", "confirmacao-confirmou", "confirmacao-tempo-acabou", "confirmacao-mista-3",
   "confirmacao-mista-3-fim", "confirmacao-voce", "confirmacao-voce-10s", "organizador", "tirado",
   "sem-prazo", "nao-carregou", "nao-existe", "sem-internet",
+  // página de Ganhadores (criarFalsoGanhadores)
+  "ganhadores-cheia", "ganhadores-vazia", "ganhadores-erro", "ganhadores-muitos", "conferir-achou", "conferir-nao-achou",
 ] as const
 
 /** Quantos ouvintes estão ligados agora, somando todos os painéis abertos. Depois de fechar o painel, tudo volta a 0. */
@@ -267,6 +271,62 @@ export async function criarFalso(cenario: string, papelPedido: Papel | null, ext
     ;(window as unknown as { __divineFalso: typeof alca }).__divineFalso = alca
   }
   return dados
+}
+
+// ------------------------------------------------------------ página de Ganhadores
+/** Registros falsos para a página de Ganhadores. Cada um bate com a conta de verdade (código e lista), menos "NAOC-ONFE-RE00",
+ *  que tem um ganhador trocado para mostrar o "Não confere". Nomes e prêmios no pior caso (comprimento, emoji, HTML). */
+async function registrosFalsos(quantos: number): Promise<Registro[]> {
+  const inscritos = PIOR.map(comoInscrito)
+  const premios: { premio: string; info: PremioInfo | null }[] = [
+    { premio: "Abyssal Forest Dye", info: PREMIO },
+    { premio: "1.000 gemas", info: { tipo: "gemas", nome: "Gemas", quantidade: 1000, icone: ICONE_GEMA, raridade: "gema", descricao: "", itemId: 0 } },
+    { premio: "Gift of Battle", info: { tipo: "item", nome: "Gift of Battle", quantidade: 1, icone: ICONE_GEMA, raridade: "legendary", descricao: "", itemId: 0 } },
+    { premio: "Um prêmio com um nome muito, muito, muito comprido mesmo, daqueles que quebram o card em duas linhas ou mais", info: null },
+    { premio: "250 de ouro", info: { tipo: "ouro", nome: "Ouro", quantidade: 250, icone: "", raridade: "ouro", descricao: "", itemId: 0 } },
+    { premio: "Visions of Eternity", info: { tipo: "expansao", nome: "Visions of Eternity", quantidade: 1, icone: "", raridade: "expansao", descricao: "", itemId: 0 } },
+  ]
+  const titulos = ["Sorteio da live de sexta", "1º Sorteio da live especial de fim de mês com um título bem longo, de 80 letras!!", "Raid training de quarta", "<b>Sorteio</b> relâmpago"]
+  const vencedores = [1, 3, 1, 6, 1, 2, 1, 14]
+  const agora = Date.now()
+  const saida: Registro[] = []
+  for (let i = 0; i < quantos; i++) {
+    const codigo = i === 0 ? "N8F2-M325-U72K" : i === 1 ? "NAOC-ONFE-RE00" : `FALS-${i.toString(36).toUpperCase().padStart(4, "0")}-TEST`
+    const v = vencedores[i % vencedores.length]
+    const x = await sortearAoVivo(inscritos, [], v, codigo)
+    const p = premios[i % premios.length]
+    const ganhadores = i === 1 ? ["Intruso.0000", ...x.ganhadores.slice(1)] : x.ganhadores
+    saida.push({
+      id: `falso-${i}`, titulo: titulos[i % titulos.length], premio: p.premio, premioInfo: p.info, ganhadores, codigo,
+      impressao: x.impressao, total: x.total, excluidos: [], participantes: PIOR, refeito: i % 5 === 2 ? 2 : 0,
+      data: agora - i * 86_400_000 - 3_600_000, mantidos: [], ausentes: i % 4 === 3 ? ["Lua.2207"] : [],
+    })
+  }
+  return saida
+}
+
+/** Dados falsos da página de Ganhadores: ?falso=ganhadores-cheia | ganhadores-vazia | ganhadores-erro | ganhadores-muitos | conferir-achou | conferir-nao-achou. */
+export function criarFalsoGanhadores(cenario: string): DadosGanhadores {
+  const dorme = (ms: number) => new Promise<void>((ok) => setTimeout(ok, ms))
+  const sinalOu = (sinal?: AbortSignal) => { if (sinal?.aborted) throw new DOMException("cancelado", "AbortError") }
+  let cache: Promise<Registro[]> | null = null
+  const todos = () => (cache ??= registrosFalsos(cenario === "ganhadores-muitos" ? 50 : cenario === "ganhadores-vazia" ? 0 : 12))
+  return {
+    falso: true,
+    async lerRegistros(quantos, sinal) {
+      await dorme(900)
+      sinalOu(sinal)
+      if (cenario === "ganhadores-erro") throw new Error("falso: não carregou")
+      return (await todos()).slice(0, quantos)
+    },
+    async lerRegistroPorCodigo(codigo, sinal) {
+      await dorme(700)
+      sinalOu(sinal)
+      if (cenario === "ganhadores-erro") throw new Error("falso: não carregou")
+      if (cenario === "conferir-nao-achou" || cenario === "ganhadores-vazia") return null
+      return (await todos()).find((r) => r.codigo === codigo) ?? null
+    },
+  }
 }
 
 // ------------------------------------------------------------ cenários

@@ -3,6 +3,7 @@
 // Este arquivo NÃO importa "firebase/*" (só lib/dados/firebase.ts importa).
 import { FIREBASE } from '@/conteudo/sorteio';
 import type { PremioInfo } from '@/lib/sorteio/premio';
+import type { Registro } from './firebase';
 
 type Rest = {
   stringValue?: string; booleanValue?: boolean; integerValue?: string; doubleValue?: number; timestampValue?: string; nullValue?: null;
@@ -48,6 +49,56 @@ async function consulta(structuredQuery: object, sinal?: AbortSignal) {
   const linhas = (await r.json()) as { document?: { name: string; fields?: Record<string, Rest> } }[];
   return linhas.filter((l) => l.document).map(({ document: d }) => ({ id: d!.name.split('/').pop()!, ...(deRest({ mapValue: { fields: d!.fields } }) as Record<string, unknown>) }));
 }
+
+// ---------------------------------------------------------------- ganhadores (registros permanentes)
+const texto = (v: unknown) => (typeof v === 'string' ? v : '');
+const lista = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
+const numero = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
+
+const TIPOS_PREMIO = ['item', 'gemas', 'ouro', 'expansao', 'texto'] as const;
+
+/** O prêmio campo a campo: nada vem espalhado sem conferir. */
+function comoPremio(p: unknown): PremioInfo | null {
+  if (!p || typeof p !== 'object' || Array.isArray(p)) return null;
+  const o = p as Record<string, unknown>;
+  const tipo = TIPOS_PREMIO.find((t) => t === o.tipo) ?? 'texto';
+  const q = numero(o.quantidade);
+  return { tipo, nome: texto(o.nome), quantidade: q > 0 ? q : 1, icone: texto(o.icone), raridade: texto(o.raridade), descricao: texto(o.descricao), itemId: numero(o.itemId) };
+}
+
+/** Um registro vindo de fora, com cada campo conferido: o que não tem a forma certa vira vazio (nada quebra a tela).
+ *  Sem id ou sem código não serve para nada na tela: `null`, e quem chama descarta. */
+function comoRegistro(x: Record<string, unknown>): Registro | null {
+  const id = texto(x.id), codigo = texto(x.codigo);
+  if (!id || !codigo) return null;
+  return {
+    id, titulo: texto(x.titulo), premio: texto(x.premio), premioInfo: comoPremio(x.premioInfo),
+    ganhadores: lista(x.ganhadores), codigo, impressao: texto(x.impressao), total: numero(x.total),
+    excluidos: lista(x.excluidos), participantes: lista(x.participantes), refeito: numero(x.refeito), data: numero(x.data),
+    mantidos: lista(x.mantidos), ausentes: lista(x.ausentes),
+  };
+}
+const registro = (x: Record<string, unknown>) => comoRegistro(x);
+const validos = (l: (Registro | null)[]) => l.filter((r): r is Registro => r !== null);
+
+/** Os registros mais novos primeiro. As regras do banco aceitam no máximo 50. */
+export async function lerRegistros(quantos = 30, sinal?: AbortSignal): Promise<Registro[]> {
+  const rs = await consulta({
+    from: [{ collectionId: 'registros' }],
+    orderBy: [{ field: { fieldPath: 'data' }, direction: 'DESCENDING' }],
+    limit: Math.min(quantos, 50),
+  }, sinal);
+  return validos(rs.map(registro));
+}
+
+/** Acha o registro pelo código (já limpo, com hífens). `null` se não existir. */
+export async function lerRegistroPorCodigo(codigo: string, sinal?: AbortSignal): Promise<Registro | null> {
+  const [r] = await consulta({
+    from: [{ collectionId: 'registros' }],
+    where: { fieldFilter: { field: { fieldPath: 'codigo' }, op: 'EQUAL', value: { stringValue: codigo } } },
+    limit: 1,
+  }, sinal);
+  return r ? comoRegistro(r) : null;}
 
 /** Quantos inscritos o sorteio tem agora. `null` se não deu para contar. */
 export async function contarInscritos(id: string, sinal?: AbortSignal): Promise<number | null> {

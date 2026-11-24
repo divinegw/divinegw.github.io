@@ -26,4 +26,12 @@ export const fechaLogo = (ms: number) => ms < 5 * 60_000;
 export const nomeDoPremio = (s: { premio: string; titulo: string; premioInfo: PremioInfo | null }) =>
   (s.premioInfo ? textoPremio(s.premioInfo) : s.premio) || s.titulo;
 
+/** "23/11 21:42". Vazio se a data não veio (0). */
+export const dataCurta = (ms: number) => {
+  if (!ms) return '';
+  const d = new Date(ms);
+  // de outro ano: mostra o ano ("23/11/2025, 21:42")
+  return d.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', ...(d.getFullYear() !== new Date().getFullYear() ? { year: 'numeric' as const } : {}), hour: '2-digit', minute: '2-digit' });
+};
+
 export const pessoas = (n: number, um: string, varios: string) => `${n.toLocaleString('pt-BR')} ${n === 1 ? um : varios}`;
