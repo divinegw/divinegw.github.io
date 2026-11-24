@@ -22,6 +22,7 @@ export function ResultadoCard({
   discord,
   conferido,
   aoAnunciar,
+  nivel = 3,
   children,
 }: {
   titulo: string
@@ -31,8 +32,11 @@ export function ResultadoCard({
   discord: string
   conferido?: boolean
   aoAnunciar: (texto: string) => void
+  /** Nível do título: 3 nas abas; 4 quando o resultado fica dentro de um bloco que já tem título 3 (aba Extras). */
+  nivel?: 3 | 4
   children: React.ReactNode
 }) {
+  const Titulo = nivel === 4 ? "h4" : "h3"
   const idTitulo = React.useId()
   const [copia, setCopia] = React.useState<"" | "ok" | "falhou">("")
   const temporizador = React.useRef<number | undefined>(undefined)
@@ -67,7 +71,7 @@ export function ResultadoCard({
 
   return (
     <section aria-labelledby={idTitulo} className="grid gap-4 rounded-lg border border-primary-border bg-primary-bg p-4 min-[480px]:p-5">
-      <h3 id={idTitulo} ref={refTitulo} tabIndex={-1} className="rotulo text-primary-text outline-none">{titulo}</h3>
+      <Titulo id={idTitulo} ref={refTitulo} tabIndex={-1} className="rotulo text-primary-text outline-none">{titulo}</Titulo>
       <div
         ref={corpo}
         className="max-h-[min(60vh,32rem)] overflow-y-auto overscroll-contain"

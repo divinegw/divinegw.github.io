@@ -1213,5 +1213,2638 @@
   },
   null,
   null
+ ],
+ "squads|lerLista": [
+  "Mirela.7342|Heal",
+  "Draknos.6624|Quickness",
+  "Lua.2207|DPS",
+  "Kaelith.4821|DPS",
+  "Bruno Tank.1290|DPS",
+  "Thorvald.5510|Heal",
+  "Christopher Alexander Montgome.5678|Alacrity",
+  "Varek.9013|DPS",
+  "Pietra.4466|dps",
+  "Hoshi.1185|DPS",
+  "Sereia Azul.0381|Heal",
+  "🦊 Fox.4242|Quickness",
+  "Caio Necro.3302|DPS",
+  "Aurelia.8871|DPS",
+  "Grom.4040|",
+  "Nyx.7719|DPS"
+ ],
+ "squads|K7PX-3QMA-9RTD|5|tamanho|espalha": {
+  "grupos": [
+   [
+    "Hoshi.1185",
+    "Lua.2207",
+    "Varek.9013",
+    "🦊 Fox.4242"
+   ],
+   [
+    "Aurelia.8871",
+    "Bruno Tank.1290",
+    "Thorvald.5510",
+    "Draknos.6624"
+   ],
+   [
+    "Nyx.7719",
+    "Pietra.4466",
+    "Mirela.7342",
+    "Grom.4040"
+   ],
+   [
+    "Caio Necro.3302",
+    "Kaelith.4821",
+    "Sereia Azul.0381",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 4,
+  "discord": "**Sorteio DIVINE** · 4 grupos\n**Grupo 1:** Hoshi.1185 (DPS), Lua.2207 (DPS), Varek.9013 (DPS), 🦊 Fox.4242 (Quickness)\n**Grupo 2:** Aurelia.8871 (DPS), Bruno Tank.1290 (DPS), Thorvald.5510 (Heal), Draknos.6624 (Quickness)\n**Grupo 3:** Nyx.7719 (DPS), Pietra.4466 (dps), Mirela.7342 (Heal), Grom.4040\n**Grupo 4:** Caio Necro.3302 (DPS), Kaelith.4821 (DPS), Sereia Azul.0381 (Heal), Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 4 grupos",
+  "impressao": "25040EEF",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "squads|K7PX-3QMA-9RTD|5|tamanho|solto": {
+  "grupos": [
+   [
+    "Aurelia.8871",
+    "🦊 Fox.4242",
+    "Draknos.6624",
+    "Caio Necro.3302"
+   ],
+   [
+    "Grom.4040",
+    "Nyx.7719",
+    "Kaelith.4821",
+    "Varek.9013"
+   ],
+   [
+    "Bruno Tank.1290",
+    "Pietra.4466",
+    "Thorvald.5510",
+    "Mirela.7342"
+   ],
+   [
+    "Hoshi.1185",
+    "Christopher Alexander Montgome.5678",
+    "Sereia Azul.0381",
+    "Lua.2207"
+   ]
+  ],
+  "qtdGrupos": 4,
+  "discord": "**Sorteio DIVINE** · 4 grupos\n**Grupo 1:** Aurelia.8871 (DPS), 🦊 Fox.4242 (Quickness), Draknos.6624 (Quickness), Caio Necro.3302 (DPS)\n**Grupo 2:** Grom.4040, Nyx.7719 (DPS), Kaelith.4821 (DPS), Varek.9013 (DPS)\n**Grupo 3:** Bruno Tank.1290 (DPS), Pietra.4466 (dps), Thorvald.5510 (Heal), Mirela.7342 (Heal)\n**Grupo 4:** Hoshi.1185 (DPS), Christopher Alexander Montgome.5678 (Alacrity), Sereia Azul.0381 (Heal), Lua.2207 (DPS)",
+  "resumo": "16 pessoas em 4 grupos",
+  "impressao": "25040EEF",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "squads|K7PX-3QMA-9RTD|3|grupos|espalha": {
+  "grupos": [
+   [
+    "Hoshi.1185",
+    "Caio Necro.3302",
+    "Pietra.4466",
+    "Thorvald.5510",
+    "🦊 Fox.4242",
+    "Christopher Alexander Montgome.5678"
+   ],
+   [
+    "Aurelia.8871",
+    "Lua.2207",
+    "Kaelith.4821",
+    "Mirela.7342",
+    "Draknos.6624"
+   ],
+   [
+    "Nyx.7719",
+    "Bruno Tank.1290",
+    "Varek.9013",
+    "Sereia Azul.0381",
+    "Grom.4040"
+   ]
+  ],
+  "qtdGrupos": 3,
+  "discord": "**Sorteio DIVINE** · 3 grupos\n**Grupo 1:** Hoshi.1185 (DPS), Caio Necro.3302 (DPS), Pietra.4466 (dps), Thorvald.5510 (Heal), 🦊 Fox.4242 (Quickness), Christopher Alexander Montgome.5678 (Alacrity)\n**Grupo 2:** Aurelia.8871 (DPS), Lua.2207 (DPS), Kaelith.4821 (DPS), Mirela.7342 (Heal), Draknos.6624 (Quickness)\n**Grupo 3:** Nyx.7719 (DPS), Bruno Tank.1290 (DPS), Varek.9013 (DPS), Sereia Azul.0381 (Heal), Grom.4040",
+  "resumo": "16 pessoas em 3 grupos",
+  "impressao": "25040EEF",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "squads|K7PX-3QMA-9RTD|3|grupos|solto": {
+  "grupos": [
+   [
+    "Aurelia.8871",
+    "Hoshi.1185",
+    "Pietra.4466",
+    "Kaelith.4821",
+    "Caio Necro.3302",
+    "Lua.2207"
+   ],
+   [
+    "Grom.4040",
+    "🦊 Fox.4242",
+    "Christopher Alexander Montgome.5678",
+    "Thorvald.5510",
+    "Varek.9013"
+   ],
+   [
+    "Bruno Tank.1290",
+    "Nyx.7719",
+    "Draknos.6624",
+    "Sereia Azul.0381",
+    "Mirela.7342"
+   ]
+  ],
+  "qtdGrupos": 3,
+  "discord": "**Sorteio DIVINE** · 3 grupos\n**Grupo 1:** Aurelia.8871 (DPS), Hoshi.1185 (DPS), Pietra.4466 (dps), Kaelith.4821 (DPS), Caio Necro.3302 (DPS), Lua.2207 (DPS)\n**Grupo 2:** Grom.4040, 🦊 Fox.4242 (Quickness), Christopher Alexander Montgome.5678 (Alacrity), Thorvald.5510 (Heal), Varek.9013 (DPS)\n**Grupo 3:** Bruno Tank.1290 (DPS), Nyx.7719 (DPS), Draknos.6624 (Quickness), Sereia Azul.0381 (Heal), Mirela.7342 (Heal)",
+  "resumo": "16 pessoas em 3 grupos",
+  "impressao": "25040EEF",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "squads|K7PX-3QMA-9RTD|20|tamanho|espalha": {
+  "grupos": [
+   [
+    "Hoshi.1185",
+    "Aurelia.8871",
+    "Nyx.7719",
+    "Caio Necro.3302",
+    "Lua.2207",
+    "Bruno Tank.1290",
+    "Pietra.4466",
+    "Kaelith.4821",
+    "Varek.9013",
+    "Thorvald.5510",
+    "Mirela.7342",
+    "Sereia Azul.0381",
+    "🦊 Fox.4242",
+    "Draknos.6624",
+    "Grom.4040",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 1,
+  "discord": "**Sorteio DIVINE** · 1 grupos\n**Grupo 1:** Hoshi.1185 (DPS), Aurelia.8871 (DPS), Nyx.7719 (DPS), Caio Necro.3302 (DPS), Lua.2207 (DPS), Bruno Tank.1290 (DPS), Pietra.4466 (dps), Kaelith.4821 (DPS), Varek.9013 (DPS), Thorvald.5510 (Heal), Mirela.7342 (Heal), Sereia Azul.0381 (Heal), 🦊 Fox.4242 (Quickness), Draknos.6624 (Quickness), Grom.4040, Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 1 grupos",
+  "impressao": "25040EEF",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "squads|K7PX-3QMA-9RTD|16|grupos|espalha": {
+  "grupos": [
+   [
+    "Hoshi.1185"
+   ],
+   [
+    "Aurelia.8871"
+   ],
+   [
+    "Nyx.7719"
+   ],
+   [
+    "Caio Necro.3302"
+   ],
+   [
+    "Lua.2207"
+   ],
+   [
+    "Bruno Tank.1290"
+   ],
+   [
+    "Pietra.4466"
+   ],
+   [
+    "Kaelith.4821"
+   ],
+   [
+    "Varek.9013"
+   ],
+   [
+    "Thorvald.5510"
+   ],
+   [
+    "Mirela.7342"
+   ],
+   [
+    "Sereia Azul.0381"
+   ],
+   [
+    "🦊 Fox.4242"
+   ],
+   [
+    "Draknos.6624"
+   ],
+   [
+    "Grom.4040"
+   ],
+   [
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 16,
+  "discord": "**Sorteio DIVINE** · 16 grupos\n**Grupo 1:** Hoshi.1185 (DPS)\n**Grupo 2:** Aurelia.8871 (DPS)\n**Grupo 3:** Nyx.7719 (DPS)\n**Grupo 4:** Caio Necro.3302 (DPS)\n**Grupo 5:** Lua.2207 (DPS)\n**Grupo 6:** Bruno Tank.1290 (DPS)\n**Grupo 7:** Pietra.4466 (dps)\n**Grupo 8:** Kaelith.4821 (DPS)\n**Grupo 9:** Varek.9013 (DPS)\n**Grupo 10:** Thorvald.5510 (Heal)\n**Grupo 11:** Mirela.7342 (Heal)\n**Grupo 12:** Sereia Azul.0381 (Heal)\n**Grupo 13:** 🦊 Fox.4242 (Quickness)\n**Grupo 14:** Draknos.6624 (Quickness)\n**Grupo 15:** Grom.4040\n**Grupo 16:** Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 16 grupos",
+  "impressao": "25040EEF",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "squads|K7PX-3QMA-9RTD|1|tamanho|espalha": {
+  "grupos": [
+   [
+    "Hoshi.1185"
+   ],
+   [
+    "Aurelia.8871"
+   ],
+   [
+    "Nyx.7719"
+   ],
+   [
+    "Caio Necro.3302"
+   ],
+   [
+    "Lua.2207"
+   ],
+   [
+    "Bruno Tank.1290"
+   ],
+   [
+    "Pietra.4466"
+   ],
+   [
+    "Kaelith.4821"
+   ],
+   [
+    "Varek.9013"
+   ],
+   [
+    "Thorvald.5510"
+   ],
+   [
+    "Mirela.7342"
+   ],
+   [
+    "Sereia Azul.0381"
+   ],
+   [
+    "🦊 Fox.4242"
+   ],
+   [
+    "Draknos.6624"
+   ],
+   [
+    "Grom.4040"
+   ],
+   [
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 16,
+  "discord": "**Sorteio DIVINE** · 16 grupos\n**Grupo 1:** Hoshi.1185 (DPS)\n**Grupo 2:** Aurelia.8871 (DPS)\n**Grupo 3:** Nyx.7719 (DPS)\n**Grupo 4:** Caio Necro.3302 (DPS)\n**Grupo 5:** Lua.2207 (DPS)\n**Grupo 6:** Bruno Tank.1290 (DPS)\n**Grupo 7:** Pietra.4466 (dps)\n**Grupo 8:** Kaelith.4821 (DPS)\n**Grupo 9:** Varek.9013 (DPS)\n**Grupo 10:** Thorvald.5510 (Heal)\n**Grupo 11:** Mirela.7342 (Heal)\n**Grupo 12:** Sereia Azul.0381 (Heal)\n**Grupo 13:** 🦊 Fox.4242 (Quickness)\n**Grupo 14:** Draknos.6624 (Quickness)\n**Grupo 15:** Grom.4040\n**Grupo 16:** Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 16 grupos",
+  "impressao": "25040EEF",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "squads|ABCD-EFGH-JKMN|5|tamanho|espalha": {
+  "grupos": [
+   [
+    "Bruno Tank.1290",
+    "Caio Necro.3302",
+    "Varek.9013",
+    "Draknos.6624"
+   ],
+   [
+    "Kaelith.4821",
+    "Aurelia.8871",
+    "Thorvald.5510",
+    "🦊 Fox.4242"
+   ],
+   [
+    "Lua.2207",
+    "Nyx.7719",
+    "Mirela.7342",
+    "Grom.4040"
+   ],
+   [
+    "Pietra.4466",
+    "Hoshi.1185",
+    "Sereia Azul.0381",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 4,
+  "discord": "**Sorteio DIVINE** · 4 grupos\n**Grupo 1:** Bruno Tank.1290 (DPS), Caio Necro.3302 (DPS), Varek.9013 (DPS), Draknos.6624 (Quickness)\n**Grupo 2:** Kaelith.4821 (DPS), Aurelia.8871 (DPS), Thorvald.5510 (Heal), 🦊 Fox.4242 (Quickness)\n**Grupo 3:** Lua.2207 (DPS), Nyx.7719 (DPS), Mirela.7342 (Heal), Grom.4040\n**Grupo 4:** Pietra.4466 (dps), Hoshi.1185 (DPS), Sereia Azul.0381 (Heal), Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 4 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "squads|ABCD-EFGH-JKMN|5|tamanho|solto": {
+  "grupos": [
+   [
+    "Nyx.7719",
+    "Caio Necro.3302",
+    "Mirela.7342",
+    "Aurelia.8871"
+   ],
+   [
+    "Kaelith.4821",
+    "Bruno Tank.1290",
+    "Pietra.4466",
+    "Thorvald.5510"
+   ],
+   [
+    "Varek.9013",
+    "Grom.4040",
+    "Sereia Azul.0381",
+    "Hoshi.1185"
+   ],
+   [
+    "🦊 Fox.4242",
+    "Christopher Alexander Montgome.5678",
+    "Draknos.6624",
+    "Lua.2207"
+   ]
+  ],
+  "qtdGrupos": 4,
+  "discord": "**Sorteio DIVINE** · 4 grupos\n**Grupo 1:** Nyx.7719 (DPS), Caio Necro.3302 (DPS), Mirela.7342 (Heal), Aurelia.8871 (DPS)\n**Grupo 2:** Kaelith.4821 (DPS), Bruno Tank.1290 (DPS), Pietra.4466 (dps), Thorvald.5510 (Heal)\n**Grupo 3:** Varek.9013 (DPS), Grom.4040, Sereia Azul.0381 (Heal), Hoshi.1185 (DPS)\n**Grupo 4:** 🦊 Fox.4242 (Quickness), Christopher Alexander Montgome.5678 (Alacrity), Draknos.6624 (Quickness), Lua.2207 (DPS)",
+  "resumo": "16 pessoas em 4 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "squads|ABCD-EFGH-JKMN|3|grupos|espalha": {
+  "grupos": [
+   [
+    "Bruno Tank.1290",
+    "Pietra.4466",
+    "Nyx.7719",
+    "Thorvald.5510",
+    "Draknos.6624",
+    "Christopher Alexander Montgome.5678"
+   ],
+   [
+    "Kaelith.4821",
+    "Caio Necro.3302",
+    "Hoshi.1185",
+    "Mirela.7342",
+    "🦊 Fox.4242"
+   ],
+   [
+    "Lua.2207",
+    "Aurelia.8871",
+    "Varek.9013",
+    "Sereia Azul.0381",
+    "Grom.4040"
+   ]
+  ],
+  "qtdGrupos": 3,
+  "discord": "**Sorteio DIVINE** · 3 grupos\n**Grupo 1:** Bruno Tank.1290 (DPS), Pietra.4466 (dps), Nyx.7719 (DPS), Thorvald.5510 (Heal), Draknos.6624 (Quickness), Christopher Alexander Montgome.5678 (Alacrity)\n**Grupo 2:** Kaelith.4821 (DPS), Caio Necro.3302 (DPS), Hoshi.1185 (DPS), Mirela.7342 (Heal), 🦊 Fox.4242 (Quickness)\n**Grupo 3:** Lua.2207 (DPS), Aurelia.8871 (DPS), Varek.9013 (DPS), Sereia Azul.0381 (Heal), Grom.4040",
+  "resumo": "16 pessoas em 3 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "squads|ABCD-EFGH-JKMN|3|grupos|solto": {
+  "grupos": [
+   [
+    "Nyx.7719",
+    "🦊 Fox.4242",
+    "Grom.4040",
+    "Pietra.4466",
+    "Aurelia.8871",
+    "Lua.2207"
+   ],
+   [
+    "Kaelith.4821",
+    "Caio Necro.3302",
+    "Christopher Alexander Montgome.5678",
+    "Sereia Azul.0381",
+    "Thorvald.5510"
+   ],
+   [
+    "Varek.9013",
+    "Bruno Tank.1290",
+    "Mirela.7342",
+    "Draknos.6624",
+    "Hoshi.1185"
+   ]
+  ],
+  "qtdGrupos": 3,
+  "discord": "**Sorteio DIVINE** · 3 grupos\n**Grupo 1:** Nyx.7719 (DPS), 🦊 Fox.4242 (Quickness), Grom.4040, Pietra.4466 (dps), Aurelia.8871 (DPS), Lua.2207 (DPS)\n**Grupo 2:** Kaelith.4821 (DPS), Caio Necro.3302 (DPS), Christopher Alexander Montgome.5678 (Alacrity), Sereia Azul.0381 (Heal), Thorvald.5510 (Heal)\n**Grupo 3:** Varek.9013 (DPS), Bruno Tank.1290 (DPS), Mirela.7342 (Heal), Draknos.6624 (Quickness), Hoshi.1185 (DPS)",
+  "resumo": "16 pessoas em 3 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "squads|ABCD-EFGH-JKMN|20|tamanho|espalha": {
+  "grupos": [
+   [
+    "Bruno Tank.1290",
+    "Kaelith.4821",
+    "Lua.2207",
+    "Pietra.4466",
+    "Caio Necro.3302",
+    "Aurelia.8871",
+    "Nyx.7719",
+    "Hoshi.1185",
+    "Varek.9013",
+    "Thorvald.5510",
+    "Mirela.7342",
+    "Sereia Azul.0381",
+    "Draknos.6624",
+    "🦊 Fox.4242",
+    "Grom.4040",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 1,
+  "discord": "**Sorteio DIVINE** · 1 grupos\n**Grupo 1:** Bruno Tank.1290 (DPS), Kaelith.4821 (DPS), Lua.2207 (DPS), Pietra.4466 (dps), Caio Necro.3302 (DPS), Aurelia.8871 (DPS), Nyx.7719 (DPS), Hoshi.1185 (DPS), Varek.9013 (DPS), Thorvald.5510 (Heal), Mirela.7342 (Heal), Sereia Azul.0381 (Heal), Draknos.6624 (Quickness), 🦊 Fox.4242 (Quickness), Grom.4040, Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 1 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "squads|ABCD-EFGH-JKMN|16|grupos|espalha": {
+  "grupos": [
+   [
+    "Bruno Tank.1290"
+   ],
+   [
+    "Kaelith.4821"
+   ],
+   [
+    "Lua.2207"
+   ],
+   [
+    "Pietra.4466"
+   ],
+   [
+    "Caio Necro.3302"
+   ],
+   [
+    "Aurelia.8871"
+   ],
+   [
+    "Nyx.7719"
+   ],
+   [
+    "Hoshi.1185"
+   ],
+   [
+    "Varek.9013"
+   ],
+   [
+    "Thorvald.5510"
+   ],
+   [
+    "Mirela.7342"
+   ],
+   [
+    "Sereia Azul.0381"
+   ],
+   [
+    "Draknos.6624"
+   ],
+   [
+    "🦊 Fox.4242"
+   ],
+   [
+    "Grom.4040"
+   ],
+   [
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 16,
+  "discord": "**Sorteio DIVINE** · 16 grupos\n**Grupo 1:** Bruno Tank.1290 (DPS)\n**Grupo 2:** Kaelith.4821 (DPS)\n**Grupo 3:** Lua.2207 (DPS)\n**Grupo 4:** Pietra.4466 (dps)\n**Grupo 5:** Caio Necro.3302 (DPS)\n**Grupo 6:** Aurelia.8871 (DPS)\n**Grupo 7:** Nyx.7719 (DPS)\n**Grupo 8:** Hoshi.1185 (DPS)\n**Grupo 9:** Varek.9013 (DPS)\n**Grupo 10:** Thorvald.5510 (Heal)\n**Grupo 11:** Mirela.7342 (Heal)\n**Grupo 12:** Sereia Azul.0381 (Heal)\n**Grupo 13:** Draknos.6624 (Quickness)\n**Grupo 14:** 🦊 Fox.4242 (Quickness)\n**Grupo 15:** Grom.4040\n**Grupo 16:** Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 16 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "squads|ABCD-EFGH-JKMN|1|tamanho|espalha": {
+  "grupos": [
+   [
+    "Bruno Tank.1290"
+   ],
+   [
+    "Kaelith.4821"
+   ],
+   [
+    "Lua.2207"
+   ],
+   [
+    "Pietra.4466"
+   ],
+   [
+    "Caio Necro.3302"
+   ],
+   [
+    "Aurelia.8871"
+   ],
+   [
+    "Nyx.7719"
+   ],
+   [
+    "Hoshi.1185"
+   ],
+   [
+    "Varek.9013"
+   ],
+   [
+    "Thorvald.5510"
+   ],
+   [
+    "Mirela.7342"
+   ],
+   [
+    "Sereia Azul.0381"
+   ],
+   [
+    "Draknos.6624"
+   ],
+   [
+    "🦊 Fox.4242"
+   ],
+   [
+    "Grom.4040"
+   ],
+   [
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 16,
+  "discord": "**Sorteio DIVINE** · 16 grupos\n**Grupo 1:** Bruno Tank.1290 (DPS)\n**Grupo 2:** Kaelith.4821 (DPS)\n**Grupo 3:** Lua.2207 (DPS)\n**Grupo 4:** Pietra.4466 (dps)\n**Grupo 5:** Caio Necro.3302 (DPS)\n**Grupo 6:** Aurelia.8871 (DPS)\n**Grupo 7:** Nyx.7719 (DPS)\n**Grupo 8:** Hoshi.1185 (DPS)\n**Grupo 9:** Varek.9013 (DPS)\n**Grupo 10:** Thorvald.5510 (Heal)\n**Grupo 11:** Mirela.7342 (Heal)\n**Grupo 12:** Sereia Azul.0381 (Heal)\n**Grupo 13:** Draknos.6624 (Quickness)\n**Grupo 14:** 🦊 Fox.4242 (Quickness)\n**Grupo 15:** Grom.4040\n**Grupo 16:** Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 16 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "squads|divine guild|5|tamanho|espalha": {
+  "grupos": [
+   [
+    "Lua.2207",
+    "Nyx.7719",
+    "Hoshi.1185",
+    "Draknos.6624"
+   ],
+   [
+    "Pietra.4466",
+    "Caio Necro.3302",
+    "Thorvald.5510",
+    "🦊 Fox.4242"
+   ],
+   [
+    "Aurelia.8871",
+    "Varek.9013",
+    "Mirela.7342",
+    "Grom.4040"
+   ],
+   [
+    "Bruno Tank.1290",
+    "Kaelith.4821",
+    "Sereia Azul.0381",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 4,
+  "discord": "**Sorteio DIVINE** · 4 grupos\n**Grupo 1:** Lua.2207 (DPS), Nyx.7719 (DPS), Hoshi.1185 (DPS), Draknos.6624 (Quickness)\n**Grupo 2:** Pietra.4466 (dps), Caio Necro.3302 (DPS), Thorvald.5510 (Heal), 🦊 Fox.4242 (Quickness)\n**Grupo 3:** Aurelia.8871 (DPS), Varek.9013 (DPS), Mirela.7342 (Heal), Grom.4040\n**Grupo 4:** Bruno Tank.1290 (DPS), Kaelith.4821 (DPS), Sereia Azul.0381 (Heal), Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 4 grupos",
+  "impressao": "25040EEF",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "squads|divine guild|5|tamanho|solto": {
+  "grupos": [
+   [
+    "🦊 Fox.4242",
+    "Mirela.7342",
+    "Nyx.7719",
+    "Draknos.6624"
+   ],
+   [
+    "Grom.4040",
+    "Pietra.4466",
+    "Bruno Tank.1290",
+    "Hoshi.1185"
+   ],
+   [
+    "Caio Necro.3302",
+    "Sereia Azul.0381",
+    "Kaelith.4821",
+    "Lua.2207"
+   ],
+   [
+    "Varek.9013",
+    "Aurelia.8871",
+    "Thorvald.5510",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 4,
+  "discord": "**Sorteio DIVINE** · 4 grupos\n**Grupo 1:** 🦊 Fox.4242 (Quickness), Mirela.7342 (Heal), Nyx.7719 (DPS), Draknos.6624 (Quickness)\n**Grupo 2:** Grom.4040, Pietra.4466 (dps), Bruno Tank.1290 (DPS), Hoshi.1185 (DPS)\n**Grupo 3:** Caio Necro.3302 (DPS), Sereia Azul.0381 (Heal), Kaelith.4821 (DPS), Lua.2207 (DPS)\n**Grupo 4:** Varek.9013 (DPS), Aurelia.8871 (DPS), Thorvald.5510 (Heal), Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 4 grupos",
+  "impressao": "25040EEF",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "squads|divine guild|3|grupos|espalha": {
+  "grupos": [
+   [
+    "Lua.2207",
+    "Bruno Tank.1290",
+    "Varek.9013",
+    "Thorvald.5510",
+    "Draknos.6624",
+    "Christopher Alexander Montgome.5678"
+   ],
+   [
+    "Pietra.4466",
+    "Nyx.7719",
+    "Kaelith.4821",
+    "Mirela.7342",
+    "🦊 Fox.4242"
+   ],
+   [
+    "Aurelia.8871",
+    "Caio Necro.3302",
+    "Hoshi.1185",
+    "Sereia Azul.0381",
+    "Grom.4040"
+   ]
+  ],
+  "qtdGrupos": 3,
+  "discord": "**Sorteio DIVINE** · 3 grupos\n**Grupo 1:** Lua.2207 (DPS), Bruno Tank.1290 (DPS), Varek.9013 (DPS), Thorvald.5510 (Heal), Draknos.6624 (Quickness), Christopher Alexander Montgome.5678 (Alacrity)\n**Grupo 2:** Pietra.4466 (dps), Nyx.7719 (DPS), Kaelith.4821 (DPS), Mirela.7342 (Heal), 🦊 Fox.4242 (Quickness)\n**Grupo 3:** Aurelia.8871 (DPS), Caio Necro.3302 (DPS), Hoshi.1185 (DPS), Sereia Azul.0381 (Heal), Grom.4040",
+  "resumo": "16 pessoas em 3 grupos",
+  "impressao": "25040EEF",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "squads|divine guild|3|grupos|solto": {
+  "grupos": [
+   [
+    "🦊 Fox.4242",
+    "Varek.9013",
+    "Sereia Azul.0381",
+    "Bruno Tank.1290",
+    "Draknos.6624",
+    "Christopher Alexander Montgome.5678"
+   ],
+   [
+    "Grom.4040",
+    "Mirela.7342",
+    "Aurelia.8871",
+    "Kaelith.4821",
+    "Hoshi.1185"
+   ],
+   [
+    "Caio Necro.3302",
+    "Pietra.4466",
+    "Nyx.7719",
+    "Thorvald.5510",
+    "Lua.2207"
+   ]
+  ],
+  "qtdGrupos": 3,
+  "discord": "**Sorteio DIVINE** · 3 grupos\n**Grupo 1:** 🦊 Fox.4242 (Quickness), Varek.9013 (DPS), Sereia Azul.0381 (Heal), Bruno Tank.1290 (DPS), Draknos.6624 (Quickness), Christopher Alexander Montgome.5678 (Alacrity)\n**Grupo 2:** Grom.4040, Mirela.7342 (Heal), Aurelia.8871 (DPS), Kaelith.4821 (DPS), Hoshi.1185 (DPS)\n**Grupo 3:** Caio Necro.3302 (DPS), Pietra.4466 (dps), Nyx.7719 (DPS), Thorvald.5510 (Heal), Lua.2207 (DPS)",
+  "resumo": "16 pessoas em 3 grupos",
+  "impressao": "25040EEF",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "squads|divine guild|20|tamanho|espalha": {
+  "grupos": [
+   [
+    "Lua.2207",
+    "Pietra.4466",
+    "Aurelia.8871",
+    "Bruno Tank.1290",
+    "Nyx.7719",
+    "Caio Necro.3302",
+    "Varek.9013",
+    "Kaelith.4821",
+    "Hoshi.1185",
+    "Thorvald.5510",
+    "Mirela.7342",
+    "Sereia Azul.0381",
+    "Draknos.6624",
+    "🦊 Fox.4242",
+    "Grom.4040",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 1,
+  "discord": "**Sorteio DIVINE** · 1 grupos\n**Grupo 1:** Lua.2207 (DPS), Pietra.4466 (dps), Aurelia.8871 (DPS), Bruno Tank.1290 (DPS), Nyx.7719 (DPS), Caio Necro.3302 (DPS), Varek.9013 (DPS), Kaelith.4821 (DPS), Hoshi.1185 (DPS), Thorvald.5510 (Heal), Mirela.7342 (Heal), Sereia Azul.0381 (Heal), Draknos.6624 (Quickness), 🦊 Fox.4242 (Quickness), Grom.4040, Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 1 grupos",
+  "impressao": "25040EEF",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "squads|divine guild|16|grupos|espalha": {
+  "grupos": [
+   [
+    "Lua.2207"
+   ],
+   [
+    "Pietra.4466"
+   ],
+   [
+    "Aurelia.8871"
+   ],
+   [
+    "Bruno Tank.1290"
+   ],
+   [
+    "Nyx.7719"
+   ],
+   [
+    "Caio Necro.3302"
+   ],
+   [
+    "Varek.9013"
+   ],
+   [
+    "Kaelith.4821"
+   ],
+   [
+    "Hoshi.1185"
+   ],
+   [
+    "Thorvald.5510"
+   ],
+   [
+    "Mirela.7342"
+   ],
+   [
+    "Sereia Azul.0381"
+   ],
+   [
+    "Draknos.6624"
+   ],
+   [
+    "🦊 Fox.4242"
+   ],
+   [
+    "Grom.4040"
+   ],
+   [
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 16,
+  "discord": "**Sorteio DIVINE** · 16 grupos\n**Grupo 1:** Lua.2207 (DPS)\n**Grupo 2:** Pietra.4466 (dps)\n**Grupo 3:** Aurelia.8871 (DPS)\n**Grupo 4:** Bruno Tank.1290 (DPS)\n**Grupo 5:** Nyx.7719 (DPS)\n**Grupo 6:** Caio Necro.3302 (DPS)\n**Grupo 7:** Varek.9013 (DPS)\n**Grupo 8:** Kaelith.4821 (DPS)\n**Grupo 9:** Hoshi.1185 (DPS)\n**Grupo 10:** Thorvald.5510 (Heal)\n**Grupo 11:** Mirela.7342 (Heal)\n**Grupo 12:** Sereia Azul.0381 (Heal)\n**Grupo 13:** Draknos.6624 (Quickness)\n**Grupo 14:** 🦊 Fox.4242 (Quickness)\n**Grupo 15:** Grom.4040\n**Grupo 16:** Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 16 grupos",
+  "impressao": "25040EEF",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "squads|divine guild|1|tamanho|espalha": {
+  "grupos": [
+   [
+    "Lua.2207"
+   ],
+   [
+    "Pietra.4466"
+   ],
+   [
+    "Aurelia.8871"
+   ],
+   [
+    "Bruno Tank.1290"
+   ],
+   [
+    "Nyx.7719"
+   ],
+   [
+    "Caio Necro.3302"
+   ],
+   [
+    "Varek.9013"
+   ],
+   [
+    "Kaelith.4821"
+   ],
+   [
+    "Hoshi.1185"
+   ],
+   [
+    "Thorvald.5510"
+   ],
+   [
+    "Mirela.7342"
+   ],
+   [
+    "Sereia Azul.0381"
+   ],
+   [
+    "Draknos.6624"
+   ],
+   [
+    "🦊 Fox.4242"
+   ],
+   [
+    "Grom.4040"
+   ],
+   [
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 16,
+  "discord": "**Sorteio DIVINE** · 16 grupos\n**Grupo 1:** Lua.2207 (DPS)\n**Grupo 2:** Pietra.4466 (dps)\n**Grupo 3:** Aurelia.8871 (DPS)\n**Grupo 4:** Bruno Tank.1290 (DPS)\n**Grupo 5:** Nyx.7719 (DPS)\n**Grupo 6:** Caio Necro.3302 (DPS)\n**Grupo 7:** Varek.9013 (DPS)\n**Grupo 8:** Kaelith.4821 (DPS)\n**Grupo 9:** Hoshi.1185 (DPS)\n**Grupo 10:** Thorvald.5510 (Heal)\n**Grupo 11:** Mirela.7342 (Heal)\n**Grupo 12:** Sereia Azul.0381 (Heal)\n**Grupo 13:** Draknos.6624 (Quickness)\n**Grupo 14:** 🦊 Fox.4242 (Quickness)\n**Grupo 15:** Grom.4040\n**Grupo 16:** Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 16 grupos",
+  "impressao": "25040EEF",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "squads|ZZZZ-2222-9999|5|tamanho|espalha": {
+  "grupos": [
+   [
+    "Nyx.7719",
+    "Pietra.4466",
+    "Kaelith.4821",
+    "🦊 Fox.4242"
+   ],
+   [
+    "Aurelia.8871",
+    "Hoshi.1185",
+    "Sereia Azul.0381",
+    "Draknos.6624"
+   ],
+   [
+    "Lua.2207",
+    "Bruno Tank.1290",
+    "Mirela.7342",
+    "Grom.4040"
+   ],
+   [
+    "Caio Necro.3302",
+    "Varek.9013",
+    "Thorvald.5510",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 4,
+  "discord": "**Sorteio DIVINE** · 4 grupos\n**Grupo 1:** Nyx.7719 (DPS), Pietra.4466 (dps), Kaelith.4821 (DPS), 🦊 Fox.4242 (Quickness)\n**Grupo 2:** Aurelia.8871 (DPS), Hoshi.1185 (DPS), Sereia Azul.0381 (Heal), Draknos.6624 (Quickness)\n**Grupo 3:** Lua.2207 (DPS), Bruno Tank.1290 (DPS), Mirela.7342 (Heal), Grom.4040\n**Grupo 4:** Caio Necro.3302 (DPS), Varek.9013 (DPS), Thorvald.5510 (Heal), Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 4 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "squads|ZZZZ-2222-9999|5|tamanho|solto": {
+  "grupos": [
+   [
+    "Kaelith.4821",
+    "Nyx.7719",
+    "Sereia Azul.0381",
+    "Hoshi.1185"
+   ],
+   [
+    "Varek.9013",
+    "Thorvald.5510",
+    "Caio Necro.3302",
+    "Christopher Alexander Montgome.5678"
+   ],
+   [
+    "Aurelia.8871",
+    "🦊 Fox.4242",
+    "Pietra.4466",
+    "Lua.2207"
+   ],
+   [
+    "Grom.4040",
+    "Bruno Tank.1290",
+    "Mirela.7342",
+    "Draknos.6624"
+   ]
+  ],
+  "qtdGrupos": 4,
+  "discord": "**Sorteio DIVINE** · 4 grupos\n**Grupo 1:** Kaelith.4821 (DPS), Nyx.7719 (DPS), Sereia Azul.0381 (Heal), Hoshi.1185 (DPS)\n**Grupo 2:** Varek.9013 (DPS), Thorvald.5510 (Heal), Caio Necro.3302 (DPS), Christopher Alexander Montgome.5678 (Alacrity)\n**Grupo 3:** Aurelia.8871 (DPS), 🦊 Fox.4242 (Quickness), Pietra.4466 (dps), Lua.2207 (DPS)\n**Grupo 4:** Grom.4040, Bruno Tank.1290 (DPS), Mirela.7342 (Heal), Draknos.6624 (Quickness)",
+  "resumo": "16 pessoas em 4 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "squads|ZZZZ-2222-9999|3|grupos|espalha": {
+  "grupos": [
+   [
+    "Nyx.7719",
+    "Caio Necro.3302",
+    "Bruno Tank.1290",
+    "Sereia Azul.0381",
+    "🦊 Fox.4242",
+    "Christopher Alexander Montgome.5678"
+   ],
+   [
+    "Aurelia.8871",
+    "Pietra.4466",
+    "Varek.9013",
+    "Mirela.7342",
+    "Draknos.6624"
+   ],
+   [
+    "Lua.2207",
+    "Hoshi.1185",
+    "Kaelith.4821",
+    "Thorvald.5510",
+    "Grom.4040"
+   ]
+  ],
+  "qtdGrupos": 3,
+  "discord": "**Sorteio DIVINE** · 3 grupos\n**Grupo 1:** Nyx.7719 (DPS), Caio Necro.3302 (DPS), Bruno Tank.1290 (DPS), Sereia Azul.0381 (Heal), 🦊 Fox.4242 (Quickness), Christopher Alexander Montgome.5678 (Alacrity)\n**Grupo 2:** Aurelia.8871 (DPS), Pietra.4466 (dps), Varek.9013 (DPS), Mirela.7342 (Heal), Draknos.6624 (Quickness)\n**Grupo 3:** Lua.2207 (DPS), Hoshi.1185 (DPS), Kaelith.4821 (DPS), Thorvald.5510 (Heal), Grom.4040",
+  "resumo": "16 pessoas em 3 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "squads|ZZZZ-2222-9999|3|grupos|solto": {
+  "grupos": [
+   [
+    "Kaelith.4821",
+    "Grom.4040",
+    "🦊 Fox.4242",
+    "Caio Necro.3302",
+    "Hoshi.1185",
+    "Draknos.6624"
+   ],
+   [
+    "Varek.9013",
+    "Nyx.7719",
+    "Bruno Tank.1290",
+    "Pietra.4466",
+    "Christopher Alexander Montgome.5678"
+   ],
+   [
+    "Aurelia.8871",
+    "Thorvald.5510",
+    "Sereia Azul.0381",
+    "Mirela.7342",
+    "Lua.2207"
+   ]
+  ],
+  "qtdGrupos": 3,
+  "discord": "**Sorteio DIVINE** · 3 grupos\n**Grupo 1:** Kaelith.4821 (DPS), Grom.4040, 🦊 Fox.4242 (Quickness), Caio Necro.3302 (DPS), Hoshi.1185 (DPS), Draknos.6624 (Quickness)\n**Grupo 2:** Varek.9013 (DPS), Nyx.7719 (DPS), Bruno Tank.1290 (DPS), Pietra.4466 (dps), Christopher Alexander Montgome.5678 (Alacrity)\n**Grupo 3:** Aurelia.8871 (DPS), Thorvald.5510 (Heal), Sereia Azul.0381 (Heal), Mirela.7342 (Heal), Lua.2207 (DPS)",
+  "resumo": "16 pessoas em 3 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "squads|ZZZZ-2222-9999|20|tamanho|espalha": {
+  "grupos": [
+   [
+    "Nyx.7719",
+    "Aurelia.8871",
+    "Lua.2207",
+    "Caio Necro.3302",
+    "Pietra.4466",
+    "Hoshi.1185",
+    "Bruno Tank.1290",
+    "Varek.9013",
+    "Kaelith.4821",
+    "Sereia Azul.0381",
+    "Mirela.7342",
+    "Thorvald.5510",
+    "🦊 Fox.4242",
+    "Draknos.6624",
+    "Grom.4040",
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 1,
+  "discord": "**Sorteio DIVINE** · 1 grupos\n**Grupo 1:** Nyx.7719 (DPS), Aurelia.8871 (DPS), Lua.2207 (DPS), Caio Necro.3302 (DPS), Pietra.4466 (dps), Hoshi.1185 (DPS), Bruno Tank.1290 (DPS), Varek.9013 (DPS), Kaelith.4821 (DPS), Sereia Azul.0381 (Heal), Mirela.7342 (Heal), Thorvald.5510 (Heal), 🦊 Fox.4242 (Quickness), Draknos.6624 (Quickness), Grom.4040, Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 1 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "squads|ZZZZ-2222-9999|16|grupos|espalha": {
+  "grupos": [
+   [
+    "Nyx.7719"
+   ],
+   [
+    "Aurelia.8871"
+   ],
+   [
+    "Lua.2207"
+   ],
+   [
+    "Caio Necro.3302"
+   ],
+   [
+    "Pietra.4466"
+   ],
+   [
+    "Hoshi.1185"
+   ],
+   [
+    "Bruno Tank.1290"
+   ],
+   [
+    "Varek.9013"
+   ],
+   [
+    "Kaelith.4821"
+   ],
+   [
+    "Sereia Azul.0381"
+   ],
+   [
+    "Mirela.7342"
+   ],
+   [
+    "Thorvald.5510"
+   ],
+   [
+    "🦊 Fox.4242"
+   ],
+   [
+    "Draknos.6624"
+   ],
+   [
+    "Grom.4040"
+   ],
+   [
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 16,
+  "discord": "**Sorteio DIVINE** · 16 grupos\n**Grupo 1:** Nyx.7719 (DPS)\n**Grupo 2:** Aurelia.8871 (DPS)\n**Grupo 3:** Lua.2207 (DPS)\n**Grupo 4:** Caio Necro.3302 (DPS)\n**Grupo 5:** Pietra.4466 (dps)\n**Grupo 6:** Hoshi.1185 (DPS)\n**Grupo 7:** Bruno Tank.1290 (DPS)\n**Grupo 8:** Varek.9013 (DPS)\n**Grupo 9:** Kaelith.4821 (DPS)\n**Grupo 10:** Sereia Azul.0381 (Heal)\n**Grupo 11:** Mirela.7342 (Heal)\n**Grupo 12:** Thorvald.5510 (Heal)\n**Grupo 13:** 🦊 Fox.4242 (Quickness)\n**Grupo 14:** Draknos.6624 (Quickness)\n**Grupo 15:** Grom.4040\n**Grupo 16:** Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 16 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "squads|ZZZZ-2222-9999|1|tamanho|espalha": {
+  "grupos": [
+   [
+    "Nyx.7719"
+   ],
+   [
+    "Aurelia.8871"
+   ],
+   [
+    "Lua.2207"
+   ],
+   [
+    "Caio Necro.3302"
+   ],
+   [
+    "Pietra.4466"
+   ],
+   [
+    "Hoshi.1185"
+   ],
+   [
+    "Bruno Tank.1290"
+   ],
+   [
+    "Varek.9013"
+   ],
+   [
+    "Kaelith.4821"
+   ],
+   [
+    "Sereia Azul.0381"
+   ],
+   [
+    "Mirela.7342"
+   ],
+   [
+    "Thorvald.5510"
+   ],
+   [
+    "🦊 Fox.4242"
+   ],
+   [
+    "Draknos.6624"
+   ],
+   [
+    "Grom.4040"
+   ],
+   [
+    "Christopher Alexander Montgome.5678"
+   ]
+  ],
+  "qtdGrupos": 16,
+  "discord": "**Sorteio DIVINE** · 16 grupos\n**Grupo 1:** Nyx.7719 (DPS)\n**Grupo 2:** Aurelia.8871 (DPS)\n**Grupo 3:** Lua.2207 (DPS)\n**Grupo 4:** Caio Necro.3302 (DPS)\n**Grupo 5:** Pietra.4466 (dps)\n**Grupo 6:** Hoshi.1185 (DPS)\n**Grupo 7:** Bruno Tank.1290 (DPS)\n**Grupo 8:** Varek.9013 (DPS)\n**Grupo 9:** Kaelith.4821 (DPS)\n**Grupo 10:** Sereia Azul.0381 (Heal)\n**Grupo 11:** Mirela.7342 (Heal)\n**Grupo 12:** Thorvald.5510 (Heal)\n**Grupo 13:** 🦊 Fox.4242 (Quickness)\n**Grupo 14:** Draknos.6624 (Quickness)\n**Grupo 15:** Grom.4040\n**Grupo 16:** Christopher Alexander Montgome.5678 (Alacrity)",
+  "resumo": "16 pessoas em 16 grupos",
+  "impressao": "25040EEF",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "squads|sem-funcao": [
+  [
+   "🦊 Fox.4242",
+   "Mirela.7342",
+   "bruna.1111",
+   "ágata lima.1037"
+  ],
+  [
+   "Ana Clara.4321",
+   "Christopher Alexander Montgome.5678",
+   "Lua.2207",
+   "Zé Pedro.1000"
+  ],
+  [
+   "Kaelith.4821",
+   "Draknos.6624",
+   "Bruno Tank.1290"
+  ]
+ ],
+ "conteudo|K7PX-3QMA-9RTD|raid-boss|1": {
+  "saiu": [
+   "Sabetha"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Sabetha (Wing X)",
+  "resumo": "Sabetha",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "conteudo|K7PX-3QMA-9RTD|raid-boss|3": {
+  "saiu": [
+   "Sabetha",
+   "Slothasor",
+   "Matthias"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Sabetha (Wing X)\n2º Slothasor (Wing X)\n3º Matthias (Wing X)",
+  "resumo": "Sabetha, Slothasor, Matthias",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "conteudo|K7PX-3QMA-9RTD|fractal+dungeon|1": {
+  "saiu": [
+   "Aquatic Ruins"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Aquatic Ruins (Fractals)",
+  "resumo": "Aquatic Ruins",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "conteudo|K7PX-3QMA-9RTD|fractal+dungeon|3": {
+  "saiu": [
+   "Aquatic Ruins",
+   "Mai Trin",
+   "Cliffside"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Aquatic Ruins (Fractals)\n2º Mai Trin (Fractals)\n3º Cliffside (Fractals)",
+  "resumo": "Aquatic Ruins, Mai Trin, Cliffside",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "conteudo|K7PX-3QMA-9RTD|dungeon+raid-boss+fractal|1": {
+  "saiu": [
+   "Slothasor"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Slothasor (Wing X)",
+  "resumo": "Slothasor",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "conteudo|K7PX-3QMA-9RTD|dungeon+raid-boss+fractal|3": {
+  "saiu": [
+   "Slothasor",
+   "Gorseval",
+   "Arah"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Slothasor (Wing X)\n2º Gorseval (Wing X)\n3º Arah (Dungeons)",
+  "resumo": "Slothasor, Gorseval, Arah",
+  "codigo": "K7PX-3QMA-9RTD",
+  "conferindo": true
+ },
+ "dados|K7PX-3QMA-9RTD|1d20|0": {
+  "rol": [
+   18
+  ],
+  "total": 18,
+  "nome": "1d20",
+  "discord": "**Sorteio DIVINE** · 1d20\nTotal: 18",
+  "resumo": "1d20: 18"
+ },
+ "dados|K7PX-3QMA-9RTD|3d20|0": {
+  "rol": [
+   18,
+   8,
+   9
+  ],
+  "total": 35,
+  "nome": "3d20",
+  "discord": "**Sorteio DIVINE** · 3d20\nTotal: 35 (18, 8, 9)",
+  "resumo": "3d20: 35"
+ },
+ "dados|K7PX-3QMA-9RTD|4d6|2": {
+  "rol": [
+   6,
+   1,
+   3,
+   1
+  ],
+  "total": 13,
+  "nome": "4d6+2",
+  "discord": "**Sorteio DIVINE** · 4d6+2\nTotal: 13 (6, 1, 3, 1)",
+  "resumo": "4d6+2: 13"
+ },
+ "dados|K7PX-3QMA-9RTD|2d100|-5": {
+  "rol": [
+   64,
+   83
+  ],
+  "total": 142,
+  "nome": "2d100-5",
+  "discord": "**Sorteio DIVINE** · 2d100-5\nTotal: 142 (64, 83)",
+  "resumo": "2d100-5: 142"
+ },
+ "dados|K7PX-3QMA-9RTD|100d4|0": {
+  "rol": [
+   3,
+   1,
+   4,
+   2,
+   1,
+   1,
+   2,
+   3,
+   1,
+   4,
+   4,
+   2,
+   2,
+   1,
+   4,
+   4,
+   4,
+   3,
+   4,
+   2,
+   1,
+   4,
+   1,
+   4,
+   1,
+   4,
+   2,
+   3,
+   4,
+   3,
+   4,
+   1,
+   3,
+   3,
+   3,
+   2,
+   1,
+   4,
+   3,
+   2,
+   4,
+   1,
+   4,
+   1,
+   1,
+   3,
+   4,
+   4,
+   4,
+   4,
+   4,
+   3,
+   4,
+   2,
+   4,
+   2,
+   4,
+   4,
+   4,
+   3,
+   3,
+   1,
+   3,
+   2,
+   4,
+   2,
+   2,
+   3,
+   1,
+   2,
+   1,
+   1,
+   4,
+   4,
+   1,
+   2,
+   1,
+   2,
+   2,
+   4,
+   4,
+   1,
+   2,
+   2,
+   1,
+   3,
+   4,
+   3,
+   1,
+   1,
+   2,
+   4,
+   2,
+   2,
+   2,
+   2,
+   1,
+   2,
+   1,
+   4
+  ],
+  "total": 258,
+  "nome": "100d4",
+  "discord": "**Sorteio DIVINE** · 100d4\nTotal: 258 (3, 1, 4, 2, 1, 1, 2, 3, 1, 4, 4, 2, 2, 1, 4, 4, 4, 3, 4, 2, 1, 4, 1, 4, 1, 4, 2, 3, 4, 3, 4, 1, 3, 3, 3, 2, 1, 4, 3, 2, 4, 1, 4, 1, 1, 3, 4, 4, 4, 4, 4, 3, 4, 2, 4, 2, 4, 4, 4, 3, 3, 1, 3, 2, 4, 2, 2, 3, 1, 2, 1, 1, 4, 4, 1, 2, 1, 2, 2, 4, 4, 1, 2, 2, 1, 3, 4, 3, 1, 1, 2, 4, 2, 2, 2, 2, 1, 2, 1, 4)",
+  "resumo": "100d4: 258"
+ },
+ "dados|K7PX-3QMA-9RTD|1d12|7": {
+  "rol": [
+   4
+  ],
+  "total": 11,
+  "nome": "1d12+7",
+  "discord": "**Sorteio DIVINE** · 1d12+7\nTotal: 11",
+  "resumo": "1d12+7: 11"
+ },
+ "moeda|K7PX-3QMA-9RTD|1": {
+  "lados": [
+   "Coroa"
+  ],
+  "caras": 0,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\nCoroa",
+  "resumo": "Coroa"
+ },
+ "moeda|K7PX-3QMA-9RTD|10": {
+  "lados": [
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa"
+  ],
+  "caras": 4,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n4 cara, 6 coroa",
+  "resumo": "10 jogadas: 4 cara, 6 coroa"
+ },
+ "moeda|K7PX-3QMA-9RTD|61": {
+  "lados": [
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa"
+  ],
+  "caras": 31,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n31 cara, 30 coroa",
+  "resumo": "61 jogadas: 31 cara, 30 coroa"
+ },
+ "moeda|K7PX-3QMA-9RTD|1000": {
+  "lados": [
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa"
+  ],
+  "caras": 512,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n512 cara, 488 coroa",
+  "resumo": "1000 jogadas: 512 cara, 488 coroa"
+ },
+ "conteudo|ABCD-EFGH-JKMN|raid-boss|1": {
+  "saiu": [
+   "Vale Guardian"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Vale Guardian (Wing X)",
+  "resumo": "Vale Guardian",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "conteudo|ABCD-EFGH-JKMN|raid-boss|3": {
+  "saiu": [
+   "Vale Guardian",
+   "Gorseval",
+   "Sabetha"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Vale Guardian (Wing X)\n2º Gorseval (Wing X)\n3º Sabetha (Wing X)",
+  "resumo": "Vale Guardian, Gorseval, Sabetha",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "conteudo|ABCD-EFGH-JKMN|fractal+dungeon|1": {
+  "saiu": [
+   "Aquatic Ruins"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Aquatic Ruins (Fractals)",
+  "resumo": "Aquatic Ruins",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "conteudo|ABCD-EFGH-JKMN|fractal+dungeon|3": {
+  "saiu": [
+   "Aquatic Ruins",
+   "Aetherblade",
+   "Mai Trin"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Aquatic Ruins (Fractals)\n2º Aetherblade (Fractals)\n3º Mai Trin (Fractals)",
+  "resumo": "Aquatic Ruins, Aetherblade, Mai Trin",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "conteudo|ABCD-EFGH-JKMN|dungeon+raid-boss+fractal|1": {
+  "saiu": [
+   "Aquatic Ruins"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Aquatic Ruins (Fractals)",
+  "resumo": "Aquatic Ruins",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "conteudo|ABCD-EFGH-JKMN|dungeon+raid-boss+fractal|3": {
+  "saiu": [
+   "Aquatic Ruins",
+   "Mai Trin",
+   "Arah"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Aquatic Ruins (Fractals)\n2º Mai Trin (Fractals)\n3º Arah (Dungeons)",
+  "resumo": "Aquatic Ruins, Mai Trin, Arah",
+  "codigo": "ABCD-EFGH-JKMN",
+  "conferindo": true
+ },
+ "dados|ABCD-EFGH-JKMN|1d20|0": {
+  "rol": [
+   9
+  ],
+  "total": 9,
+  "nome": "1d20",
+  "discord": "**Sorteio DIVINE** · 1d20\nTotal: 9",
+  "resumo": "1d20: 9"
+ },
+ "dados|ABCD-EFGH-JKMN|3d20|0": {
+  "rol": [
+   9,
+   6,
+   16
+  ],
+  "total": 31,
+  "nome": "3d20",
+  "discord": "**Sorteio DIVINE** · 3d20\nTotal: 31 (9, 6, 16)",
+  "resumo": "3d20: 31"
+ },
+ "dados|ABCD-EFGH-JKMN|4d6|2": {
+  "rol": [
+   6,
+   4,
+   1,
+   5
+  ],
+  "total": 18,
+  "nome": "4d6+2",
+  "discord": "**Sorteio DIVINE** · 4d6+2\nTotal: 18 (6, 4, 1, 5)",
+  "resumo": "4d6+2: 18"
+ },
+ "dados|ABCD-EFGH-JKMN|2d100|-5": {
+  "rol": [
+   29,
+   21
+  ],
+  "total": 45,
+  "nome": "2d100-5",
+  "discord": "**Sorteio DIVINE** · 2d100-5\nTotal: 45 (29, 21)",
+  "resumo": "2d100-5: 45"
+ },
+ "dados|ABCD-EFGH-JKMN|100d4|0": {
+  "rol": [
+   3,
+   1,
+   3,
+   4,
+   2,
+   1,
+   4,
+   4,
+   1,
+   2,
+   2,
+   4,
+   1,
+   4,
+   4,
+   4,
+   1,
+   1,
+   1,
+   3,
+   3,
+   1,
+   4,
+   4,
+   4,
+   2,
+   2,
+   4,
+   2,
+   2,
+   3,
+   2,
+   2,
+   2,
+   3,
+   3,
+   4,
+   2,
+   2,
+   4,
+   1,
+   3,
+   3,
+   2,
+   4,
+   4,
+   3,
+   1,
+   3,
+   2,
+   4,
+   2,
+   3,
+   1,
+   2,
+   3,
+   3,
+   3,
+   2,
+   4,
+   3,
+   4,
+   4,
+   1,
+   2,
+   2,
+   4,
+   2,
+   3,
+   1,
+   1,
+   4,
+   4,
+   1,
+   2,
+   2,
+   4,
+   1,
+   4,
+   4,
+   1,
+   3,
+   3,
+   3,
+   4,
+   2,
+   1,
+   4,
+   3,
+   4,
+   3,
+   3,
+   4,
+   1,
+   2,
+   3,
+   1,
+   3,
+   2,
+   3
+  ],
+  "total": 264,
+  "nome": "100d4",
+  "discord": "**Sorteio DIVINE** · 100d4\nTotal: 264 (3, 1, 3, 4, 2, 1, 4, 4, 1, 2, 2, 4, 1, 4, 4, 4, 1, 1, 1, 3, 3, 1, 4, 4, 4, 2, 2, 4, 2, 2, 3, 2, 2, 2, 3, 3, 4, 2, 2, 4, 1, 3, 3, 2, 4, 4, 3, 1, 3, 2, 4, 2, 3, 1, 2, 3, 3, 3, 2, 4, 3, 4, 4, 1, 2, 2, 4, 2, 3, 1, 1, 4, 4, 1, 2, 2, 4, 1, 4, 4, 1, 3, 3, 3, 4, 2, 1, 4, 3, 4, 3, 3, 4, 1, 2, 3, 1, 3, 2, 3)",
+  "resumo": "100d4: 264"
+ },
+ "dados|ABCD-EFGH-JKMN|1d12|7": {
+  "rol": [
+   5
+  ],
+  "total": 12,
+  "nome": "1d12+7",
+  "discord": "**Sorteio DIVINE** · 1d12+7\nTotal: 12",
+  "resumo": "1d12+7: 12"
+ },
+ "moeda|ABCD-EFGH-JKMN|1": {
+  "lados": [
+   "Coroa"
+  ],
+  "caras": 0,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\nCoroa",
+  "resumo": "Coroa"
+ },
+ "moeda|ABCD-EFGH-JKMN|10": {
+  "lados": [
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara"
+  ],
+  "caras": 5,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n5 cara, 5 coroa",
+  "resumo": "10 jogadas: 5 cara, 5 coroa"
+ },
+ "moeda|ABCD-EFGH-JKMN|61": {
+  "lados": [
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa"
+  ],
+  "caras": 35,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n35 cara, 26 coroa",
+  "resumo": "61 jogadas: 35 cara, 26 coroa"
+ },
+ "moeda|ABCD-EFGH-JKMN|1000": {
+  "lados": [
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara"
+  ],
+  "caras": 504,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n504 cara, 496 coroa",
+  "resumo": "1000 jogadas: 504 cara, 496 coroa"
+ },
+ "conteudo|divine guild|raid-boss|1": {
+  "saiu": [
+   "Vale Guardian"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Vale Guardian (Wing X)",
+  "resumo": "Vale Guardian",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "conteudo|divine guild|raid-boss|3": {
+  "saiu": [
+   "Vale Guardian",
+   "Matthias",
+   "Gorseval"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Vale Guardian (Wing X)\n2º Matthias (Wing X)\n3º Gorseval (Wing X)",
+  "resumo": "Vale Guardian, Matthias, Gorseval",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "conteudo|divine guild|fractal+dungeon|1": {
+  "saiu": [
+   "Arah"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Arah (Dungeons)",
+  "resumo": "Arah",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "conteudo|divine guild|fractal+dungeon|3": {
+  "saiu": [
+   "Arah",
+   "Cliffside",
+   "Aquatic Ruins"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Arah (Dungeons)\n2º Cliffside (Fractals)\n3º Aquatic Ruins (Fractals)",
+  "resumo": "Arah, Cliffside, Aquatic Ruins",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "conteudo|divine guild|dungeon+raid-boss+fractal|1": {
+  "saiu": [
+   "Cliffside"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Cliffside (Fractals)",
+  "resumo": "Cliffside",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "conteudo|divine guild|dungeon+raid-boss+fractal|3": {
+  "saiu": [
+   "Cliffside",
+   "Matthias",
+   "Sabetha"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Cliffside (Fractals)\n2º Matthias (Wing X)\n3º Sabetha (Wing X)",
+  "resumo": "Cliffside, Matthias, Sabetha",
+  "codigo": "DIVINEGUILD",
+  "conferindo": true
+ },
+ "dados|divine guild|1d20|0": {
+  "rol": [
+   15
+  ],
+  "total": 15,
+  "nome": "1d20",
+  "discord": "**Sorteio DIVINE** · 1d20\nTotal: 15",
+  "resumo": "1d20: 15"
+ },
+ "dados|divine guild|3d20|0": {
+  "rol": [
+   15,
+   20,
+   12
+  ],
+  "total": 47,
+  "nome": "3d20",
+  "discord": "**Sorteio DIVINE** · 3d20\nTotal: 47 (15, 20, 12)",
+  "resumo": "3d20: 47"
+ },
+ "dados|divine guild|4d6|2": {
+  "rol": [
+   1,
+   3,
+   5,
+   4
+  ],
+  "total": 15,
+  "nome": "4d6+2",
+  "discord": "**Sorteio DIVINE** · 4d6+2\nTotal: 15 (1, 3, 5, 4)",
+  "resumo": "4d6+2: 15"
+ },
+ "dados|divine guild|2d100|-5": {
+  "rol": [
+   6,
+   54
+  ],
+  "total": 55,
+  "nome": "2d100-5",
+  "discord": "**Sorteio DIVINE** · 2d100-5\nTotal: 55 (6, 54)",
+  "resumo": "2d100-5: 55"
+ },
+ "dados|divine guild|100d4|0": {
+  "rol": [
+   2,
+   3,
+   1,
+   4,
+   4,
+   4,
+   3,
+   1,
+   2,
+   4,
+   2,
+   4,
+   4,
+   3,
+   1,
+   4,
+   3,
+   4,
+   2,
+   1,
+   3,
+   3,
+   1,
+   2,
+   4,
+   1,
+   1,
+   2,
+   1,
+   1,
+   4,
+   3,
+   4,
+   3,
+   4,
+   1,
+   2,
+   4,
+   4,
+   4,
+   1,
+   2,
+   2,
+   3,
+   3,
+   3,
+   1,
+   1,
+   3,
+   2,
+   3,
+   1,
+   4,
+   2,
+   1,
+   4,
+   2,
+   3,
+   3,
+   4,
+   4,
+   3,
+   1,
+   4,
+   2,
+   1,
+   2,
+   3,
+   4,
+   3,
+   1,
+   4,
+   3,
+   2,
+   1,
+   4,
+   3,
+   2,
+   1,
+   1,
+   2,
+   3,
+   2,
+   4,
+   1,
+   2,
+   3,
+   2,
+   4,
+   1,
+   3,
+   2,
+   1,
+   1,
+   3,
+   1,
+   1,
+   2,
+   1,
+   2
+  ],
+  "total": 246,
+  "nome": "100d4",
+  "discord": "**Sorteio DIVINE** · 100d4\nTotal: 246 (2, 3, 1, 4, 4, 4, 3, 1, 2, 4, 2, 4, 4, 3, 1, 4, 3, 4, 2, 1, 3, 3, 1, 2, 4, 1, 1, 2, 1, 1, 4, 3, 4, 3, 4, 1, 2, 4, 4, 4, 1, 2, 2, 3, 3, 3, 1, 1, 3, 2, 3, 1, 4, 2, 1, 4, 2, 3, 3, 4, 4, 3, 1, 4, 2, 1, 2, 3, 4, 3, 1, 4, 3, 2, 1, 4, 3, 2, 1, 1, 2, 3, 2, 4, 1, 2, 3, 2, 4, 1, 3, 2, 1, 1, 3, 1, 1, 2, 1, 2)",
+  "resumo": "100d4: 246"
+ },
+ "dados|divine guild|1d12|7": {
+  "rol": [
+   5
+  ],
+  "total": 12,
+  "nome": "1d12+7",
+  "discord": "**Sorteio DIVINE** · 1d12+7\nTotal: 12",
+  "resumo": "1d12+7: 12"
+ },
+ "moeda|divine guild|1": {
+  "lados": [
+   "Cara"
+  ],
+  "caras": 1,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\nCara",
+  "resumo": "Cara"
+ },
+ "moeda|divine guild|10": {
+  "lados": [
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa"
+  ],
+  "caras": 4,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n4 cara, 6 coroa",
+  "resumo": "10 jogadas: 4 cara, 6 coroa"
+ },
+ "moeda|divine guild|61": {
+  "lados": [
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara"
+  ],
+  "caras": 27,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n27 cara, 34 coroa",
+  "resumo": "61 jogadas: 27 cara, 34 coroa"
+ },
+ "moeda|divine guild|1000": {
+  "lados": [
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa"
+  ],
+  "caras": 503,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n503 cara, 497 coroa",
+  "resumo": "1000 jogadas: 503 cara, 497 coroa"
+ },
+ "conteudo|ZZZZ-2222-9999|raid-boss|1": {
+  "saiu": [
+   "Vale Guardian"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Vale Guardian (Wing X)",
+  "resumo": "Vale Guardian",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "conteudo|ZZZZ-2222-9999|raid-boss|3": {
+  "saiu": [
+   "Vale Guardian",
+   "Sabetha",
+   "Matthias"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Vale Guardian (Wing X)\n2º Sabetha (Wing X)\n3º Matthias (Wing X)",
+  "resumo": "Vale Guardian, Sabetha, Matthias",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "conteudo|ZZZZ-2222-9999|fractal+dungeon|1": {
+  "saiu": [
+   "Aetherblade"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Aetherblade (Fractals)",
+  "resumo": "Aetherblade",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "conteudo|ZZZZ-2222-9999|fractal+dungeon|3": {
+  "saiu": [
+   "Aetherblade",
+   "Aquatic Ruins",
+   "Arah"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Aetherblade (Fractals)\n2º Aquatic Ruins (Fractals)\n3º Arah (Dungeons)",
+  "resumo": "Aetherblade, Aquatic Ruins, Arah",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "conteudo|ZZZZ-2222-9999|dungeon+raid-boss+fractal|1": {
+  "saiu": [
+   "Twilight Arbor"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Twilight Arbor (Dungeons)",
+  "resumo": "Twilight Arbor",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "conteudo|ZZZZ-2222-9999|dungeon+raid-boss+fractal|3": {
+  "saiu": [
+   "Twilight Arbor",
+   "Matthias",
+   "Sabetha"
+  ],
+  "discord": "**Sorteio DIVINE** · o que vamos fazer\n1º Twilight Arbor (Dungeons)\n2º Matthias (Wing X)\n3º Sabetha (Wing X)",
+  "resumo": "Twilight Arbor, Matthias, Sabetha",
+  "codigo": "ZZZZ-2222-9999",
+  "conferindo": true
+ },
+ "dados|ZZZZ-2222-9999|1d20|0": {
+  "rol": [
+   11
+  ],
+  "total": 11,
+  "nome": "1d20",
+  "discord": "**Sorteio DIVINE** · 1d20\nTotal: 11",
+  "resumo": "1d20: 11"
+ },
+ "dados|ZZZZ-2222-9999|3d20|0": {
+  "rol": [
+   11,
+   3,
+   12
+  ],
+  "total": 26,
+  "nome": "3d20",
+  "discord": "**Sorteio DIVINE** · 3d20\nTotal: 26 (11, 3, 12)",
+  "resumo": "3d20: 26"
+ },
+ "dados|ZZZZ-2222-9999|4d6|2": {
+  "rol": [
+   6,
+   4,
+   6,
+   2
+  ],
+  "total": 20,
+  "nome": "4d6+2",
+  "discord": "**Sorteio DIVINE** · 4d6+2\nTotal: 20 (6, 4, 6, 2)",
+  "resumo": "4d6+2: 20"
+ },
+ "dados|ZZZZ-2222-9999|2d100|-5": {
+  "rol": [
+   34,
+   89
+  ],
+  "total": 118,
+  "nome": "2d100-5",
+  "discord": "**Sorteio DIVINE** · 2d100-5\nTotal: 118 (34, 89)",
+  "resumo": "2d100-5: 118"
+ },
+ "dados|ZZZZ-2222-9999|100d4|0": {
+  "rol": [
+   2,
+   4,
+   3,
+   3,
+   2,
+   4,
+   2,
+   1,
+   3,
+   2,
+   1,
+   3,
+   4,
+   4,
+   1,
+   1,
+   2,
+   3,
+   2,
+   3,
+   3,
+   1,
+   3,
+   2,
+   3,
+   2,
+   1,
+   4,
+   2,
+   1,
+   2,
+   1,
+   4,
+   3,
+   1,
+   4,
+   4,
+   3,
+   3,
+   4,
+   2,
+   2,
+   3,
+   3,
+   2,
+   3,
+   1,
+   3,
+   3,
+   2,
+   2,
+   4,
+   1,
+   3,
+   3,
+   2,
+   4,
+   1,
+   1,
+   1,
+   1,
+   3,
+   3,
+   4,
+   1,
+   1,
+   3,
+   4,
+   3,
+   2,
+   1,
+   4,
+   2,
+   4,
+   4,
+   1,
+   1,
+   3,
+   3,
+   1,
+   2,
+   2,
+   2,
+   1,
+   3,
+   1,
+   4,
+   1,
+   2,
+   3,
+   4,
+   3,
+   4,
+   4,
+   3,
+   3,
+   3,
+   4,
+   2,
+   2
+  ],
+  "total": 249,
+  "nome": "100d4",
+  "discord": "**Sorteio DIVINE** · 100d4\nTotal: 249 (2, 4, 3, 3, 2, 4, 2, 1, 3, 2, 1, 3, 4, 4, 1, 1, 2, 3, 2, 3, 3, 1, 3, 2, 3, 2, 1, 4, 2, 1, 2, 1, 4, 3, 1, 4, 4, 3, 3, 4, 2, 2, 3, 3, 2, 3, 1, 3, 3, 2, 2, 4, 1, 3, 3, 2, 4, 1, 1, 1, 1, 3, 3, 4, 1, 1, 3, 4, 3, 2, 1, 4, 2, 4, 4, 1, 1, 3, 3, 1, 2, 2, 2, 1, 3, 1, 4, 1, 2, 3, 4, 3, 4, 4, 3, 3, 3, 4, 2, 2)",
+  "resumo": "100d4: 249"
+ },
+ "dados|ZZZZ-2222-9999|1d12|7": {
+  "rol": [
+   7
+  ],
+  "total": 14,
+  "nome": "1d12+7",
+  "discord": "**Sorteio DIVINE** · 1d12+7\nTotal: 14",
+  "resumo": "1d12+7: 14"
+ },
+ "moeda|ZZZZ-2222-9999|1": {
+  "lados": [
+   "Cara"
+  ],
+  "caras": 1,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\nCara",
+  "resumo": "Cara"
+ },
+ "moeda|ZZZZ-2222-9999|10": {
+  "lados": [
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa"
+  ],
+  "caras": 6,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n6 cara, 4 coroa",
+  "resumo": "10 jogadas: 6 cara, 4 coroa"
+ },
+ "moeda|ZZZZ-2222-9999|61": {
+  "lados": [
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Coroa"
+  ],
+  "caras": 30,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n30 cara, 31 coroa",
+  "resumo": "61 jogadas: 30 cara, 31 coroa"
+ },
+ "moeda|ZZZZ-2222-9999|1000": {
+  "lados": [
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Coroa",
+   "Cara",
+   "Cara",
+   "Cara",
+   "Coroa",
+   "Cara",
+   "Coroa"
+  ],
+  "caras": 499,
+  "discord": "**Sorteio DIVINE** · cara ou coroa\n499 cara, 501 coroa",
+  "resumo": "1000 jogadas: 499 cara, 501 coroa"
+ },
+ "itensDe": [
+  [
+   "Vale Guardian",
+   "Gorseval",
+   "Sabetha",
+   "Slothasor",
+   "Matthias",
+   "Arah",
+   "Twilight Arbor"
+  ],
+  0
+ ],
+ "validarSquads": [
+  {
+   "erro": {
+    "campo": "lista",
+    "texto": "Coloque pelo menos uma conta na lista."
+   }
+  },
+  {
+   "erro": {
+    "campo": "lista",
+    "texto": "Coloque pelo menos 2 participantes na lista."
+   }
+  },
+  {
+   "n": 5
+  },
+  {
+   "erro": {
+    "campo": "n",
+    "texto": "Em \"Pessoas por grupo\", ponha 1 ou mais."
+   }
+  },
+  {
+   "erro": {
+    "campo": "n",
+    "texto": "Em \"Grupos\", ponha 1 ou mais."
+   }
+  },
+  {
+   "n": 16
+  },
+  {
+   "erro": {
+    "campo": "n",
+    "texto": "São 16 pessoas: dá para fazer no máximo 16 grupos."
+   }
+  },
+  {
+   "n": 5
+  },
+  {
+   "n": 2
+  },
+  {
+   "erro": {
+    "campo": "n",
+    "texto": "São 2 pessoas: dá para fazer no máximo 2 grupos."
+   }
+  }
+ ],
+ "validarConteudo": [
+  {
+   "erro": {
+    "campo": "grupo",
+    "texto": "Escolha pelo menos um tipo de conteúdo."
+   }
+  },
+  {
+   "erro": {
+    "campo": "grupo",
+    "texto": "Escolha pelo menos um tipo de conteúdo."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantos\", ponha 1 ou mais."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantos\", ponha 1 ou mais."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Só tem 5 opções nos tipos marcados. Peça menos ou marque mais tipos."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Só tem 1 opção nos tipos marcados. Peça menos ou marque mais tipos."
+   }
+  },
+  {
+   "qtd": 1
+  },
+  {
+   "qtd": 5
+  }
+ ],
+ "validarDados": [
+  {
+   "qtd": 1,
+   "lados": 20,
+   "mod": 0
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantos dados\", escolha de 1 a 100."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantos dados\", escolha de 1 a 100."
+   }
+  },
+  {
+   "erro": {
+    "campo": "mod",
+    "texto": "Em \"Somar ao total\", use um número inteiro (pode ser negativo)."
+   }
+  },
+  {
+   "qtd": 3,
+   "lados": 6,
+   "mod": -4
+  },
+  {
+   "qtd": 1,
+   "lados": 20,
+   "mod": 0
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantos dados\", escolha de 1 a 100."
+   }
+  }
+ ],
+ "validarMoeda": [
+  {
+   "qtd": 1
+  },
+  {
+   "qtd": 1000
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantas vezes\", escolha de 1 a 1.000."
+   }
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantas vezes\", escolha de 1 a 1.000."
+   }
+  },
+  {
+   "qtd": 1
+  },
+  {
+   "erro": {
+    "campo": "qtd",
+    "texto": "Em \"Quantas vezes\", escolha de 1 a 1.000."
+   }
+  }
  ]
 }

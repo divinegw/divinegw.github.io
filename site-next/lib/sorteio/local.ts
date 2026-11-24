@@ -1,5 +1,5 @@
-// As contas dos sorteios que rodam só no navegador (abas "Lista de contas" e "Números"), sem nada de tela.
-// Extraído de site-astro/src/scripts/sorteio.ts (Etapa 2c) SEM MUDAR A LÓGICA: com o mesmo código e a mesma entrada,
+// As contas dos sorteios que rodam só no navegador (abas "Lista de contas", "Números", "Squads" e "Extras"), sem nada de tela.
+// Extraído de site-astro/src/scripts/sorteio.ts (Etapas 2c e 2d) SEM MUDAR A LÓGICA: com o mesmo código e a mesma entrada,
 // o resultado é igual ao do site de hoje, e "Conferir um sorteio antigo" continua valendo.
 // De onde veio cada função (linhas de site-astro/src/scripts/sorteio.ts):
 //   ordinal            linha 19
@@ -12,10 +12,15 @@
 //   textoParaCopiar    linha 88
 //   somaHistorico      linhas 58-61 (o que o histórico grava)
 //   quando             linha 15
-// Só aparecem aqui como NOVAS (não existem em função no site de hoje; as mensagens vêm das linhas 256-260 e 345-353, 398-400):
-//   validarNumeros, validarLista, validarPremios.
+//   sortearSquads      linhas 411-441 (Squads: grupos por tamanho ou por número, função espalhada ou não)
+//   sortearConteudo    linhas 443-458 (O que jogar; o contexto do gerador é `conteudo|<ids marcados, em ordem alfabética>`)
+//   sortearDados       linhas 460-472 (Dados; o contexto do gerador é `dados|<lados>`)
+//   sortearMoeda       linhas 474-484 (Cara ou coroa; o contexto do gerador é `moeda`)
+// Só aparecem aqui como NOVAS (não existem em função no site de hoje; as mensagens vêm das linhas 256-260 e 345-353, 398-400, 414-419, 449-451, 462-463 e 475):
+//   validarNumeros, validarLista, validarPremios, validarSquads, validarConteudo, validarDados, validarMoeda.
 import { comPeso, formata, gerador, impressao, inteiro, limpaCodigo, novoCodigo, numeros, type Gerador } from './aleatorio'
 import type { Participante } from './contas'
+import type { GrupoConteudo, ItemConteudo } from './conteudo'
 
 export const ordinal = (i: number) => `${i}º`
 export const quando = (d = new Date()) => d.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
@@ -87,6 +92,76 @@ export async function sortearNumeros(min: bigint, max: bigint, qtd: number, repe
   return { saiu, faixa, qtd, repetir, codigo, conferindo, discord, resumo }
 }
 
+// ---------------------------------------------------------------- Squads (sorteio.ts, linhas 411-441)
+export interface OpcoesSquads { n: number; porGrupos: boolean; equilibrar: boolean }
+export interface SaidaSquads extends SaidaBase { ps: Participante[]; grupos: Participante[][]; qtdGrupos: number }
+
+export async function sortearSquads(participantes: Participante[], o: OpcoesSquads, digitado = ''): Promise<SaidaSquads> {
+  const ps = ordenada(participantes)
+  const { n, porGrupos, equilibrar } = o
+  const qtdGrupos = porGrupos ? n : Math.ceil(ps.length / n)
+  const { codigo, conferindo } = codigoDe(digitado)
+  const g = await gerador(codigo, 'squads')
+  let fila: Participante[]
+  if (equilibrar) {
+    // cada função embaralhada à parte; as funções com mais gente são distribuídas primeiro
+    const porFuncao = new Map<string, Participante[]>()
+    for (const p of ps) { const k = (p.funcao ?? '').toLocaleLowerCase('pt-BR'); porFuncao.set(k, [...(porFuncao.get(k) ?? []), p]) }
+    fila = [...porFuncao.entries()].sort((a, b) => b[1].length - a[1].length || (a[0] < b[0] ? -1 : 1)).flatMap(([, v]) => g.embaralha(v))
+  } else fila = g.embaralha(ps)
+  const grupos: Participante[][] = Array.from({ length: qtdGrupos }, () => [])
+  let vez = 0
+  for (const p of fila) {
+    // vai para o grupo com menos gente; no empate, revezando
+    const menor = Math.min(...grupos.map((x) => x.length))
+    while (grupos[vez % qtdGrupos].length !== menor) vez++
+    grupos[vez % qtdGrupos].push(p)
+    vez++
+  }
+  const imp = await impressao(ordenada(ps).map((p) => `${p.chave}-${p.funcao ?? ''}`).join('\n'))
+  const discord = `**Sorteio DIVINE** · ${qtdGrupos} grupos\n${grupos.map((gr, i) => `**Grupo ${i + 1}:** ${gr.map((p) => p.nome + (p.funcao ? ` (${p.funcao})` : '')).join(', ')}`).join('\n')}`
+  return { ps, grupos, qtdGrupos, codigo, conferindo, impressao: imp, discord, resumo: `${ps.length} pessoas em ${qtdGrupos} grupos` }
+}
+
+// ---------------------------------------------------------------- Extras: O que jogar (sorteio.ts, linhas 443-458)
+/** Os itens dos grupos marcados, na ordem dos grupos (essa ordem decide o resultado). */
+export const itensDe = (grupos: GrupoConteudo[], ids: string[]): ItemConteudo[] => {
+  const escolhidos = new Set(ids)
+  return grupos.filter((d) => escolhidos.has(d.id)).flatMap((d) => d.itens)
+}
+export interface SaidaConteudo extends SaidaBase { saiu: ItemConteudo[] }
+
+export async function sortearConteudo(grupos: GrupoConteudo[], ids: string[], qtd: number, digitado = ''): Promise<SaidaConteudo> {
+  const escolhidos = new Set(ids)
+  const pool = itensDe(grupos, ids)
+  const { codigo, conferindo } = codigoDe(digitado)
+  const g = await gerador(codigo, `conteudo|${[...escolhidos].sort().join(',')}`)
+  const saiu = g.embaralha(pool).slice(0, qtd)
+  return { saiu, codigo, conferindo, discord: `**Sorteio DIVINE** · o que vamos fazer\n${saiu.map((x, i) => `${ordinal(i + 1)} ${x.t} (${x.onde})`).join('\n')}`, resumo: saiu.map((x) => x.t).join(', ') }
+}
+
+// ---------------------------------------------------------------- Extras: Dados e moeda (sorteio.ts, linhas 460-484)
+export interface SaidaDados extends SaidaBase { rol: number[]; total: number; nome: string; qtd: number; lados: number; mod: number }
+
+export async function sortearDados(qtd: number, lados: number, mod: number, digitado = ''): Promise<SaidaDados> {
+  const { codigo, conferindo } = codigoDe(digitado)
+  const g = await gerador(codigo, `dados|${lados}`)
+  const rol = Array.from({ length: qtd }, () => Number(g.entre(1n, BigInt(lados))))
+  const total = rol.reduce((s, x) => s + x, 0) + mod
+  const nome = `${qtd}d${lados}${mod ? (mod > 0 ? `+${mod}` : mod) : ''}`
+  return { rol, total, nome, qtd, lados, mod, codigo, conferindo, discord: `**Sorteio DIVINE** · ${nome}\nTotal: ${total}${qtd > 1 ? ` (${rol.join(', ')})` : ''}`, resumo: `${nome}: ${total}` }
+}
+
+export interface SaidaMoeda extends SaidaBase { lados: ('Cara' | 'Coroa')[]; caras: number; qtd: number }
+
+export async function sortearMoeda(qtd: number, digitado = ''): Promise<SaidaMoeda> {
+  const { codigo, conferindo } = codigoDe(digitado)
+  const g = await gerador(codigo, 'moeda')
+  const lados = Array.from({ length: qtd }, () => (g.indice(2) ? 'Coroa' : 'Cara') as 'Cara' | 'Coroa')
+  const caras = lados.filter((x) => x === 'Cara').length
+  return { lados, caras, qtd, codigo, conferindo, discord: `**Sorteio DIVINE** · cara ou coroa\n${qtd === 1 ? lados[0] : `${caras} cara, ${qtd - caras} coroa`}`, resumo: qtd === 1 ? lados[0] : `${qtd} jogadas: ${caras} cara, ${qtd - caras} coroa` }
+}
+
 // ---------------------------------------------------------------- copiar e histórico
 /** O texto de "Copiar resultado". `origem` é o endereço do site (location.origin). */
 export const textoParaCopiar = (r: Pick<SaidaBase, 'discord' | 'codigo' | 'impressao'>, origem: string) =>
@@ -136,4 +211,43 @@ export function validarPremios(premios: string[], n: number, repetir: boolean): 
     return { campo: 'premios', texto: `São ${premios.length} prêmios para ${n} ${n === 1 ? 'pessoa' : 'pessoas'}. Marque que uma pessoa pode levar mais de um, ou tire prêmios.` }
   }
   return null
+}
+
+/** `n` = quantas contas válidas há na lista. A ordem das checagens é a do site de hoje (quantidade, lista, grupos demais). */
+export function validarSquads(n: number, nTxt: string, porGrupos: boolean):
+  { erro: ErroDeCampo<'lista' | 'n'> } | { erro?: undefined; n: number } {
+  const q = Number(nTxt.trim() || '5')
+  if (!Number.isInteger(q) || q < 1) return { erro: { campo: 'n', texto: `Em "${porGrupos ? 'Grupos' : 'Pessoas por grupo'}", ponha 1 ou mais.` } }
+  if (n === 0) return { erro: { campo: 'lista', texto: 'Coloque pelo menos uma conta na lista.' } }
+  if (n < 2) return { erro: { campo: 'lista', texto: 'Coloque pelo menos 2 participantes na lista.' } }
+  const qtdGrupos = porGrupos ? q : Math.ceil(n / q)
+  if (qtdGrupos > n) return { erro: { campo: 'n', texto: `São ${n} pessoas: dá para fazer no máximo ${n} grupos.` } }
+  return { n: q }
+}
+
+/** `pool` = quantos itens há nos tipos marcados; `nGrupos` = quantos tipos estão marcados. */
+export function validarConteudo(pool: number, nGrupos: number, qtdTxt: string):
+  { erro: ErroDeCampo<'grupo' | 'qtd'> } | { erro?: undefined; qtd: number } {
+  const qtd = Number(qtdTxt.trim() || '1')
+  if (!nGrupos || !pool) return { erro: { campo: 'grupo', texto: 'Escolha pelo menos um tipo de conteúdo.' } }
+  if (!Number.isInteger(qtd) || qtd < 1) return { erro: { campo: 'qtd', texto: 'Em "Quantos", ponha 1 ou mais.' } }
+  if (qtd > pool) return { erro: { campo: 'qtd', texto: `Só tem ${pool} ${pool === 1 ? 'opção' : 'opções'} nos tipos marcados. Peça menos ou marque mais tipos.` } }
+  return { qtd }
+}
+
+const LADOS_VALIDOS = [4, 6, 8, 10, 12, 20, 100]
+export function validarDados(qtdTxt: string, ladosTxt: string, modTxt: string):
+  { erro: ErroDeCampo<'qtd' | 'mod'> } | { erro?: undefined; qtd: number; lados: number; mod: number } {
+  const qtd = Number(qtdTxt.trim() || '1'), lados = Number(ladosTxt.trim() || '20'), mod = Number(modTxt.trim() || '0')
+  if (!Number.isInteger(qtd) || qtd < 1 || qtd > 100) return { erro: { campo: 'qtd', texto: 'Em "Quantos dados", escolha de 1 a 100.' } }
+  if (!Number.isInteger(mod)) return { erro: { campo: 'mod', texto: 'Em "Somar ao total", use um número inteiro (pode ser negativo).' } }
+  if (Math.abs(mod) > 1_000_000) return { erro: { campo: 'mod', texto: 'Em "Somar ao total", use um inteiro de -1.000.000 a 1.000.000.' } }
+  if (!LADOS_VALIDOS.includes(lados)) return { erro: { campo: 'qtd', texto: 'Escolha os lados na lista: d4, d6, d8, d10, d12, d20 ou d100.' } }
+  return { qtd, lados, mod }
+}
+
+export function validarMoeda(qtdTxt: string): { erro: ErroDeCampo<'qtd'> } | { erro?: undefined; qtd: number } {
+  const qtd = Number(qtdTxt.trim() || '1')
+  if (!Number.isInteger(qtd) || qtd < 1 || qtd > 1000) return { erro: { campo: 'qtd', texto: 'Em "Quantas vezes", escolha de 1 a 1.000.' } }
+  return { qtd }
 }

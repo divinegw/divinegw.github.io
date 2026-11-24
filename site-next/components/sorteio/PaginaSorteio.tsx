@@ -10,6 +10,7 @@ import { FacaSorteio } from "@/components/sorteio/FacaSorteio"
 import { useAbertos } from "@/components/sorteio/useAbertos"
 import { Skeleton } from "@/components/ui/skeleton"
 import { navegar, useAgora, useParametros, useUrlLida } from "@/components/sorteio/url"
+import type { GrupoConteudo } from "@/lib/sorteio/conteudo"
 import { cn } from "@/lib/utils"
 
 // `pai`: a tela é filha do Início, então a trilha leva de volta a ele (DIVINE › Sorteio › esta tela).
@@ -50,7 +51,7 @@ const FRASE_INICIO = "Os sorteios da guilda. Entre num que está aberto ou crie 
 
 // Início: abertos à esquerda (320 px; no celular, em cima) e o "Faça um sorteio" à direita.
 // Sem nenhum aberto, o bloco some e o formulário fica sozinho, com até 640 px.
-function Inicio({ refTitulo }: { refTitulo: React.Ref<HTMLHeadingElement> }) {
+function Inicio({ refTitulo, conteudo }: { refTitulo: React.Ref<HTMLHeadingElement>; conteudo: GrupoConteudo[] }) {
   const { estado, recarregar } = useAbertos()
   const agora = useAgora()
   // enquanto a lista carrega, a coluna da esquerda fica reservada (esqueleto no computador); só uma resposta vazia dá a largura toda ao formulário
@@ -60,7 +61,7 @@ function Inicio({ refTitulo }: { refTitulo: React.Ref<HTMLHeadingElement> }) {
       <Topo titulo="Sorteio" frase={FRASE_INICIO} migalha="Sorteio" refTitulo={refTitulo} />
       <div className={cn("grid items-start gap-8", sozinho ? "max-w-[640px]" : "min-[900px]:grid-cols-[320px_minmax(0,1fr)]")}>
         {!sozinho && <BlocoAbertos estado={estado} recarregar={recarregar} />}
-        <FacaSorteio />
+        <FacaSorteio conteudo={conteudo} />
       </div>
     </>
   )
@@ -113,7 +114,7 @@ function Carregando() {
   )
 }
 
-export function PaginaSorteio() {
+export function PaginaSorteio({ conteudo }: { conteudo: GrupoConteudo[] }) {
   const lida = useUrlLida()
   const parametros = useParametros()
   const tela = parametros.get("s") ? "painel" : parametros.get("ver") === "abertos" ? "abertos" : "inicio"
@@ -131,5 +132,5 @@ export function PaginaSorteio() {
   if (!lida) return <Carregando />
   if (tela === "painel") return <Painel refTitulo={titulo} />
   if (tela === "abertos") return <TodosAbertos refTitulo={titulo} />
-  return <Inicio refTitulo={titulo} />
+  return <Inicio refTitulo={titulo} conteudo={conteudo} />
 }

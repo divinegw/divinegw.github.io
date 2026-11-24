@@ -33,8 +33,8 @@ type Resultado =
 // Arquivo aberto: só .txt ou .csv. O site de hoje não limita o tamanho; aqui 1 MB (uns 50 mil nomes) evita travar a aba.
 const LIMITE_ARQUIVO = 1024 * 1024
 // O texto todo da lista (colado + arquivo) também tem teto, para uma colada gigante não travar a aba.
-const LIMITE_TEXTO = 2 * 1024 * 1024
-const AVISO_TEXTO = "A lista ficou grande demais (passa de 2 MB). Tire parte dos nomes e tente de novo."
+export const LIMITE_TEXTO = 2 * 1024 * 1024
+export const AVISO_TEXTO ="A lista ficou grande demais (passa de 2 MB). Tire parte dos nomes e tente de novo."
 const reduzido = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
 const espera = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 const quadro = () => new Promise<void>((r) => requestAnimationFrame(() => r()))
@@ -49,7 +49,7 @@ const coresSite = (): CoresRoleta => ({
 })
 
 // Mesmo texto do site de hoje para linhas que não são conta do jogo (sorteio.ts, errosDaLista).
-function textoErrosDaLista(erros: Leitura["erros"]) {
+export function textoErrosDaLista(erros: Leitura["erros"]) {
   const ex = erros.slice(0, 3).map((e) => `linha ${e.linha} ("${e.texto}")`).join(", ")
   return `${erros.length === 1 ? "Esta linha não parece" : `${erros.length} linhas não parecem`} conta do jogo: ${ex}${erros.length > 3 ? "…" : ""}. Corrija para o formato Nome.1234 ou desmarque "Aceitar só contas do jogo" em "Mais opções".`
 }
@@ -70,7 +70,8 @@ function textoContagem(l: Leitura, peso: boolean) {
 
 // A aba "Lista de contas": sortear vencedores (com reservas, bilhetes, ordem de todo mundo) ou distribuir prêmios.
 // As contas e os limites são os do site de hoje (lib/sorteio/local.ts); aqui só há tela.
-export function AbaLista() {
+// `aoMudarTexto` entrega o texto da lista a quem precisa dele (a aba Squads tem o botão "Usar a lista da aba Lista de contas").
+export function AbaLista({ aoMudarTexto }: { aoMudarTexto?: (texto: string) => void }) {
   const [modo, setModo] = React.useState<Modo>("vencedores")
   const [texto, setTexto] = React.useState("")
   const [contado, setContado] = React.useState("")
@@ -119,6 +120,7 @@ export function AbaLista() {
     mostrarCard(titulo.current)
   }, [pedidoTitulo])
   React.useEffect(() => () => { rodada.current++ }, [])
+  React.useEffect(() => { aoMudarTexto?.(texto) }, [texto, aoMudarTexto])
 
   const limpa = (campo: keyof Erros) => setErros((e) => (e[campo] ? { ...e, [campo]: undefined } : e))
   // Devolve false se o texto passa do limite (e fica como estava, com o aviso).
