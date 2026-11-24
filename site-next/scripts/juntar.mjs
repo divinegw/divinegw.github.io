@@ -9,8 +9,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Rotas já migradas, sem extensão: 'sorteio' vira sorteio.html; 'sorteio/ganhadores' vira sorteio/ganhadores.html.
-// Etapa 0: nenhuma. O index.html e o 404.html do Next só entram na Etapa 4.
-const ROTAS = [];
+// O index.html e o 404.html do Next só entram na Etapa 4.
+const ROTAS = ['sorteio', 'sorteio/ganhadores']; // Etapa 3: o sorteio novo (Início, painel e Ganhadores)
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(RAIZ, 'out');
