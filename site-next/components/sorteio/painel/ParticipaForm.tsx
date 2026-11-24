@@ -60,21 +60,25 @@ export function AreaConta({ s, aberto, organizador, semInscritos, minhaConta, ti
 
 function Dentro({ conta, fechado, aceite }: { conta: string; fechado: boolean; aceite: boolean }) {
   return (
-    <div className="flex items-start gap-3 rounded-md border border-primary-border bg-primary-bg px-4 py-3 text-small motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-200">
-      <CheckIcon className="mt-0.5 size-5 shrink-0 text-primary-text" strokeWidth={1.75} aria-hidden="true" />
-      <div className="grid min-w-0 gap-1.5">
+    <div className="flex items-start gap-3 rounded-md border border-primary-border bg-primary-bg px-4 py-4 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-200">
+      <CheckIcon className="mt-0.5 size-6 shrink-0 text-primary-text" strokeWidth={1.75} aria-hidden="true" />
+      <div className="grid min-w-0 gap-3">
         {/* o foco vem para cá depois de entrar: o leitor de tela lê a confirmação */}
-        <p tabIndex={-1} data-foco-painel className="font-semibold outline-none [overflow-wrap:anywhere]">Você está no sorteio como {conta}.</p>
-        <p className="text-muted-foreground">
-          {fechado ? "As inscrições fecharam. Deixe esta página aberta: o resultado aparece aqui." : "Deixe esta página aberta: o resultado aparece aqui."}
+        <p tabIndex={-1} data-foco-painel className="text-lead font-semibold text-foreground outline-none [overflow-wrap:anywhere]">
+          Você está participando do sorteio com o ID <span className="dado text-primary-text">{conta}</span>.
         </p>
-        {aceite && !fechado ? <p>{AVISO_ACEITE}</p> : null}
-        <p className="text-muted-foreground">Digitou o ID errado? Avise quem organiza.</p>
+        <p className="text-body text-muted-foreground">Mantenha esta página aberta. O resultado será exibido aqui.</p>
+        {aceite && !fechado ? (
+          <p className="flex items-start gap-2 text-body text-foreground">
+            <ClockIcon className="mt-1 size-4 shrink-0 text-primary-text" strokeWidth={1.75} aria-hidden="true" />
+            Se for sorteado, você terá 1 minuto para confirmar sua presença.
+          </p>
+        ) : null}
+        <p className="border-t border-border pt-3 text-small text-muted-foreground">Informou o ID errado? Avise quem está organizando.</p>
       </div>
     </div>
   )
 }
-
 function Formulario({ aceite, pedeGoogle, aoParticipar }: { aceite: boolean; pedeGoogle: boolean; aoParticipar: AreaContaProps["aoParticipar"] }) {
   const [valor, setValor] = React.useState("")
   const [erro, setErro] = React.useState<string | undefined>()
@@ -101,7 +105,7 @@ function Formulario({ aceite, pedeGoogle, aoParticipar }: { aceite: boolean; ped
 
   return (
     <form noValidate onSubmit={enviar} className="grid gap-3">
-      <Campo rotulo="Seu ID do Guild Wars 2" ajuda={erro ? undefined : "Com o ponto e os 4 números, como Joana.1234."} erro={erro}>
+      <Campo rotulo="Seu ID do Guild Wars 2" ajuda={erro ? undefined : "Digite seu ID. Ex: Fulminancer.0000"} erro={erro}>
         <Input
           ref={campo}
           name="conta"
@@ -116,6 +120,15 @@ function Formulario({ aceite, pedeGoogle, aoParticipar }: { aceite: boolean; ped
           className="dado max-w-form"
         />
       </Campo>
+      <Detalhes resumo="Onde acho meu ID?" className="max-w-form">
+        <p className="text-small text-muted-foreground">
+          No jogo, aperte <kbd className="dado rounded-sm border border-border-hover bg-fill-1 px-1.5">Y</kbd> para abrir o painel social: seu ID aparece lá, como Nome.1234. Fora do jogo, ele também está na sua conta ArenaNet, em{" "}
+          <a className="text-primary-text underline underline-offset-4" href="https://account.arena.net" target="_blank" rel="noopener noreferrer">
+            account.arena.net<span className="sr-only"> (abre em nova aba)</span>
+          </a>
+          .
+        </p>
+      </Detalhes>
       <Button type="submit" size="lg" className="w-full min-[560px]:w-fit" carregando={ocupado}>
         {ocupado ? "Entrando…" : "Participar"}
       </Button>
@@ -126,15 +139,6 @@ function Formulario({ aceite, pedeGoogle, aoParticipar }: { aceite: boolean; ped
           {AVISO_ACEITE}
         </p>
       )}
-      <Detalhes resumo="Onde acho meu ID?" className="max-w-form">
-        <p className="text-small text-muted-foreground">
-          No jogo, aperte <kbd className="dado rounded-sm border border-border-hover bg-fill-1 px-1.5">Y</kbd> para abrir o painel social: seu ID aparece lá, como Nome.1234. Fora do jogo, ele também está na sua conta ArenaNet, em{" "}
-          <a className="text-primary-text underline underline-offset-4" href="https://account.arena.net" target="_blank" rel="noopener noreferrer">
-            account.arena.net<span className="sr-only"> (abre em nova aba)</span>
-          </a>
-          .
-        </p>
-      </Detalhes>
     </form>
   )
 }

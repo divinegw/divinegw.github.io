@@ -2,7 +2,7 @@
 export type PaginaAtual = "guias" | "galeria" | "sorteio" | "novidades" | "creditos"
 
 export const LINKS_BARRA: { id: PaginaAtual; rotulo: string; href: string }[] = [
-  { id: "guias", rotulo: "Guias", href: "/#guias" },
+  { id: "guias", rotulo: "Guias", href: "/#comece" },
   { id: "galeria", rotulo: "Galeria", href: "/galeria.html" },
   { id: "sorteio", rotulo: "Sorteio", href: "/sorteio.html" },
   { id: "novidades", rotulo: "Novidades", href: "/novidades.html" },

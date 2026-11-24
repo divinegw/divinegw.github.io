@@ -30,6 +30,7 @@ export const NOVIDADES: Novidade[] = [
       { tipo: 'atualizado', area: 'site', texto: 'Na página do sorteio, você já vê os que estão abertos agora. Escolha um e entre com o seu ID do Guild Wars 2.', href: '/sorteio.html' },
       { tipo: 'atualizado', area: 'site', texto: 'Refizemos o painel do sorteio. Nos 10 segundos finais o relógio fica laranja, e quem ganha confirma o prêmio em 1 minuto ali mesmo.', href: '/sorteio.html' },
       { tipo: 'atualizado', area: 'site', texto: 'Para quem organiza pelo celular, deixamos os botões de sortear e de copiar o link sempre à mão e criamos um convite pronto para colar no Discord.', href: '/sorteio.html' },
+      { tipo: 'novo', area: 'site', texto: 'Agora dá para sortear até 10.000 unidades de um item. Você digita a quantidade e o formulário já mostra a conta em stacks.', href: '/sorteio.html' },
       { tipo: 'atualizado', area: 'site', texto: 'Quer conferir um resultado? Na página Ganhadores, cole o código em "Conferir pelo código" e veja a prova.', href: '/sorteio/ganhadores.html' },
       { tipo: 'atualizado', area: 'site', texto: 'Os códigos dos sorteios antigos continuam valendo. O mesmo código dá o mesmo resultado de antes.', href: '/sorteio/ganhadores.html' },
     ],

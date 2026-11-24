@@ -7,7 +7,7 @@ import { PaginaGanhadores } from "@/components/sorteio/ganhadores/PaginaGanhador
 
 export const metadata: Metadata = {
   title: "Ganhadores",
-  description: "Quem ganhou os sorteios ao vivo da guilda DIVINE, com o código de cada sorteio para conferir.",
+  description: "Confira os vencedores e valide qualquer resultado pelo código de verificação.",
 }
 
 // /sorteio/ganhadores.html. A página é estática; a lista e a conferência são lidas no navegador (só leitura, sem login).

@@ -163,7 +163,7 @@ export async function sortearMoeda(qtd: number, digitado = ''): Promise<SaidaMoe
 }
 
 // ---------------------------------------------------------------- copiar e histórico
-/** O texto de "Copiar resultado". `origem` é o endereço do site (location.origin). */
+/** O texto de "Copiar resultado". `origem` é o endereço do site (ORIGEM_SITE, de conteudo/site.ts). */
 export const textoParaCopiar = (r: Pick<SaidaBase, 'discord' | 'codigo' | 'impressao'>, origem: string) =>
   `${r.discord}\nCódigo: ${r.codigo}${r.impressao ? ` · lista ${r.impressao}` : ''}\nConfira em ${origem}/sorteio.html`
 

@@ -9,6 +9,10 @@ export const SITE = {
   frase: "Guias de Guild Wars 2 escritos pela guilda DIVINE, do primeiro squad ao Challenge Mode.",
 };
 
+// Endereço do site publicado. Todo link copiado ou compartilhado usa este, nunca window.location.origin
+// (quem cria um sorteio pelo servidor local não pode receber um link "localhost").
+export const ORIGEM_SITE = "https://divinegw.github.io";
+
 // Avisos legais do rodapé.
 //   arenanet: o aviso obrigatório, em inglês e SEM ALTERAÇÃO (Content Terms of Use, II.5, versão de 28/10/2025).
 export const AVISO = {

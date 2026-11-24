@@ -14,7 +14,7 @@ export const DURACOES: { min: number; rotulo: string }[] = [
   { min: 60, rotulo: '1 hora' }, { min: 180, rotulo: '3 horas' }, { min: 1440, rotulo: '1 dia' }, { min: 4320, rotulo: '3 dias' },
   { min: 10080, rotulo: '7 dias' }, { min: 0, rotulo: 'Sem prazo (você encerra)' },
 ];
-export const LIMITES = { titulo: 80, descricao: 300, textoPremio: 80, vencedores: 50, qtdItem: 250, gemas: 100_000, ouro: 1_000_000 } as const;
+export const LIMITES = { titulo: 80, descricao: 300, textoPremio: 80, vencedores: 50, qtdItem: 10_000, gemas: 100_000, ouro: 1_000_000 } as const;
 export const EXPANSOES_OPCOES = EXPANSOES.map((e) => ({ valor: e.nome, rotulo: `${e.nome} (${e.sigla})` }));
 
 /** Número inteiro de 1 a `max`. Campo vazio vira `vazio`; fora da faixa ou quebrado vira `invalido`. */

@@ -8,7 +8,7 @@ import { ListaGanhadores } from "@/components/sorteio/ganhadores/ListaGanhadores
 import { useParametros, useUrlLida } from "@/components/sorteio/url"
 import { carregarGanhadores, type DadosGanhadores } from "@/lib/dados"
 
-const FRASE = "Quem ganhou cada sorteio. Todo resultado tem um código, e qualquer pessoa confere."
+const FRASE = "Confira os vencedores e valide qualquer resultado pelo código de verificação."
 
 // Se a camada de dados nem carregar, a lista mostra "Não deu para carregar" e a busca, "Não deu para procurar".
 const SEM_DADOS: DadosGanhadores = {

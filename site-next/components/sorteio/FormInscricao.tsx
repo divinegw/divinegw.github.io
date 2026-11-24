@@ -7,12 +7,14 @@ import { Campo } from "@/components/divine/Campo"
 import { FaixaAviso } from "@/components/divine/FaixaAviso"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { ORIGEM_SITE } from "@/conteudo/site"
 import { Label } from "@/components/ui/label"
 import { RadioChip, RadioGroup } from "@/components/ui/radio-group"
 import { Select } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { BuscaItem, type EstadoBusca } from "@/components/sorteio/BuscaItem"
+import { IconePremio } from "@/components/sorteio/IconePremio"
 import {
   DURACOES, EXPANSOES_OPCOES, LIMITES, TIPOS_PREMIO, lerInteiro, msgFaixa, textoConvite,
 } from "@/lib/sorteio/formulario"
@@ -23,6 +25,17 @@ type Fase = "normal" | "abrindo" | "aberto" | "falha"
 
 const ICONE_TIPO: Record<TipoPremio, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
   item: PackageIcon, gemas: GemIcon, ouro: CoinsIcon, expansao: MapIcon, texto: GiftIcon,
+}
+
+/** Ajuda da quantidade do item. Acima de 250 (um stack), mostra a conta em stacks. */
+function ajudaQtd(texto: string) {
+  const n = Number(texto.trim())
+  if (Number.isInteger(n) && n >= 250 && n <= LIMITES.qtdItem) {
+    const stacks = Math.floor(n / 250)
+    const resto = n % 250
+    return `= ${stacks} ${stacks === 1 ? "stack" : "stacks"}${resto ? ` e ${resto}` : ""}`
+  }
+  return `De 1 a ${LIMITES.qtdItem.toLocaleString("pt-BR")}.`
 }
 
 const ANUNCIO: Partial<Record<Fase, string>> = {
@@ -149,7 +162,7 @@ export function FormInscricao({ aoCriar }: { aoCriar?: () => void }) {
         vencedores: (lerInteiro(vencedores, LIMITES.vencedores) as { valor: number }).valor,
         duracaoMin: Number(duracao), premio: textoPremio(premio), premioInfo: premio, google, aceite,
       })
-      const link = linkDe(id, window.location.origin)
+      const link = linkDe(id, ORIGEM_SITE)
       const copiou = await navigator.clipboard.writeText(textoConvite(titulo.trim(), premio, link)).then(() => true, () => false)
       setCriado({ id, link, copiou })
       setFase("aberto")
@@ -225,7 +238,7 @@ export function FormInscricao({ aoCriar }: { aoCriar?: () => void }) {
               />
             </Campo>
             <div className="min-[900px]:w-44">
-              <Campo rotulo="Quantidade" ajuda={erros.qtd ? undefined : `De 1 a ${LIMITES.qtdItem}.`} erro={erros.qtd}>
+              <Campo rotulo="Quantidade" ajuda={erros.qtd ? undefined : ajudaQtd(qtdItem)} erro={erros.qtd}>
                 <Input
                   name="quantidade" type="number" inputMode="numeric" min={1} max={LIMITES.qtdItem} className="dado"
                   value={qtdItem} onChange={(e) => { setQtdItem(e.target.value); limpa("qtd") }}
@@ -255,11 +268,17 @@ export function FormInscricao({ aoCriar }: { aoCriar?: () => void }) {
           </div>
         )}
         {tipo === "expansao" && (
-          <Campo rotulo="Qual expansão">
-            <Select name="expansao" value={expansao} onChange={(e) => setExpansao(e.target.value)}>
-              {EXPANSOES_OPCOES.map((o) => <option key={o.valor} value={o.valor}>{o.rotulo}</option>)}
-            </Select>
-          </Campo>
+          <div className="grid gap-2">
+            <Label htmlFor="campo-expansao">Qual expansão</Label>
+            <div className="flex items-center gap-3">
+              <IconePremio premio={premioSimples("expansao", expansao, 1)} tipo="expansao" />
+              <div className="min-w-0 flex-1">
+                <Select id="campo-expansao" name="expansao" value={expansao} onChange={(e) => setExpansao(e.target.value)}>
+                  {EXPANSOES_OPCOES.map((o) => <option key={o.valor} value={o.valor}>{o.rotulo}</option>)}
+                </Select>
+              </div>
+            </div>
+          </div>
         )}
         {tipo === "texto" && (
           <Campo rotulo="Qual é o prêmio" erro={erros.texto}>

@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import { carregarDados, type Dados } from "@/lib/dados"
+import { ORIGEM_SITE } from "@/conteudo/site"
 import type { Carimbo, Conexao, Sorteio, Usuario } from "@/lib/dados/firebase"
 import { CONTA_GW2 } from "@/lib/sorteio/contas"
 import { chaveDe, type Inscrito } from "@/lib/sorteio/ao-vivo"
@@ -194,7 +195,7 @@ export function usePainel(id: string, cenario: string | null, papel: string | nu
     linkOrganizador: async () => {
       if (!dados) return null
       const token = await dados.tokenOrganizador(id)
-      return token ? `${dados.linkDe(id, window.location.origin)}&org=${token}` : null
+      return token ? `${dados.linkDe(id, ORIGEM_SITE)}&org=${token}` : null
     },
   }
 

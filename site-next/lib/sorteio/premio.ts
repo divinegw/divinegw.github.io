@@ -104,7 +104,7 @@ export async function buscarItem(nome: string): Promise<PremioInfo> {
 export function textoPremio(p: PremioInfo) {
   if (p.tipo === 'gemas') return `${p.quantidade.toLocaleString('pt-BR')} gemas`;
   if (p.tipo === 'ouro') return `${p.quantidade.toLocaleString('pt-BR')} ouro`;
-  if (p.tipo === 'item' && p.quantidade > 1) return `${p.quantidade} × ${p.nome}`;
+  if (p.tipo === 'item' && p.quantidade > 1) return `${p.quantidade.toLocaleString('pt-BR')} × ${p.nome}`;
   return p.nome;
 }
 

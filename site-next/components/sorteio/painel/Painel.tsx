@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Skeleton } from "@/components/ui/skeleton"
+import { ORIGEM_SITE } from "@/conteudo/site"
 import { chaveDe } from "@/lib/sorteio/ao-vivo"
 import { estadoDoAceite, formatarRelogio, textoConviteDiscord, textoResultado, type Fase } from "@/lib/sorteio/painel"
 
@@ -174,7 +175,7 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
 
   async function copiarLinkVazio() {
     if (!dados) return
-    const ok = await navigator.clipboard.writeText(dados.linkDe(id, window.location.origin)).then(() => true, () => false)
+    const ok = await navigator.clipboard.writeText(dados.linkDe(id, ORIGEM_SITE)).then(() => true, () => false)
     anunciar(ok ? "Link copiado." : "Não deu para copiar o link.")
   }
 
@@ -278,7 +279,7 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
 
   // ---------------------------------------------------------------- o painel
   const sorteioCerto = s
-  const link = dados ? dados.linkDe(id, typeof window === "undefined" ? "" : window.location.origin) : ""
+  const link = dados ? dados.linkDe(id, ORIGEM_SITE) : ""
   const estado: EstadoSelo = fase === "sorteando" ? "sorteando" : fase === "inscricoes" ? (aberto ? "aberto" : "encerrado") : "sorteado"
   const semInscritos = (inscritos?.length ?? 0) === 0
   const conhece = p.conexao !== null || p.avisos.conectar
@@ -328,7 +329,7 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
             }}
             aoAbrirFiltro={() => setFiltroAberto(true)}
             aoPegarLinkOrganizador={p.acoes.linkOrganizador}
-            textoDoResultado={() => (r ? textoResultado(sorteioCerto, r, aceite?.fase === "fim" ? aceite.ganhadores.filter((g) => !g.ok).map((g) => g.nome) : [], window.location.origin) : "")}
+            textoDoResultado={() => (r ? textoResultado(sorteioCerto, r, aceite?.fase === "fim" ? aceite.ganhadores.filter((g) => !g.ok).map((g) => g.nome) : [], ORIGEM_SITE) : "")}
             textoDoConvite={(t) => textoConviteDiscord(t, sorteioCerto, link)}
           />
         )}

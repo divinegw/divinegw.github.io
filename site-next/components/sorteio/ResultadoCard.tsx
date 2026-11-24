@@ -4,6 +4,7 @@ import * as React from "react"
 import { CopyIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { ORIGEM_SITE } from "@/conteudo/site"
 import { textoParaCopiar } from "@/lib/sorteio/local"
 
 /** Leva o card do resultado para a tela, só o necessário. Suave apenas se a pessoa não pediu menos movimento. */
@@ -60,7 +61,7 @@ export function ResultadoCard({
   async function copiar() {
     let ok = false
     try {
-      await navigator.clipboard.writeText(textoParaCopiar({ discord, codigo, impressao }, window.location.origin))
+      await navigator.clipboard.writeText(textoParaCopiar({ discord, codigo, impressao }, ORIGEM_SITE))
       ok = true
     } catch { /* sem área de transferência (ou sem permissão): avisa que não deu */ }
     setCopia(ok ? "ok" : "falhou")
