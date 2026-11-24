@@ -112,6 +112,8 @@ Celular primeiro: 390 px é a tela principal; computador a partir de 900 px.
 | carregando | troca o ícone por um giro; mesma largura e altura; clique bloqueado (também em link) | igual | igual |
 | selecionado | `primary-bg` + borda `primary-border`; o peso da letra não muda | véu `tint-selected` | — |
 
+**Barras de rolagem (regra do site inteiro):** finas, sem setas e sem trilho. A da página fica sempre visível; em listas e painéis com rolagem própria, a barra só aparece com o mouse em cima ou com o foco do teclado dentro (globals.css). Nada de barra padrão do sistema.
+
 E mais: no máximo um botão principal por tela (por isso o "Entrar no Discord" do rodapé é secundário); itens de lista e menu com 4 px entre si; o esqueleto tem o tamanho do que vai entrar; aviso que muda sozinho é anunciado ao leitor de tela só quando muda de estado (não o relógio a cada segundo).
 
 ## Como a gente escreve

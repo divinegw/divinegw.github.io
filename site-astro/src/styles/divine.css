@@ -17,7 +17,11 @@
 /* ---------- BASE ---------- */
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
 html,body{margin:0;padding:0;}
-html{scroll-behavior:smooth;scrollbar-color:var(--line-strong) var(--bg);}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;}
+/* Barras de rolagem discretas no site inteiro (regra do mantenedor, 24/11/2026; DESIGN.md): finas, sem setas nem trilho;
+   em listas e painéis com rolagem própria, só aparecem com o mouse em cima ou com o foco dentro. */
+body *{scrollbar-width:thin;scrollbar-color:transparent transparent;}
+body *:hover,body *:focus-within{scrollbar-color:var(--line-strong) transparent;}
 body{
   font-family:var(--font-body);font-size:var(--fs-base);line-height:var(--lh-body);
   color:var(--text);background:var(--bg);
