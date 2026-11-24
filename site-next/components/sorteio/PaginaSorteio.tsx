@@ -48,7 +48,7 @@ function Topo({ titulo, frase, migalha, pai = false, refTitulo }: { titulo: stri
   )
 }
 
-const FRASE_INICIO = "Os sorteios da guilda. Entre num que está aberto ou crie o seu."
+const FRASE_INICIO = "Participe dos sorteios ativos ou organize um novo."
 
 // Início: abertos à esquerda (320 px; no celular, em cima) e o "Faça um sorteio" à direita.
 // Sem nenhum aberto, o bloco some e o formulário fica sozinho, com até 640 px.

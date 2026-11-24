@@ -2,12 +2,13 @@ import type { Metadata } from "next"
 
 import { BarraTopo } from "@/components/divine/BarraTopo"
 import { Rodape } from "@/components/divine/Rodape"
+import { TopoArte } from "@/components/divine/TopoArte"
 import { PaginaSorteio } from "@/components/sorteio/PaginaSorteio"
 import { conteudoSorteio } from "@/lib/sorteio/conteudo"
 
 export const metadata: Metadata = {
   title: "Sorteio",
-  description: "Os sorteios da guilda DIVINE: entre num que está aberto ou crie o seu.",
+  description: "Os sorteios da guilda DIVINE: participe dos sorteios ativos ou organize um novo.",
 }
 
 // /sorteio.html. A página é estática; o que depende da URL (?s=, ?ver=, ?aba=) é lido no navegador, dentro de PaginaSorteio.
@@ -17,7 +18,9 @@ export default function Page() {
   return (
     <>
       <BarraTopo atual="sorteio" />
-      <main id="conteudo" tabIndex={-1} className="mx-auto max-w-page px-4 pt-8 pb-16 min-[900px]:px-8 min-[900px]:pt-12 focus-visible:outline-none">
+      <TopoArte arte="dungeons" />
+      {/* o título da página sobe e fica sobre a parte de baixo da arte, como no site de hoje */}
+      <main id="conteudo" tabIndex={-1} className="relative mx-auto -mt-28 max-w-page px-4 pb-16 min-[900px]:-mt-32 min-[900px]:px-8 focus-visible:outline-none">
         <PaginaSorteio conteudo={conteudo} />
       </main>
       <Rodape atual="sorteio" />

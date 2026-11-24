@@ -133,6 +133,7 @@ Os do shadcn ficam em `site-next/components/ui/` e se ajustam no próprio arquiv
 | Diálogo, confirmação, folha | `ui/dialog.tsx`, `ui/alert-dialog.tsx`, `ui/sheet.tsx` | — | Etapa 1 |
 | Aviso rápido | `ui/sonner.tsx` | — | Etapa 1 |
 | Esqueleto, barra de progresso, separador, dica, rolagem | `ui/skeleton.tsx`, `ui/progress.tsx`, `ui/separator.tsx`, `ui/tooltip.tsx`, `ui/scroll-area.tsx` | progresso: `tom` ouro ou urgente (últimos 10 s) | Etapa 1 |
+| Faixa de arte do topo (TopoArte) | `divine/TopoArte.tsx` | arte da guilda de ponta a ponta, 180 a 260 px, degradê até o fundo; o h1 da página fica sobre a parte de baixo (como no site de hoje). Artes em `public/assets/artes/<nome>-<640|1024|1600>.webp` | Etapa 3 |
 | Barra do topo, rodapé, logo | `divine/` | no computador, "Guias" leva à lista na página inicial; os 6 guias ficam no menu do celular e no rodapé | Etapa 1 |
 | Relógio, lista de pessoas, faixa de aviso, vazio, barra de quem organiza | `divine/` | — | Etapa 2 (sorteio) |
 | Busca (Ctrl+K), tabela, accordion | `ui/` | — | Etapas 4 e 5 |

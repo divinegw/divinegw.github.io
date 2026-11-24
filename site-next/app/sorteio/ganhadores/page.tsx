@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import { BarraTopo } from "@/components/divine/BarraTopo"
 import { Rodape } from "@/components/divine/Rodape"
+import { TopoArte } from "@/components/divine/TopoArte"
 import { PaginaGanhadores } from "@/components/sorteio/ganhadores/PaginaGanhadores"
 
 export const metadata: Metadata = {
@@ -14,7 +15,9 @@ export default function Page() {
   return (
     <>
       <BarraTopo atual="sorteio" />
-      <main id="conteudo" tabIndex={-1} className="mx-auto max-w-page px-4 pt-8 pb-16 min-[900px]:px-8 min-[900px]:pt-12 focus-visible:outline-none">
+      <TopoArte arte="dungeons" />
+      {/* o título da página sobe e fica sobre a parte de baixo da arte, como no site de hoje */}
+      <main id="conteudo" tabIndex={-1} className="relative mx-auto -mt-28 max-w-page px-4 pb-16 min-[900px]:-mt-32 min-[900px]:px-8 focus-visible:outline-none">
         <PaginaGanhadores />
       </main>
       <Rodape atual="sorteio" />
