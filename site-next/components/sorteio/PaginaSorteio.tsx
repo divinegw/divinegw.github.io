@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { BlocoAbertos, semAbertos } from "@/components/sorteio/BlocoAbertos"
 import { FacaSorteio } from "@/components/sorteio/FacaSorteio"
 import { useAbertos } from "@/components/sorteio/useAbertos"
+import { Painel } from "@/components/sorteio/painel/Painel"
 import { Skeleton } from "@/components/ui/skeleton"
 import { navegar, useAgora, useParametros, useUrlLida } from "@/components/sorteio/url"
 import type { GrupoConteudo } from "@/lib/sorteio/conteudo"
@@ -93,14 +94,9 @@ function TodosAbertos({ refTitulo }: { refTitulo: React.Ref<HTMLHeadingElement> 
   )
 }
 
-// ?s=<id>: o link de inscrição. O painel do sorteio entra na Etapa 3.
-function Painel({ refTitulo }: { refTitulo: React.Ref<HTMLHeadingElement> }) {
-  return (
-    <>
-      <Topo titulo="Sorteio" frase={FRASE_INICIO} migalha="Sorteio" refTitulo={refTitulo} />
-      <Vazio titulo="O painel do sorteio chega na próxima etapa." className="max-w-[640px]" />
-    </>
-  )
+// ?s=<id>: o link de inscrição e o painel do sorteio. Quem muda de sorteio recebe um painel novo (a `key`).
+function TelaPainel({ id, refTitulo }: { id: string; refTitulo: React.Ref<HTMLHeadingElement> }) {
+  return <Painel key={id} id={id} refTitulo={refTitulo} />
 }
 
 // Neutro: aparece só na primeira pintura, até a URL poder ser lida (a página gerada não sabe se é ?s=, ?ver= ou o Início).
@@ -130,7 +126,7 @@ export function PaginaSorteio({ conteudo }: { conteudo: GrupoConteudo[] }) {
   }, [lida, tela])
 
   if (!lida) return <Carregando />
-  if (tela === "painel") return <Painel refTitulo={titulo} />
+  if (tela === "painel") return <TelaPainel id={parametros.get("s") ?? ""} refTitulo={titulo} />
   if (tela === "abertos") return <TodosAbertos refTitulo={titulo} />
   return <Inicio refTitulo={titulo} conteudo={conteudo} />
 }

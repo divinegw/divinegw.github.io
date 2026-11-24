@@ -4,20 +4,20 @@ import { cva } from "class-variance-authority"
 // Regras de interação do DESIGN.md: hover só com o botão ativo (not-disabled:), pressionado, desativado sem
 // opacidade. O anel de foco vem do globals.css (:focus-visible), por isso não há ring-* aqui.
 const caixaDesativada =
-  "disabled:cursor-not-allowed disabled:border-border disabled:bg-fill-1 disabled:text-disabled"
-const semCaixaDesativada = "disabled:cursor-not-allowed disabled:text-disabled"
+  "disabled:cursor-not-allowed disabled:border-border disabled:bg-fill-1 disabled:text-disabled aria-disabled:cursor-not-allowed aria-disabled:border-border aria-disabled:bg-fill-1 aria-disabled:text-disabled"
+const semCaixaDesativada = "disabled:cursor-not-allowed disabled:text-disabled aria-disabled:cursor-not-allowed aria-disabled:text-disabled"
 
 export const buttonVariants = cva(
   "group/button relative inline-flex shrink-0 items-center justify-center gap-2 rounded-md border border-transparent text-body font-semibold whitespace-nowrap select-none transition-[background-color,border-color,color,transform] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5",
   {
     variants: {
       variant: {
-        default: `bg-primary text-primary-foreground not-disabled:hover:bg-primary-hover not-disabled:active:scale-[.98] not-disabled:active:bg-primary-pressed ${caixaDesativada}`,
-        secondary: `border-border bg-fill-1 text-foreground not-disabled:hover:border-border-hover not-disabled:active:bg-fill-2 ${caixaDesativada}`,
-        outline: `border-border bg-fill-1 text-foreground not-disabled:hover:border-border-hover not-disabled:active:bg-fill-2 ${caixaDesativada}`,
-        ghost: `text-foreground not-disabled:hover:not-aria-pressed:bg-tint-hover not-disabled:active:bg-tint-pressed aria-pressed:bg-tint-selected ${semCaixaDesativada}`,
-        destructive: `border-destructive-border bg-destructive-bg text-destructive not-disabled:hover:border-destructive not-disabled:active:bg-destructive/25 ${caixaDesativada}`,
-        link: `text-primary-text underline-offset-4 not-disabled:hover:underline ${semCaixaDesativada}`,
+        default: `bg-primary text-primary-foreground not-disabled:not-aria-disabled:hover:bg-primary-hover not-disabled:not-aria-disabled:active:scale-[.98] not-disabled:not-aria-disabled:active:bg-primary-pressed ${caixaDesativada}`,
+        secondary: `border-border bg-fill-1 text-foreground not-disabled:not-aria-disabled:hover:border-border-hover not-disabled:not-aria-disabled:active:bg-fill-2 ${caixaDesativada}`,
+        outline: `border-border bg-fill-1 text-foreground not-disabled:not-aria-disabled:hover:border-border-hover not-disabled:not-aria-disabled:active:bg-fill-2 ${caixaDesativada}`,
+        ghost: `text-foreground not-disabled:not-aria-disabled:hover:not-aria-pressed:bg-tint-hover not-disabled:not-aria-disabled:active:bg-tint-pressed aria-pressed:bg-tint-selected ${semCaixaDesativada}`,
+        destructive: `border-destructive-border bg-destructive-bg text-destructive not-disabled:not-aria-disabled:hover:border-destructive not-disabled:not-aria-disabled:active:bg-destructive/25 ${caixaDesativada}`,
+        link: `text-primary-text underline-offset-4 not-disabled:not-aria-disabled:hover:underline ${semCaixaDesativada}`,
       },
       size: {
         default: "h-control px-4 [&_svg:not([class*='size-'])]:size-5",

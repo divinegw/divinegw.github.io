@@ -19,7 +19,7 @@ type Msg = { tipo: "info" | "erro" | "ok"; texto: string } | null
 //  - o campo não tem `name`, então nem um envio de formulário a leva;
 //  - só vai para api.guildwars2.com, pelas chamadas de lib/sorteio/gw2.ts (igual ao site de hoje).
 // Nome de guilda e de membro vêm da API: sempre texto (o React escapa), nunca HTML.
-export function GuildaApi({ aoColocar }: { aoColocar: (nomes: string[]) => void }) {
+export function GuildaApi({ aoColocar, filtro = false }: { aoColocar: (nomes: string[]) => void; filtro?: boolean }) {
   const [chave, setChave] = React.useState("")
   const [mostrar, setMostrar] = React.useState(false)
   const [msg, setMsg] = React.useState<Msg>(null)
@@ -43,7 +43,7 @@ export function GuildaApi({ aoColocar }: { aoColocar: (nomes: string[]) => void 
       if (meu !== pedido.current) return
       setLista(l)
       setRanks(Object.fromEntries([...new Set(l.map((m) => m.rank))].map((r) => [r, true])))
-      avisa("ok", `${l.length} ${l.length === 1 ? "membro encontrado" : "membros encontrados"}. Escolha os ranks e clique em "Colocar os membros na lista".`)
+      avisa("ok", `${l.length} ${l.length === 1 ? "membro encontrado" : "membros encontrados"}. Escolha os ranks e clique em "${filtro ? "Deixar só os membros da guilda" : "Colocar os membros na lista"}".`)
     } catch (e) {
       if (meu === pedido.current) avisa("erro", e instanceof Error ? e.message : "Não deu para falar com a API do jogo.")
     } finally {
@@ -88,14 +88,16 @@ export function GuildaApi({ aoColocar }: { aoColocar: (nomes: string[]) => void 
     setGuildas(null)
     setLista([])
     setRanks({})
-    avisa("ok", `${nomes.length} ${nomes.length === 1 ? "membro entrou" : "membros entraram"} na lista.${g ? ` Guilda ${g.nome} [${g.tag}].` : ""}`)
+    avisa("ok", filtro
+      ? `${nomes.length} ${nomes.length === 1 ? "membro carregado" : "membros carregados"}. Quem não é da guilda aparece riscado na lista de inscritos.${g ? ` Guilda ${g.nome} [${g.tag}].` : ""}`
+      : `${nomes.length} ${nomes.length === 1 ? "membro entrou" : "membros entraram"} na lista.${g ? ` Guilda ${g.nome} [${g.tag}].` : ""}`)
   }
 
   const nomesRanks = Object.keys(ranks)
   const Icone = msg?.tipo === "erro" ? CircleAlertIcon : CheckIcon
 
-  return (
-    <Detalhes resumo="Puxar os membros da guilda pela API do jogo" icone={<UsersIcon strokeWidth={1.75} />}>
+  const conteudo = (
+    <>
       <p className="text-small text-muted-foreground">
         Só quem é líder da guilda consegue puxar os membros. Crie uma chave em{" "}
         <a className="text-primary-text underline underline-offset-4" href="https://account.arena.net/applications" target="_blank" rel="noopener noreferrer">
@@ -166,10 +168,13 @@ export function GuildaApi({ aoColocar }: { aoColocar: (nomes: string[]) => void 
           </Campo>
           <Button type="button" variant="secondary" className="w-full" disabled={ocupado || !lista.length} onClick={colocar}>
             <UsersIcon />
-            Colocar os membros na lista
+            {filtro ? "Deixar só os membros da guilda" : "Colocar os membros na lista"}
           </Button>
         </div>
       )}
-    </Detalhes>
+    </>
   )
+  // No painel do sorteio (modo "filtro") o conteúdo vai dentro de uma caixa de diálogo, já aberto.
+  if (filtro) return <div className="grid gap-4">{conteudo}</div>
+  return <Detalhes resumo="Puxar os membros da guilda pela API do jogo" icone={<UsersIcon strokeWidth={1.75} />}>{conteudo}</Detalhes>
 }
