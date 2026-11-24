@@ -112,6 +112,58 @@ describe('camada falsa', () => {
     await expect(d.inscrever('teste', 'joana.1234')).rejects.toThrow();
     parar();
   });
+  // Ouve a lista de inscritos e o sorteio até o fim do teste (o painel faz o mesmo).
+  async function observar(cenario: string) {
+    const d = await criarFalso(cenario, 'organizador', sem);
+    let inscritos: { chave: string; conta: string }[] = [];
+    let bloqueados: string[] = [];
+    const a = d.ouvirInscritos('teste', (l) => { inscritos = l; });
+    const b = d.ouvirSorteio('teste', (s) => { bloqueados = [...(s?.tirados ?? [])]; });
+    await new Promise((ok) => setTimeout(ok, 300));
+    return { d, contas: () => inscritos.map((p) => p.conta), bloqueados: () => bloqueados, parar: () => { a(); b(); } };
+  }
+  it('"Tirar" libera o aparelho: a pessoa entra de novo, e nada vai para os bloqueados', async () => {
+    const o = await observar('inscricoes-vazia');
+    await o.d.inscrever('teste', 'Joana.1234');
+    await expect(o.d.inscrever('teste', 'Joana.9999')).rejects.toThrow(); // um aparelho, uma inscrição
+    await o.d.tirarPermitindoVolta('teste', 'joana.1234', 'falso-uid');
+    expect(o.contas()).toEqual([]);
+    expect(o.bloqueados()).toEqual([]);
+    await o.d.inscrever('teste', 'Joana.9999'); // ID certo
+    expect(o.contas()).toEqual(['Joana.9999']);
+    o.parar();
+  });
+  it('"Tirar" também deixa entrar de novo com o mesmo ID', async () => {
+    const o = await observar('inscricoes-vazia');
+    await o.d.inscrever('teste', 'Joana.1234');
+    await o.d.tirarPermitindoVolta('teste', 'joana.1234', 'falso-uid');
+    await o.d.inscrever('teste', 'Joana.1234');
+    expect(o.contas()).toEqual(['Joana.1234']);
+    o.parar();
+  });
+  it('"Tirar e bloquear" impede nova inscrição da mesma conta, de qualquer aparelho', async () => {
+    const o = await observar('inscricoes-vazia');
+    await o.d.inscrever('teste', 'Joana.1234');
+    await o.d.tirarEBloquear('teste', 'joana.1234', 'Joana.1234');
+    expect(o.contas()).toEqual([]);
+    expect(o.bloqueados()).toEqual(['Joana.1234']);
+    await expect(o.d.inscrever('teste', 'joana.1234')).rejects.toThrow(/bloqueada/);
+    // outro aparelho, que ainda não tem marca: a conta continua barrada
+    const outro = await observar('bloqueado');
+    await expect(outro.d.inscrever('teste', 'Zyanore.3030')).rejects.toThrow(/bloqueada/);
+    o.parar(); outro.parar();
+  });
+  it('a lista de bloqueados só cresce', async () => {
+    const o = await observar('inscricoes-cheia');
+    await o.d.tirarEBloquear('teste', 'mirela.7342', 'Mirela.7342');
+    expect(o.bloqueados()).toEqual(['Mirela.7342']);
+    await o.d.tirarPermitindoVolta('teste', 'lua.2207', 'falso-lua.2207');
+    expect(o.bloqueados()).toEqual(['Mirela.7342']); // "Tirar" não mexe nela
+    await o.d.tirarEBloquear('teste', 'varek.9013', 'Varek.9013');
+    expect(o.bloqueados()).toEqual(['Mirela.7342', 'Varek.9013']);
+    expect(o.contas()).toHaveLength(37);
+    o.parar();
+  });
   it('o resultado de cenário confere com o código', async () => {
     const d = await criarFalso('resultado-3', null, sem);
     let sorteio: Parameters<Parameters<typeof d.ouvirSorteio>[1]>[0] = null;

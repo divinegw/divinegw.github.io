@@ -101,7 +101,8 @@ service cloud.firestore {
       }
       // quem não aceitou o prêmio a tempo: lista pública que só cresce
       function ausentesOk(n, a) { return n.get('ausentes', []).hasAll(a.get('ausentes', [])); }
-      // a lista de quem foi tirado só cresce, de um em um
+      // a lista de quem foi BLOQUEADO ("Tirar e bloquear") só cresce, de um em um. Quem está nela não se inscreve
+      // de novo por nenhum aparelho. O "Tirar" simples não entra aqui (24/11/2026: a pessoa pode voltar com o ID certo).
       function tiradosOk(n, a) {
         return n.tirados == a.tirados || (n.tirados.hasAll(a.tirados) && n.tirados.size() == a.tirados.size() + 1);
       }
@@ -161,13 +162,18 @@ service cloud.firestore {
           && request.resource.data.em == request.time
           && request.resource.data.uid == eu()
           && janela16(request.resource.data.expiraEm)
+          // conta bloqueada por quem organiza ("Tirar e bloquear") não entra de novo, de nenhum aparelho
+          && !(request.resource.data.conta in sorteio().tirados)
           // uma inscrição por aparelho (ou por conta Google, no modo rigoroso): a marca entra junto, na mesma gravação
           && !exists(/databases/$(db)/documents/sorteios/$(sid)/aparelhos/$(eu()))
           && getAfter(/databases/$(db)/documents/sorteios/$(sid)/aparelhos/$(eu())).data.chave == chave;
-        // tirar alguém deixa o nome na lista pública de tirados, na mesma gravação
+        // quem organiza tira alguém de dois jeitos, sempre numa gravação só:
+        //   "Tirar": apaga também a marca do aparelho da pessoa, para ela poder entrar de novo (ex.: ID digitado errado);
+        //   "Tirar e bloquear": põe a conta na lista de bloqueados (tirados), que impede uma nova inscrição.
         // (ou o sorteio inteiro está sendo apagado junto)
         allow delete: if organizador()
           && (!existsAfter(caminho())
+            || !existsAfter(/databases/$(db)/documents/sorteios/$(sid)/aparelhos/$(resource.data.uid))
             || (getAfter(caminho()).data.tirados.hasAll([resource.data.conta])
               && !sorteio().tirados.hasAll([resource.data.conta])));
       }
@@ -186,6 +192,9 @@ service cloud.firestore {
 
       match /aparelhos/{uid} {
         allow get: if logado() && eu() == uid;
+        // "Tirar" (sem bloquear): quem organiza apaga a marca junto com a inscrição, e a pessoa pode entrar de novo
+        allow delete: if organizador()
+          && !existsAfter(/databases/$(db)/documents/sorteios/$(sid)/inscritos/$(resource.data.chave));
         allow create: if logado() && eu() == uid
           && request.resource.data.keys().hasOnly(['chave', 'expiraEm'])
           && janela16(request.resource.data.expiraEm)

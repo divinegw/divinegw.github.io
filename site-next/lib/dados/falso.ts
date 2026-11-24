@@ -37,7 +37,7 @@ export const CENARIOS = [
   "inscricoes-cheia", "inscricoes-vazia", "inscricoes-um", "inscricoes-2000", "ultimos-10s", "encerrado",
   "sorteando", "sorteando-aceite", "resultado-1", "resultado-3", "voce-ganhou", "voce-nao-ganhou",
   "confirmacao-esperando", "confirmacao-confirmou", "confirmacao-tempo-acabou", "confirmacao-mista-3",
-  "confirmacao-mista-3-fim", "confirmacao-voce", "confirmacao-voce-10s", "organizador", "tirado",
+  "confirmacao-mista-3-fim", "confirmacao-voce", "confirmacao-voce-10s", "organizador", "tirado-volta", "bloqueado", "tirado",
   "sem-prazo", "nao-carregou", "nao-existe", "sem-internet",
   // página de Ganhadores (criarFalsoGanhadores)
   "ganhadores-cheia", "ganhadores-vazia", "ganhadores-erro", "ganhadores-muitos", "conferir-achou", "conferir-nao-achou",
@@ -54,7 +54,7 @@ const PREMIO: PremioInfo = {
 const NOMES = ["Kaelith.4821", "Bruno Tank.1290", "Mirela.7342", "Thorvald.5510", "Sereia Azul.0381", "Draknos.6624", "Lua.2207", "Varek.9013", "Pietra.4466", "Hoshi.1185", "Caio Necro.3302", "Aurelia.8871", "Grom.4040", "Nyx.7719", "Iara.5028", "Tavros.6612", "Belinha.2930", "Ravyn.1477", "Christopher Alexander Montgome.5678", "Benachrichtigungseinstellungen.1234", "🦊 Fox.4242", "王秀英.8888", "Ozzy.8805", "Selene.3391", "Fennick.2264", "Duda.9150", "Korrin.7036", "Maya Ele.4519", "Ruiva.6680", "Tiberius.0927", "Ana Guard.5843", "Lyra.3175", "Bastião.8412", "Elowen.2096", "Rook.7348", "Jade.4401", "Merrik.6157", "Sol.9932", "Teodoro.1820", "Vex.5574"]
 const PIOR = ["Benachrichtigungseinstellungen.1234", "Christopher Alexander Montgome.5678", "Jo.0001", "dana.0042", "🦊 Fox.4242", "👩🏽‍💻 Priya.7777", "王秀英.8888", "محمد علي.3030", "Nguyễn Thị Hương.2468", "<b>Ana</b>.1234", "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW.9999", "Kaelith.4821", "Bruno Tank.1290", "Mirela.7342"]
 
-const comoInscrito = (conta: string): Inscrito => ({ chave: chaveDe(conta), conta })
+const comoInscrito = (conta: string): Inscrito => ({ chave: chaveDe(conta), conta, uid: `falso-${chaveDe(conta)}` })
 const ordenar = (l: Inscrito[]) => [...l].sort((a, b) => (a.chave < b.chave ? -1 : 1))
 
 /** Procura, entre códigos fixos, um em que `eu` ganha (ou não ganha), para o cenário ser sempre o mesmo. */
@@ -73,6 +73,8 @@ interface Montagem {
   inscritos: Inscrito[]
   aceites: Set<string>
   chaveMinha: string | null
+  /** a marca do aparelho já foi apagada (quem organiza usou "Tirar"), embora a página ainda mostre a inscrição antiga */
+  aparelhoLivre?: boolean
   falha: boolean
   offline: boolean
   /** resultado que aparece sozinho, 1,5 s depois de abrir (para ver a roleta de verdade) */
@@ -81,7 +83,7 @@ interface Montagem {
 
 export async function criarFalso(cenario: string, papelPedido: Papel | null, extras: URLSearchParams): Promise<Dados> {
   const parado = extras.get("parado") === "1"
-  const voce = extras.get("voce") === "1" || cenario === "confirmacao-voce" || cenario === "confirmacao-voce-10s" || cenario === "voce-ganhou" || cenario === "voce-nao-ganhou" || cenario === "tirado"
+  const voce = extras.get("voce") === "1" || cenario === "confirmacao-voce" || cenario === "confirmacao-voce-10s" || cenario === "voce-ganhou" || cenario === "voce-nao-ganhou" || cenario === "tirado" || cenario === "tirado-volta" || cenario === "bloqueado"
   let erroPedido = extras.get("erro")
   let deslocamento = 0
   let congelado: number | null = parado ? Date.now() : null
@@ -93,6 +95,8 @@ export async function criarFalso(cenario: string, papelPedido: Papel | null, ext
   let { sorteio, inscritos } = m
   let aceites = m.aceites
   let chaveMinha = m.chaveMinha
+  // a marca de "este aparelho já se inscreveu" (aparelhos/{uid} no banco): uma inscrição por aparelho
+  let marca: string | null = m.aparelhoLivre ? null : m.chaveMinha
   let online = !m.offline
   const esperaOnline: (() => void)[] = []
 
@@ -177,8 +181,12 @@ export async function criarFalso(cenario: string, papelPedido: Papel | null, ext
       if (!sorteio || !sorteio.aberto || sorteio.resultado) throw new Error("falso: fechado")
       const chave = chaveDe(conta)
       if (inscritos.some((p) => p.chave === chave)) throw new Error("falso: já inscrito")
-      inscritos = ordenar([...inscritos, comoInscrito(conta)])
+      // as regras do banco: conta bloqueada não entra de novo, e o aparelho só se inscreve uma vez
+      if ((sorteio.tirados ?? []).some((n) => chaveDe(n) === chave)) throw new Error("falso: conta bloqueada")
+      if (marca) throw new Error("falso: este aparelho já se inscreveu")
+      inscritos = ordenar([...inscritos, { ...comoInscrito(conta), uid: usuario.uid }])
       chaveMinha = chave
+      marca = chave
       avisaInscritos()
       return chave
     },
@@ -189,7 +197,16 @@ export async function criarFalso(cenario: string, papelPedido: Papel | null, ext
       aceites = new Set([...aceites, chave])
       avisaAceites()
     },
-    async tirarParticipante(_id, chave, conta) {
+    // "Tirar": apaga a inscrição e a marca do aparelho; a pessoa pode entrar de novo. Nada vai para a lista de bloqueados.
+    async tirarPermitindoVolta(_id, chave) {
+      await dorme(300)
+      falhaSe("tirar")
+      inscritos = inscritos.filter((p) => p.chave !== chave)
+      if (marca === chave) { marca = null; chaveMinha = null }
+      avisaInscritos()
+    },
+    // "Tirar e bloquear": apaga a inscrição e põe a conta na lista de bloqueados (que só cresce). A marca do aparelho fica.
+    async tirarEBloquear(_id, chave, conta) {
       await dorme(300)
       falhaSe("tirar")
       inscritos = inscritos.filter((p) => p.chave !== chave)
@@ -398,7 +415,14 @@ async function montar(cenario: string, voce: boolean, agora: () => number): Prom
       return comResultado({ vencedores: 3, aceite: true, euGanha: false, idadeMs: 600_000, prazoEm: 25_000, aceitos: (g) => [g[0]] })
     case "confirmacao-mista-3-fim":
       return comResultado({ vencedores: 3, aceite: true, euGanha: false, idadeMs: 600_000, prazoEm: -3_000, aceitos: (g) => [g[0]] })
-    case "tirado": {
+    // este aparelho tinha entrado e quem organiza usou "Tirar": a página aberta ainda lembra da inscrição, o banco já liberou o aparelho
+    case "tirado-volta": {
+      const sem = inscritos.filter((p) => p.chave !== chaveDe(EU))
+      return { ...vazio, sorteio: base([]), inscritos: sem, chaveMinha: chaveDe(EU), aparelhoLivre: true }
+    }
+    // "tirado" é o nome antigo de "bloqueado"
+    case "tirado":
+    case "bloqueado": {
       const sem = inscritos.filter((p) => p.chave !== chaveDe(EU))
       return { ...vazio, sorteio: base([], { tirados: [EU] }), inscritos: sem, chaveMinha: chaveDe(EU) }
     }

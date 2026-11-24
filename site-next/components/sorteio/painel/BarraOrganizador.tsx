@@ -5,6 +5,8 @@ import {
   ChevronDownIcon, CopyIcon, DicesIcon, KeyRoundIcon, LinkIcon, RotateCcwIcon, SendIcon, SquareIcon, TrashIcon, UserIcon, UsersIcon,
 } from "lucide-react"
 
+import { toast } from "sonner"
+
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Confirma } from "@/components/sorteio/painel/Confirma"
@@ -13,9 +15,8 @@ import type { Fase } from "@/lib/sorteio/painel"
 import { cn } from "@/lib/utils"
 
 type Dialogo = "sortear" | "encerrar" | "refazer" | "apagar" | null
-type Mensagem = { texto: string; erro: boolean } | null
 
-const MOTIVO_TRAVA = "Libera quando a primeira pessoa entrar."
+const MOTIVO_TRAVA = "Disponível quando a primeira pessoa entrar."
 const vencedoresTexto = (n: number) => `${n} ${n === 1 ? "vencedor" : "vencedores"}`
 // O texto do item do menu com a linha de apoio embaixo (a do protótipo).
 function Rotulo({ apoio, children }: { apoio: string; children: React.ReactNode }) {
@@ -55,22 +56,15 @@ export interface BarraOrganizadorProps {
 export function BarraOrganizador(p: BarraOrganizadorProps) {
   const { fase, s, aberto } = p
   const [dialogo, setDialogo] = React.useState<Dialogo>(null)
-  const [msg, setMsg] = React.useState<Mensagem>(null)
   const [ocupado, setOcupado] = React.useState(false)
-  const temporizador = React.useRef<number | undefined>(undefined)
-  React.useEffect(() => () => window.clearTimeout(temporizador.current), [])
 
-  const mostra = (texto: string, erro = false) => {
-    window.clearTimeout(temporizador.current)
-    setMsg({ texto, erro })
-    if (!erro) temporizador.current = window.setTimeout(() => setMsg(null), 4000)
-  }
+  // Aviso flutuante (o Sonner já anuncia para o leitor de tela, então não há região viva aqui).
+  const mostra = (texto: string, erro = false) => { if (erro) toast.error(texto); else toast(texto) }
   async function executa(f: () => Promise<string | null>) {
     setOcupado(true)
     const erro = await f()
     setOcupado(false)
     if (erro) mostra(erro, true)
-    else setMsg(null)
   }
   async function copia(texto: string, ok: string, falha: string) {
     const deu = await navigator.clipboard.writeText(texto).then(() => true, () => false)
@@ -111,7 +105,6 @@ export function BarraOrganizador(p: BarraOrganizadorProps) {
         "min-[900px]:static min-[900px]:order-first min-[900px]:rounded-t-lg min-[900px]:rounded-b-none min-[900px]:border-t-0 min-[900px]:border-b min-[900px]:pb-0"
       )}
     >
-      <p role="status" className={cn("px-4 pt-3 text-small", msg ? (msg.erro ? "text-destructive" : "text-primary-text") : "sr-only")}>{msg?.texto}</p>
       <div className="flex flex-wrap items-center gap-2 p-3 min-[900px]:px-4">
         <span className="mr-auto flex items-center gap-1.5 text-small font-semibold text-muted-foreground max-[899px]:w-full">
           <UserIcon className="size-4" strokeWidth={1.75} aria-hidden="true" />

@@ -14,7 +14,7 @@ type Real = typeof Firebase
 export type Dados = Pick<
   Real,
   | "entrar" | "ligarGoogle" | "ouvirSorteio" | "ouvirInscritos" | "ouvirAceites" | "conectar" | "tokenOrganizador"
-  | "guardarToken" | "inscrever" | "aceitar" | "tirarParticipante" | "encerrarInscricoes" | "reabrirInscricoes"
+  | "guardarToken" | "inscrever" | "aceitar" | "tirarPermitindoVolta" | "tirarEBloquear" | "encerrarInscricoes" | "reabrirInscricoes"
   | "sortear" | "sortearDeNovo" | "trocarAusentes" | "apagarSorteio" | "linkDe" | "PRAZO_ACEITE" | "MAX_REFEITOS"
 > & {
   /** Hora de agora em milissegundos. No falso, dá para parar e avançar. */
@@ -59,7 +59,8 @@ export async function carregarDados(cenario: string | null, papel: string | null
     guardarToken: fb.guardarToken,
     inscrever: fb.inscrever,
     aceitar: fb.aceitar,
-    tirarParticipante: fb.tirarParticipante,
+    tirarPermitindoVolta: fb.tirarPermitindoVolta,
+    tirarEBloquear: fb.tirarEBloquear,
     encerrarInscricoes: fb.encerrarInscricoes,
     reabrirInscricoes: fb.reabrirInscricoes,
     sortear: fb.sortear,

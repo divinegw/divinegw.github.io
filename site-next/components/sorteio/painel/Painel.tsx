@@ -1,7 +1,8 @@
-"use client"
+﻿"use client"
 
 import * as React from "react"
-import { CheckIcon, ClockIcon, PencilIcon, TrophyIcon, UsersIcon, WifiOffIcon } from "lucide-react"
+import { CheckIcon, ClockIcon, PencilIcon, TrophyIcon, UsersIcon, WifiOffIcon, XIcon } from "lucide-react"
+import { toast } from "sonner"
 
 import { FaixaAviso } from "@/components/divine/FaixaAviso"
 import { ListaPessoas, type ItemPessoa } from "@/components/divine/ListaPessoas"
@@ -25,6 +26,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Skeleton } from "@/components/ui/skeleton"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { ORIGEM_SITE } from "@/conteudo/site"
 import { chaveDe } from "@/lib/sorteio/ao-vivo"
 import { estadoDoAceite, formatarRelogio, textoConviteDiscord, textoResultado, type Fase } from "@/lib/sorteio/painel"
@@ -69,7 +71,7 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
   const { anunciar, regiao } = useAnuncio()
   const p = usePainel(id, cenario, papel, extras, anunciar)
   const reduzido = useReduzirMovimento()
-  const { sorteio: s, inscritos, aceites, agora, organizador, minhaChave, minhaConta, tirado, aberto, dados } = p
+  const { sorteio: s, inscritos, aceites, agora, organizador, minhaChave, minhaConta, tirado, tiradoVolta, aberto, dados } = p
   const r = s?.resultado ?? null
 
   // ---------------------------------------------------------------- a fase
@@ -110,6 +112,16 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
     }
     antesConta.current = minhaConta
   }, [minhaConta, p.carga, fase])
+
+  // quem organiza tirou este aparelho com a página aberta: o leitor de tela fica sabendo (na carga da página, não repete)
+  const antesSaiu = React.useRef<"dentro" | "volta" | "barrado" | null>(null)
+  const situacao = tirado ? "barrado" : tiradoVolta ? "volta" : "dentro"
+  React.useEffect(() => {
+    if (p.carga !== "pronto") return
+    if (antesSaiu.current === "dentro" && situacao === "volta") anunciar("Quem organiza tirou sua inscrição. Se o ID estava errado, entre de novo com o certo.")
+    if (antesSaiu.current === "dentro" && situacao === "barrado") anunciar("Quem organiza tirou você deste sorteio.")
+    antesSaiu.current = situacao
+  }, [situacao, p.carga, anunciar])
 
   const anterior = React.useRef<{ fase: Fase; codigo: string | null; aberto: boolean; aceite: string | null; ok: string[] } | null>(null)
   const okMask = aceite ? aceite.ganhadores.filter((g) => g.ok).map((g) => g.nome).join("|") : ""
@@ -167,7 +179,7 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
   const [membros, setMembros] = React.useState<Set<string> | null>(null)
   const [filtroAberto, setFiltroAberto] = React.useState(false)
   const [gerenciando, setGerenciando] = React.useState(false)
-  const [tirando, setTirando] = React.useState<{ chave: string; conta: string } | null>(null)
+  const [tirando, setTirando] = React.useState<{ chave: string; conta: string; uid: string } | null>(null)
   const botaoGerenciar = React.useRef<HTMLButtonElement>(null)
   const fora = React.useMemo(() => (membros && inscritos ? inscritos.filter((x) => !membros.has(x.chave)).map((x) => x.chave) : []), [membros, inscritos])
   const foraSet = React.useMemo(() => new Set(fora), [fora])
@@ -176,7 +188,8 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
   async function copiarLinkVazio() {
     if (!dados) return
     const ok = await navigator.clipboard.writeText(dados.linkDe(id, ORIGEM_SITE)).then(() => true, () => false)
-    anunciar(ok ? "Link copiado." : "Não deu para copiar o link.")
+    if (ok) toast("Link copiado.")
+    else toast.error("Não deu para copiar o link.")
   }
 
   // ---------------------------------------------------------------- a lista de participantes
@@ -194,9 +207,14 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
       let fim: React.ReactNode
       if (gerenciando && organizador && fase === "inscricoes") {
         fim = (
-          <Button type="button" variant="ghost" size="sm" className="h-control" aria-label={`Tirar ${x.conta} do sorteio`} onClick={() => setTirando({ chave: x.chave, conta: x.conta })}>
-            Tirar
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button type="button" variant="ghost" size="icon" aria-label={`Tirar ${x.conta} do sorteio`} onClick={() => setTirando({ chave: x.chave, conta: x.conta, uid: x.uid ?? "" })}>
+                <XIcon aria-hidden="true" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Tirar</TooltipContent>
+          </Tooltip>
         )
       } else if (v) {
         fim = !ganhadoresLista ? <Badge variant="ouro"><TrophyIcon aria-hidden="true" />Vencedor</Badge>
@@ -349,6 +367,7 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
                     semInscritos={semInscritos}
                     minhaConta={minhaConta}
                     tirado={tirado}
+                    tiradoVolta={tiradoVolta}
                     pedeGoogle={Boolean(sorteioCerto.google && !p.usuario?.google)}
                     aoParticipar={p.acoes.participar}
                   />
@@ -400,17 +419,21 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
                 <span className="sr-only">: {total} {(inscritos?.length ?? 0) === 1 ? "pessoa" : "pessoas"}</span>
               </h2>
               {organizador && fase === "inscricoes" && !semInscritos && (
-                <Button
-                  ref={botaoGerenciar}
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="h-control"
-                  onClick={() => setGerenciando((v) => !v)}
-                >
-                  {gerenciando ? <CheckIcon /> : <PencilIcon />}
-                  {gerenciando ? "Concluir" : "Gerenciar"}
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      ref={botaoGerenciar}
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      aria-label={gerenciando ? "Concluir" : "Gerenciar participantes"}
+                      onClick={() => setGerenciando((v) => !v)}
+                    >
+                      {gerenciando ? <CheckIcon aria-hidden="true" /> : <PencilIcon aria-hidden="true" />}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>{gerenciando ? "Concluir" : "Gerenciar"}</TooltipContent>
+                </Tooltip>
               )}
             </div>
             {membros && organizador && (
@@ -435,24 +458,44 @@ function PainelAberto({ id, cenario, papel, extras, refTitulo, aoTentarDeNovo }:
         </div>
       </section>
 
-      <Transparencia s={sorteioCerto} />
+      <Transparencia s={sorteioCerto} organizador={organizador} />
 
       <Confirma
         aberto={tirando !== null}
         aoFechar={() => setTirando(null)}
-        titulo={tirando ? `Tirar ${tirando.conta}?` : "Tirar do sorteio?"}
-        texto={tirando ? `Tirar ${tirando.conta} do sorteio? O nome fica na lista pública de inscrições tiradas, e essa pessoa não consegue se inscrever de novo pelo mesmo aparelho.` : ""}
-        acao={tirando ? `Tirar ${tirando.conta}` : "Tirar"}
-        perigo
-        aoConfirmar={() => {
-          const alvo = tirando
-          setTirando(null)
-          if (!alvo) return
-          void p.acoes.tirar(alvo.chave, alvo.conta).then((erro) => {
-            anunciar(erro ?? `Você tirou ${alvo.conta} do sorteio.`)
-            botaoGerenciar.current?.focus()
-          })
-        }}
+        titulo={tirando ? `Tirar ${tirando.conta} do sorteio?` : "Tirar do sorteio?"}
+        texto="Escolha se essa pessoa pode entrar de novo."
+        escolhas={[
+          {
+            rotulo: "Tirar",
+            apoio: "Pode entrar de novo, com o ID certo.",
+            aoEscolher: () => {
+              const alvo = tirando
+              setTirando(null)
+              if (!alvo) return
+              void p.acoes.tirar(alvo.chave, alvo.uid).then((erro) => {
+                if (erro) toast.error(erro)
+                else toast(`${alvo.conta} saiu do sorteio e pode entrar de novo.`)
+                botaoGerenciar.current?.focus()
+              })
+            },
+          },
+          {
+            rotulo: "Tirar e bloquear",
+            apoio: "Não entra mais neste sorteio.",
+            perigo: true,
+            aoEscolher: () => {
+              const alvo = tirando
+              setTirando(null)
+              if (!alvo) return
+              void p.acoes.tirarEBloquear(alvo.chave, alvo.conta).then((erro) => {
+                if (erro) toast.error(erro)
+                else toast(`${alvo.conta} foi bloqueado neste sorteio.`)
+                botaoGerenciar.current?.focus()
+              })
+            },
+          },
+        ]}
       />
 
       <Dialog open={filtroAberto} onOpenChange={setFiltroAberto}>

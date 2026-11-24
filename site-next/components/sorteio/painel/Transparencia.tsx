@@ -3,11 +3,12 @@ import * as React from "react"
 import { Detalhes } from "@/components/sorteio/Detalhes"
 import type { Sorteio } from "@/lib/dados/firebase"
 
-// O que todo mundo pode conferir: quantas vezes sortearam, quem foi tirado e quem ganhou e não aceitou a tempo.
+// O que todo mundo pode conferir: quantas vezes sortearam e quem ganhou e não aceitou a tempo. Quem organiza vê também
+// quem foi bloqueado ("Tirar e bloquear"); para os outros, nada sobre isso.
 // As três listas só crescem (as regras do banco não deixam apagar). Tudo é texto.
-export function Transparencia({ s }: { s: Sorteio }) {
+export function Transparencia({ s, organizador }: { s: Sorteio; organizador: boolean }) {
   const h = s.historico ?? []
-  const t = s.tirados ?? []
+  const t = organizador ? (s.tirados ?? []) : []
   const au = s.ausentes ?? []
   if (!h.length && !t.length && !au.length) return null
   return (
@@ -24,7 +25,7 @@ export function Transparencia({ s }: { s: Sorteio }) {
         </Detalhes>
       )}
       {t.length > 0 && (
-        <Detalhes resumo={`${t.length === 1 ? "1 inscrição foi tirada" : `${t.length} inscrições foram tiradas`} por quem organizou. Ver quais`}>
+        <Detalhes resumo={`${t.length === 1 ? "1 bloqueado" : `${t.length} bloqueados`} neste sorteio. Ver quais`}>
           <ol className="grid gap-1 text-small">{t.map((n, i) => <li key={`${n}-${i}`} className="[overflow-wrap:anywhere]">{n}</li>)}</ol>
         </Detalhes>
       )}

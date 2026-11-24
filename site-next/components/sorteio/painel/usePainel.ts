@@ -21,6 +21,7 @@ export const MSG = {
   tokenRecusado: "Este link de organizador não vale para este sorteio. Peça o link de novo para quem abriu o sorteio.",
   inscritos: "Não deu para atualizar a lista de inscritos. Confira sua internet e recarregue a página.",
   aceites: "Não deu para acompanhar quem aceitou o prêmio. Confira sua internet e recarregue a página.",
+  bloqueada: "Esse ID não pode entrar neste sorteio.",
 } as const
 
 const aoErro = (e: unknown, padrao: string) => (e && typeof e === "object" && "codigo" in e && e instanceof Error ? e.message : padrao)
@@ -46,6 +47,8 @@ export function usePainel(id: string, cenario: string | null, papel: string | nu
   const [agora, setAgora] = React.useState(0)
   // a conta que esta pessoa acabou de digitar, até a lista de inscritos chegar com ela
   const [contaLocal, setContaLocal] = React.useState<string | null>(null)
+  // este aparelho já apareceu na lista de inscritos nesta visita (para saber que sumiu de lá, e não que a lista ainda não chegou)
+  const [mereciVer, setMereciVer] = React.useState(false)
 
   const anunciar = React.useRef(aoAnunciar)
   React.useEffect(() => { anunciar.current = aoAnunciar }, [aoAnunciar])
@@ -127,10 +130,15 @@ export function usePainel(id: string, cenario: string | null, papel: string | nu
   const carga: Carga = falhou ? "erro" : !dados || sorteio === undefined ? "carregando" : sorteio === null ? "inexistente" : "pronto"
   const organizador = Boolean(conexao?.organizador)
   const minhaChave = conexao?.chaveMinha ?? null
-  const minhaConta = minhaChave ? (inscritos?.find((p) => p.chave === minhaChave)?.conta ?? (contaLocal && chaveDe(contaLocal) === minhaChave ? contaLocal : null)) : null
-  const tirado = Boolean(
-    minhaChave && inscritos && !inscritos.some((p) => p.chave === minhaChave) && sorteio?.tirados?.some((n) => chaveDe(n) === minhaChave)
-  )
+  // Este aparelho tem uma inscrição que sumiu da lista? Vem do banco (a marca do aparelho existia ao conectar) ou de ter visto o próprio ID
+  // na lista e depois não ver mais. Quem acabou de se inscrever, antes da lista chegar com o ID, não conta.
+  const naLista = Boolean(minhaChave && inscritos?.some((p) => p.chave === minhaChave))
+  if (naLista && !mereciVer) setMereciVer(true)
+  const saiu = Boolean(minhaChave && inscritos && !naLista && (mereciVer || !contaLocal || chaveDe(contaLocal) !== minhaChave))
+  // "Tirar e bloquear": a conta está na lista de bloqueados. "Tirar": saiu, mas pode entrar de novo.
+  const tirado = saiu && Boolean(sorteio?.tirados?.some((n) => chaveDe(n) === minhaChave))
+  const tiradoVolta = saiu && !tirado
+  const minhaConta = minhaChave && !saiu ? (inscritos?.find((p) => p.chave === minhaChave)?.conta ?? (contaLocal && chaveDe(contaLocal) === minhaChave ? contaLocal : null)) : null
   const aberto = Boolean(sorteio && agora && estaAberto(sorteio, agora))
 
   // ---------------------------------------------------------------- ações: devolvem o texto do erro, ou `null` se deu certo
@@ -159,7 +167,10 @@ export function usePainel(id: string, cenario: string | null, papel: string | nu
         }
       }
       if (inscritos?.some((p) => p.chave === chave)) return { erro: MSG.duplicada, campo: true }
+      // conta bloqueada por quem organiza: não entra por nenhum aparelho (as regras do banco também recusam)
+      if (sorteio.tirados?.some((n) => chaveDe(n) === chave)) return { erro: MSG.bloqueada, campo: true }
       await dados.inscrever(id, conta)
+      setMereciVer(false)
       setContaLocal(conta)
       setConexao({ ...c, chaveMinha: chave })
       return null
@@ -185,7 +196,10 @@ export function usePainel(id: string, cenario: string | null, papel: string | nu
   const acoes = {
     participar,
     confirmarPresenca,
-    tirar: (chave: string, conta: string) => { const x = exige(); return x ? tentar(() => x.d.tirarParticipante(id, chave, conta), "Não deu para tirar. Tente de novo.") : Promise.resolve("Não deu para tirar. Tente de novo.") },
+    /** "Tirar": a pessoa sai e pode entrar de novo. `uid` é o aparelho que fez a inscrição. */
+    tirar: (chave: string, uid: string) => { const x = exige(); return x ? tentar(() => x.d.tirarPermitindoVolta(id, chave, uid), "Não deu para tirar. Tente de novo.") : Promise.resolve("Não deu para tirar. Tente de novo.") },
+    /** "Tirar e bloquear": a pessoa sai e a conta não entra mais neste sorteio. */
+    tirarEBloquear: (chave: string, conta: string) => { const x = exige(); return x ? tentar(() => x.d.tirarEBloquear(id, chave, conta), "Não deu para tirar. Tente de novo.") : Promise.resolve("Não deu para tirar. Tente de novo.") },
     encerrar: () => (dados ? tentar(() => dados.encerrarInscricoes(id), "Não deu para mudar. Tente de novo.") : Promise.resolve("Não deu para mudar. Tente de novo.")),
     reabrir: () => (dados ? tentar(() => dados.reabrirInscricoes(id), "Não deu para mudar. Tente de novo.") : Promise.resolve("Não deu para mudar. Tente de novo.")),
     sortear: (fora: string[]) => { const x = exige(); return x ? tentar(() => x.d.sortear(id, x.s, x.l, fora), "Não deu para salvar o resultado. Tente de novo.") : Promise.resolve("Não deu para salvar o resultado. Tente de novo.") },
@@ -199,7 +213,7 @@ export function usePainel(id: string, cenario: string | null, papel: string | nu
     },
   }
 
-  return { dados, carga, sorteio: sorteio ?? null, inscritos, aceites, usuario, conexao, online, avisos, novos, agora, organizador, minhaChave, minhaConta, tirado, aberto, acoes }
+  return { dados, carga, sorteio: sorteio ?? null, inscritos, aceites, usuario, conexao, online, avisos, novos, agora, organizador, minhaChave, minhaConta, tirado, tiradoVolta, aberto, acoes }
 }
 
 export type PainelDados = ReturnType<typeof usePainel>

@@ -27,6 +27,16 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://divinegw.github.io"),
   title: { default: "Manual da Guilda DIVINE", template: "%s · DIVINE" },
   description: "Guias de Raids, Fractals, Dungeons e Endgame de Guild Wars 2 da guilda DIVINE.",
+  openGraph: {
+    type: "website",
+    siteName: "Guilda DIVINE",
+    locale: "pt_BR",
+    images: [{ url: "/assets/og/endgame.jpg", width: 1200, height: 630, type: "image/jpeg", alt: "Arte de Guild Wars 2" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [{ url: "/assets/og/endgame.jpg", alt: "Arte de Guild Wars 2" }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

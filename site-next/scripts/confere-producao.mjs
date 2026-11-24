@@ -22,6 +22,9 @@ const PROIBIDOS = [
   "conferir-achou",
   "conferir-nao-achou",
   "NAOC-ONFE-RE00",
+  // cenários do "Tirar" e do "Tirar e bloquear" (com aspas: "bloqueado" também aparece em frases do painel)
+  "tirado-volta",
+  '"bloqueado"',
 ]
 const EXTENSOES = /\.(js|mjs|css|html|txt|json|map)$/i
 

@@ -193,7 +193,7 @@ export function ouvirSorteio(id: string, aoMudar: (s: Sorteio | null) => void, a
 /** Ouve os inscritos, já em ordem de chave. */
 export function ouvirInscritos(id: string, aoMudar: (inscritos: Inscrito[]) => void, aoFalhar?: Falha): () => void {
   return onSnapshot(collection(banco(), 'sorteios', id, 'inscritos'), (snap) => {
-    aoMudar(snap.docs.map((x) => ({ chave: x.id, conta: String(x.data().conta) })).sort((a, b) => (a.chave < b.chave ? -1 : 1)));
+    aoMudar(snap.docs.map((x) => ({ chave: x.id, conta: String(x.data().conta), uid: String(x.data().uid) })).sort((a, b) => (a.chave < b.chave ? -1 : 1)));
   }, (e) => aoFalhar?.(comoErro(e)));
 }
 
@@ -269,12 +269,23 @@ export async function aceitar(id: string, chave: string): Promise<void> {
   await setDoc(doc(banco(), 'sorteios', id, 'aceites', chave), { em: serverTimestamp(), expiraEm: apoio() });
 }
 
-/** Tira um inscrito; o nome vai para a lista pública de tirados, na mesma gravação. */
-export async function tirarParticipante(id: string, chave: string, conta: string): Promise<void> {
+/** "Tirar e bloquear": a pessoa sai e não volta por nenhum aparelho. A conta vai para a lista de bloqueados (`tirados`)
+ *  na mesma gravação; a marca do aparelho fica. */
+export async function tirarEBloquear(id: string, chave: string, conta: string): Promise<void> {
   const d = banco();
   const b = writeBatch(d);
   b.delete(doc(d, 'sorteios', id, 'inscritos', chave));
   b.update(doc(d, 'sorteios', id), { tirados: arrayUnion(conta) });
+  await b.commit();
+}
+
+/** "Tirar": a pessoa sai e pode entrar de novo (ID errado, tirada por engano). Numa gravação só, apaga a inscrição
+ *  e a marca do aparelho de quem se inscreveu. Nada vai para `tirados`. `uid` é o do documento da inscrição. */
+export async function tirarPermitindoVolta(id: string, chave: string, uid: string): Promise<void> {
+  const d = banco();
+  const b = writeBatch(d);
+  b.delete(doc(d, 'sorteios', id, 'inscritos', chave));
+  b.delete(doc(d, 'sorteios', id, 'aparelhos', uid));
   await b.commit();
 }
 

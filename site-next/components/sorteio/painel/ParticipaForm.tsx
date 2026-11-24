@@ -16,8 +16,10 @@ export interface AreaContaProps {
   semInscritos: boolean
   /** A conta com que este aparelho já entrou, se entrou. */
   minhaConta: string | null
-  /** Este aparelho tinha uma inscrição e quem organiza a tirou. */
+  /** Este aparelho tinha uma inscrição e quem organiza a tirou e bloqueou a conta. */
   tirado: boolean
+  /** Este aparelho tinha uma inscrição e quem organiza a tirou com "Tirar": pode entrar de novo. */
+  tiradoVolta: boolean
   /** Sorteio com conta Google e este aparelho ainda não ligou a sua. */
   pedeGoogle: boolean
   /** Devolve o erro (e se ele é do campo), ou `null` se entrou. */
@@ -36,7 +38,7 @@ function Aviso({ icone, children, className }: { icone: React.ReactNode; childre
 const AVISO_ACEITE = "Se você ganhar, tem 1 minuto para confirmar que está aqui."
 
 /** A área do ID: o campo para entrar, ou o que a pessoa precisa saber no lugar dele. Quem organiza não participa: não vê campo. */
-export function AreaConta({ s, aberto, organizador, semInscritos, minhaConta, tirado, pedeGoogle, aoParticipar }: AreaContaProps) {
+export function AreaConta({ s, aberto, organizador, semInscritos, minhaConta, tirado, tiradoVolta, pedeGoogle, aoParticipar }: AreaContaProps) {
   if (organizador) {
     return aberto ? null : (
       <Aviso icone={<ClockIcon strokeWidth={1.75} />}>
@@ -49,6 +51,16 @@ export function AreaConta({ s, aberto, organizador, semInscritos, minhaConta, ti
       <Aviso icone={<UserXIcon strokeWidth={1.75} />}>
         <b className="font-semibold text-foreground">Quem organiza tirou você deste sorteio.</b>
       </Aviso>
+    )
+  }
+  if (tiradoVolta) {
+    return (
+      <div className="grid gap-4">
+        <Aviso icone={<UserXIcon strokeWidth={1.75} />}>
+          <b className="font-semibold text-foreground">Quem organiza tirou sua inscrição.</b> Se o ID estava errado, entre de novo com o certo.
+        </Aviso>
+        {aberto ? <Formulario aceite={Boolean(s.aceite)} pedeGoogle={pedeGoogle} aoParticipar={aoParticipar} /> : null}
+      </div>
     )
   }
   if (minhaConta) return <Dentro conta={minhaConta} fechado={!aberto} aceite={Boolean(s.aceite)} />

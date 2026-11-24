@@ -196,6 +196,15 @@
   50% { background-color: var(--fill-2); }
 }
 
+/* Barras de rolagem discretas (pedido do mantenedor, 24/11/2026): finas, sem setas nem trilho.
+   A da página fica sempre visível, fina; a de listas com rolagem própria só aparece com o mouse em cima
+   ou com o foco do teclado dentro. scrollbar-width/scrollbar-color valem no Chrome, Edge e Firefox atuais. */
+@layer base {
+  html { scrollbar-width: thin; scrollbar-color: var(--border-hover) transparent; }
+  body * { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+  body *:hover, body *:focus-within { scrollbar-color: var(--border-hover) transparent; }
+}
+
 @layer base {
   * {
     @apply border-border;

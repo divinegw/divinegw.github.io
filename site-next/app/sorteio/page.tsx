@@ -6,9 +6,15 @@ import { TopoArte } from "@/components/divine/TopoArte"
 import { PaginaSorteio } from "@/components/sorteio/PaginaSorteio"
 import { conteudoSorteio } from "@/lib/sorteio/conteudo"
 
+const descricao = "Os sorteios da guilda DIVINE: participe dos sorteios ativos ou organize um novo."
+const imagem = { url: "/assets/og/sorteio.jpg", width: 1200, height: 630, type: "image/jpeg", alt: "Arte da guilda DIVINE" }
+
 export const metadata: Metadata = {
   title: "Sorteio",
-  description: "Os sorteios da guilda DIVINE: participe dos sorteios ativos ou organize um novo.",
+  description: descricao,
+  alternates: { canonical: "/sorteio.html" },
+  openGraph: { type: "website", siteName: "Guilda DIVINE", locale: "pt_BR", url: "/sorteio.html", title: "Sorteio · DIVINE", description: descricao, images: [imagem] },
+  twitter: { card: "summary_large_image", title: "Sorteio · DIVINE", description: descricao, images: [{ url: imagem.url, alt: imagem.alt }] },
 }
 
 // /sorteio.html. A página é estática; o que depende da URL (?s=, ?ver=, ?aba=) é lido no navegador, dentro de PaginaSorteio.

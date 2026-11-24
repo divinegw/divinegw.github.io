@@ -4,7 +4,8 @@
 // qualquer pessoa chega ao mesmo resultado.
 import { gerador, comPeso, impressao } from './aleatorio';
 
-export interface Inscrito { chave: string; conta: string }
+/** `uid`: o aparelho que fez a inscrição (campo do documento). Só quem organiza usa, para o "Tirar" apagar também a marca do aparelho. */
+export interface Inscrito { chave: string; conta: string; uid?: string }
 
 export const chaveDe = (conta: string) => conta.toLocaleLowerCase('pt-BR');
 

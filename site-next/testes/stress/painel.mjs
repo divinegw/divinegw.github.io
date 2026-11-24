@@ -16,7 +16,7 @@ fs.mkdirSync(FOTOS, { recursive: true });
 
 const TODOS = ['inscricoes-cheia', 'inscricoes-vazia', 'inscricoes-um', 'inscricoes-2000', 'ultimos-10s', 'encerrado', 'sorteando', 'sorteando-aceite',
   'resultado-1', 'resultado-3', 'voce-ganhou', 'voce-nao-ganhou', 'confirmacao-esperando', 'confirmacao-confirmou', 'confirmacao-tempo-acabou',
-  'confirmacao-mista-3', 'confirmacao-mista-3-fim', 'confirmacao-voce', 'confirmacao-voce-10s', 'organizador', 'tirado', 'sem-prazo', 'nao-carregou', 'nao-existe', 'sem-internet'];
+  'confirmacao-mista-3', 'confirmacao-mista-3-fim', 'confirmacao-voce', 'confirmacao-voce-10s', 'organizador', 'tirado-volta', 'bloqueado', 'sem-prazo', 'nao-carregou', 'nao-existe', 'sem-internet'];
 const pedidos = process.argv.slice(2).filter((a) => !a.startsWith('http'));
 const CENARIOS = pedidos.length ? pedidos : TODOS;
 // cenários em que o tempo corre de verdade (roleta e contagem final); nos outros o relógio fica parado para a foto ser estável

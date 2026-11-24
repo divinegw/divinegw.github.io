@@ -182,7 +182,7 @@ export function FaseConfirmacao({
                   <DicesIcon />
                   Sortear outra pessoa
                 </Button>
-                <span id="libera-troca" className="text-small text-muted-foreground">Libera quando o minuto acabar.</span>
+                <span id="libera-troca" className="text-small text-muted-foreground">Disponível quando o minuto terminar.</span>
               </>
             )}
             {erroTroca && <p role="alert" className="text-small text-destructive">{erroTroca}</p>}

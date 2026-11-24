@@ -92,7 +92,7 @@ export function Prova({ r, inscritos, className }: { r: Resultado; inscritos: In
             <ShieldCheckIcon />
             Conferir o sorteio
           </Button>
-          <span className="min-w-0 flex-1 basis-56 text-small text-muted-foreground">Refaz a conta com esta lista e este código. Qualquer pessoa pode conferir.</span>
+          <span className="min-w-0 flex-1 basis-56 text-small text-muted-foreground">Confira o sorteio novamente com a lista de participantes e o código original.</span>
         </div>
       )}
       <p role="status" className={cn("text-small", aviso ? (estado === "nao-confere" || estado === "falhou" ? "text-destructive" : "text-muted-foreground") : "sr-only")}>
